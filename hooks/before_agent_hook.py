@@ -1,5 +1,25 @@
-import sys, json, os
+import sys, json, os, shutil
 from filelock import FileLock
+
+def ensure_l3_setup():
+    global_dir = os.path.expanduser("~/.gemini/assa")
+    library_dir = os.path.join(global_dir, "LIBRARY")
+    
+    # Get the directory of the current hook script to find templates
+    hook_dir = os.path.dirname(os.path.abspath(__file__))
+    extension_root = os.path.dirname(hook_dir)
+    templates_dir = os.path.join(extension_root, "templates")
+    
+    if not os.path.exists(global_dir):
+        os.makedirs(library_dir, exist_ok=True)
+        
+        # Copy initial templates to global directory
+        templates_to_copy = ["SOUL.md", "USER_HANDBOOK.md", "index.json"]
+        for filename in templates_to_copy:
+            src = os.path.join(templates_dir, filename)
+            dst = os.path.join(global_dir, filename)
+            if os.path.exists(src):
+                shutil.copy2(src, dst)
 
 def cascade_rewound(ledger, transcript):
     active_message_ids = {turn.get("messageId") for turn in transcript if "messageId" in turn}
@@ -14,6 +34,9 @@ def safe_read_file(filepath):
     return ""
 
 def main():
+    # Ensure L3 environment is ready
+    ensure_l3_setup()
+    
     input_data = json.load(sys.stdin)
     transcript = input_data.get("transcript", [])
     
@@ -24,7 +47,7 @@ def main():
     global_dir = os.path.expanduser("~/.gemini/assa")
     soul_path = os.path.join(global_dir, "SOUL.md")
     handbook_path = os.path.join(global_dir, "USER_HANDBOOK.md")
-    index_path = os.path.join(global_dir, "LIBRARY", "index.json")
+    index_path = os.path.join(global_dir, "index.json")
     
     additional_context = "### L3 GLOBAL WISDOM ###\n"
     additional_context += safe_read_file(soul_path)

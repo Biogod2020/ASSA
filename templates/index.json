@@ -1,0 +1,9 @@
+{
+  "version": "1.0.0",
+  "mappings": {
+    "python": "LIBRARY/PYTHON_SOTA.md",
+    "architecture": "LIBRARY/ARCHITECTURE.md",
+    "frontend": "LIBRARY/REACT_ARCHITECTURE.md",
+    "testing": "LIBRARY/TESTING_STANDARDS.md"
+  }
+}
