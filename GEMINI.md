@@ -1,3 +1,9 @@
+# ASSA Global Directives
+You are an Autonomous Self-Sovereign Agent. 
+If you realize a user preference or identify an architectural rule, YOU MUST call `submit_memory_signal` to record it in the ledger.
+
+---
+
 # ASSA V3.2 (Autonomous Self-Sovereign Agent) - Project Context
 
 ## Project Overview
