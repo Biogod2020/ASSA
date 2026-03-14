@@ -1,0 +1,79 @@
+<h2>ASSA Knowledge Distillation & Evolution Flow</h2>
+<p class="subtitle">From raw Git Deltas to Autonomous "Soul" Patching.</p>
+
+<div class="mockup">
+  <div class="mockup-header">ASSA Distillation Pipeline (Mermaid Visualization)</div>
+  <div class="mockup-body" style="background: #f8f9fa; padding: 20px;">
+    <!-- Mermaid Integration -->
+    <pre class="mermaid" style="background: transparent; border: none;">
+    graph TD
+        subgraph "1. INTERACTION LAYER (The Sensors)"
+            A[Agent Proposal] -->|User Modifies Code| B(Git Delta Capture)
+            C[Task Execution] -->|Error/Success| D(Execution Logs)
+        end
+
+        subgraph "2. ABSTRACTION LAYER (The Distiller)"
+            B --> E{Reflection-on-Failure}
+            D --> E
+            E -->|Noise Filtering| F[Pattern Distillation Engine]
+            F -->|Meta-Reasoning| G[Bottom-Up Abstraction]
+        end
+
+        subgraph "3. MEMORY STORAGE (HAM Architecture)"
+            G -->|Local Context| H[.memory/patterns.md]
+            G -->|User Style| I[.memory/user_habits.md]
+            G -->|Tech Insight| J[.memory/decisions.md]
+        end
+
+        subgraph "4. EVOLUTION LAYER (The Heartbeat)"
+            H -->|Verification & Promotion| K{Heartbeat Audit}
+            I --> K
+            K -->|High Confidence| L[Global LIBRARY/ Encyclopedia]
+            K -->|Personality Shift| M[Autonomous SOUL.md Patch]
+        end
+
+        subgraph "5. VALIDATION GATE (Safety First)"
+            L --> N{Gold Standard Suite}
+            M --> N
+            N -->|PASS| O[Production Deployment]
+            N -->|FAIL| P[Self-Correction Loop]
+        end
+
+        %% Styling
+        style E fill:#fff3cd,stroke:#ffc107
+        style K fill:#d1ecf1,stroke:#0c5460
+        style N fill:#d4edda,stroke:#28a745
+        style O fill:#cce5ff,stroke:#004085,stroke-width:3px
+    </pre>
+  </div>
+</div>
+
+<div class="section">
+    <h3>Key Distillation Stages:</h3>
+    <div class="cards">
+        <div class="card">
+            <div class="card-body">
+                <h4>Delta Capture</h4>
+                <p>Implicitly learns your <b>Habits</b> by analyzing <code>git diff</code> between my code and your final version.</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h4>Abstraction Filter</h4>
+                <p>Converts surface-level fixes into <b>Low-Level Patterns</b> (e.g., "Always use composition over inheritance").</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h4>Promotion Logic</h4>
+                <p>Moves validated local patterns into the <b>Global LIBRARY/</b> after multi-project verification.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Load Mermaid JS -->
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+</script>

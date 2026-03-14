@@ -1,0 +1,74 @@
+<h2>ASSA Decoupled Sub-Agent Architecture</h2>
+<p class="subtitle">Separating Execution (Main Agent) from Evolution (Evolutionary Sub-Agents).</p>
+
+<div class="mockup">
+  <div class="mockup-header">Asynchronous Evolution Loop</div>
+  <div class="mockup-body" style="background: #fdfdfd; padding: 20px;">
+    <!-- Mermaid Integration -->
+    <pre class="mermaid" style="background: transparent; border: none;">
+    sequenceDiagram
+        participant User as 👤 User
+        participant Main as 🤖 Main Agent (Operational)
+        participant Mem as 💾 Shared Memory (.memory/)
+        participant Sub as 🧠 Evolution Sub-Agents (Distiller/Validator)
+
+        User->>Main: Execute Task (Refactor Python)
+        activate Main
+        Mem-->>Main: Context Router (Load Python Rules)
+        Main->>User: Task Complete + Git Commit
+        deactivate Main
+
+        Note over Main, Sub: AfterTool / SessionEnd Hook Triggered
+
+        Sub->>Mem: Read raw_deltas.json & Logs
+        activate Sub
+        Note right of Sub: Meta-Reasoning in Background
+        Sub->>Sub: Distill Patterns & Learn Habits
+        Sub->>Mem: Update patterns.md & SOUL.md (Draft)
+        
+        Sub->>Sub: Run Gold Standard Verification
+        alt PASS
+            Sub->>Mem: Apply "Soul" Patch (Hard Merge)
+        else FAIL
+            Sub->>Sub: Re-try or Discard Evolution
+        end
+        deactivate Sub
+
+        User->>Main: Next Task
+        activate Main
+        Mem-->>Main: Hot-Reloaded Knowledge (I've learned a better way!)
+        Main->>User: Optimized Execution
+        deactivate Main
+    </pre>
+  </div>
+</div>
+
+<div class="section">
+    <h3>The Role of Sub-Agents:</h3>
+    <div class="cards">
+        <div class="card">
+            <div class="card-body">
+                <h4>Asynchronous Distillation</h4>
+                <p>Heavy reasoning about code diffs and patterns happens in a <b>separate session</b> to save tokens and time.</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h4>Automated Verification</h4>
+                <p>A specialized sub-agent acts as a <b>Quality Gate</b>, running tests before any meta-logic is updated.</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h4>Self-Triggering</h4>
+                <p>Sub-agents can wake up based on <b>Git Hooks</b> or <b>CRON tasks</b>, evolving the agent while you're away.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Load Mermaid JS -->
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+</script>

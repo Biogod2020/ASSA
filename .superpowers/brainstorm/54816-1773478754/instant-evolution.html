@@ -1,0 +1,49 @@
+<h2>ASSA Instant-Evolution Loop</h2>
+<p class="subtitle">Reactive Feedback + Git State Integration + Hot-Reloading Knowledge.</p>
+
+<div class="mockup">
+  <div class="mockup-header">Event-Driven Learning Pipeline</div>
+  <div class="mockup-body" style="background: #f8f9fa; padding: 20px;">
+    <!-- Mermaid Integration -->
+    <pre class="mermaid" style="background: transparent; border: none;">
+    graph LR
+        subgraph "1. REAL-TIME TRIGGERS"
+            A1[User Feedback: 'Wrong/Perfect'] -->|Immediate Reflection| B[Sub-Agent Distiller]
+            A2[Git Commit / Rollback] -->|Pattern Validation| B
+            A3[Periodic Heartbeat] -->|Batch Consolidation| B
+        end
+
+        subgraph "2. KNOWLEDGE UPDATE"
+            B -->|Write| C[(Shared Memory: .memory/)]
+            C -->|Update Timestamp| D[File Watcher]
+        end
+
+        subgraph "3. INSTANT HOT-RELOAD"
+            D -->|Trigger| E[Context Router]
+            E -->|Inject New Rules| F[Main Agent (Active Session)]
+            F -->|Better Output| G[👤 User]
+        end
+
+        %% Styling
+        style B fill:#fff3cd,stroke:#ffc107
+        style C fill:#d1ecf1,stroke:#0c5460
+        style E fill:#d4edda,stroke:#28a745
+        style F fill:#cce5ff,stroke:#004085,stroke-width:2px
+    </pre>
+  </div>
+</div>
+
+<div class="section">
+    <h3>The "Hot-Reload" Advantage:</h3>
+    <ul class="pros-cons">
+        <li><b>Feedback-Driven:</b> Negative feedback (e.g., "Don't use semicolons") triggers an immediate update to <code>user_habits.md</code>.</li>
+        <li><b>Git-Aware:</b> A <code>git rollback</code> is treated as a critical failure signal, forcing the agent to analyze and avoid that pattern instantly.</li>
+        <li><b>Zero Latency:</b> The Context Router re-scans memory before <b>every</b> message, ensuring the agent "gets smarter" mid-conversation.</li>
+    </ul>
+</div>
+
+<!-- Load Mermaid JS -->
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+</script>

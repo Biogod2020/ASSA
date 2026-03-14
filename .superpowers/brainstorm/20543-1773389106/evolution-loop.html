@@ -1,0 +1,76 @@
+<h2>Deep Meta-Evolution Architecture</h2>
+<p class="subtitle">A self-optimizing loop where the agent's reasoning engine modifies its own core directives.</p>
+
+<div class="mockup">
+  <div class="mockup-header">The Evolution Loop (Based on OpenClaw 2026 SOTA)</div>
+  <div class="mockup-body">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 20px;">
+      
+      <!-- Interaction Phase -->
+      <div style="border: 2px solid var(--accent); padding: 15px; border-radius: 8px; width: 80%; text-align: center;">
+        <strong>1. Interaction & Logging</strong>
+        <p style="font-size: 0.9em; color: var(--text-secondary);">Agent executes tasks and logs raw interactions + successes/failures.</p>
+      </div>
+
+      <div style="font-size: 24px;">↓</div>
+
+      <!-- Reflection Phase -->
+      <div style="border: 2px solid var(--accent); padding: 15px; border-radius: 8px; width: 80%; text-align: center; background: rgba(var(--accent-rgb), 0.1);">
+        <strong>2. Reflective Audit (The "Heartbeat")</strong>
+        <p style="font-size: 0.9em; color: var(--text-secondary);">Agent reviews logs and identifies bottlenecks or gaps in <code>SOUL.md</code> or <code>HEARTBEAT.md</code>.</p>
+      </div>
+
+      <div style="font-size: 24px;">↓</div>
+
+      <!-- Generation Phase -->
+      <div style="border: 2px solid var(--accent); padding: 15px; border-radius: 8px; width: 80%; text-align: center;">
+        <strong>3. Meta-Prompt Synthesis</strong>
+        <p style="font-size: 0.9em; color: var(--text-secondary);">Agent generates a "Patch" for its own system prompt or a new <code>SKILL.md</code>.</p>
+      </div>
+
+      <div style="font-size: 24px;">↓</div>
+
+      <!-- Validation Phase -->
+      <div style="border: 2px solid var(--accent-success, #28a745); padding: 15px; border-radius: 8px; width: 80%; text-align: center;">
+        <strong>4. Multi-Stage Verification</strong>
+        <p style="font-size: 0.9em; color: var(--text-secondary);">Unit -> Integration -> System Tests. Must NOT regress existing capabilities.</p>
+      </div>
+
+      <div style="font-size: 24px;">↓</div>
+
+      <!-- Deployment Phase -->
+      <div style="border: 2px solid var(--accent); padding: 15px; border-radius: 8px; width: 80%; text-align: center; background: var(--bg-secondary);">
+        <strong>5. Autonomous Re-boot/Update</strong>
+        <p style="font-size: 0.9em; color: var(--text-secondary);">Verified changes are committed to Git and hot-swapped into the active session.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Which approach fits best?</h3>
+  <div class="options" data-multiselect="false">
+    <div class="option" data-choice="approach-1" onclick="toggleSelect(this)">
+      <div class="letter">A</div>
+      <div class="content">
+        <h3>Self-Patching Framework</h3>
+        <p>Agent generates incremental "Diffs" for its <code>SOUL.md</code> based on observed failures. Minimizes system-wide changes while optimizing specific prompts.</p>
+      </div>
+    </div>
+    <div class="option" data-choice="approach-2" onclick="toggleSelect(this)">
+      <div class="letter">B</div>
+      <div class="content">
+        <h3>Evolutionary Prompt Search</h3>
+        <p>The agent maintains 3 "variants" of its core system prompt and tests them against a benchmark suite, automatically picking the highest performer.</p>
+      </div>
+    </div>
+    <div class="option" data-choice="approach-3" onclick="toggleSelect(this)">
+      <div class="letter">C</div>
+      <div class="content">
+        <h3>Rule-Based Expansion</h3>
+        <p>The agent identifies "New Patterns" and encodes them into a hierarchical structure (Macro Rules in SOUL.md -> Micro Rules in SKILL.md).</p>
+      </div>
+    </div>
+  </div>
+</div>
