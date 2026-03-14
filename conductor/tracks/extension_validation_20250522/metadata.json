@@ -1,0 +1,8 @@
+{
+  "track_id": "extension_validation_20250522",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2025-05-22T15:00:00Z",
+  "updated_at": "2025-05-22T15:00:00Z",
+  "description": "Comprehensive end-to-end validation of the ASSA extension using the real Gemini CLI."
+}
