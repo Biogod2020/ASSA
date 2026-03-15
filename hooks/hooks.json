@@ -1,0 +1,30 @@
+{
+  "hooks": {
+    "BeforeAgent": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "name": "ASSA BeforeAgent",
+            "type": "command",
+            "command": "node ${extensionPath}/hooks/beforeAgentHook.js",
+            "timeout": 60000
+          }
+        ]
+      }
+    ],
+    "AfterTool": [
+      {
+        "matcher": "run_shell_command",
+        "hooks": [
+          {
+            "name": "ASSA AfterTool",
+            "type": "command",
+            "command": "node ${extensionPath}/hooks/afterToolHook.js",
+            "timeout": 60000
+          }
+        ]
+      }
+    ]
+  }
+}

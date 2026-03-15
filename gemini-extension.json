@@ -1,59 +1,19 @@
 {
   "id": "assa-evolution",
-  "name": "ASSA Evolution",
+  "name": "assa-evolution",
   "version": "3.2.0",
   "author": "ASSA Architect",
   "description": "Autonomous Self-Sovereign Agent with L1/L2/L3 memory hierarchy.",
   "repository": "https://github.com/user/assa-evolution",
   "contextFileName": "GEMINI.md",
-  "hooks": {
-    "BeforeAgent": "python3 hooks/before_agent_hook.py",
-    "AfterTool": "python3 hooks/after_tool_hook.py"
+  "mcpServers": {
+    "assa-mcp": {
+      "command": "node",
+      "args": ["${extensionPath}/hooks/mcpServer.js"]
+    }
   },
   "agents": [
     "agents/distiller.md",
     "agents/syncer.md"
-  ],
-  "tools": [
-    {
-      "name": "submit_memory_signal",
-      "description": "Submits a semantic memory realization to the local ledger.",
-      "executable": "python3 hooks/tool_submit_signal.py",
-      "inputSchema": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "enum": [
-              "positive",
-              "negative"
-            ],
-            "description": "Type of feedback"
-          },
-          "rule": {
-            "type": "string",
-            "description": "The actionable rule/lesson"
-          },
-          "context": {
-            "type": "string",
-            "description": "Why this was learned"
-          },
-          "tags": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        },
-        "required": [
-          "type",
-          "rule"
-        ]
-      }
-    },
-    {
-      "name": "request_global_promotion",
-      "description": "Requests the Syncer sub-agent to promote a topic to global knowledge.",
-      "executable": "python3 hooks/tool_request_promotion.py"
-    }
   ]
 }

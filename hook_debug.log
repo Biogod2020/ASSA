@@ -1,0 +1,507 @@
+BeforeAgent Hook Fired at 2026-03-15T02:54:22.449Z
+Read 331 bytes from stdin
+Agent: main
+Context assembled: 2840 chars, 1 pending signals
+BeforeAgent Hook Fired at 2026-03-15T02:57:36.791Z
+Read 323 bytes from stdin
+Agent: main
+Context assembled: 2481 chars, 0 pending signals
+AfterTool Hook fired at 2026-03-15T02:57:43.801Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T02:57:49.116Z
+Tool Executed: run_shell_command
+Detected git commit → hinting @distiller delegation
+BeforeAgent Hook Fired at 2026-03-15T03:17:29.334Z
+Read 591 bytes from stdin
+Agent: main
+Context assembled: 4482 chars, 6 pending signals
+BeforeAgent Hook Fired at 2026-03-15T03:19:00.059Z
+Read 297 bytes from stdin
+Agent: main
+Context assembled: 4764 chars, 0 pending signals
+BeforeAgent Hook Fired at 2026-03-15T03:26:49.915Z
+Read 402 bytes from stdin
+Agent: main
+Context assembled: 4493 chars, 6 pending signals
+BeforeAgent Hook Fired at 2026-03-15T04:41:54.641Z
+Read 318 bytes from stdin
+Agent: main
+Context assembled: 4764 chars, 0 pending signals
+AfterTool Hook fired at 2026-03-15T04:42:25.020Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:42:44.064Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:43:37.483Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:44:45.901Z
+Tool Executed: run_shell_command
+BeforeAgent Hook Fired at 2026-03-15T04:46:32.787Z
+Read 355 bytes from stdin
+Agent: main
+Context assembled: 4764 chars, 0 pending signals
+BeforeAgent Hook Fired at 2026-03-15T04:46:45.063Z
+Read 355 bytes from stdin
+Agent: main
+Context assembled: 4764 chars, 0 pending signals
+AfterTool Hook fired at 2026-03-15T04:46:58.730Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:47:12.447Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:47:32.620Z
+Tool Executed: run_shell_command
+BeforeAgent Hook Fired at 2026-03-15T04:49:54.339Z
+Read 354 bytes from stdin
+Agent: main
+Context assembled: 4764 chars, 0 pending signals
+AfterTool Hook fired at 2026-03-15T04:51:10.362Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:51:26.975Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:51:44.453Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:52:04.124Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:52:08.961Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:52:13.256Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:52:17.636Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:52:22.086Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:52:26.940Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:52:32.718Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:52:38.748Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:52:44.822Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:52:50.946Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:52:56.977Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:53:01.427Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:53:07.536Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:53:14.310Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:53:20.552Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:53:27.409Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:53:33.826Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:53:39.787Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:53:45.863Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:53:57.044Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:54:02.968Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:54:09.081Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:54:13.653Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:54:19.654Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:54:25.647Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:54:31.652Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:55:04.240Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:55:08.805Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:55:15.129Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:55:21.193Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:55:31.907Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:55:37.995Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:55:43.991Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:55:50.777Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:55:57.864Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:56:03.967Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:56:10.134Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:56:14.756Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:56:20.923Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:56:27.284Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:56:33.949Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:56:40.224Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:56:46.275Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:56:50.681Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:56:57.217Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:57:08.361Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:57:15.075Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:57:21.172Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:57:29.880Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:57:35.801Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:57:57.914Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:58:03.180Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:58:10.214Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:58:17.343Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T04:58:36.169Z
+Tool Executed: run_shell_command
+BeforeAgent Hook Fired at 2026-03-15T05:00:43.080Z
+Read 358 bytes from stdin
+Agent: main
+Context assembled: 4764 chars, 0 pending signals
+AfterTool Hook fired at 2026-03-15T05:01:09.444Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:03:56.163Z
+Tool Executed: run_shell_command
+BeforeAgent Hook Fired at 2026-03-15T05:09:41.998Z
+Read 331 bytes from stdin
+Agent: main
+Context assembled: 4764 chars, 0 pending signals
+BeforeAgent Hook Fired at 2026-03-15T05:12:57.500Z
+Read 12934 bytes from stdin
+Agent: main
+Context assembled: 4764 chars, 0 pending signals
+AfterTool Hook fired at 2026-03-15T05:13:04.938Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:13:10.179Z
+Tool Executed: run_shell_command
+BeforeAgent Hook Fired at 2026-03-15T05:13:29.752Z
+Read 321 bytes from stdin
+Agent: main
+Context assembled: 4764 chars, 0 pending signals
+AfterTool Hook fired at 2026-03-15T05:13:49.762Z
+Tool Executed: run_shell_command
+BeforeAgent Hook Fired at 2026-03-15T05:14:01.622Z
+Read 12994 bytes from stdin
+Agent: main
+Context assembled: 4764 chars, 0 pending signals
+AfterTool Hook fired at 2026-03-15T05:14:09.462Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:14:20.301Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:14:29.572Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:15:06.979Z
+Tool Executed: run_shell_command
+BeforeAgent Hook Fired at 2026-03-15T05:15:52.227Z
+Read 13135 bytes from stdin
+Agent: main
+Context assembled: 4764 chars, 0 pending signals
+AfterTool Hook fired at 2026-03-15T05:15:59.817Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:16:08.006Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:16:14.702Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:16:21.966Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:16:28.066Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:16:34.756Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:16:39.426Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:16:45.415Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:17:01.488Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:17:13.640Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:17:40.908Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:17:45.666Z
+Tool Executed: run_shell_command
+Detected git commit → instructing main agent to dispatch Distiller via generalist subagent
+AfterTool Hook fired at 2026-03-15T05:17:52.019Z
+Tool Executed: run_shell_command
+Detected git commit → instructing main agent to dispatch Distiller via generalist subagent
+AfterTool Hook fired at 2026-03-15T05:18:09.456Z
+Tool Executed: run_shell_command
+BeforeAgent Hook Fired at 2026-03-15T05:21:13.218Z
+Read 1151 bytes from stdin
+Agent: main
+Context assembled: 7384 chars, 0 pending signals
+AfterTool Hook fired at 2026-03-15T05:21:26.159Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:22:45.387Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:23:02.757Z
+Tool Executed: run_shell_command
+Detected git commit → instructing main agent to dispatch Distiller via generalist subagent
+AfterTool Hook fired at 2026-03-15T05:25:24.226Z
+Tool Executed: run_shell_command
+BeforeAgent Hook Fired at 2026-03-15T05:27:53.174Z
+Read 309 bytes from stdin
+Agent: main
+Context assembled: 7885 chars, 0 pending signals
+AfterTool Hook fired at 2026-03-15T05:28:00.193Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:28:05.233Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:28:17.582Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:28:25.058Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:28:31.695Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:28:38.110Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:28:44.411Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:28:50.513Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:28:56.940Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:29:03.126Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:29:08.247Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:29:14.425Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:29:20.549Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:29:26.619Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:29:32.874Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:29:38.881Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:29:43.366Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T05:29:48.467Z
+Tool Executed: run_shell_command
+BeforeAgent Hook Fired at 2026-03-15T05:32:56.307Z
+Read 316 bytes from stdin
+Agent: main
+Context assembled: 7885 chars, 0 pending signals
+AfterTool Hook fired at 2026-03-15T05:33:47.241Z
+Tool Executed: run_shell_command
+BeforeAgent Hook Fired at 2026-03-15T05:40:16.615Z
+Read 289 bytes from stdin
+Agent: main
+Context assembled: 7885 chars, 0 pending signals
+BeforeAgent Hook Fired at 2026-03-15T05:46:16.876Z
+Read 327 bytes from stdin
+Agent: main
+Context assembled: 7885 chars, 0 pending signals
+BeforeAgent Hook Fired at 2026-03-15T06:09:02.655Z
+Read 311 bytes from stdin
+Agent: main
+Context assembled: 7885 chars, 0 pending signals
+AfterTool Hook fired at 2026-03-15T06:09:18.771Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T06:09:35.787Z
+Tool Executed: run_shell_command
+BeforeAgent Hook Fired at 2026-03-15T06:09:53.007Z
+Read 331 bytes from stdin
+Agent: main
+Context assembled: 2840 chars, 1 pending signals
+AfterTool Hook fired at 2026-03-15T06:10:02.357Z
+Tool Executed: run_shell_command
+BeforeAgent Hook Fired at 2026-03-15T06:10:36.907Z
+Read 415 bytes from stdin
+Agent: main
+Context assembled: 4604 chars, 6 pending signals
+AfterTool Hook fired at 2026-03-15T06:11:14.746Z
+Tool Executed: run_shell_command
+BeforeAgent Hook Fired at 2026-03-15T06:24:21.892Z
+Read 289 bytes from stdin
+Agent: main
+Context assembled: 7885 chars, 0 pending signals
+AfterTool Hook fired at 2026-03-15T06:26:09.248Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T06:27:59.242Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T06:31:32.190Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T06:35:09.884Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T06:37:21.203Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T06:37:33.547Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T06:37:37.638Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T06:38:10.255Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T06:38:23.159Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T06:38:28.831Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T06:38:53.331Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T06:39:17.188Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T06:41:32.592Z
+Tool Executed: run_shell_command
+BeforeAgent Hook Fired at 2026-03-15T06:43:06.778Z
+Read 305 bytes from stdin
+Agent: main, Transcript Turns: 0
+Context assembled: 7919 chars, 0 pending signals
+BeforeAgent Hook Fired at 2026-03-15T06:44:11.784Z
+Read 3453 bytes from stdin
+Agent: main, Transcript Turns: 0
+Context assembled: 7919 chars, 0 pending signals
+AfterTool Hook fired at 2026-03-15T06:44:40.608Z
+Tool Executed: run_shell_command
+BeforeAgent Hook Fired at 2026-03-15T06:45:10.734Z
+Read 295 bytes from stdin
+Agent: main, Transcript Turns: 0
+Context assembled: 7919 chars, 0 pending signals
+AfterTool Hook fired at 2026-03-15T06:45:23.644Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T06:45:39.114Z
+Tool Executed: run_shell_command
+BeforeAgent Hook Fired at 2026-03-15T06:46:50.135Z
+Read 930 bytes from stdin
+Agent: main, Transcript Turns: 0
+Context assembled: 7919 chars, 0 pending signals
+BeforeAgent Hook Fired at 2026-03-15T06:47:45.596Z
+Read 289 bytes from stdin
+Agent: main, Transcript Turns: 0
+Context assembled: 7919 chars, 0 pending signals
+AfterTool Hook fired at 2026-03-15T06:48:13.163Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T06:49:02.949Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T06:49:55.587Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T06:50:30.169Z
+Tool Executed: run_shell_command
+BeforeAgent Hook Fired at 2026-03-15T06:51:53.140Z
+Read 312 bytes from stdin
+Agent: main, Transcript Turns: 0
+Context assembled: 7919 chars, 0 pending signals
+BeforeAgent Hook Fired at 2026-03-15T06:52:45.854Z
+Read 291 bytes from stdin
+Agent: main, Transcript Turns: 0
+Context assembled: 7919 chars, 0 pending signals
+AfterTool Hook fired at 2026-03-15T06:52:57.179Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T06:53:07.579Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T06:53:26.815Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T06:53:33.812Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T06:53:39.914Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T06:53:46.547Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T06:58:56.078Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T06:59:06.016Z
+Tool Executed: run_shell_command
+BeforeAgent Hook Fired at 2026-03-15T07:00:22.379Z
+Read 292 bytes from stdin
+Agent: main, Transcript Turns: 0
+Context assembled: 7919 chars, 0 pending signals
+BeforeAgent Hook Fired at 2026-03-15T07:02:33.230Z
+Read 288 bytes from stdin
+Agent: main, Transcript Turns: 0
+Context assembled: 7919 chars, 0 pending signals
+BeforeAgent Hook Fired at 2026-03-15T07:11:21.272Z
+Read 288 bytes from stdin
+Agent: main, Transcript Turns: 0
+Context assembled: 7919 chars, 0 pending signals
+BeforeAgent Hook Fired at 2026-03-15T07:11:53.965Z
+Read 288 bytes from stdin
+Agent: main, Transcript Turns: 0
+Context assembled: 7919 chars, 0 pending signals
+BeforeAgent Hook Fired at 2026-03-15T07:25:37.340Z
+Read 296 bytes from stdin
+Agent: main, Transcript Turns: 0
+Context assembled: 7919 chars, 0 pending signals
+BeforeAgent Hook Fired at 2026-03-15T08:11:52.275Z
+Read 16570 bytes from stdin
+Agent: main, Transcript Turns: 0
+Context assembled: 7919 chars, 0 pending signals
+AfterTool Hook fired at 2026-03-15T08:12:55.612Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T08:13:25.942Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T08:13:56.243Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T08:15:37.534Z
+Tool Executed: run_shell_command
+BeforeAgent Hook Fired at 2026-03-15T08:17:51.575Z
+Read 22 bytes from stdin
+Agent: main, Transcript Turns: 0
+Creating missing .memory directory
+Initializing missing local file: patterns.md
+Initializing missing local file: decisions.md
+Initializing missing local file: local_habits.md
+Initializing missing local file: LESSONS_LEARNED.md
+Context assembled: 2428 chars, 0 pending signals
+AfterTool Hook fired at 2026-03-15T08:17:51.701Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T08:17:59.569Z
+Tool Executed: run_shell_command
+BeforeAgent Hook Fired at 2026-03-15T08:18:17.060Z
+Read 22 bytes from stdin
+Agent: main, Transcript Turns: 0
+ASSA Health Warning: Subagents are disabled (experimental.enableAgents: false in settings.json). ASSA Distillation will not work.
+Context assembled: 2808 chars, 0 pending signals
+AfterTool Hook fired at 2026-03-15T08:18:17.277Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T08:21:48.303Z
+Tool Executed: run_shell_command
+Detected git commit → instructing main agent to dispatch Distiller via generalist subagent
+AfterTool Hook fired at 2026-03-15T08:22:04.585Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T08:22:20.642Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T08:22:24.709Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T08:22:53.391Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T08:27:00.558Z
+Tool Executed: run_shell_command
+Detected git commit → instructing main agent to dispatch Distiller via generalist subagent
+AfterTool Hook fired at 2026-03-15T08:27:24.031Z
+Tool Executed: run_shell_command
+BeforeAgent Hook Fired at 2026-03-15T08:30:44.530Z
+Read 13141 bytes from stdin
+Agent: main, Transcript Turns: 0
+Context assembled: 6757 chars, 0 pending signals
+AfterTool Hook fired at 2026-03-15T08:31:01.134Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T08:31:08.508Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T08:31:26.139Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T08:31:38.530Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T08:31:58.296Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T08:32:33.544Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T08:32:41.182Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T08:32:53.398Z
+Tool Executed: run_shell_command
+Detected git commit → instructing main agent to dispatch Distiller via generalist subagent

@@ -1,19 +1,17 @@
 import sys, json, os, shutil
 from filelock import FileLock
+import ledger_utils
 
 def ensure_l3_setup():
     global_dir = os.path.expanduser("~/.gemini/assa")
     library_dir = os.path.join(global_dir, "LIBRARY")
     
-    # Get the directory of the current hook script to find templates
     hook_dir = os.path.dirname(os.path.abspath(__file__))
     extension_root = os.path.dirname(hook_dir)
     templates_dir = os.path.join(extension_root, "templates")
     
     if not os.path.exists(global_dir):
         os.makedirs(library_dir, exist_ok=True)
-        
-        # Copy initial templates to global directory
         templates_to_copy = ["SOUL.md", "USER_HANDBOOK.md", "index.json"]
         for filename in templates_to_copy:
             src = os.path.join(templates_dir, filename)
@@ -34,16 +32,17 @@ def safe_read_file(filepath):
     return ""
 
 def main():
-    # Ensure L3 environment is ready
     ensure_l3_setup()
     
     input_data = json.load(sys.stdin)
     transcript = input_data.get("transcript", [])
     
-    ledger_path = ".memory/evolution_ledger.json"
-    lock_path = ".memory/evolution_ledger.json.lock"
-    patterns_path = ".memory/patterns.md"
+    # Update Ledger State
+    ledger = ledger_utils.load_ledger()
+    ledger = cascade_rewound(ledger, transcript)
+    ledger_utils.save_ledger(ledger)
     
+    # Gather Context
     global_dir = os.path.expanduser("~/.gemini/assa")
     soul_path = os.path.join(global_dir, "SOUL.md")
     handbook_path = os.path.join(global_dir, "USER_HANDBOOK.md")
@@ -54,19 +53,15 @@ def main():
     additional_context += safe_read_file(handbook_path)
     additional_context += safe_read_file(index_path)
     
-    if os.path.exists(ledger_path):
-        with FileLock(lock_path):
-            with open(ledger_path, "r") as f: ledger = json.load(f)
-            ledger = cascade_rewound(ledger, transcript)
-            with open(ledger_path, "w") as f: json.dump(ledger, f, indent=2)
+    pending_items = [e for e in ledger if e["status"] == "PENDING"]
+    if pending_items:
+        additional_context += "### L1 PENDING SIGNALS (Immediate realizations) ###\n"
+        additional_context += json.dumps(pending_items, indent=2) + "\n\n"
             
-            pending_items = [e for e in ledger if e["status"] == "PENDING"]
-            if pending_items:
-                additional_context += "### L1 PENDING SIGNALS ###\n"
-                additional_context += json.dumps(pending_items, indent=2) + "\n\n"
-            
-    additional_context += "### L2 PROJECT PATTERNS ###\n"
-    additional_context += safe_read_file(patterns_path)
+    additional_context += "### L2 PROJECT PATTERNS & DECISIONS ###\n"
+    additional_context += safe_read_file(".memory/patterns.md")
+    additional_context += safe_read_file(".memory/decisions.md")
+    additional_context += safe_read_file(".memory/local_habits.md")
 
     print(json.dumps({
         "decision": "allow",
