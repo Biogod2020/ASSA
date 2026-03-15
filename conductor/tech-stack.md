@@ -5,10 +5,12 @@
 
 ## Languages & Logic
 - **Minimal External Dependencies**: The system should remain lean and focused on the core Gemini CLI environment.
-- **Python-Based (Optional/Minimal)**: Any necessary logic should be implemented in Python for compatibility and ease of integration with existing tools.
+- **Node.js**: Primary language for middleware hooks and MCP servers, focusing on low-latency, zero-dependency implementations.
+- **Python-Based (Optional)**: Secondary language for legacy logic or data analysis.
 
 ## State & Data Management
-- **JSON/YAML Storage**: Use JSON and YAML for structured configuration, metadata, and skill definitions. This provides a balance between human readability and ease of machine parsing.
+- **JSON/YAML Storage**: Use JSON and YAML for structured configuration, metadata, and skill definitions.
+- **Diagnostic Foundation**: A dedicated health check module verifies environment integrity (e.g., experimental flags, hook connectivity) on every startup.
 
 ## Testing & Validation
 - **Incremental Expansion Protocol**: Before any self-evolved code or skill is deployed, it must pass through a multi-stage validation process:

@@ -14,7 +14,7 @@ A system that empowers Gemini CLI with the ability to autonomously evolve, impro
 ## Core Features
 - **Skill Creation**: The ability to identify missing capabilities and autonomously create, test, and register new skills.
 - **Self-Reflection/Learning**: Analyzing past task outcomes to refine strategies, update internal documentation, and improve decision-making.
-- **Self-Maintenance**: Managing its own environment, updating configurations, and ensuring all dependencies and tools are optimized.
+- **Self-Maintenance & Healing**: Monitoring its own environment health (settings, hooks, directories) and autonomously repairing corrupted or missing components.
 
 ## Ultimate Goal
 - **Full Autonomy**: A system that requires zero user intervention to identify areas for improvement and execute the necessary expansion or maintenance.
