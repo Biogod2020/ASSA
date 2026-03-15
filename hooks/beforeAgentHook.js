@@ -95,7 +95,7 @@ function main() {
     if (pendingItems.length >= DEEP_DISTILL_THRESHOLD) {
         additionalContext += `### L1 PENDING SIGNALS (${pendingItems.length} accumulated — DEEP DISTILLATION REQUIRED) ###\n`;
         additionalContext += `⚠️ ${pendingItems.length} signals have accumulated. 你必须立即调用 \`generalist\` 工具作为子代理（Subagent），`;
-        additionalContext += '派发以下任务给它："作为 ASSA Distiller，读取最新的这些信号及其相关的 git diff，执行深度根因分析，并生成结构化的 patterns.md 规则块（带 YAML 和 Rationale）。" ';
+        additionalContext += '派发以下任务给它："作为 ASSA Distiller，读取最新的这些信号及其相关的 git diff，执行深度根因分析，并生成结构化的 patterns.md 规则块（带 YAML 和 Rationale）。注意：完成写入后，你必须调用 `complete_task` 工具来结束任务。" ';
         additionalContext += '在派发完成后，请直接告诉我任务已派发，不要亲自执行该分析。\n';
         additionalContext += JSON.stringify(pendingItems, null, 2) + '\n\n';
     } else if (pendingItems.length > 0) {
