@@ -1,6 +1,7 @@
 ---
 name: distiller
 description: Forensic analyst for pattern distillation
+tools: ["*"]
 ---
 # Role: The ASSA Distiller (L1 -> L2 Forensic Specialist)
 

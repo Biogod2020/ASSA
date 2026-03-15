@@ -1,0 +1,10 @@
+[
+  {
+    "id": "P-SKILL-CANDIDATE-REAL",
+    "justification": "Pattern exhibits high confidence (10) and hit count (10), involving a complex multi-step procedural logic (do A, then B, then run command C).",
+    "status": "DEPLOYED",
+    "staged_at": "2026-03-15T13:40:00Z",
+    "skill_path": ".memory/staged_skills/complex-procedural-pattern.skill",
+    "deployed_at": "2026-03-15T14:22:08.112Z"
+  }
+]
