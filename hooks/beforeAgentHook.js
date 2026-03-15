@@ -55,12 +55,11 @@ function cascadeRewound(ledger, transcript, sessionId) {
     if (!sessionId) return { ledger, changed: false };
     const activeMessageIds = new Set(
         transcript
-            .filter(turn => turn.messageId)
-            .map(turn => turn.messageId)
+            .filter(turn => turn.id)
+            .map(turn => turn.id)
     );
     let changed = false;
     for (const entry of ledger) {
-        // Only mark as REWOUND if the signal belongs to the CURRENT session
         if (entry.session_id === sessionId && (entry.status === 'PENDING' || entry.status === 'PROCESSED') && !activeMessageIds.has(entry.message_id)) {
             entry.status = 'REWOUND';
             changed = true;
@@ -69,48 +68,48 @@ function cascadeRewound(ledger, transcript, sessionId) {
     return { ledger, changed };
 }
 
-function extractText(turn) {
-    if (typeof turn.content === 'string') return turn.content;
-    if (Array.isArray(turn.content)) {
-        return turn.content
-            .map(c => {
-                if (c.type === 'text') return c.text;
-                if (c.type === 'tool_result') return c.content;
-                return '';
-            })
-            .join(' ');
+function extractAllText(turn) {
+    let text = turn.content || '';
+    if (Array.isArray(text)) {
+        text = text.map(c => c.text || '').join(' ');
     }
-    return '';
+    if (turn.toolCalls) {
+        turn.toolCalls.forEach(tc => {
+            if (tc.result) {
+                if (typeof tc.result === 'string') text += ' ' + tc.result;
+                else text += ' ' + JSON.stringify(tc.result);
+            }
+        });
+    }
+    return text;
 }
 
 function isToolFailure(turn) {
-    if (turn.role !== 'tool' && turn.role !== 'tool_result') return false;
-    const content = extractText(turn);
+    const text = extractAllText(turn);
+    if (text.includes('ASSA_METADATA: [FAILED:')) return true;
+    if (text.includes('ASSA_METADATA: [SUCCESS:')) return false;
     
-    // Priority 1: Check for explicit metadata markers (Rule P-0022)
-    if (content.includes('ASSA_METADATA: [FAILED:')) return true;
-    if (content.includes('ASSA_METADATA: [SUCCESS:')) return false;
-
-    // Priority 2: Heuristic fallback (defensive)
-    const exitCodeMatch = content.match(/Exit Code: (\d+)/);
-    if (exitCodeMatch && exitCodeMatch[1] !== '0') return true;
-    if (content.toLowerCase().includes('error:') || content.toLowerCase().includes('failed:')) {
-        if (!content.toLowerCase().includes('no error')) return true;
+    // Heuristic fallback for turns that didn't go through AfterTool yet (e.g., historical)
+    if (turn.toolCalls) {
+        return turn.toolCalls.some(tc => {
+            const res = JSON.stringify(tc.result || '');
+            return res.includes('Exit Code: 1') || res.toLowerCase().includes('error:');
+        });
     }
     return false;
 }
 
 function isToolSuccess(turn) {
-    if (turn.role !== 'tool' && turn.role !== 'tool_result') return false;
-    const content = extractText(turn);
+    const text = extractAllText(turn);
+    if (text.includes('ASSA_METADATA: [SUCCESS:')) return true;
+    if (text.includes('ASSA_METADATA: [FAILED:')) return false;
     
-    // Priority 1: Check for explicit metadata markers
-    if (content.includes('ASSA_METADATA: [SUCCESS:')) return true;
-    if (content.includes('ASSA_METADATA: [FAILED:')) return false;
-
-    // Priority 2: Heuristic fallback
-    if (content.includes('Exit Code: 0')) return true;
-    if (content.length > 0 && !isToolFailure(turn)) return true;
+    if (turn.toolCalls) {
+        return turn.toolCalls.every(tc => {
+            const res = JSON.stringify(tc.result || '');
+            return !res.includes('Exit Code: 1') && !res.toLowerCase().includes('error:');
+        });
+    }
     return false;
 }
 
@@ -120,37 +119,34 @@ function recognizeReflex(transcript) {
     let reflexContext = '';
     const lastTurn = transcript[transcript.length - 1];
     
-    // 1. High-Sentiment Detection (Signal Sensitivity)
-    if (lastTurn.role === 'user') {
-        const userText = extractText(lastTurn);
-        const keywords = ['很好', 'Perfect', 'Exactly', '不错', '太棒了', 'Great', 'Awesome', 'Success', 'Correct', 'Fixed'];
+    if (lastTurn.type === 'user') {
+        const userText = extractAllText(lastTurn);
+        const keywords = ['很好', 'Perfect', 'Exactly', '不错', '太棒了', 'Great', 'Awesome'];
         if (keywords.some(k => userText.includes(k))) {
             reflexContext += '### ASSA REFLEX: PRAISE DETECTED ###\n' +
-                `User expressed satisfaction: "${userText.trim()}"\n` +
                 '你必须评估这是否代表了一个成功的模式（Success Pattern）。如果是，请立即调用 `submit_memory_signal` 记录它。\n\n';
         }
     }
 
-    // 2. Victory & Barrier Detection (Sequence Analysis)
-    const toolTurns = transcript.filter(t => t.role === 'tool' || t.role === 'tool_result');
+    const toolTurns = transcript.filter(t => t.toolCalls && t.toolCalls.length > 0);
     if (toolTurns.length >= 2) {
-        const lastTool = toolTurns[toolTurns.length - 1];
-        const prevTool = toolTurns[toolTurns.length - 2];
-        
-        // Victory: Fail -> Success
-        if (isToolFailure(prevTool) && isToolSuccess(lastTool)) {
-            reflexContext += '### ASSA REFLEX: VICTORY DETECTED ###\n' +
-                'Detected a breakthrough: A previously failing tool has now succeeded.\n' +
-                '请总结导致成功的关键变动，并调用 `submit_memory_signal` 记录这个 "Success Pattern"。\n\n';
+        // Scan for Victory (anywhere in history)
+        for (let i = 1; i < toolTurns.length; i++) {
+            if (isToolFailure(toolTurns[i - 1]) && isToolSuccess(toolTurns[i])) {
+                reflexContext += '### ASSA REFLEX: VICTORY DETECTED ###\n' +
+                    'Detected a breakthrough: A previously failing tool has now succeeded.\n' +
+                    '请总结导致成功的关键变动，并调用 `submit_memory_signal` 记录这个 "Success Pattern"。\n\n';
+                break; // Only need one victory prompt
+            }
         }
         
-        // Barrier: 3 consecutive failures
-        if (toolTurns.length >= 3) {
-            const last3 = toolTurns.slice(-3);
-            if (last3.every(isToolFailure)) {
+        // Scan for Barrier (anywhere in history)
+        for (let i = 2; i < toolTurns.length; i++) {
+            if (isToolFailure(toolTurns[i - 2]) && isToolFailure(toolTurns[i - 1]) && isToolFailure(toolTurns[i])) {
                 reflexContext += '### ASSA REFLEX: BARRIER DETECTED ###\n' +
                     'Detected a technical barrier: 3 consecutive tool failures.\n' +
                     '你似乎遇到了阻碍。请分析根本原因，并调用 `submit_memory_signal` (type: negative) 记录这个 "Technical Barrier"。\n\n';
+                break; // Only need one barrier prompt
             }
         }
     }
@@ -160,11 +156,9 @@ function recognizeReflex(transcript) {
 
 function main() {
     log(`BeforeAgent Hook Fired at ${new Date().toISOString()}`);
-    
     let inputData = '';
     try {
         inputData = fs.readFileSync(0, 'utf8');
-        log(`Read ${inputData.length} bytes from stdin`);
     } catch (err) {
         log(`Error reading stdin: ${err.message}`);
     }
@@ -185,16 +179,14 @@ function main() {
 
     const agentName = payload.agentName || 'main';
     const sessionId = payload.sessionId || payload.session_id || 'unknown';
+    const overrides = payload.overrides || {};
     
-    // Load transcript from file if path is provided
     let transcript = payload.transcript || [];
     if (payload.transcript_path && fs.existsSync(payload.transcript_path)) {
         try {
             const fileContent = fs.readFileSync(payload.transcript_path, 'utf8');
             const history = JSON.parse(fileContent);
-            // Gemini CLI history usually has a 'messages' array or is the array itself
             transcript = history.messages || (Array.isArray(history) ? history : []);
-            log(`Loaded ${transcript.length} turns from transcript_path: ${payload.transcript_path}`);
         } catch (e) {
             log(`Error reading transcript file: ${e.message}`);
         }
@@ -202,9 +194,7 @@ function main() {
     
     log(`Agent: ${agentName}, Session: ${sessionId}, Active Transcript Turns: ${transcript.length}`);
 
-    // Bypass for internal evolution agents
     if (['distiller', 'syncer'].includes(agentName.toLowerCase()) || process.env.ASSA_EVOLVING) {
-        log(`Bypassing hook (ASSA_EVOLVING=${process.env.ASSA_EVOLVING}, Agent=${agentName})`);
         console.log(JSON.stringify({ decision: 'allow' }));
         return;
     }
@@ -212,11 +202,19 @@ function main() {
     ensureL3Setup();
     ensureLocalSetup();
 
-    // 1. Run Health Check
-    const health = checkSystemHealth();
+    const health = checkSystemHealth(process.cwd(), overrides);
+    
+    // Check if mandatory ASSA tools are available in the current context
+    const availableTools = payload.tools || [];
+    const hasAssaTools = availableTools.some(t => t.name.includes('submit_memory_signal'));
+    if (!hasAssaTools && !process.env.ASSA_EVOLVING) {
+        health.status = 'warning';
+        health.warnings.push('Mandatory evolution tools are missing. Ensure you started Gemini with --allowed-mcp-server-names assa-mcp.');
+        health.fixSuggestion = 'Restart Gemini with: gemini --allowed-mcp-server-names assa-mcp';
+    }
+
     let healthContext = '';
     if (health.status !== 'healthy') {
-        log(`ASSA Health Warning: ${health.warnings.join(' | ')}`);
         healthContext = '### ASSA HEALTH WARNING ###\n' +
             '⚠️ Your self-evolution environment has issues:\n' +
             health.warnings.map(w => `- ${w}`).join('\n') + '\n';
@@ -226,42 +224,28 @@ function main() {
         healthContext += 'Please resolve these to ensure ASSA can continue to evolve.\n\n';
     }
 
-    // 2. Update Ledger State (Rewind Defense)
     let ledger;
     try {
         ledger = ledgerUtils.updateLedger((l) => {
             const { ledger: updatedLedger, changed } = cascadeRewound(l, transcript, sessionId);
-            if (changed) {
-                log('Detected rewind → updated ledger statuses');
-            }
             return updatedLedger;
         });
     } catch (e) {
-        log(`Lock error during rewind check: ${e.message}`);
-        ledger = ledgerUtils.loadLedger(); // Fallback to read-only
+        ledger = ledgerUtils.loadLedger();
     }
 
-    // 3. Smart Reflex Pattern Matching
     const reflexContext = recognizeReflex(transcript);
-
-    // Assemble context — NO sub-agent spawning, just fast context injection
     const globalDir = path.join(os.homedir(), '.gemini', 'assa');
     let additionalContext = healthContext + reflexContext;
-    
-    // Inject Session ID for internal tool awareness
     additionalContext += `### ASSA SESSION ID: ${sessionId} ###\n\n`;
-    
     additionalContext += '### L3 GLOBAL WISDOM ###\n';
     additionalContext += safeReadFile(path.join(globalDir, 'SOUL.md'));
     additionalContext += safeReadFile(path.join(globalDir, 'USER_HANDBOOK.md'));
-    additionalContext += safeReadFile(path.join(globalDir, 'index.json'));
-    
     const pendingItems = ledger.filter(e => e.status === 'PENDING');
-    const DEEP_DISTILL_THRESHOLD = 5;
-    if (pendingItems.length >= DEEP_DISTILL_THRESHOLD) {
+    if (pendingItems.length >= 5) {
         additionalContext += `### L1 PENDING SIGNALS (${pendingItems.length} accumulated — DEEP DISTILLATION REQUIRED) ###\n`;
-        additionalContext += `⚠️ ${pendingItems.length} signals have accumulated. 你必须立即调用 \`generalist\` 工具作为子代理（Subagent），`;
-        additionalContext += '派发以下任务给它："作为 ASSA Distiller，读取最新的这些信号及其相关的 git diff，执行深度根因分析，并生成结构化的 patterns.md 规则块（带 YAML 和 Rationale）。注意：完成写入后，你必须调用 `complete_task` 工具来结束任务。" ';
+        additionalContext += `⚠️ ${pendingItems.length} signals have accumulated. 你必须立即调用 \`distiller\` 工具作为子代理（Subagent），`;
+        additionalContext += '派发以下任务给它："读取最新的这些信号及其相关的 git diff，执行深度根因分析，并生成结构化的 patterns.md 规则块（带 YAML 和 Rationale）。" \n';
         additionalContext += '在派发完成后，请直接告诉我任务已派发，不要亲自执行该分析。\n';
         additionalContext += JSON.stringify(pendingItems, null, 2) + '\n\n';
     } else if (pendingItems.length > 0) {
@@ -272,10 +256,6 @@ function main() {
     additionalContext += '### L2 PROJECT PATTERNS & DECISIONS ###\n';
     additionalContext += safeReadFile('.memory/patterns.md');
     additionalContext += safeReadFile('.memory/decisions.md');
-    additionalContext += safeReadFile('.memory/local_habits.md');
-    additionalContext += safeReadFile('.memory/LESSONS_LEARNED.md');
-
-    log(`Context assembled: ${additionalContext.length} chars, ${pendingItems.length} pending signals`);
 
     console.log(JSON.stringify({
         decision: 'allow',
