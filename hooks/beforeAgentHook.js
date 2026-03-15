@@ -51,7 +51,8 @@ function safeReadFile(filepath) {
     return '';
 }
 
-function cascadeRewound(ledger, transcript) {
+function cascadeRewound(ledger, transcript, sessionId) {
+    if (!sessionId) return { ledger, changed: false };
     const activeMessageIds = new Set(
         transcript
             .filter(turn => turn.messageId)
@@ -59,7 +60,8 @@ function cascadeRewound(ledger, transcript) {
     );
     let changed = false;
     for (const entry of ledger) {
-        if ((entry.status === 'PENDING' || entry.status === 'PROCESSED') && !activeMessageIds.has(entry.message_id)) {
+        // Only mark as REWOUND if the signal belongs to the CURRENT session
+        if (entry.session_id === sessionId && (entry.status === 'PENDING' || entry.status === 'PROCESSED') && !activeMessageIds.has(entry.message_id)) {
             entry.status = 'REWOUND';
             changed = true;
         }
@@ -94,7 +96,8 @@ function main() {
 
     const agentName = payload.agentName || 'main';
     const transcript = payload.transcript || [];
-    log(`Agent: ${agentName}, Transcript Turns: ${transcript.length}`);
+    const sessionId = payload.sessionId || payload.session_id || 'unknown';
+    log(`Agent: ${agentName}, Session: ${sessionId}, Transcript Turns: ${transcript.length}`);
 
     // Bypass for internal evolution agents
     if (['distiller', 'syncer'].includes(agentName.toLowerCase()) || process.env.ASSA_EVOLVING) {
@@ -124,7 +127,7 @@ function main() {
     let ledger;
     try {
         ledger = ledgerUtils.updateLedger((l) => {
-            const { ledger: updatedLedger, changed } = cascadeRewound(l, transcript);
+            const { ledger: updatedLedger, changed } = cascadeRewound(l, transcript, sessionId);
             if (changed) {
                 log('Detected rewind → updated ledger statuses');
             }

@@ -125,7 +125,8 @@ rl.on('line', (line) => {
                     if (pendingItems.length > 0) {
                         pendingItems.forEach(e => e.status = 'PROCESSED');
                     }
-                    return ledger;
+                    // Clean up REWOUND signals to keep the ledger size manageable
+                    return ledger.filter(e => e.status !== 'REWOUND');
                 });
                 
                 if (pendingItems.length === 0) {
