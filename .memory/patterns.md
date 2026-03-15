@@ -76,3 +76,112 @@ hit_count: 1
 # Node-First Middleware Strategy
 **Rationale**: Standardizing hooks and MCP servers on Node.js minimizes cold-start latency and simplifies the dependency graph for the core environment, avoiding the overhead of managing dual-runtime (Python/Node) logic for simple middleware.
 **Rule**: Prefer Node.js (v18+) for all hooks and MCP servers. Maintain zero-dependency implementations where possible to ensure maximum portability and minimize the risk of environment-level failures due to missing packages.
+
+---
+id: P-20260315-0008
+category: Logic
+confidence: 10
+status: Active
+hit_count: 1
+---
+# Zero-LLM Infrastructure Verification
+**Rationale**: Testing core infrastructure (hooks, MCP servers) using full LLM calls is slow, expensive, and subject to quota limits or flakiness. Infrastructure should be verifiable via pure functional tests or direct JSON-RPC mocks.
+**Rule**: Use direct sub-process spawning and JSON-RPC message injection (e.g., `tests/test_mcp_tools.js`) to verify MCP tool logic and hook behavior. Reserve E2E LLM tests for final validation only.
+
+---
+id: P-20260315-0009
+category: Logic
+confidence: 9
+status: Active
+hit_count: 1
+---
+# Schema-Enforced Signal Lifecycle
+**Rationale**: Manual edits to `.memory/evolution_ledger.json` are prone to syntax errors and race conditions. Enforcing signal submission through a specialized MCP tool ensures schema consistency and maintains a reliable audit trail for the distiller.
+**Rule**: Always use the `submit_memory_signal` MCP tool to record new realizations. Avoid manual file manipulation of the ledger to prevent data corruption.
+
+---
+id: P-20260315-0010
+category: Architecture
+confidence: 10
+status: Active
+hit_count: 1
+---
+# Documentation-First Evolution
+**Rationale**: In a self-evolving system, architectural shifts must be captured in the `conductor/` directory to provide a "source of truth" for subagents and future iterations. This prevents design drift and ensure that all components (hooks, skills, agents) remain aligned with the primary intent.
+Rule: Major architectural changes MUST be accompanied by updates to `conductor/tracks/` and `conductor/product.md`. Verification scripts should check for documentation synchronization before completing a track.
+
+---
+id: P-20260315-0011
+category: Workflow
+confidence: 10
+status: Active
+hit_count: 1
+---
+# Track Archival Hygiene
+**Rationale**: Accumulating completed tracks in the active `tracks/` directory increases noise for codebase research and bloats the context for subagents. Clean workspaces improve retrieval accuracy.
+**Rule**: Immediately move all plan and specification files to a dated sub-directory in `conductor/archive/` upon track completion. Remove the corresponding entries from the active `conductor/tracks.md` to maintain a focused development scope.
+
+---
+id: P-20260315-0012
+category: Architecture
+confidence: 10
+status: Active
+hit_count: 1
+---
+# Priority Health Alerting
+**Rationale**: Learning signals and architectural patterns are secondary to system integrity. If the environment is broken (e.g., agents disabled or ledger corrupted), the agent must prioritize fixing the foundation over performing features.
+**Rule**: The `BeforeAgent` hook must inject health warnings at the absolute TOP of the `additionalContext` block. Use the `### ASSA HEALTH WARNING ###` header and provide a single, actionable "fix suggestion" command to minimize user friction.
+
+---
+id: P-20260315-0013
+category: Workflow
+confidence: 9
+status: Active
+hit_count: 1
+---
+# Scientific Git Commitment
+**Rationale**: Vague or incorrect commit messages degrade the quality of the project's audit trail and mislead future analysis by the ASSA Distiller. Verification must precede proclamation.
+**Rule**: Before staging any change, run `git status` and `git diff HEAD` to verify the exact scope. Proactively draft commit messages using the Conventional Commits format, focusing on the "why" in the body, and present them for confirmation instead of asking the user for input.
+
+---
+id: P-20260315-0014
+category: Logic
+confidence: 10
+status: Active
+hit_count: 1
+---
+# Session-Aware Rewind Isolation
+**Rationale**: In environments where multiple sessions share a single `evolution_ledger.json`, a rewind in one session can incorrectly invalidate signals from others if the "Rewind Defense" logic (P-20260315-0004) is not session-aware. This leads to data loss and "false negatives" in the learning loop.
+**Rule**: The `BeforeAgent` hook must pass the `sessionId` to the rewind cascade logic. Only signals whose `session_id` matches the current `sessionId` are eligible to be marked as `REWOUND`. Signals from other sessions must remain untouched regardless of their presence in the current transcript.
+
+---
+id: P-20260315-0015
+category: Architecture
+confidence: 10
+status: Active
+hit_count: 1
+---
+# Continuous Ledger Pruning
+**Rationale**: The `REWOUND` status is a terminal state for signals that are no longer valid. Leaving these entries in the ledger indefinitely causes unnecessary growth and increases processing latency for the distiller.
+**Rule**: The `distill_pending` tool (or equivalent logic in the MCP server) must automatically filter out and remove all entries with `status: "REWOUND"` from the ledger after processing the `PENDING` signals. This ensures the ledger remains a compact source of truth for active and processed learning.
+---
+id: P-20260315-0016
+category: Architecture
+confidence: 10
+status: Active
+hit_count: 1
+---
+# Production-Grade Evolution Synergy
+**Rationale**: The 'Native Subagent Dispatch' architecture, when unified with 'Session-Aware Rewind Isolation' and 'Continuous Ledger Pruning', creates a robust, production-grade self-evolution loop that minimizes context pollution and ensures data integrity.
+**Rule**: Standardize the self-evolution loop on the synergy between Native Subagent Dispatch (P-20260315-0002), Session-Aware Rewind Isolation (P-20260315-0014), and Continuous Ledger Pruning (P-20260315-0015). Any modifications to the evolution pipeline must preserve this three-way integrity.
+
+---
+id: P-20260315-0017
+category: Behavioral
+confidence: 10
+status: Active
+hit_count: 1
+---
+# High-Sentiment Signal Sensitivity
+**Rationale**: Failing to recognize positive reinforcement (e.g., "很好", "Perfect", "Exactly") results in missed learning opportunities and requires the user to manually point out success patterns. Proactive signal detection is essential for a truly autonomous evolution loop.
+**Rule**: Scan all user turns for high-sentiment keywords (e.g., '很好', 'Perfect', 'Exactly', '不错'). Upon detection, immediately trigger `submit_memory_signal` to record the current state as a success pattern. Missing a praise signal is considered a high-priority behavioral gap.

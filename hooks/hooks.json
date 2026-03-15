@@ -5,6 +5,11 @@
         "matcher": "*",
         "hooks": [
           {
+            "name": "Capture",
+            "type": "command",
+            "command": "node ${extensionPath}/hooks/capture_payload.js"
+          },
+          {
             "name": "ASSA BeforeAgent",
             "type": "command",
             "command": "node ${extensionPath}/hooks/beforeAgentHook.js",
@@ -15,7 +20,7 @@
     ],
     "AfterTool": [
       {
-        "matcher": "run_shell_command",
+        "matcher": "*",
         "hooks": [
           {
             "name": "ASSA AfterTool",

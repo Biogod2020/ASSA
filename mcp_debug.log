@@ -48,3 +48,25 @@ Received: {"method":"notifications/initialized","jsonrpc":"2.0"}
 Received: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1}
 Received: {"method":"notifications/roots/list_changed","jsonrpc":"2.0"}
 Received: {"method":"notifications/roots/list_changed","jsonrpc":"2.0"}
+Received: {"method":"notifications/roots/list_changed","jsonrpc":"2.0"}
+Received: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"roots":{"listChanged":true}},"clientInfo":{"name":"gemini-cli-mcp-client","version":"0.33.1"}},"jsonrpc":"2.0","id":0}
+Received: {"method":"notifications/initialized","jsonrpc":"2.0"}
+Received: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1}
+Received: {"method":"notifications/roots/list_changed","jsonrpc":"2.0"}
+Received: {"method":"tools/call","params":{"name":"mark_processed_signals","arguments":{"message_ids":["sig-001","sig-002","sig-003","sig-004","sig-005","sig-006"]},"_meta":{"progressToken":"bb4c7110-5ee4-463d-973f-ed2c94913018"}},"jsonrpc":"2.0","id":2}
+Received: {"jsonrpc":"2.0","method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"roots":{"listChanged":true}},"clientInfo":{"name":"test-client","version":"1.0.0"}},"id":0}
+Received: {"jsonrpc":"2.0","method":"notifications/initialized"}
+Received: {"jsonrpc":"2.0","method":"tools/list","params":{},"id":1}
+Received: {"jsonrpc":"2.0","method":"tools/call","params":{"name":"submit_memory_signal","arguments":{"type":"positive","rule":"Use 'const' for all immutable variables in JavaScript.","context":"User preference","tags":["javascript","style"]}},"id":2}
+Received: {"jsonrpc":"2.0","method":"tools/call","params":{"name":"distill_pending","arguments":{}},"id":3}
+Distilled 1 signals into patterns.md
+Received: {"jsonrpc":"2.0","method":"tools/call","params":{"name":"distill_pending","arguments":{}},"id":4}
+Received: {"jsonrpc":"2.0","method":"tools/call","params":{"name":"request_global_promotion","arguments":{"topic":"all"}},"id":5}
+Promoted 1 patterns to L3 for topic: all
+Received: {"jsonrpc":"2.0","method":"tools/call","params":{"name":"submit_memory_signal","arguments":{"rule":"Test rule","type":"positive","tags":["test"]}},"id":60}
+Received: {"jsonrpc":"2.0","method":"tools/call","params":{"name":"mark_processed_signals","arguments":{"message_ids":["mcp-1773564390612"]}},"id":6}
+Received: {"method":"tools/call","params":{"name":"submit_memory_signal","arguments":{"rule":"The 'Native Subagent Dispatch' architecture combined with 'Session-Aware Rewind Isolation' and 'Continuous Ledger Pruning' provides a production-grade self-evolution loop that the user finds 'Very Good'.","tags":["success-pattern","architecture"],"context":"User praised the implementation and the cleanliness of the files after the subagent architecture migration.","type":"positive"},"_meta":{"progressToken":"7c83f5c9-2f90-438a-9825-742d7f245bb0"}},"jsonrpc":"2.0","id":2}
+Received: {"method":"tools/call","params":{"name":"submit_memory_signal","arguments":{"tags":["behavioral-evolution","signal-sensitivity"],"type":"negative","rule":"Enhance 'Signal Sensitivity': The agent must actively scan every user turn for high-sentiment keywords (e.g., '很好', 'Perfect', 'Exactly', '不错') and immediately trigger 'submit_memory_signal' without waiting for manual correction. Missing a praise is as critical as missing a bug.","context":"Agent missed a clear 'Success Pattern' trigger ('很好') until prompted by the user. This indicates a gap in the agent's real-time behavioral monitoring."},"_meta":{"progressToken":"958822e8-1c27-47e7-a033-9934c2bda6a4"}},"jsonrpc":"2.0","id":3}
+Received: {"method":"tools/call","params":{"name":"distill_pending","arguments":{},"_meta":{"progressToken":"734cbfa0-d374-49b0-8101-c2283fc39218"}},"jsonrpc":"2.0","id":4}
+Distilled 2 signals into patterns.md
+Received: {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "distill_pending", "arguments": {}}}

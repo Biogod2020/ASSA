@@ -69,6 +69,86 @@ function cascadeRewound(ledger, transcript, sessionId) {
     return { ledger, changed };
 }
 
+function extractText(turn) {
+    if (typeof turn.content === 'string') return turn.content;
+    if (Array.isArray(turn.content)) {
+        return turn.content
+            .map(c => {
+                if (c.type === 'text') return c.text;
+                if (c.type === 'tool_result') return c.content;
+                return '';
+            })
+            .join(' ');
+    }
+    return '';
+}
+
+function isToolFailure(turn) {
+    if (turn.role !== 'tool' && turn.role !== 'tool_result') return false;
+    const content = extractText(turn);
+    // Exit codes other than 0 indicate failure
+    const exitCodeMatch = content.match(/Exit Code: (\d+)/);
+    if (exitCodeMatch && exitCodeMatch[1] !== '0') return true;
+    // Typical error indicators
+    if (content.toLowerCase().includes('error:') || content.toLowerCase().includes('failed:')) {
+        // But avoid false positives for things like "No errors found"
+        if (!content.toLowerCase().includes('no error')) return true;
+    }
+    return false;
+}
+
+function isToolSuccess(turn) {
+    if (turn.role !== 'tool' && turn.role !== 'tool_result') return false;
+    const content = extractText(turn);
+    if (content.includes('Exit Code: 0')) return true;
+    if (content.length > 0 && !isToolFailure(turn)) return true;
+    return false;
+}
+
+function recognizeReflex(transcript) {
+    if (!transcript || transcript.length === 0) return '';
+    
+    let reflexContext = '';
+    const lastTurn = transcript[transcript.length - 1];
+    
+    // 1. High-Sentiment Detection (Signal Sensitivity)
+    if (lastTurn.role === 'user') {
+        const userText = extractText(lastTurn);
+        const keywords = ['很好', 'Perfect', 'Exactly', '不错', '太棒了', 'Great', 'Awesome', 'Success', 'Correct', 'Fixed'];
+        if (keywords.some(k => userText.includes(k))) {
+            reflexContext += '### ASSA REFLEX: PRAISE DETECTED ###\n' +
+                `User expressed satisfaction: "${userText.trim()}"\n` +
+                '你必须评估这是否代表了一个成功的模式（Success Pattern）。如果是，请立即调用 `submit_memory_signal` 记录它。\n\n';
+        }
+    }
+
+    // 2. Victory & Barrier Detection (Sequence Analysis)
+    const toolTurns = transcript.filter(t => t.role === 'tool' || t.role === 'tool_result');
+    if (toolTurns.length >= 2) {
+        const lastTool = toolTurns[toolTurns.length - 1];
+        const prevTool = toolTurns[toolTurns.length - 2];
+        
+        // Victory: Fail -> Success
+        if (isToolFailure(prevTool) && isToolSuccess(lastTool)) {
+            reflexContext += '### ASSA REFLEX: VICTORY DETECTED ###\n' +
+                'Detected a breakthrough: A previously failing tool has now succeeded.\n' +
+                '请总结导致成功的关键变动，并调用 `submit_memory_signal` 记录这个 "Success Pattern"。\n\n';
+        }
+        
+        // Barrier: 3 consecutive failures
+        if (toolTurns.length >= 3) {
+            const last3 = toolTurns.slice(-3);
+            if (last3.every(isToolFailure)) {
+                reflexContext += '### ASSA REFLEX: BARRIER DETECTED ###\n' +
+                    'Detected a technical barrier: 3 consecutive tool failures.\n' +
+                    '你似乎遇到了阻碍。请分析根本原因，并调用 `submit_memory_signal` (type: negative) 记录这个 "Technical Barrier"。\n\n';
+            }
+        }
+    }
+
+    return reflexContext;
+}
+
 function main() {
     log(`BeforeAgent Hook Fired at ${new Date().toISOString()}`);
     
@@ -123,7 +203,7 @@ function main() {
         healthContext += 'Please resolve these to ensure ASSA can continue to evolve.\n\n';
     }
 
-    // Update Ledger State (Rewind Defense)
+    // 2. Update Ledger State (Rewind Defense)
     let ledger;
     try {
         ledger = ledgerUtils.updateLedger((l) => {
@@ -138,9 +218,12 @@ function main() {
         ledger = ledgerUtils.loadLedger(); // Fallback to read-only
     }
 
+    // 3. Smart Reflex Pattern Matching
+    const reflexContext = recognizeReflex(transcript);
+
     // Assemble context — NO sub-agent spawning, just fast context injection
     const globalDir = path.join(os.homedir(), '.gemini', 'assa');
-    let additionalContext = healthContext;
+    let additionalContext = healthContext + reflexContext;
     additionalContext += '### L3 GLOBAL WISDOM ###\n';
     additionalContext += safeReadFile(path.join(globalDir, 'SOUL.md'));
     additionalContext += safeReadFile(path.join(globalDir, 'USER_HANDBOOK.md'));

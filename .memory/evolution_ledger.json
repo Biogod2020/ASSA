@@ -1,1 +1,34 @@
-[]
+[
+  {
+    "session_id": "unknown",
+    "message_id": "mcp-1773565770047",
+    "timestamp": "2026-03-15T09:09:30.047Z",
+    "status": "PROCESSED",
+    "type": "positive",
+    "payload": {
+      "rule": "The 'Native Subagent Dispatch' architecture combined with 'Session-Aware Rewind Isolation' and 'Continuous Ledger Pruning' provides a production-grade self-evolution loop that the user finds 'Very Good'.",
+      "context": "User praised the implementation and the cleanliness of the files after the subagent architecture migration.",
+      "tags": [
+        "success-pattern",
+        "architecture"
+      ]
+    },
+    "git_anchor": ""
+  },
+  {
+    "session_id": "unknown",
+    "message_id": "mcp-1773566031658",
+    "timestamp": "2026-03-15T09:13:51.658Z",
+    "status": "PROCESSED",
+    "type": "negative",
+    "payload": {
+      "rule": "Enhance 'Signal Sensitivity': The agent must actively scan every user turn for high-sentiment keywords (e.g., '很好', 'Perfect', 'Exactly', '不错') and immediately trigger 'submit_memory_signal' without waiting for manual correction. Missing a praise is as critical as missing a bug.",
+      "context": "Agent missed a clear 'Success Pattern' trigger ('很好') until prompted by the user. This indicates a gap in the agent's real-time behavioral monitoring.",
+      "tags": [
+        "behavioral-evolution",
+        "signal-sensitivity"
+      ]
+    },
+    "git_anchor": ""
+  }
+]
