@@ -86,12 +86,15 @@ function extractText(turn) {
 function isToolFailure(turn) {
     if (turn.role !== 'tool' && turn.role !== 'tool_result') return false;
     const content = extractText(turn);
-    // Exit codes other than 0 indicate failure
+    
+    // Priority 1: Check for explicit metadata markers (Rule P-0022)
+    if (content.includes('ASSA_METADATA: [FAILED:')) return true;
+    if (content.includes('ASSA_METADATA: [SUCCESS:')) return false;
+
+    // Priority 2: Heuristic fallback (defensive)
     const exitCodeMatch = content.match(/Exit Code: (\d+)/);
     if (exitCodeMatch && exitCodeMatch[1] !== '0') return true;
-    // Typical error indicators
     if (content.toLowerCase().includes('error:') || content.toLowerCase().includes('failed:')) {
-        // But avoid false positives for things like "No errors found"
         if (!content.toLowerCase().includes('no error')) return true;
     }
     return false;
@@ -100,6 +103,12 @@ function isToolFailure(turn) {
 function isToolSuccess(turn) {
     if (turn.role !== 'tool' && turn.role !== 'tool_result') return false;
     const content = extractText(turn);
+    
+    // Priority 1: Check for explicit metadata markers
+    if (content.includes('ASSA_METADATA: [SUCCESS:')) return true;
+    if (content.includes('ASSA_METADATA: [FAILED:')) return false;
+
+    // Priority 2: Heuristic fallback
     if (content.includes('Exit Code: 0')) return true;
     if (content.length > 0 && !isToolFailure(turn)) return true;
     return false;
@@ -238,6 +247,10 @@ function main() {
     // Assemble context — NO sub-agent spawning, just fast context injection
     const globalDir = path.join(os.homedir(), '.gemini', 'assa');
     let additionalContext = healthContext + reflexContext;
+    
+    // Inject Session ID for internal tool awareness
+    additionalContext += `### ASSA SESSION ID: ${sessionId} ###\n\n`;
+    
     additionalContext += '### L3 GLOBAL WISDOM ###\n';
     additionalContext += safeReadFile(path.join(globalDir, 'SOUL.md'));
     additionalContext += safeReadFile(path.join(globalDir, 'USER_HANDBOOK.md'));

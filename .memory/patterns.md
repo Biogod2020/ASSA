@@ -222,3 +222,25 @@ hit_count: 1
 - **Technical Barrier**: Three or more consecutive failures. Triggers a request for a deep root-cause analysis (negative signal).
 These must be recorded silently to preserve the developer's "flow" while still capturing technical realizations.
 
+
+---
+id: P-20260315-0021
+category: Architecture
+confidence: 10
+status: Active
+hit_count: 1
+---
+# Side-Channel Transcript Ingestion (Buffer-Overflow Resilience)
+**Rationale**: Ingesting the full JSON-serialized conversation history through `stdin` is subject to platform-specific pipe buffer limits (often 16KB-64KB). When the transcript exceeds this size, the hook receives truncated data, causing JSON parsing failures and disabling behavioral reflexes.
+**Rule**: Prioritize reading the conversation history from the `transcript_path` provided by the CLI. Only fall back to the inline `transcript` array if the file path is missing or inaccessible. This "side-channel" strategy ensures zero-loss data ingestion and stabilizes deep-history analysis in long-running sessions.
+
+---
+id: P-20260315-0022
+category: Architecture
+confidence: 10
+status: Active
+hit_count: 1
+---
+# Metadata-Augmented Behavioral Matching
+**Rationale**: Heuristic string matching of tool responses (e.g., "Exit Code: 1") is brittle and prone to false positives/negatives as tool outputs change across environments. Establishing an explicit "ground truth" at the moment of execution simplifies downstream pattern matching.
+**Rule**: The `AfterTool` hook must inject explicit, machine-readable status markers (e.g., `<!-- ASSA_METADATA: [SUCCESS/FAILED] -->`) into the context. Behavioral pattern matching logic in `BeforeAgent` must prioritize these markers over raw transcript content to trigger deterministic reflexes (Victory/Barrier) with 100% precision.

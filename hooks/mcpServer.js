@@ -36,7 +36,8 @@ rl.on('line', (line) => {
                                     type: { enum: ['positive', 'negative'], description: 'Type of feedback', default: 'positive' },
                                     rule: { type: 'string', description: 'The actionable rule/lesson' },
                                     context: { type: 'string', description: 'Why this was learned' },
-                                    tags: { type: 'array', items: { type: 'string' } }
+                                    tags: { type: 'array', items: { type: 'string' } },
+                                    session_id: { type: 'string', description: 'The current active sessionId' }
                                 },
                                 required: ['rule']
                             }
@@ -92,7 +93,7 @@ rl.on('line', (line) => {
                 const recordId = 'mcp-' + Date.now();
                 ledgerUtils.updateLedger((ledger) => {
                     const record = {
-                        session_id: 'unknown',
+                        session_id: args.session_id || 'unknown',
                         message_id: recordId,
                         timestamp: new Date().toISOString(),
                         status: 'PENDING',

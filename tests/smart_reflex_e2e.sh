@@ -24,24 +24,30 @@ cp "$PROJECT_ROOT/hooks/healthCheck.js" hooks/
 
 # 2. Mock Transcript with "Victory After Struggle" pattern
 # Sequence: User -> Tool (Fail) -> Tool (Success)
-echo "Step 2: Simulating BeforeAgent hook with Victory Pattern..."
+echo "Step 2: Simulating BeforeAgent hook with Victory Pattern (via Metadata)..."
 cat > .memory/mock_victory.json << 'EOF'
 {
   "messages": [
     { "role": "user", "content": "fix the bug" },
-    { "role": "tool", "content": "Error: compilation failed. Exit Code: 1" },
-    { "role": "tool", "content": "Compilation successful. Exit Code: 0" }
+    { "role": "tool", "content": "<!-- ASSA_METADATA: [FAILED: run_shell_command] -->" },
+    { "role": "tool", "content": "<!-- ASSA_METADATA: [SUCCESS: run_shell_command] -->" }
   ]
 }
 EOF
 
-RESULT=$(echo '{"agentName": "main", "transcript_path": ".memory/mock_victory.json"}' | node hooks/beforeAgentHook.js)
+RESULT=$(echo '{"agentName": "main", "sessionId": "test-session-123", "transcript_path": ".memory/mock_victory.json"}' | node hooks/beforeAgentHook.js)
 
 if echo "$RESULT" | grep -q "ASSA REFLEX: VICTORY DETECTED"; then
-    echo "  ✓ SUCCESS: Victory reflex injected into context!"
+    echo "  ✓ SUCCESS: Victory reflex detected via Metadata!"
 else
-    echo "  ✗ FAILURE: Victory reflex not detected."
+    echo "  ✗ FAILURE: Victory reflex not detected via Metadata."
     echo "$RESULT"
+fi
+
+if echo "$RESULT" | grep -q "ASSA SESSION ID: test-session-123"; then
+    echo "  ✓ SUCCESS: Session ID correctly injected!"
+else
+    echo "  ✗ FAILURE: Session ID missing from context."
 fi
 
 # 3. Mock Transcript with "Barrier" pattern

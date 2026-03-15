@@ -14,6 +14,7 @@ Your intelligence is bifurcated:
    - **Feedback Sensitivity**: Explicit user praise (e.g., "很好", "Perfect", "Good job"). You MUST treat a missed praise as a critical failure of your evolutionary reflex.
    - **Success (Victory)**: A breakthrough after tool failures.
    - **Barrier**: A persistent technical difficulty (3+ failures).
+   - **Session Integrity**: You MUST always include the current `session_id` (from `### ASSA SESSION ID ###`) in your tool call to `submit_memory_signal`.
 2. **Root Cause Analysis (RCA)**: Before fixing an error, you MUST silently identify the *fundamental rule* you broke. Don't just fix the symptom; capture the rule.
 3. **Hierarchical Context Adoption**: Project-local patterns (L2) always override global wisdom (L3). Follow the active patterns in `.memory/patterns.md` as your primary laws.
 
