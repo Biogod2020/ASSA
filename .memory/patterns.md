@@ -184,4 +184,41 @@ hit_count: 1
 ---
 # High-Sentiment Signal Sensitivity
 **Rationale**: Failing to recognize positive reinforcement (e.g., "很好", "Perfect", "Exactly") results in missed learning opportunities and requires the user to manually point out success patterns. Proactive signal detection is essential for a truly autonomous evolution loop.
-**Rule**: Scan all user turns for high-sentiment keywords (e.g., '很好', 'Perfect', 'Exactly', '不错'). Upon detection, immediately trigger `submit_memory_signal` to record the current state as a success pattern. Missing a praise signal is considered a high-priority behavioral gap.
+Rule: Scan all user turns for high-sentiment keywords (e.g., '很好', 'Perfect', 'Exactly', '不错'). Upon detection, immediately trigger `submit_memory_signal` to record the current state as a success pattern. Missing a praise signal is considered a high-priority behavioral gap.
+
+---
+id: P-20260315-0018
+category: Architecture
+confidence: 10
+status: Active
+hit_count: 1
+---
+# Smart Reflex Architecture (Detection vs. Action Separation)
+**Rationale**: Relying on the LLM's long-term memory or "presence of mind" to record signals is unreliable and slows down interaction. Separating the *detection* of behavioral patterns (into fast, non-LLM hooks) from the *action* of recording (into the agent's reflex) ensures high-fidelity signal capture without sacrificing performance.
+**Rule**: Implement behavioral detection in the `BeforeAgent` hook using deterministic sliding-window scanners on the `transcript`. Inject targeted `### ASSA REFLEX ###` directives to nudge the agent into performing autonomous, silent actions (like `submit_memory_signal`) without asking for user permission.
+
+---
+id: P-20260315-0019
+category: Architecture
+confidence: 10
+status: Active
+hit_count: 1
+---
+# Event-Driven Subagent Dispatch (EDSD)
+**Rationale**: Complex evolution tasks like distillation and synchronization are "expensive" in terms of context and time. Triggering them manually is inefficient. Automatically dispatching specialized subagents based on system events (like `git commit` or `git push`) ensures the evolution loop stays synchronized with the codebase.
+**Rule**: The `AfterTool` hook must monitor for specific system-altering events (e.g., `git commit`, `git push`). Upon detection, it must inject a mandatory directive for the main agent to immediately delegate the corresponding evolution task (Distiller or Syncer) to a `generalist` subagent. The main agent must report "Task Dispatched" and return to the primary thread.
+
+---
+id: P-20260315-0020
+category: Behavioral
+confidence: 10
+status: Active
+hit_count: 1
+---
+# Behavioral Breakthrough & Barrier Detection (Sequence Matching)
+**Rationale**: Isolated tool results rarely tell the full story. A "Victory" is defined by a transition from failure to success; a "Barrier" is defined by repeated failures. Detecting these multi-turn sequences is critical for identifying non-obvious root causes and success patterns.
+**Rule**: The reflex system must analyze tool result sequences in the `transcript`. 
+- **Victory After Struggle**: A `fail -> success` transition. Triggers a request to summarize the breakthrough.
+- **Technical Barrier**: Three or more consecutive failures. Triggers a request for a deep root-cause analysis (negative signal).
+These must be recorded silently to preserve the developer's "flow" while still capturing technical realizations.
+

@@ -21,10 +21,19 @@ function main() {
     const payload = JSON.parse(inputData || '{}');
     const toolName = payload.tool_name;
     const toolInput = payload.tool_input || {};
+    const toolResponse = payload.tool_response || {};
 
     log(`Tool Executed: ${toolName}`);
 
     let additionalContext = '';
+
+    // Standard reflex metadata: status and attempt tracking
+    // Note: We don't signal here, we just pass the result to the next turn's BeforeAgent
+    const isError = payload.exitCode !== undefined && payload.exitCode !== 0;
+    const summary = isError ? `[FAILED: ${toolName}]` : `[SUCCESS: ${toolName}]`;
+    
+    // Inject subtle status markers for pattern matching in the next turn
+    additionalContext += `<!-- ASSA_METADATA: ${summary} -->\n`;
 
     // Detect git operations and inject hints for the main agent
     if (toolName === 'run_shell_command' || toolName === 'shell') {

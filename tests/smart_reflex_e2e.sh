@@ -25,16 +25,17 @@ cp "$PROJECT_ROOT/hooks/healthCheck.js" hooks/
 # 2. Mock Transcript with "Victory After Struggle" pattern
 # Sequence: User -> Tool (Fail) -> Tool (Success)
 echo "Step 2: Simulating BeforeAgent hook with Victory Pattern..."
-PAYLOAD='{
-  "agentName": "main",
-  "transcript": [
+cat > .memory/mock_victory.json << 'EOF'
+{
+  "messages": [
     { "role": "user", "content": "fix the bug" },
     { "role": "tool", "content": "Error: compilation failed. Exit Code: 1" },
     { "role": "tool", "content": "Compilation successful. Exit Code: 0" }
   ]
-}'
+}
+EOF
 
-RESULT=$(echo "$PAYLOAD" | node hooks/beforeAgentHook.js)
+RESULT=$(echo '{"agentName": "main", "transcript_path": ".memory/mock_victory.json"}' | node hooks/beforeAgentHook.js)
 
 if echo "$RESULT" | grep -q "ASSA REFLEX: VICTORY DETECTED"; then
     echo "  ✓ SUCCESS: Victory reflex injected into context!"
@@ -46,16 +47,17 @@ fi
 # 3. Mock Transcript with "Barrier" pattern
 # Sequence: Tool (Fail) -> Tool (Fail) -> Tool (Fail)
 echo "Step 3: Simulating BeforeAgent hook with Barrier Pattern..."
-PAYLOAD='{
-  "agentName": "main",
-  "transcript": [
+cat > .memory/mock_barrier.json << 'EOF'
+{
+  "messages": [
     { "role": "tool", "content": "Error 1. Exit Code: 1" },
     { "role": "tool", "content": "Error 2. Exit Code: 1" },
     { "role": "tool", "content": "Error 3. Exit Code: 1" }
   ]
-}'
+}
+EOF
 
-RESULT=$(echo "$PAYLOAD" | node hooks/beforeAgentHook.js)
+RESULT=$(echo '{"agentName": "main", "transcript_path": ".memory/mock_barrier.json"}' | node hooks/beforeAgentHook.js)
 
 if echo "$RESULT" | grep -q "ASSA REFLEX: BARRIER DETECTED"; then
     echo "  ✓ SUCCESS: Barrier reflex injected into context!"
@@ -66,14 +68,15 @@ fi
 
 # 4. Mock Transcript with "Praise" pattern
 echo "Step 4: Simulating BeforeAgent hook with Praise Pattern..."
-PAYLOAD='{
-  "agentName": "main",
-  "transcript": [
+cat > .memory/mock_praise.json << 'EOF'
+{
+  "messages": [
     { "role": "user", "content": "很好, 这个问题解决得非常完美" }
   ]
-}'
+}
+EOF
 
-RESULT=$(echo "$PAYLOAD" | node hooks/beforeAgentHook.js)
+RESULT=$(echo '{"agentName": "main", "transcript_path": ".memory/mock_praise.json"}' | node hooks/beforeAgentHook.js)
 
 if echo "$RESULT" | grep -q "ASSA REFLEX: PRAISE DETECTED"; then
     echo "  ✓ SUCCESS: Praise reflex injected into context!"

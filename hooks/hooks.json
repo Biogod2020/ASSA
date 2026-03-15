@@ -7,7 +7,7 @@
           {
             "name": "Capture",
             "type": "command",
-            "command": "node ${extensionPath}/hooks/capture_payload.js"
+            "command": "node ${extensionPath}/hooks/debug_transcript.js"
           },
           {
             "name": "ASSA BeforeAgent",

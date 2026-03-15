@@ -55,7 +55,15 @@ EOF
 
 # 3. Simulate BeforeAgent Hook with Truncated Transcript (Rewind turn 2 in 'rewind-test')
 echo "Step 3: Simulating BeforeAgent hook after a rewind (Session: rewind-test, Turn 2 removed)..."
-echo '{"agentName": "main", "sessionId": "rewind-test", "transcript": [{"messageId": "msg-001"}]}' | node hooks/beforeAgentHook.js > /dev/null
+cat > .memory/mock_transcript.json << 'EOF'
+{
+  "messages": [
+    { "messageId": "msg-001", "role": "user", "content": "test" }
+  ]
+}
+EOF
+# Pass transcript_path instead of transcript array
+echo '{"agentName": "main", "sessionId": "rewind-test", "transcript_path": ".memory/mock_transcript.json"}' | node hooks/beforeAgentHook.js > /dev/null
 
 # 4. Verification
 echo "Step 4: Final Verification..."

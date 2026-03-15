@@ -47,8 +47,15 @@ function testRewindCascade() {
     fs.writeFileSync(LEDGER_PATH, JSON.stringify(initialLedger));
 
     // 2. Mock transcript WITHOUT the message_id
+    const transcriptData = JSON.stringify({
+        messages: [{ messageId: 'other-msg' }]
+    });
+    const transcriptPath = path.join(TMP_DIR, 'mock_transcript.json');
+    fs.writeFileSync(transcriptPath, transcriptData);
+
     const payload = JSON.stringify({
-        transcript: [{ messageId: 'other-msg' }]
+        sessionId: 's1',
+        transcript_path: transcriptPath
     });
 
     // 3. Run hook (ensure we are in TMP_DIR context)
@@ -81,8 +88,15 @@ function testContextInjection() {
     }];
     fs.writeFileSync(LEDGER_PATH, JSON.stringify(initialLedger));
 
+    const transcriptData = JSON.stringify({
+        messages: [{ messageId: 'm1' }]
+    });
+    const transcriptPath = path.join(TMP_DIR, 'mock_transcript.json');
+    fs.writeFileSync(transcriptPath, transcriptData);
+
     const payload = JSON.stringify({
-        transcript: [{ messageId: 'm1' }]
+        sessionId: 's1',
+        transcript_path: transcriptPath
     });
 
     // 2. Run hook
@@ -91,6 +105,8 @@ function testContextInjection() {
         input: payload,
         encoding: 'utf8'
     });
+
+    if (result.error) throw result.error;
 
     // 3. Verify Output
     const output = JSON.parse(result.stdout);

@@ -175,9 +175,23 @@ function main() {
     }
 
     const agentName = payload.agentName || 'main';
-    const transcript = payload.transcript || [];
     const sessionId = payload.sessionId || payload.session_id || 'unknown';
-    log(`Agent: ${agentName}, Session: ${sessionId}, Transcript Turns: ${transcript.length}`);
+    
+    // Load transcript from file if path is provided
+    let transcript = payload.transcript || [];
+    if (payload.transcript_path && fs.existsSync(payload.transcript_path)) {
+        try {
+            const fileContent = fs.readFileSync(payload.transcript_path, 'utf8');
+            const history = JSON.parse(fileContent);
+            // Gemini CLI history usually has a 'messages' array or is the array itself
+            transcript = history.messages || (Array.isArray(history) ? history : []);
+            log(`Loaded ${transcript.length} turns from transcript_path: ${payload.transcript_path}`);
+        } catch (e) {
+            log(`Error reading transcript file: ${e.message}`);
+        }
+    }
+    
+    log(`Agent: ${agentName}, Session: ${sessionId}, Active Transcript Turns: ${transcript.length}`);
 
     // Bypass for internal evolution agents
     if (['distiller', 'syncer'].includes(agentName.toLowerCase()) || process.env.ASSA_EVOLVING) {

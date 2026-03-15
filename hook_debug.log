@@ -710,3 +710,40 @@ AfterTool Hook fired at 2026-03-15T10:53:04.304Z
 Tool Executed: run_shell_command
 AfterTool Hook fired at 2026-03-15T10:53:28.752Z
 Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T10:53:36.498Z
+Tool Executed: run_shell_command
+Detected git commit → instructing main agent to dispatch Distiller via generalist subagent
+AfterTool Hook fired at 2026-03-15T10:53:56.027Z
+Tool Executed: run_shell_command
+BeforeAgent Hook Fired at 2026-03-15T10:55:21.353Z
+Read 13141 bytes from stdin
+Agent: main, Session: 751efa54-e30b-43a0-ae0e-ab57ede55268, Transcript Turns: 0
+Context assembled: 15690 chars, 0 pending signals
+AfterTool Hook fired at 2026-03-15T10:55:33.942Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T10:55:53.891Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T10:56:05.430Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T10:56:13.907Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T10:56:19.561Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T10:56:27.904Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T10:57:29.497Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T11:00:25.610Z
+Tool Executed: run_shell_command
+AfterTool Hook fired at 2026-03-15T11:00:36.014Z
+Tool Executed: run_shell_command
+BeforeAgent Hook Fired at 2026-03-15T11:30:25.252Z
+Read 297 bytes from stdin
+Agent: main, Session: 751efa54-e30b-43a0-ae0e-ab57ede55268, Transcript Turns: 0
+Context assembled: 15690 chars, 0 pending signals
+BeforeAgent Hook Fired at 2026-03-15T11:32:44.718Z
+Read 291 bytes from stdin
+Agent: main, Session: 751efa54-e30b-43a0-ae0e-ab57ede55268, Transcript Turns: 0
+Context assembled: 15690 chars, 0 pending signals
+AfterTool Hook fired at 2026-03-15T11:35:29.231Z
+Tool Executed: run_shell_command
