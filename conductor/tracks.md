@@ -11,8 +11,3 @@ This file tracks all major development tracks for the project. Each track has it
 
 - [x] **Track: Comprehensive end-to-end validation of the ASSA extension using the real Gemini CLI.**
 *Link: [./tracks/extension_validation_20250522/](./tracks/extension_validation_20250522/)*
-
----
-
-- [x] **Track: ASSA Self-Maintenance & Environment Guard**
-*Link: [./tracks/self_maintenance_20260315/](./tracks/self_maintenance_20260315/)*
