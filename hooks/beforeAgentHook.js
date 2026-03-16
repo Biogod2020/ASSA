@@ -60,33 +60,40 @@ function safeReadFile(filepath) {
     return '';
 }
 
+const PRAISE_KEYWORDS = ['很好', 'Perfect', 'Exactly', '不错', '太棒了', 'Great', 'Awesome', '完美', '干得漂亮', '棒', '赞'];
+
 function cascadeRewound(ledger, transcript, sessionId) {
     if (!sessionId) return { ledger, changed: false };
     
-    // Collect all unique IDs and all text from the transcript
-    let allTranscriptContent = '';
-    transcript.forEach(turn => {
-        allTranscriptContent += (turn.id || '') + ' ';
-        allTranscriptContent += extractAllText(turn) + ' ';
-    });
+    try {
+        // Collect all unique IDs and all text from the transcript
+        let allTranscriptContent = '';
+        transcript.forEach(turn => {
+            allTranscriptContent += (turn.id || '') + ' ';
+            allTranscriptContent += extractAllText(turn) + ' ';
+        });
 
-    let changed = false;
-    for (const entry of ledger) {
-        if (entry.session_id === sessionId) {
-            const isPresent = allTranscriptContent.includes(entry.message_id);
-            
-            if ((entry.status === 'PENDING' || entry.status === 'PROCESSED') && !isPresent) {
-                log(`REWIND DETECTED: Signal ${entry.message_id} not found in transcript. Marking as REWOUND.`);
-                entry.status = 'REWOUND';
-                changed = true;
-            } else if (entry.status === 'REWOUND' && isPresent) {
-                log(`RECOVERY DETECTED: Signal ${entry.message_id} reappeared in transcript. Restoring to PENDING.`);
-                entry.status = 'PENDING'; // Restore to PENDING for re-distillation if needed
-                changed = true;
+        let changed = false;
+        for (const entry of ledger) {
+            if (entry.session_id === sessionId) {
+                const isPresent = allTranscriptContent.includes(entry.message_id);
+                
+                if ((entry.status === 'PENDING' || entry.status === 'PROCESSED') && !isPresent) {
+                    log(`REWIND DETECTED: Signal ${entry.message_id} not found in transcript. Marking as REWOUND.`);
+                    entry.status = 'REWOUND';
+                    changed = true;
+                } else if (entry.status === 'REWOUND' && isPresent) {
+                    log(`RECOVERY DETECTED: Signal ${entry.message_id} reappeared in transcript. Restoring to PENDING.`);
+                    entry.status = 'PENDING'; // Restore to PENDING for re-distillation if needed
+                    changed = true;
+                }
             }
         }
+        return { ledger, changed };
+    } catch (err) {
+        log(`ERROR in cascadeRewound: ${err.stack}`);
+        return { ledger, changed: false };
     }
-    return { ledger, changed };
 }
 
 function extractAllText(turn) {
@@ -154,14 +161,13 @@ function recognizeReflex(transcript) {
     if (!transcript || transcript.length === 0) return '';
     
     let reflexContext = '';
-    const keywords = ['很好', 'Perfect', 'Exactly', '不错', '太棒了', 'Great', 'Awesome', '完美', '干得漂亮', '棒', '赞'];
     
     // Scan last 3 turns for praise
     const recentTurns = transcript.slice(-3);
     const hasPraise = recentTurns.some(turn => {
         if (turn.type === 'user') {
             const userText = extractAllText(turn);
-            return keywords.some(k => userText.includes(k));
+            return PRAISE_KEYWORDS.some(k => userText.includes(k));
         }
         return false;
     });
