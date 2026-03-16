@@ -1,1 +1,34 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Gemini CLI & MCP Logs
+hook_debug.log
+mcp_debug.log
+transcript.json
+debug_transcript.js
+
+# ASSA Internal State
+# We normally want to keep patterns.md in the repo as a baseline, 
+# but the ledger and skill queue should be clean.
+.memory/evolution_ledger.json
+.memory/skill_queue.json
+.memory/staged_skills/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+.pytest_cache/
+__pycache__/
+coverage/
+/Users/jay/assa-master-sandbox
+/Users/jay/assa-real-world-sandbox
+/Users/jay/assa-sandbox
+
+# Extension temp files
 .superpowers/
+.gemini-clipboard
