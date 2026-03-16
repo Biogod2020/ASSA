@@ -30,5 +30,88 @@
       ]
     },
     "git_anchor": ""
+  },
+  {
+    "session_id": "unknown",
+    "message_id": "mcp-1773580026052",
+    "timestamp": "2026-03-15T13:07:06.052Z",
+    "status": "PROCESSED",
+    "type": "positive",
+    "payload": {
+      "rule": "When dispatching evolution subagents, use 'ASSA_EVOLVING=true' to bypass hook recursion and ensure the distiller has '*' tool permissions in its .md profile.",
+      "context": "Verified fixed namespacing and deadlock avoidance in subagent distillation logic. User confirmed the progress is 'Very Good'.",
+      "tags": [
+        "architecture-fix",
+        "subagent-synergy"
+      ]
+    },
+    "git_anchor": ""
+  },
+  {
+    "session_id": "751efa54-e30b-43a0-ae0e-ab57ede55268",
+    "message_id": "mcp-1773631482657",
+    "timestamp": "2026-03-16T03:24:42.658Z",
+    "status": "REWOUND",
+    "type": "positive",
+    "payload": {
+      "rule": "ASSA V3.2 is now stable with a fully functional pattern-to-skill pipeline. Future tasks can rely on 'skill_generator' for automated tool creation. Hook health is now decoupled from transient tool visibility in BeforeAgent payload.",
+      "context": "Successfully completed the 'Autonomous Skill Evolution' track and resolved the persistent 'BeforeAgent' hook false warning. The user confirmed with '好的'.",
+      "tags": [
+        "milestone-complete",
+        "hook-stability-fix"
+      ]
+    },
+    "git_anchor": ""
+  },
+  {
+    "session_id": "751efa54-e30b-43a0-ae0e-ab57ede55268",
+    "message_id": "mcp-1773644298458",
+    "timestamp": "2026-03-16T06:58:18.462Z",
+    "status": "REWOUND",
+    "type": "positive",
+    "payload": {
+      "rule": "Instruction Recency Priority: Moving immediate reflex directives to the bottom of the injected context (🚨 ASSA IMMEDIATE REFLEXES 🚨) prevents 'instruction drift' in long conversations and ensures the agent acts on system impulses with high precision.",
+      "context": "During the 'Sensitivity Fix' task, multiple tool failures (replace/read_file) occurred due to output truncation and ambiguous context. The breakthrough was achieved by using surgical line-range reads and moving reflex directives to the bottom of the context to ensure high-attention capture.",
+      "tags": [
+        "architecture-fix",
+        "context-optimization",
+        "sensitivity"
+      ]
+    },
+    "git_anchor": ""
+  },
+  {
+    "session_id": "751efa54-e30b-43a0-ae0e-ab57ede55268",
+    "message_id": "mcp-1773644299919",
+    "timestamp": "2026-03-16T06:58:19.921Z",
+    "status": "REWOUND",
+    "type": "negative",
+    "payload": {
+      "rule": "Ambiguous Context Barrier: Editing large files without fresh, surgical verification of line ranges and exact whitespace leads to cascading tool failures. Always use read_file with explicit start/end lines before using the replace tool.",
+      "context": "Multiple consecutive 'replace' and 'read_file' failures occurred because the agent attempted to edit blocks based on truncated or assumed content.",
+      "tags": [
+        "technical-barrier",
+        "debugging",
+        "reliability"
+      ]
+    },
+    "git_anchor": ""
+  },
+  {
+    "session_id": "unknown",
+    "message_id": "mcp-1773659112844",
+    "timestamp": "2026-03-16T11:05:12.844Z",
+    "status": "PENDING",
+    "type": "positive",
+    "payload": {
+      "rule": "Cross-Platform Signal Validation: When syncing memory ledger with framework transcripts (Gemini CLI), never rely on single ID fields. Perform exhaustive text-searches across the entire turn content to bridge disparate ID namespaces (UUID vs MCP-ID).",
+      "context": "Previous turns suffered from hook crashes and brittle ID matching that incorrectly invalidated memories. Breakthrough: Switched to exhaustive text-search for signal IDs across disparate namespaces and fixed the TypeError in tool monitoring.",
+      "tags": [
+        "architecture-fix",
+        "reliability",
+        "id-matching"
+      ]
+    },
+    "git_anchor": ""
   }
 ]
