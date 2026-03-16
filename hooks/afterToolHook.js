@@ -8,69 +8,82 @@ function log(msg) {
     fs.appendFileSync(LOG_PATH, msg + '\n');
 }
 
+// Redirect all unexpected logs to stderr to keep stdout pure for JSON
+console.log = console.error;
+console.warn = console.error;
+
+process.on('uncaughtException', (err) => {
+    log(`UNCAUGHT EXCEPTION: ${err.stack}`);
+    process.exit(0);
+});
+
 function main() {
-    log(`AfterTool Hook fired at ${new Date().toISOString()}`);
-    
-    let inputData = '';
     try {
-        inputData = fs.readFileSync(0, 'utf8');
-    } catch (err) {
-        log(`Error reading stdin: ${err.message}`);
-    }
-
-    const payload = JSON.parse(inputData || '{}');
-    const toolName = payload.tool_name;
-    const toolInput = payload.tool_input || {};
-    const toolResponse = payload.tool_response || {};
-    const llmContent = toolResponse.llmContent || '';
-
-    log(`Tool Executed: ${toolName}`);
-    // log(`Tool Response: ${JSON.stringify(toolResponse)}`);
-
-    let additionalContext = '';
-
-    // Standard reflex metadata: status and attempt tracking
-    // Parse llmContent for Exit Code (Rule P-0022 workaround)
-    // The pattern is usually 'Exit Code: 1' or 'exit code: 1' at the end of a line
-    const exitCodeMatch = llmContent.match(/Exit [Cc]ode: (\d+)/);
-    const exitCode = exitCodeMatch ? parseInt(exitCodeMatch[1]) : undefined;
-    
-    const isError = (exitCode !== undefined && exitCode !== 0) || 
-                    toolResponse.status === 'error' || 
-                    llmContent.toLowerCase().includes('error:');
-                    
-    const summary = isError ? `[FAILED: ${toolName}]` : `[SUCCESS: ${toolName}]`;
-    log(`Result Determination: ${summary} (exitCode: ${exitCode})`);
-    
-    // Inject subtle status markers for pattern matching in the next turn
-    additionalContext += `<!-- ASSA_METADATA: ${summary} -->\n`;
-
-    // Detect git operations and inject hints for the main agent
-    if (toolName === 'run_shell_command' || toolName === 'shell') {
-        const cmd = toolInput.command || '';
-        if (cmd.includes('git commit')) {
-            log('Detected git commit → instructing main agent to dispatch Distiller subagent');
-            additionalContext = '### ASSA TRIGGER: GIT COMMIT DETECTED ###\n' +
-                'A git commit just occurred. 你必须立即调用 `distiller` 工具作为子代理（Subagent），' +
-                '派发以下任务给它：\"读取最新的 .memory/evolution_ledger.json 和最近的 git diff，执行深度根因分析，并将结构化的 YAML 规则块写入 .memory/patterns.md。\" ' +
-                '在派发完成后，请直接告诉我任务已派发，不要亲自执行该分析。这是为了保持主对话上下文的清洁。\n';
-        } else if (cmd.includes('git push')) {
-            log('Detected git push → instructing main agent to dispatch Syncer subagent');
-            additionalContext = '### ASSA TRIGGER: GIT PUSH DETECTED ###\n' +
-                'A git push just occurred. 你必须立即调用 `syncer` 工具作为子代理（Subagent），' +
-                '派发以下任务给它：\"审计本地 .memory/patterns.md 中成熟度高的模式，剥离项目特定标识后，推广同步到全局库 ~/.gemini/assa/LIBRARY/ 下的相应文件中。\" ' +
-                '在派发完成后，请直接告诉我任务已派发，不要亲自执行该同步。这是为了保持主对话上下文的清洁。\n';
+        log(`AfterTool Hook fired at ${new Date().toISOString()}`);
+        
+        let inputData = '';
+        try {
+            inputData = fs.readFileSync(0, 'utf8');
+        } catch (err) {
+            log(`Error reading stdin: ${err.message}`);
         }
-    }
 
-    if (additionalContext) {
-        console.log(JSON.stringify({
+        if (!inputData || !inputData.trim()) {
+            process.stdout.write(JSON.stringify({ decision: 'allow' }) + '\n');
+            return;
+        }
+
+        let payload;
+        try {
+            payload = JSON.parse(inputData);
+        } catch (e) {
+            log(`JSON parse error: ${e.message}`);
+            process.stdout.write(JSON.stringify({ decision: 'allow' }) + '\n');
+            return;
+        }
+
+        const toolName = payload.tool_name || 'unknown';
+        const toolInput = payload.tool_input || {};
+        const toolResponse = payload.tool_response || {};
+        
+        // CRITICAL FIX: Heuristic string matching is too brittle.
+        // We prioritize explicit status from the CLI.
+        const llmContent = typeof toolResponse.llmContent === 'string' 
+            ? toolResponse.llmContent 
+            : JSON.stringify(toolResponse.llmContent || '');
+        const exitCodeMatch = llmContent.match(/Exit [Cc]ode: (\d+)/i);
+        const exitCode = exitCodeMatch ? parseInt(exitCodeMatch[1]) : undefined;
+        
+        // A tool truly failed ONLY if:
+        // 1. Status is explicitly 'error'
+        // 2. Exit code is defined and non-zero
+        const isError = toolResponse.status === 'error' || (exitCode !== undefined && exitCode !== 0);
+                        
+        const summary = isError ? `[FAILED: ${toolName}]` : `[SUCCESS: ${toolName}]`;
+        log(`Tool: ${toolName}, Status: ${toolResponse.status}, ExitCode: ${exitCode} -> ${summary}`);
+        
+        let additionalContext = `<!-- ASSA_METADATA: ${summary} -->\n`;
+
+        // Detect git operations and inject hints
+        if (toolName === 'run_shell_command' || toolName === 'shell') {
+            const cmd = toolInput.command || '';
+            if (cmd.includes('git commit')) {
+                additionalContext += '### ASSA TRIGGER: GIT COMMIT DETECTED ###\n' +
+                    'A git commit just occurred. 你必须立即调用 `distiller` 工具作为子代理（Subagent）执行提炼任务。\n';
+            } else if (cmd.includes('git push')) {
+                additionalContext += '### ASSA TRIGGER: GIT PUSH DETECTED ###\n' +
+                    'A git push just occurred. 你必须立即调用 `syncer` 工具作为子代理（Subagent）执行同步任务。\n';
+            }
+        }
+
+        process.stdout.write(JSON.stringify({
             decision: 'allow',
             hookSpecificOutput: { additionalContext }
-        }));
-    } else {
-        console.log(JSON.stringify({ decision: 'allow' }));
+        }) + '\n');
+    } catch (globalErr) {
+        log(`GLOBAL CRASH in AfterTool: ${globalErr.stack}`);
+        process.stdout.write(JSON.stringify({ decision: 'allow' }) + '\n');
     }
 }
 
-if (require.main === module) main();
+main();
