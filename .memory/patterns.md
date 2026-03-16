@@ -42,6 +42,31 @@ hit_count: 1
 - **documentation-fix/release-integrity/victory-pattern**: Documentation Consistency & Legal Alignment: Before any release or public push, perform a mandatory cross-check between the physical LICENSE file and the README badges/sections. Legal consistency is a pillar of 'SOTA' technical integrity. (from mcp-1773663082852)
 - **workspace-hygiene/maintenance/release-readiness**: Periodic Workspace Hygiene & Archiving: As the project reaches a release milestone or version boundary, version-specific tests and artifacts should be moved to an 'archive/' directory. This maintains a lean root, reduces cognitive load, and signals release readiness for the next phase. (from mcp-1773663723569)
 
+- **architecture/context-router**: Context Router: Implement domain-aware library loading in system hooks to surgically inject L3 patterns based on CWD-to-Domain mappings. This prevents context explosion while maintaining high-signal operational mandates. (from mcp-1773663723570)
+- **lifecycle/syncer-auto-indexing**: Syncer Auto-Indexing: Automate the update of global library metadata (index.json) during the L2->L3 promotion process. This ensures that new promoted patterns are immediately routable by the Context Router without manual intervention. (from mcp-1773663723571)
+
+---
+id: P-20260316-ROUTR
+category: Architecture
+confidence: 10
+status: Active
+hit_count: 1
+---
+# Context Router (Domain-Aware Loading)
+**Rationale**: As the global L3 library grows, injecting all patterns into every session leads to context explosion and noise. Surgical injection based on the project's domain (CWD) ensures the agent has exactly the tools and wisdom it needs for the specific task at hand.
+**Rule**: Utilize the `index.json` mapping in the global library to surgically load domain-specific patterns. System hooks must match the current workspace against defined `domains` and inject only relevant `.md` files, preserving context for task execution.
+
+---
+id: P-20260316-INDEX
+category: Lifecycle
+confidence: 10
+status: Active
+hit_count: 1
+---
+# Syncer Auto-Indexing
+**Rationale**: Manual maintenance of library metadata is error-prone and creates a lag between pattern promotion and availability. Automating the indexing process within the Syncer agent ensures the "Context Router" always has an up-to-date map of the global wisdom.
+**Rule**: The Syncer agent MUST update the global `index.json` whenever a new pattern is promoted or an existing one is updated. This includes ensuring the `domains` array is comprehensive and the `pattern` file path is correct.
+
 ---
 id: P-20260316-TEST-PROMO
 category: Architecture
