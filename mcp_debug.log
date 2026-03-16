@@ -132,3 +132,9 @@ Sent result for mark_processed_signals
 Received: {"method":"tools/call","params":{"name":"submit_memory_signal","arguments":{"rule":"Documentation Consistency & Legal Alignment: Before any release or public push, perform a mandatory cross-check between the physical LICENSE file and the README badges/sections. Legal consistency is a pillar of 'SOTA' technical integrity.","context":"Identified a mismatch between the LICENSE file (MIT) and the README badge (Apache 2.0). Breakthrough: Corrected the documentation to align with the actual legal file, ensuring release integrity.","tags":["documentation-fix","release-integrity","victory-pattern"]},"_meta":{"progressToken":"fc0c1c85-dcdd-44ad-8fac-5648d701ea16"}},"jsonrpc":"2.0","id":5}
 Calling tool: submit_memory_signal
 Sent result for submit_memory_signal
+Received: {"method":"tools/call","params":{"name":"distill_pending","arguments":{},"_meta":{"progressToken":"cc6b0562-fd19-4b9a-99f4-6da3a9f5d476"}},"jsonrpc":"2.0","id":6}
+Calling tool: distill_pending
+Sent result for distill_pending
+Received: {"method":"tools/call","params":{"name":"request_global_promotion","arguments":{"topic":"all"},"_meta":{"progressToken":"aad67df0-dee8-4624-bf38-984bbe410964"}},"jsonrpc":"2.0","id":7}
+Calling tool: request_global_promotion
+Sent result for request_global_promotion

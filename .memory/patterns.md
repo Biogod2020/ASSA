@@ -39,3 +39,4 @@ hit_count: 1
 # Deep Research & Shadow Path Discovery
 **Rationale**: Automated analysis tools often clone repositories or stage documentation in extension-specific temporary directories (e.g., `~/.gemini/tmp`) rather than the primary workspace. Limiting audits to known project folders leads to "missing link" failures where existing local resources are ignored.
 **Rule**: When performing deep research or codebase mapping, systematically scan extension temporary directories (e.g., `~/.gemini/tmp`) in addition to primary workspace paths to identify hidden framework clones or research artifacts.
+- **documentation-fix/release-integrity/victory-pattern**: Documentation Consistency & Legal Alignment: Before any release or public push, perform a mandatory cross-check between the physical LICENSE file and the README badges/sections. Legal consistency is a pillar of 'SOTA' technical integrity. (from mcp-1773663082852)

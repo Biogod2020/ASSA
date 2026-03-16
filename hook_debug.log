@@ -2098,3 +2098,23 @@ BeforeAgent Hook Fired at 2026-03-16T12:15:09.216Z
 CWD: /Users/jay/LocalProjects/self_evolement
 Agent: main, Session: c92cd5bc-6fe3-4916-92dd-5b93421906a6, Prompt Length: 52, Active Transcript Turns: 51
 REFLEX TRIGGER: Praise detected in prompt or transcript.
+AfterTool Hook fired at 2026-03-16T12:16:58.312Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:17:06.082Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:17:18.023Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:17:21.229Z
+Tool: mcp_assa-mcp_distill_pending, Status: undefined, ExitCode: undefined -> [SUCCESS: mcp_assa-mcp_distill_pending]
+AfterTool Hook fired at 2026-03-16T12:17:25.252Z
+Tool: run_shell_command, Status: undefined, ExitCode: 127 -> [FAILED: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:17:28.165Z
+Tool: mcp_assa-mcp_request_global_promotion, Status: undefined, ExitCode: undefined -> [SUCCESS: mcp_assa-mcp_request_global_promotion]
+AfterTool Hook fired at 2026-03-16T12:17:32.288Z
+Tool: generalist, Status: undefined, ExitCode: undefined -> [SUCCESS: generalist]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-16T12:19:29.885Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: c92cd5bc-6fe3-4916-92dd-5b93421906a6, Prompt Length: 41, Active Transcript Turns: 56
+AfterTool Hook fired at 2026-03-16T12:19:36.215Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
