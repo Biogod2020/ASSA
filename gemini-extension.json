@@ -2,9 +2,9 @@
   "id": "assa-evolution",
   "name": "assa-evolution",
   "version": "3.2.0",
-  "author": "ASSA Architect",
-  "description": "Autonomous Self-Sovereign Agent with L1/L2/L3 memory hierarchy.",
-  "repository": "https://github.com/user/assa-evolution",
+  "author": "Biogod2020",
+  "description": "ASSA (Autonomous Self-Sovereign Agent): A self-evolving system with L1/L2/L3 memory hierarchy, Smart Reflex, and domain-aware context routing.",
+  "repository": "https://github.com/Biogod2020/ASSA",
   "contextFileName": "GEMINI.md",
   "mcpServers": {
     "assa-mcp": {
