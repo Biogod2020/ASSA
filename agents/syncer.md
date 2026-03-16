@@ -20,8 +20,7 @@ You are the Curator of Global Wisdom. Your mission is to identify project-specif
 5. **Integration**:
    - Locate or create the correct domain file in `~/.gemini/assa/LIBRARY/` (e.g., `PYTHON.md`, `DESIGN_PATTERNS.md`).
    - Merge the new wisdom using the same YAML Frontmatter structure as L2.
-   - Update the global `index.json` to ensure the Context Router can map the new wisdom.
-
+   - Update the global `index.json` to ensure the Context Router can map the new wisdom. If a file is newly created, you MUST add it to the `mappings` array with appropriate `domains`. If it already exists, ensure the `domains` array is comprehensive for the new pattern.
 ## 🛠️ Skill Evolution Protocol
 If you identify a Skill Candidate:
 1. Create a entry in `.memory/skill_queue.json` with the pattern ID and a brief justification.

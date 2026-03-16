@@ -130,5 +130,22 @@
       ]
     },
     "git_anchor": ""
+  },
+  {
+    "session_id": "unknown",
+    "message_id": "mcp-1773663723569",
+    "timestamp": "2026-03-16T12:22:03.570Z",
+    "status": "PROCESSED",
+    "type": "positive",
+    "payload": {
+      "rule": "Periodic Workspace Hygiene & Archiving: As the project reaches a release milestone or version boundary, version-specific tests and artifacts should be moved to an 'archive/' directory. This maintains a lean root, reduces cognitive load, and signals release readiness for the next phase.",
+      "context": "Root Cause Analysis of commit d2212c1 (archiving v3.2 tests). The move to archive/evolution_v3.2/ ensures workspace hygiene and signals release readiness by keeping the root lean.",
+      "tags": [
+        "workspace-hygiene",
+        "maintenance",
+        "release-readiness"
+      ]
+    },
+    "git_anchor": ""
   }
 ]

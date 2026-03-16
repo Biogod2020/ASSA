@@ -40,3 +40,15 @@ hit_count: 1
 **Rationale**: Automated analysis tools often clone repositories or stage documentation in extension-specific temporary directories (e.g., `~/.gemini/tmp`) rather than the primary workspace. Limiting audits to known project folders leads to "missing link" failures where existing local resources are ignored.
 **Rule**: When performing deep research or codebase mapping, systematically scan extension temporary directories (e.g., `~/.gemini/tmp`) in addition to primary workspace paths to identify hidden framework clones or research artifacts.
 - **documentation-fix/release-integrity/victory-pattern**: Documentation Consistency & Legal Alignment: Before any release or public push, perform a mandatory cross-check between the physical LICENSE file and the README badges/sections. Legal consistency is a pillar of 'SOTA' technical integrity. (from mcp-1773663082852)
+- **workspace-hygiene/maintenance/release-readiness**: Periodic Workspace Hygiene & Archiving: As the project reaches a release milestone or version boundary, version-specific tests and artifacts should be moved to an 'archive/' directory. This maintains a lean root, reduces cognitive load, and signals release readiness for the next phase. (from mcp-1773663723569)
+
+---
+id: P-20260316-TEST-PROMO
+category: Architecture
+confidence: 10
+status: Active
+hit_count: 5
+---
+# Test Promotion Pattern
+**Rationale**: Verification of syncer auto-index logic.
+**Rule**: Test rule for syncer.

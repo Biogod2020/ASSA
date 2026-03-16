@@ -299,6 +299,38 @@ function main() {
         additionalContext += safeReadFile(path.join(globalDir, 'SOUL.md'));
         additionalContext += safeReadFile(path.join(globalDir, 'USER_HANDBOOK.md'));
         
+        // Load the centralized pool of promoted patterns (always loaded)
+        additionalContext += safeReadFile(path.join(globalDir, 'LIBRARY', 'PROMOTED_PATTERNS.md'));
+
+        // Domain-Aware Loading: Load specific library files based on index.json mappings
+        const libraryDir = path.join(globalDir, 'LIBRARY');
+        const indexPath = path.join(libraryDir, 'index.json');
+        let matchedFiles = new Set();
+
+        if (fs.existsSync(indexPath)) {
+            try {
+                const index = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
+                const cwd = process.cwd().toLowerCase();
+                if (index.mappings && Array.isArray(index.mappings)) {
+                    index.mappings.forEach(m => {
+                        const match = m.domains.some(domain => cwd.includes(domain.toLowerCase()));
+                        if (match) {
+                            log(`Domain match detected: Loading ${m.pattern}`);
+                            matchedFiles.add(m.pattern);
+                            additionalContext += safeReadFile(path.join(libraryDir, m.pattern));
+                        }
+                    });
+                }
+            } catch (e) {
+                log(`Error parsing library index: ${e.message}`);
+            }
+        }
+
+        // If no domain-specific files were loaded (other than PROMOTED_PATTERNS),
+        // we could optionally load a subset of library files as a fallback,
+        // but to prevent context explosion, we rely on the PROMOTED_PATTERNS pool
+        // and project-specific L2 patterns.
+        
         // 3. Pending Signals (Current Tasks)
         const pendingItems = ledger.filter(e => e.status === 'PENDING');
         if (pendingItems.length >= 5) {

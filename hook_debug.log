@@ -2118,3 +2118,139 @@ CWD: /Users/jay/LocalProjects/self_evolement
 Agent: main, Session: c92cd5bc-6fe3-4916-92dd-5b93421906a6, Prompt Length: 41, Active Transcript Turns: 56
 AfterTool Hook fired at 2026-03-16T12:19:36.215Z
 Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:19:42.607Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-16T12:20:02.499Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: c92cd5bc-6fe3-4916-92dd-5b93421906a6, Prompt Length: 23, Active Transcript Turns: 60
+AfterTool Hook fired at 2026-03-16T12:20:21.342Z
+Tool: activate_skill, Status: undefined, ExitCode: undefined -> [SUCCESS: activate_skill]
+AfterTool Hook fired at 2026-03-16T12:20:48.261Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:20:53.184Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-16T12:20:59.108Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-16T12:21:06.342Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-16T12:22:03.662Z
+Tool: mcp_assa-mcp_submit_memory_signal, Status: undefined, ExitCode: undefined -> [SUCCESS: mcp_assa-mcp_submit_memory_signal]
+AfterTool Hook fired at 2026-03-16T12:22:07.111Z
+Tool: mcp_assa-mcp_distill_pending, Status: undefined, ExitCode: undefined -> [SUCCESS: mcp_assa-mcp_distill_pending]
+AfterTool Hook fired at 2026-03-16T12:22:11.431Z
+Tool: mcp_assa-mcp_request_global_promotion, Status: undefined, ExitCode: undefined -> [SUCCESS: mcp_assa-mcp_request_global_promotion]
+AfterTool Hook fired at 2026-03-16T12:22:15.235Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-16T12:22:20.982Z
+Tool: generalist, Status: undefined, ExitCode: undefined -> [SUCCESS: generalist]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-16T12:22:41.503Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: c92cd5bc-6fe3-4916-92dd-5b93421906a6, Prompt Length: 1460, Active Transcript Turns: 63
+REFLEX TRIGGER: Praise detected in prompt or transcript.
+AfterTool Hook fired at 2026-03-16T12:22:52.871Z
+Tool: read_file, Status: undefined, ExitCode: 1 -> [FAILED: read_file]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-16T12:25:22.636Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: c92cd5bc-6fe3-4916-92dd-5b93421906a6, Prompt Length: 22, Active Transcript Turns: 66
+REFLEX TRIGGER: Praise detected in prompt or transcript.
+AfterTool Hook fired at 2026-03-16T12:25:50.023Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:26:02.327Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-16T12:26:38.973Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: c92cd5bc-6fe3-4916-92dd-5b93421906a6, Prompt Length: 34, Active Transcript Turns: 71
+AfterTool Hook fired at 2026-03-16T12:26:54.067Z
+Tool: replace, Status: undefined, ExitCode: undefined -> [SUCCESS: replace]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-16T12:27:44.030Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: c92cd5bc-6fe3-4916-92dd-5b93421906a6, Prompt Length: 25, Active Transcript Turns: 74
+REFLEX TRIGGER: Praise detected in prompt or transcript.
+AfterTool Hook fired at 2026-03-16T12:28:00.071Z
+Tool: run_shell_command, Status: undefined, ExitCode: 2 -> [FAILED: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:28:10.315Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-16T12:29:18.821Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: c92cd5bc-6fe3-4916-92dd-5b93421906a6, Prompt Length: 59, Active Transcript Turns: 78
+AfterTool Hook fired at 2026-03-16T12:29:28.607Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:29:36.000Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:29:39.208Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:29:43.448Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-16T12:30:00.146Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: c92cd5bc-6fe3-4916-92dd-5b93421906a6, Prompt Length: 85, Active Transcript Turns: 78
+AfterTool Hook fired at 2026-03-16T12:30:58.567Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:31:04.192Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:31:11.270Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:31:14.938Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-16T12:31:38.628Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:31:49.892Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:31:56.160Z
+Tool: replace, Status: undefined, ExitCode: undefined -> [SUCCESS: replace]
+AfterTool Hook fired at 2026-03-16T12:32:04.416Z
+Tool: replace, Status: undefined, ExitCode: undefined -> [SUCCESS: replace]
+AfterTool Hook fired at 2026-03-16T12:32:10.124Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-16T12:32:13.322Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-16T12:32:17.363Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-16T12:32:23.809Z
+Tool: replace, Status: undefined, ExitCode: undefined -> [SUCCESS: replace]
+AfterTool Hook fired at 2026-03-16T12:32:29.226Z
+Tool: run_shell_command, Status: undefined, ExitCode: 2 -> [FAILED: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:32:38.411Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:32:55.896Z
+AfterTool Hook fired at 2026-03-16T12:32:55.896Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-16T12:33:06.086Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:33:20.413Z
+Tool: run_shell_command, Status: undefined, ExitCode: 2 -> [FAILED: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:33:24.489Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:33:28.892Z
+Tool: run_shell_command, Status: undefined, ExitCode: 2 -> [FAILED: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:33:32.511Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:33:36.041Z
+Tool: replace, Status: undefined, ExitCode: undefined -> [SUCCESS: replace]
+AfterTool Hook fired at 2026-03-16T12:33:38.606Z
+Tool: generalist, Status: undefined, ExitCode: undefined -> [SUCCESS: generalist]
+AfterTool Hook fired at 2026-03-16T12:33:54.968Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:33:58.806Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:34:02.680Z
+Tool: run_shell_command, Status: undefined, ExitCode: 1 -> [FAILED: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:34:14.102Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:34:25.258Z
+Tool: run_shell_command, Status: undefined, ExitCode: 1 -> [FAILED: run_shell_command]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-16T12:34:37.160Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: test-sync, Prompt Length: 11, Active Transcript Turns: 0
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-16T12:34:37.309Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]

@@ -138,3 +138,14 @@ Sent result for distill_pending
 Received: {"method":"tools/call","params":{"name":"request_global_promotion","arguments":{"topic":"all"},"_meta":{"progressToken":"aad67df0-dee8-4624-bf38-984bbe410964"}},"jsonrpc":"2.0","id":7}
 Calling tool: request_global_promotion
 Sent result for request_global_promotion
+Received: {"method":"notifications/roots/list_changed","jsonrpc":"2.0"}
+Roots changed notification received.
+Received: {"method":"tools/call","params":{"name":"submit_memory_signal","arguments":{"rule":"Periodic Workspace Hygiene & Archiving: As the project reaches a release milestone or version boundary, version-specific tests and artifacts should be moved to an 'archive/' directory. This maintains a lean root, reduces cognitive load, and signals release readiness for the next phase.","tags":["workspace-hygiene","maintenance","release-readiness"],"context":"Root Cause Analysis of commit d2212c1 (archiving v3.2 tests). The move to archive/evolution_v3.2/ ensures workspace hygiene and signals release readiness by keeping the root lean."},"_meta":{"progressToken":"fe1e54f8-9def-474c-a985-bea7ab9c3511"}},"jsonrpc":"2.0","id":8}
+Calling tool: submit_memory_signal
+Sent result for submit_memory_signal
+Received: {"method":"tools/call","params":{"name":"distill_pending","arguments":{},"_meta":{"progressToken":"a74c0477-b851-464c-9302-6d4282d6dbcc"}},"jsonrpc":"2.0","id":9}
+Calling tool: distill_pending
+Sent result for distill_pending
+Received: {"method":"tools/call","params":{"name":"request_global_promotion","arguments":{"topic":"all"},"_meta":{"progressToken":"0f3d324d-353a-4e8b-ac8f-a53c6a55c52a"}},"jsonrpc":"2.0","id":10}
+Calling tool: request_global_promotion
+Sent result for request_global_promotion
