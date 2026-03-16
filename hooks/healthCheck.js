@@ -61,6 +61,26 @@ function checkSystemHealth(workspaceRoot = process.cwd(), overrides = {}) {
         }
     }
 
+    // 5. Check Extension Manifest & MCP Server Config
+    const manifestPath = path.join(workspaceRoot, 'gemini-extension.json');
+    if (fs.existsSync(manifestPath)) {
+        try {
+            const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+            const mcpServers = manifest.mcpServers || {};
+            if (!mcpServers['assa-mcp']) {
+                health.status = 'warning';
+                health.warnings.push('assa-mcp server is not defined in gemini-extension.json.');
+            } else {
+                const serverCmd = mcpServers['assa-mcp'].command;
+                if (serverCmd.includes('node')) {
+                    // Extract path if possible or just assume it's there for now
+                }
+            }
+        } catch (e) {
+            health.warnings.push(`Error parsing gemini-extension.json: ${e.message}`);
+        }
+    }
+
     return health;
 }
 

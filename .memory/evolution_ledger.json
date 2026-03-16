@@ -48,60 +48,10 @@
     "git_anchor": ""
   },
   {
-    "session_id": "751efa54-e30b-43a0-ae0e-ab57ede55268",
-    "message_id": "mcp-1773631482657",
-    "timestamp": "2026-03-16T03:24:42.658Z",
-    "status": "REWOUND",
-    "type": "positive",
-    "payload": {
-      "rule": "ASSA V3.2 is now stable with a fully functional pattern-to-skill pipeline. Future tasks can rely on 'skill_generator' for automated tool creation. Hook health is now decoupled from transient tool visibility in BeforeAgent payload.",
-      "context": "Successfully completed the 'Autonomous Skill Evolution' track and resolved the persistent 'BeforeAgent' hook false warning. The user confirmed with '好的'.",
-      "tags": [
-        "milestone-complete",
-        "hook-stability-fix"
-      ]
-    },
-    "git_anchor": ""
-  },
-  {
-    "session_id": "751efa54-e30b-43a0-ae0e-ab57ede55268",
-    "message_id": "mcp-1773644298458",
-    "timestamp": "2026-03-16T06:58:18.462Z",
-    "status": "REWOUND",
-    "type": "positive",
-    "payload": {
-      "rule": "Instruction Recency Priority: Moving immediate reflex directives to the bottom of the injected context (🚨 ASSA IMMEDIATE REFLEXES 🚨) prevents 'instruction drift' in long conversations and ensures the agent acts on system impulses with high precision.",
-      "context": "During the 'Sensitivity Fix' task, multiple tool failures (replace/read_file) occurred due to output truncation and ambiguous context. The breakthrough was achieved by using surgical line-range reads and moving reflex directives to the bottom of the context to ensure high-attention capture.",
-      "tags": [
-        "architecture-fix",
-        "context-optimization",
-        "sensitivity"
-      ]
-    },
-    "git_anchor": ""
-  },
-  {
-    "session_id": "751efa54-e30b-43a0-ae0e-ab57ede55268",
-    "message_id": "mcp-1773644299919",
-    "timestamp": "2026-03-16T06:58:19.921Z",
-    "status": "REWOUND",
-    "type": "negative",
-    "payload": {
-      "rule": "Ambiguous Context Barrier: Editing large files without fresh, surgical verification of line ranges and exact whitespace leads to cascading tool failures. Always use read_file with explicit start/end lines before using the replace tool.",
-      "context": "Multiple consecutive 'replace' and 'read_file' failures occurred because the agent attempted to edit blocks based on truncated or assumed content.",
-      "tags": [
-        "technical-barrier",
-        "debugging",
-        "reliability"
-      ]
-    },
-    "git_anchor": ""
-  },
-  {
     "session_id": "unknown",
     "message_id": "mcp-1773659112844",
     "timestamp": "2026-03-16T11:05:12.844Z",
-    "status": "PENDING",
+    "status": "PROCESSED",
     "type": "positive",
     "payload": {
       "rule": "Cross-Platform Signal Validation: When syncing memory ledger with framework transcripts (Gemini CLI), never rely on single ID fields. Perform exhaustive text-searches across the entire turn content to bridge disparate ID namespaces (UUID vs MCP-ID).",
@@ -110,6 +60,56 @@
         "architecture-fix",
         "reliability",
         "id-matching"
+      ]
+    },
+    "git_anchor": ""
+  },
+  {
+    "session_id": "unknown",
+    "message_id": "mcp-1773661627792",
+    "timestamp": "2026-03-16T11:47:07.792Z",
+    "status": "PROCESSED",
+    "type": "positive",
+    "payload": {
+      "rule": "Evolutionary Milestone: The ASSA V3.2 core reliability patch (incorporating enhanced praise detection, exhaustive ID search for rollbacks, and recovery logic) has been successfully deployed and verified in a live session. This architectural pattern for hook-based memory synchronization is now considered a 'Golden Standard' for future self-evolving extensions.",
+      "context": "User confirmed that the new 'Smart Reflex' and 'Rewind Resilience' features are working by providing positive feedback ('很好'). The system successfully triggered the reflex context and the user is satisfied with the re-installation and verification process.",
+      "tags": [
+        "success-pattern",
+        "deployment-victory",
+        "self-evolution"
+      ]
+    },
+    "git_anchor": ""
+  },
+  {
+    "session_id": "unknown",
+    "message_id": "mcp-1773662122498",
+    "timestamp": "2026-03-16T11:55:22.498Z",
+    "status": "PROCESSED",
+    "type": "positive",
+    "payload": {
+      "rule": "Deep Sourcing Protocol: For any project involving rapidly evolving third-party frameworks or CLIs, DO NOT rely on internal training data or general web searches. You MUST clone the official repository or fetch raw source/docs to verify exact API signatures and payload structures. Empirical source analysis is the only path to 100% reliability in these contexts.",
+      "context": "The user explicitly instructed that for fast-moving tools (like Gemini CLI), the agent must prioritize 'Deep Research' (cloning/fetching official repos) over 'Surface Research' (Google searches). This approach directly led to the fix of hook payload mismatches and sensitive praise detection.",
+      "tags": [
+        "research-protocol",
+        "reliability",
+        "github-first"
+      ]
+    },
+    "git_anchor": ""
+  },
+  {
+    "session_id": "unknown",
+    "message_id": "mcp-1773662651198",
+    "timestamp": "2026-03-16T12:04:11.198Z",
+    "status": "PENDING",
+    "type": "positive",
+    "payload": {
+      "rule": "Comprehensive Research Discovery: When searching for official framework clones or research artifacts, do not limit audits to primary workspace folders. Systematically scan extension-specific temporary directories (e.g., '~/.gemini/tmp') to identify clones staged during automated analysis sessions.",
+      "context": "During the investigation of local clones, the official repository was not found in 'LocalProjects' but was hidden in the '.gemini/tmp' directory. This insight is crucial for future codebase mapping.",
+      "tags": [
+        "research-protocol",
+        "discovery-victory"
       ]
     },
     "git_anchor": ""

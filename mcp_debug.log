@@ -70,3 +70,59 @@ Received: {"method":"tools/call","params":{"name":"submit_memory_signal","argume
 Received: {"method":"tools/call","params":{"name":"distill_pending","arguments":{},"_meta":{"progressToken":"734cbfa0-d374-49b0-8101-c2283fc39218"}},"jsonrpc":"2.0","id":4}
 Distilled 2 signals into patterns.md
 Received: {"jsonrpc": "2.0", "id": 1, "method": "tools/call", "params": {"name": "distill_pending", "arguments": {}}}
+Received: {"method":"tools/call","params":{"name":"submit_memory_signal","arguments":{"tags":["architecture-fix","subagent-synergy"],"rule":"When dispatching evolution subagents, use 'ASSA_EVOLVING=true' to bypass hook recursion and ensure the distiller has '*' tool permissions in its .md profile.","context":"Verified fixed namespacing and deadlock avoidance in subagent distillation logic. User confirmed the progress is 'Very Good'.","session_id":"751efa54-e30b-43a0-ae0e-ab57ede55268","type":"positive"},"_meta":{"progressToken":"e2308a1a-f0c7-4e00-861c-1589882d786b"}},"jsonrpc":"2.0","id":5}
+Received: {"method":"tools/call","params":{"name":"mark_processed_signals","arguments":{"message_ids":["mcp-1773580026052"]},"_meta":{"progressToken":"75932c81-518f-4737-97d4-eef8c7a49925"}},"jsonrpc":"2.0","id":6}
+Received: {"method":"notifications/roots/list_changed","jsonrpc":"2.0"}
+Received: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"roots":{"listChanged":true}},"clientInfo":{"name":"gemini-cli-mcp-client","version":"0.33.1"}},"jsonrpc":"2.0","id":0}
+Received: {"method":"notifications/initialized","jsonrpc":"2.0"}
+Received: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1}
+Received: {"method":"notifications/roots/list_changed","jsonrpc":"2.0"}
+Received: {"method":"notifications/roots/list_changed","jsonrpc":"2.0"}
+Received: {"method":"tools/call","params":{"name":"distill_pending","arguments":{},"_meta":{"progressToken":"7e1426f3-b900-43f8-99dc-7e69fe5289f4"}},"jsonrpc":"2.0","id":2}
+Received: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"roots":{"listChanged":true}},"clientInfo":{"name":"gemini-cli-mcp-client","version":"0.33.1"}},"jsonrpc":"2.0","id":0}
+Received: {"method":"notifications/initialized","jsonrpc":"2.0"}
+Received: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1}
+Received: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{},"clientInfo":{"name":"mcp-test-client","version":"0.0.1"}},"jsonrpc":"2.0","id":0}
+Received: {"method":"notifications/initialized","jsonrpc":"2.0"}
+Received: {"method":"ping","jsonrpc":"2.0","id":1}
+Received: {"jsonrpc":"2.0","method":"notifications/cancelled","params":{"requestId":1,"reason":"McpError: MCP error -32001: Request timed out"}}
+Received: {"method":"initialize","params":{"protocolVersion":"2024-11-05","capabilities":{},"serverInfo":{"name":"test-client","version":"1.0.0"}},"jsonrpc":"2.0","id":0}
+Received: {"method":"initialize","params":{"protocolVersion":"2024-11-05","capabilities":{},"serverInfo":{"name":"test-client","version":"1.0.0"}},"jsonrpc":"2.0","id":0}
+Sent Initialize response
+Received: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1}
+Sent Tools List
+Received: {"method":"tools/call","params":{"name":"check_health","arguments":{},"_meta":{"progressToken":"656e0462-eb6f-40c5-ba97-612fca0b54ca"}},"jsonrpc":"2.0","id":3}
+Received: {"method":"tools/call","params":{"name":"submit_memory_signal","arguments":{"tags":["milestone-complete","hook-stability-fix"],"type":"positive","rule":"ASSA V3.2 is now stable with a fully functional pattern-to-skill pipeline. Future tasks can rely on 'skill_generator' for automated tool creation. Hook health is now decoupled from transient tool visibility in BeforeAgent payload.","context":"Successfully completed the 'Autonomous Skill Evolution' track and resolved the persistent 'BeforeAgent' hook false warning. The user confirmed with '好的'.","session_id":"751efa54-e30b-43a0-ae0e-ab57ede55268"},"_meta":{"progressToken":"59fc67ff-9091-4e02-a097-a99f6d5052a8"}},"jsonrpc":"2.0","id":4}
+Received: {"method":"notifications/roots/list_changed","jsonrpc":"2.0"}
+Received: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"roots":{"listChanged":true}},"clientInfo":{"name":"gemini-cli-mcp-client","version":"0.33.1"}},"jsonrpc":"2.0","id":0}
+Sent Initialize response
+Received: {"method":"notifications/initialized","jsonrpc":"2.0"}
+MCP Client Initialized.
+Received: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1}
+Sent Tools List
+Received: {"method":"notifications/roots/list_changed","jsonrpc":"2.0"}
+Received: {"method":"tools/call","params":{"name":"submit_memory_signal","arguments":{"tags":["architecture-fix","context-optimization","sensitivity"],"context":"During the 'Sensitivity Fix' task, multiple tool failures (replace/read_file) occurred due to output truncation and ambiguous context. The breakthrough was achieved by using surgical line-range reads and moving reflex directives to the bottom of the context to ensure high-attention capture.","session_id":"751efa54-e30b-43a0-ae0e-ab57ede55268","type":"positive","rule":"Instruction Recency Priority: Moving immediate reflex directives to the bottom of the injected context (🚨 ASSA IMMEDIATE REFLEXES 🚨) prevents 'instruction drift' in long conversations and ensures the agent acts on system impulses with high precision."},"_meta":{"progressToken":"b62c15c0-5938-4e0b-85a6-143622e2c8c5"}},"jsonrpc":"2.0","id":5}
+Received: {"method":"tools/call","params":{"name":"submit_memory_signal","arguments":{"type":"negative","session_id":"751efa54-e30b-43a0-ae0e-ab57ede55268","rule":"Ambiguous Context Barrier: Editing large files without fresh, surgical verification of line ranges and exact whitespace leads to cascading tool failures. Always use read_file with explicit start/end lines before using the replace tool.","tags":["technical-barrier","debugging","reliability"],"context":"Multiple consecutive 'replace' and 'read_file' failures occurred because the agent attempted to edit blocks based on truncated or assumed content."},"_meta":{"progressToken":"2bd4b018-5ad0-4c43-adf8-d0bf7f3a36dc"}},"jsonrpc":"2.0","id":6}
+Received: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"roots":{"listChanged":true}},"clientInfo":{"name":"gemini-cli-mcp-client","version":"0.33.1"}},"jsonrpc":"2.0","id":0}
+Sent Initialize response
+Received: {"method":"notifications/initialized","jsonrpc":"2.0"}
+MCP Client Initialized.
+Received: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1}
+Sent Tools List
+Received: {"method":"tools/call","params":{"name":"submit_memory_signal","arguments":{"context":"The user explicitly instructed that for fast-moving tools (like Gemini CLI), the agent must prioritize 'Deep Research' (cloning/fetching official repos) over 'Surface Research' (Google searches). This approach directly led to the fix of hook payload mismatches and sensitive praise detection.","rule":"Deep Sourcing Protocol: For any project involving rapidly evolving third-party frameworks or CLIs, DO NOT rely on internal training data or general web searches. You MUST clone the official repository or fetch raw source/docs to verify exact API signatures and payload structures. Empirical source analysis is the only path to 100% reliability in these contexts.","tags":["research-protocol","reliability","github-first"],"type":"positive"},"_meta":{"progressToken":"0c4ea883-2744-4698-835b-f92f4317f86d"}},"jsonrpc":"2.0","id":2}
+Calling tool: submit_memory_signal
+Sent result for submit_memory_signal
+Received: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"roots":{"listChanged":true}},"clientInfo":{"name":"gemini-cli-mcp-client","version":"0.33.1"}},"jsonrpc":"2.0","id":0}
+Sent Initialize response
+Received: {"method":"notifications/initialized","jsonrpc":"2.0"}
+MCP Client Initialized.
+Received: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1}
+Sent Tools List
+Received: {"method":"tools/call","params":{"name":"distill_pending","arguments":{},"_meta":{"progressToken":"d0a7836f-6366-4f6d-bfbf-bb2825daca55"}},"jsonrpc":"2.0","id":2}
+Calling tool: distill_pending
+Sent result for distill_pending
+Received: {"method":"tools/call","params":{"name":"submit_memory_signal","arguments":{"rule":"Comprehensive Research Discovery: When searching for official framework clones or research artifacts, do not limit audits to primary workspace folders. Systematically scan extension-specific temporary directories (e.g., '~/.gemini/tmp') to identify clones staged during automated analysis sessions.","context":"During the investigation of local clones, the official repository was not found in 'LocalProjects' but was hidden in the '.gemini/tmp' directory. This insight is crucial for future codebase mapping.","tags":["research-protocol","discovery-victory"]},"_meta":{"progressToken":"fca396eb-90e7-414c-8cc6-68fbf9f81bf5"}},"jsonrpc":"2.0","id":3}
+Calling tool: submit_memory_signal
+Sent result for submit_memory_signal
+Received: {"method":"notifications/roots/list_changed","jsonrpc":"2.0"}
+Roots changed notification received.

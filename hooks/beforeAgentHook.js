@@ -158,14 +158,17 @@ function isToolSuccess(turn) {
     return false;
 }
 
-function recognizeReflex(transcript) {
-    if (!transcript || transcript.length === 0) return '';
+function recognizeReflex(transcript, currentPrompt) {
+    if ((!transcript || transcript.length === 0) && !currentPrompt) return '';
     
     let reflexContext = '';
     
-    // Scan last 3 turns for praise
-    const recentTurns = transcript.slice(-3);
-    const hasPraise = recentTurns.some(turn => {
+    // Scan current prompt for praise
+    const hasPraiseInPrompt = currentPrompt && PRAISE_KEYWORDS.some(k => currentPrompt.includes(k));
+    
+    // Scan last 3 turns from transcript for praise
+    const recentTurns = (transcript || []).slice(-3);
+    const hasPraiseInTranscript = recentTurns.some(turn => {
         if (turn.type === 'user') {
             const userText = extractAllText(turn);
             return PRAISE_KEYWORDS.some(k => userText.includes(k));
@@ -173,8 +176,8 @@ function recognizeReflex(transcript) {
         return false;
     });
 
-    if (hasPraise) {
-        log('REFLEX TRIGGER: Praise detected in recent turns.');
+    if (hasPraiseInPrompt || hasPraiseInTranscript) {
+        log('REFLEX TRIGGER: Praise detected in prompt or transcript.');
         reflexContext += '### ASSA REFLEX: PRAISE DETECTED ###\n' +
             '你刚才收到了用户的正面反馈。你必须评估这是否代表了一个成功的模式（Success Pattern）。如果是，请立即调用 `submit_memory_signal` 记录它。\n\n';
     }
@@ -233,9 +236,10 @@ function main() {
 
         const agentName = payload.agentName || 'main';
         const sessionId = payload.sessionId || payload.session_id || 'unknown';
+        const currentPrompt = payload.prompt || '';
         const overrides = payload.overrides || {};
         
-        let transcript = payload.transcript || [];
+        let transcript = [];
         if (payload.transcript_path && fs.existsSync(payload.transcript_path)) {
             try {
                 const fileContent = fs.readFileSync(payload.transcript_path, 'utf8');
@@ -246,7 +250,7 @@ function main() {
             }
         }
         
-        log(`Agent: ${agentName}, Session: ${sessionId}, Active Transcript Turns: ${transcript.length}`);
+        log(`Agent: ${agentName}, Session: ${sessionId}, Prompt Length: ${currentPrompt.length}, Active Transcript Turns: ${transcript.length}`);
 
         if (['distiller', 'syncer'].includes(agentName.toLowerCase()) || process.env.ASSA_EVOLVING) {
             process.stdout.write(JSON.stringify({ decision: 'allow' }) + '\n');
@@ -279,7 +283,7 @@ function main() {
             ledger = ledgerUtils.loadLedger();
         }
 
-        const reflexContext = recognizeReflex(transcript);
+        const reflexContext = recognizeReflex(transcript, currentPrompt);
         const globalDir = path.join(os.homedir(), '.gemini', 'assa');
         
         let additionalContext = healthContext;

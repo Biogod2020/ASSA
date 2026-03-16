@@ -1,76 +1,78 @@
 #!/bin/bash
 set -e
 
-# Lightweight E2E: Single LLM call to verify agent behavior
-# Uses pre-seeded ledger so agent only needs to call distill_pending
+# ASSA V3.2 Real-World Validation
+# Verifies installation, local file generation, and global memory modification.
 
-SANDBOX_DIR="/Users/jay/assa-sandbox"
+SANDBOX_DIR="/Users/jay/assa-real-world-sandbox"
 PROJECT_ROOT="/Users/jay/LocalProjects/self_evolement"
+GLOBAL_ASSA_DIR="$HOME/.gemini/assa"
 
-echo "=== Lightweight E2E: Single LLM Call ==="
+echo "🌍 Starting ASSA V3.2 Real-World Validation..."
 echo ""
 
-# 1. Prepare sandbox with pre-seeded PENDING signal
-echo "Step 1: Preparing sandbox with pre-seeded signal..."
+# 1. Clean environment
 rm -rf "$SANDBOX_DIR"
-mkdir -p "$SANDBOX_DIR/.memory"
+mkdir -p "$SANDBOX_DIR"
 cd "$SANDBOX_DIR" || exit
 git init -q
-echo "# Sandbox" > README.md
-cp -r "$PROJECT_ROOT/docs" .
-cp -r "$PROJECT_ROOT/agents" .
-cp -r "$PROJECT_ROOT/skills" .
-cp -r "$PROJECT_ROOT/templates" .
-cp "$PROJECT_ROOT/GEMINI.md" .
-git add . && git commit -m "init" -q
+touch README.md
+git add README.md
+git commit -m "initial commit" -q
 
-# Pre-seed a PENDING signal in ledger
-cat > .memory/evolution_ledger.json << 'EOF'
-[
-  {
-    "session_id": "test",
-    "message_id": "test-signal-001",
-    "timestamp": "2026-03-15T00:00:00Z",
-    "status": "PENDING",
-    "type": "positive",
-    "payload": {
-      "rule": "Always use TypeScript strict mode.",
-      "context": "Team coding standard",
-      "tags": ["typescript", "strictness"]
-    },
-    "git_anchor": ""
-  }
-]
-EOF
-echo "# PATTERNS" > .memory/patterns.md
+echo "Step 1: Running Gemini with extension loaded..."
+# We use gemini -e to load the extension from the source directory.
+# This simulates how it would behave if installed.
+# We use a simple prompt to trigger the BeforeAgent hook.
+gemini -e "$PROJECT_ROOT" -p "Status check. Are you active?" --yolo --output-format text > /dev/null
 
-echo "  ✓ Sandbox ready with 1 PENDING signal"
-echo ""
-
-# 2. Single LLM call — agent should see PENDING and call distill_pending
-echo "Step 2: Single LLM call (agent should auto-distill)..."
-START=$(date +%s)
-gemini -e assa-evolution \
-  -p "You have PENDING signals. Call the distill_pending tool NOW." \
-  --allowed-mcp-server-names assa-mcp \
-  --output-format json > trigger.json 2>&1 || true
-END=$(date +%s)
-echo "  Duration: $((END - START))s"
-
-# 3. Verify
-echo ""
-echo "Step 3: Verification..."
-if grep -q "PROCESSED" .memory/evolution_ledger.json; then
-    echo "  ✓ Ledger: Signal marked PROCESSED"
+# 2. Verify Local File Generation
+echo "Step 2: Verifying local file generation (.memory/)..."
+if [ -d ".memory" ] && [ -f ".memory/patterns.md" ] && [ -f ".memory/decisions.md" ]; then
+    echo "  ✓ SUCCESS: .memory directory and baseline files created in workspace."
 else
-    echo "  ✗ Ledger: Signal still PENDING"
+    echo "  ✗ FAILURE: Workspace initialization failed."
+    ls -la
+    exit 1
 fi
 
-if grep -q "TypeScript" .memory/patterns.md; then
-    echo "  ✓ Patterns: TypeScript rule distilled"
+# 3. Verify Global Memory Generation
+echo "Step 3: Verifying global memory generation (~/.gemini/assa/)..."
+if [ -d "$GLOBAL_ASSA_DIR" ] && [ -f "$GLOBAL_ASSA_DIR/SOUL.md" ]; then
+    echo "  ✓ SUCCESS: Global ASSA directory and SOUL.md verified."
 else
-    echo "  ✗ Patterns: Not updated"
+    echo "  ✗ FAILURE: Global initialization failed."
+    exit 1
+fi
+
+# 4. Verify MCP Tool Functionality (Signal Submission)
+echo "Step 4: Testing signal submission via MCP..."
+# We run gemini again, this time asking it to record a signal.
+gemini -e "$PROJECT_ROOT" -p "Record a positive signal with rule 'Test Logic' and context 'Verification'." --yolo --output-format text > /dev/null
+
+if grep -q "Test Logic" .memory/evolution_ledger.json; then
+    echo "  ✓ SUCCESS: Signal successfully recorded in the local ledger via MCP."
+else
+    echo "  ✗ FAILURE: MCP tool failed to write to ledger."
+    cat .memory/evolution_ledger.json
+    exit 1
+fi
+
+# 5. Verify Hook Trigger (AfterTool Git Commit)
+echo "Step 5: Testing AfterTool Hook trigger (Git Commit)..."
+echo "new content" > README.md
+# This commit should trigger the 'distiller' instruction in additionalContext.
+# Since we are in non-interactive mode, we check the debug log to see if it fired.
+git add README.md
+# We run the commit via gemini shell to ensure it goes through AfterTool
+gemini -e "$PROJECT_ROOT" -p "Run shell command: git commit -m 'test trigger'" --yolo --output-format text > /dev/null
+
+if grep -q "Detected git commit → instructing main agent to dispatch Distiller" "$PROJECT_ROOT/hook_debug.log"; then
+    echo "  ✓ SUCCESS: AfterTool hook detected commit and injected distiller instruction."
+else
+    echo "  ✗ FAILURE: AfterTool hook failed to detect commit."
+    exit 1
 fi
 
 echo ""
-echo "=== Done ==="
+echo "✨ REAL-WORLD VALIDATION COMPLETE! ASSA V3.2 is fully integrated and functional."

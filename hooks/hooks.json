@@ -5,11 +5,6 @@
         "matcher": "*",
         "hooks": [
           {
-            "name": "Capture",
-            "type": "command",
-            "command": "node ${extensionPath}/hooks/debug_transcript.js"
-          },
-          {
             "name": "ASSA BeforeAgent",
             "type": "command",
             "command": "node ${extensionPath}/hooks/beforeAgentHook.js",
