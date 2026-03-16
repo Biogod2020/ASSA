@@ -108,7 +108,8 @@ function extractAllText(turn) {
                 if (Array.isArray(tc.result)) {
                     tc.result.forEach(r => {
                         if (r.functionResponse && r.functionResponse.response) {
-                            text += ' ' + JSON.stringify(r.functionResponse.response);
+                            const resp = r.functionResponse.response;
+                            text += ' ' + (typeof resp === 'string' ? resp : (resp.output || JSON.stringify(resp)));
                         } else {
                             text += ' ' + JSON.stringify(r);
                         }
