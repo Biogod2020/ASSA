@@ -13,3 +13,8 @@
 - **Modular Skills**: The agent's primary focus is on expanding its capabilities by creating and managing its own skill library.
 - **Deep Meta-Evolution**: The system is permitted to modify its own system prompts and core rules to improve its performance and adapt to new requirements.
 - **Tool Integration**: The agent should proactively integrate and utilize external tools and MCP servers to broaden its capabilities and enhance its effectiveness.
+
+## Skill Evolution Workflow
+- **Pattern-to-Skill Lifecycle**: Capabilities evolve from raw signals (L1) to project patterns (L2), then to universal wisdom (L3), and finally into active skills (.skill).
+- **Subagent Orchestration**: Evolution tasks (Distillation, Synchronization, Generation) are delegated to specialized subagents to maintain main-thread focus and context purity.
+- **Validation Before Deployment**: All autonomously generated skills must pass structural validation and behavioral testing before being offered for installation.
