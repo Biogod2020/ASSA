@@ -143,7 +143,7 @@ function recognizeReflex(transcript: TranscriptTurn[], currentPrompt: string): s
 
   if (hasPraiseInPrompt || hasPraiseInTranscript) {
     reflexContext += '### ASSA REFLEX: PRAISE DETECTED ###\n' +
-      '你刚才收到了用户的正面反馈。你必须评估这是否代表了一个成功的模式（Success Pattern）。如果是，请立即调用 `submit_memory_signal` 记录它。\n\n';
+      'You just received positive feedback from the user. You MUST evaluate if this represents a Success Pattern. If so, immediately call `submit_memory_signal` to record it.\n\n';
   }
 
   const toolTurns = transcript.filter((t) => t.toolCalls && t.toolCalls.length > 0);
@@ -152,7 +152,7 @@ function recognizeReflex(transcript: TranscriptTurn[], currentPrompt: string): s
       if (isToolFailure(toolTurns[i - 1]) && isToolSuccess(toolTurns[i])) {
         reflexContext += '### ASSA REFLEX: VICTORY DETECTED ###\n' +
           'Detected a breakthrough: A previously failing tool has now succeeded.\n' +
-          '请总结导致成功的关键变动，并调用 `submit_memory_signal` 记录这个 "Success Pattern"。\n\n';
+          'Please summarize the key changes that led to this victory and call `submit_memory_signal` to record this "Success Pattern".\n\n';
         break;
       }
     }
@@ -161,7 +161,7 @@ function recognizeReflex(transcript: TranscriptTurn[], currentPrompt: string): s
       if (isToolFailure(toolTurns[i - 2]) && isToolFailure(toolTurns[i - 1]) && isToolFailure(toolTurns[i])) {
         reflexContext += '### ASSA REFLEX: BARRIER DETECTED ###\n' +
           'Detected a technical barrier: 3 consecutive tool failures.\n' +
-          '你似乎遇到了阻碍。请分析根本原因，并调用 `submit_memory_signal` (type: negative) 记录这个 "Technical Barrier"。\n\n';
+          'You seem to be facing a barrier. Please perform a Root Cause Analysis (RCA) and call `submit_memory_signal` (type: negative) to record this "Technical Barrier".\n\n';
         break;
       }
     }

@@ -11,7 +11,7 @@ export const afterToolHook = async (context: AfterToolHookContext): Promise<void
 
   // Victory Detection: Successful breakthrough after errors
   if (!result.isError) {
-    const successKeywords = ['Success', '突破', 'Victory', 'Done'];
+    const successKeywords = ['Success', 'Breakthrough', 'Victory', 'Done'];
     const resultContent = result.content.map((c) => c.text || '').join(' ');
     
     if (successKeywords.some((k) => resultContent.includes(k))) {
