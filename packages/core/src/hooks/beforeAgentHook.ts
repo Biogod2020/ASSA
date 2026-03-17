@@ -10,11 +10,6 @@ import { SignalRecord } from './types';
  * Manages context injection and evolutionary state.
  */
 
-const PRAISE_KEYWORDS = [
-  '很好', 'Perfect', 'Exactly', '不错', '太棒了', 'Great', 'Awesome',
-  '完美', '干得漂亮', '棒', '赞'
-];
-
 interface TranscriptTurn {
   id?: string;
   type: 'user' | 'agent';
@@ -128,40 +123,50 @@ function isToolSuccess(turn: TranscriptTurn): boolean {
   return false;
 }
 
-function recognizeReflex(transcript: TranscriptTurn[], currentPrompt: string): string {
+/**
+ * Semantic Reflection Trigger (Hyper-Sensitive)
+ * Detects implicit learning opportunities beyond simple keywords.
+ */
+const POTENTIAL_SIGNAL_HINTS = [
+  'perfect', 'exactly', 'better', 'prefer', 'instead', 'wrong', 'correct',
+  'should', 'must', 'always', 'never', 'refactor', 'standard',
+  '很好', '不错', '不对', '建议', '喜欢', '习惯', '应该', '千万', '记得'
+];
+
+function detectReflectionOpportunity(transcript: TranscriptTurn[], currentPrompt: string): string {
   let reflexContext = '';
 
-  const hasPraiseInPrompt = currentPrompt && PRAISE_KEYWORDS.some((k) => currentPrompt.includes(k));
-  const recentTurns = transcript.slice(-3);
-  const hasPraiseInTranscript = recentTurns.some((turn) => {
-    if (turn.type === 'user') {
-      const userText = extractAllText(turn);
-      return PRAISE_KEYWORDS.some((k) => userText.includes(k));
-    }
-    return false;
-  });
+  const currentText = currentPrompt.toLowerCase();
+  const hasHint = POTENTIAL_SIGNAL_HINTS.some((h) => currentText.includes(h));
+  const isSubstantial = currentPrompt.length > 30; // Lowered threshold for sensitivity
 
-  if (hasPraiseInPrompt || hasPraiseInTranscript) {
-    reflexContext += '### ASSA REFLEX: PRAISE DETECTED ###\n' +
-      'You just received positive feedback from the user. You MUST evaluate if this represents a Success Pattern. If so, immediately call `submit_memory_signal` to record it.\n\n';
+  // 1. Interaction Reflection
+  if (hasHint || isSubstantial) {
+    reflexContext += '### ASSA REFLEX: SEMANTIC INTERACTION AUDIT ###\n' +
+      'Recent user guidance contains potential architectural or stylistic preferences. ' +
+      'You MUST analyze the semantic intent. Does this imply a recurring rule or a "Golden Standard"? ' +
+      'Record any distilled wisdom into the L1 ledger immediately. ' +
+      'Do not wait for praise; learn from the logic.\n\n';
   }
 
+  // 2. Victory/Barrier detection (remains structural but with semantic prompt)
   const toolTurns = transcript.filter((t) => t.toolCalls && t.toolCalls.length > 0);
   if (toolTurns.length >= 2) {
     for (let i = 1; i < toolTurns.length; i++) {
       if (isToolFailure(toolTurns[i - 1]) && isToolSuccess(toolTurns[i])) {
-        reflexContext += '### ASSA REFLEX: VICTORY DETECTED ###\n' +
-          'Detected a breakthrough: A previously failing tool has now succeeded.\n' +
-          'Please summarize the key changes that led to this victory and call `submit_memory_signal` to record this "Success Pattern".\n\n';
+        reflexContext += '### ASSA REFLEX: BREAKTHROUGH ANALYSIS ###\n' +
+          'A tool just succeeded after a failure. This is a "Victory". ' +
+          'Analyze the semantic difference between the failed attempt and the success. ' +
+          'Formalize the technical adjustment into a reusable rule via `submit_memory_signal`.\n\n';
         break;
       }
     }
 
     for (let i = 2; i < toolTurns.length; i++) {
       if (isToolFailure(toolTurns[i - 2]) && isToolFailure(toolTurns[i - 1]) && isToolFailure(toolTurns[i])) {
-        reflexContext += '### ASSA REFLEX: BARRIER DETECTED ###\n' +
-          'Detected a technical barrier: 3 consecutive tool failures.\n' +
-          'You seem to be facing a barrier. Please perform a Root Cause Analysis (RCA) and call `submit_memory_signal` (type: negative) to record this "Technical Barrier".\n\n';
+        reflexContext += '### ASSA REFLEX: BARRIER IDENTIFICATION ###\n' +
+          'Three consecutive tool failures detected. You are facing a significant technical barrier. ' +
+          'Analyze the Root Cause (environmental, logical, or stylistic) and record it as a "Technical Barrier" to prevent future deadlocks.\n\n';
         break;
       }
     }
@@ -242,7 +247,7 @@ export async function main() {
     });
 
     const health = checkSystemHealth(process.cwd(), overrides);
-    const reflexContext = recognizeReflex(transcript, currentPrompt);
+    const reflexContext = detectReflectionOpportunity(transcript, currentPrompt);
     const globalDir = path.join(os.homedir(), '.gemini', 'assa');
 
     let additionalContext = '';

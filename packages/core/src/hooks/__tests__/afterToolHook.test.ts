@@ -40,7 +40,7 @@ describe('afterToolHook (Smart Reflex)', () => {
     expect(mockAddSignal).toHaveBeenCalledWith(expect.objectContaining({
       type: 'breakthrough',
       payload: expect.objectContaining({
-        rule: expect.stringContaining('Breakthrough detected'),
+        rule: expect.stringContaining('Potential Breakthrough'),
       }),
     }));
   });

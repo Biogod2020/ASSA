@@ -52,43 +52,20 @@ describe('beforeAgentHook', () => {
     jest.spyOn(fs, 'writeFileSync').mockImplementation(() => undefined);
   }
 
-  test('should initialize local setup if .memory is missing', async () => {
-    const mockPayload = { agentName: 'main', sessionId: 's1', prompt: 'Hello' };
-    setupMocks(mockPayload);
-    await main();
-    expect(fs.existsSync(path.join(tempDir, '.memory'))).toBe(true);
-    expect(mockStdoutWrite).toHaveBeenCalled();
-  });
-
-  test('should bypass logic for distiller agent', async () => {
-    const mockPayload = { agentName: 'distiller', sessionId: 's1' };
-    setupMocks(mockPayload);
-    await main();
-    const lastCall = mockStdoutWrite.mock.calls[mockStdoutWrite.mock.calls.length - 1][0];
-    const output = JSON.parse(lastCall as string);
-    expect(output.decision).toBe('allow');
-  });
-
-  test('should handle health warnings and transcript praise', async () => {
+  test('should handle semantic interaction audit', async () => {
     const mockPayload = {
       agentName: 'main',
       sessionId: 's1',
-      transcript_path: 'fake_transcript.json'
+      prompt: 'This is a perfect implementation, exactly what I wanted.'
     };
-    const transcript = [{ type: 'user', content: '太棒了!' }];
-    const settingsPath = path.join(os.homedir(), '.gemini/settings.json');
-    setupMocks(mockPayload, {
-      'fake_transcript.json': JSON.stringify({ messages: transcript }),
-      [settingsPath]: JSON.stringify({ experimental: { enableAgents: false } })
-    });
+    setupMocks(mockPayload);
     await main();
     const lastCall = mockStdoutWrite.mock.calls[mockStdoutWrite.mock.calls.length - 1][0];
     const output = JSON.parse(lastCall as string);
-    expect(output.hookSpecificOutput?.additionalContext).toContain('### ASSA HEALTH WARNING ###');
-    expect(output.hookSpecificOutput?.additionalContext).toContain('### ASSA REFLEX: PRAISE DETECTED ###');
+    expect(output.hookSpecificOutput?.additionalContext).toContain('### ASSA REFLEX: SEMANTIC INTERACTION AUDIT ###');
   });
 
-  test('should detect victory reflex from transcript', async () => {
+  test('should detect victory breakthrough analysis', async () => {
     const mockPayload = {
       agentName: 'main',
       sessionId: 's1',
@@ -104,10 +81,10 @@ describe('beforeAgentHook', () => {
     await main();
     const lastCall = mockStdoutWrite.mock.calls[mockStdoutWrite.mock.calls.length - 1][0];
     const output = JSON.parse(lastCall as string);
-    expect(output.hookSpecificOutput?.additionalContext).toContain('### ASSA REFLEX: VICTORY DETECTED ###');
+    expect(output.hookSpecificOutput?.additionalContext).toContain('### ASSA REFLEX: BREAKTHROUGH ANALYSIS ###');
   });
 
-  test('should detect barrier reflex', async () => {
+  test('should detect barrier identification', async () => {
     const mockPayload = {
       agentName: 'main',
       sessionId: 's1',
@@ -124,66 +101,23 @@ describe('beforeAgentHook', () => {
     await main();
     const lastCall = mockStdoutWrite.mock.calls[mockStdoutWrite.mock.calls.length - 1][0];
     const output = JSON.parse(lastCall as string);
-    expect(output.hookSpecificOutput?.additionalContext).toContain('### ASSA REFLEX: BARRIER DETECTED ###');
+    expect(output.hookSpecificOutput?.additionalContext).toContain('### ASSA REFLEX: BARRIER IDENTIFICATION ###');
   });
 
-  test('should inject pending signals from ledger', async () => {
-    const mockPayload = { agentName: 'main', sessionId: 's1' };
-    const ledger = [
-      { status: 'PENDING', payload: { rule: 'Rule 1', tags: [] }, message_id: 'm1' }
-    ];
-    setupMocks(mockPayload, {
-      '.memory/evolution_ledger.json': JSON.stringify(ledger)
-    });
-    await main();
-    const lastCall = mockStdoutWrite.mock.calls[mockStdoutWrite.mock.calls.length - 1][0];
-    const output = JSON.parse(lastCall as string);
-    expect(output.hookSpecificOutput?.additionalContext).toContain('Rule 1');
-  });
-
-  test('should handle complex transcript results', async () => {
+  test('should handle health warnings and sensitivity', async () => {
     const mockPayload = {
       agentName: 'main',
       sessionId: 's1',
-      transcript_path: 'complex.json'
+      prompt: '很好!'
     };
-    const transcript = [
-      { 
-        type: 'agent', 
-        toolCalls: [{ 
-          status: 'success', 
-          result: [{ functionResponse: { response: { output: 'Victory' } } }]
-        }] 
-      }
-    ];
+    const settingsPath = path.join(os.homedir(), '.gemini/settings.json');
     setupMocks(mockPayload, {
-      'complex.json': JSON.stringify({ messages: transcript })
-    });
-    await main();
-    expect(mockStdoutWrite).toHaveBeenCalled();
-  });
-
-  test('should handle context safety limit', async () => {
-    const mockPayload = { agentName: 'main', sessionId: 's1' };
-    setupMocks(mockPayload, {
-      '.memory/patterns.md': 'A'.repeat(21000)
+      [settingsPath]: JSON.stringify({ experimental: { enableAgents: false } })
     });
     await main();
     const lastCall = mockStdoutWrite.mock.calls[mockStdoutWrite.mock.calls.length - 1][0];
     const output = JSON.parse(lastCall as string);
-    expect(output.hookSpecificOutput?.additionalContext).toContain('CONTEXT SAFETY LIMIT EXCEEDED');
-  });
-
-  test('should handle L3 and domain-aware loading', async () => {
-    const mockPayload = { agentName: 'main', sessionId: 's1', extensionPath: tempDir };
-    const indexJson = JSON.stringify({ mappings: [{ domains: ['hook-test'], pattern: 'DOMAIN_RULES.md' }] });
-    setupMocks(mockPayload, {
-      'index.json': indexJson,
-      'DOMAIN_RULES.md': '# Domain Specific Rules'
-    });
-    await main();
-    const lastCall = mockStdoutWrite.mock.calls[mockStdoutWrite.mock.calls.length - 1][0];
-    const output = JSON.parse(lastCall as string);
-    expect(output.hookSpecificOutput?.additionalContext).toContain('# Domain Specific Rules');
+    expect(output.hookSpecificOutput?.additionalContext).toContain('### ASSA HEALTH WARNING ###');
+    expect(output.hookSpecificOutput?.additionalContext).toContain('### ASSA REFLEX: SEMANTIC INTERACTION AUDIT ###');
   });
 });

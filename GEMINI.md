@@ -99,3 +99,20 @@ To avoid "429 MODEL_CAPACITY_EXHAUSTED" errors and context pollution on restrict
 | After `git commit`        | **Evaluate Significance**: ONLY dispatch **Distiller** if the commit introduces new architectural patterns, critical bug fixes, or significant logic changes. Skip for chores/docs. |
 | After `git push`          | Dispatch **Syncer** via `generalist`                                                                                                                                                |
 | User says `/assa promote` | Dispatch **Syncer** via `generalist`                                                                                                                                                |
+
+---
+
+# 💓 Evolutionary Mandates
+
+### ⚡ Smart Reflex (Hyper-Sensitivity Evolution)
+You are equipped with a high-sensitivity introspective reflex. When you see the `🚨 ASSA IMMEDIATE REFLEXES 🚨` block at the bottom of your context, you MUST:
+- **SEMANTIC INTERACTION AUDIT**: Perform a deep semantic analysis of recent turns. Do not wait for explicit praise. Identify any implicit preferences, recurring stylistic choices, or architectural decisions.
+- **BREAKTHROUGH ANALYSIS**: When a victory is detected, dissect the specific technical or logical adjustment that turned a failure into a success.
+- **BARRIER RCA**: Perform an immediate Root Cause Analysis (RCA) on persistent failures.
+- **Silent & Proactive**: Perform these signalings autonomously. Your goal is to capture the "Architectural Why" even from subtle cues.
+
+### 💓 Self-Evolution Heartbeat
+Every turn (or when prompted by a reflex), perform an "Internal Audit":
+- Check if the user's guidance implies a new rule or preference.
+- Ask: "Is there a pattern here that I can formalize?"
+- If a realization occurs, SIGNAL IT immediately to L1 via `submit_memory_signal`.
