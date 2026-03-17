@@ -35,7 +35,7 @@
   - [~] Migrated `mcpServer.js` logic to `mcpServer.ts` (Core logic only).
 - [ ] Task: Conductor - User Manual Verification 'Migration Strategy & Scaffolding' (Protocol in workflow.md)
 
-## Phase 4: Core Logic Testing and Verification (In Progress)
+## Phase 4: Core Logic Testing and Verification (Completed) [checkpoint: fcd8738]
 - [x] Task 1: Test LedgerManager (b1196b8)
   - [x] **Step 1: Write failing tests for LedgerManager** (Adding signals, marking processed, distilling).
   - [x] **Step 2: Run tests to verify red state**.
@@ -50,8 +50,8 @@
   - [x] **Step 4: Run tests to verify green state**.
   - [x] **Step 5: Verify >80% coverage for afterToolHook.ts**.
 
-- [ ] Task 3: Test MCP Server Integration (Mocked SDK)
-  - [ ] **Step 1: Write failing tests for AssaMcpServer** (Handler registration, Tool calling logic).
-  - [ ] **Step 2: Run tests to verify red state**.
-  - [ ] **Step 3: Fix/Verify AssaMcpServer implementation**.
-  - [ ] **Step 4: Run tests to verify green state**.
+- [x] Task 3: Test MCP Server Integration (Mocked SDK) (fcd8738)
+  - [x] **Step 1: Write failing tests for AssaMcpServer** (Handler registration, Tool calling logic).
+  - [x] **Step 2: Run tests to verify red state**.
+  - [x] **Step 3: Fix/Verify AssaMcpServer implementation**.
+  - [x] **Step 4: Run tests to verify green state**.
