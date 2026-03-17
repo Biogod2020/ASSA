@@ -1,9 +1,11 @@
 # Task Decomposition Guide
 
 ## Why Decompose?
+
 Large, complex tasks are difficult to reason about and even more difficult to debug. Decomposition breaks the "Large Problem" into several "Small, Verifiable Problems."
 
 ## How to Decompose
+
 1. **Identify the Core Logic**: What is the primary transformation or action?
 2. **Identify Dependencies**: What must happen BEFORE the core logic can execute?
 3. **Identify Validation Points**: How will you prove that a specific sub-task is correct?
@@ -15,6 +17,7 @@ Large, complex tasks are difficult to reason about and even more difficult to de
    - Step 5: Final Validation
 
 ## Example: Implementing a New MCP Server
+
 - **Step 1**: Create the project structure and install dependencies.
 - **Step 2**: Implement the core tool logic.
 - **Step 3**: Implement the server transport (e.g., stdio).

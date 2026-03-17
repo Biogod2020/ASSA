@@ -1,1 +1,11 @@
-build:\n\tnpm run build\n\ntest:\n\tnpm run test\n\nlint:\n\tnpm run lint\n\nformat:\n\tnpm run format\n
+build:
+	npm run build
+
+test:
+	npm run test
+
+lint:
+	npm run lint
+
+format:
+	npm run format
