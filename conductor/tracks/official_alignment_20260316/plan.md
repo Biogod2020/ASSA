@@ -30,9 +30,13 @@
 - [~] Task: Scaffold Official-Aligned Package Structure
   - [x] `packages/core` created with `package.json`, `src/hooks`, `src/__tests__`.
 - [~] Task: Port Logic with Strict Typing
-  - [x] Migrated `ledger.js` logic to `ledger.ts`.
+  - [~] Migrated `ledger.js` logic to `ledger.ts` (Locking logic pending).
   - [x] Migrated `afterToolHook.js` logic to `afterToolHook.ts`.
-  - [~] Migrated `mcpServer.js` logic to `mcpServer.ts` (Core logic only).
+  - [~] Migrated `mcpServer.js` logic to `mcpServer.ts`.
+  - [ ] **Step 1: Migrate healthCheck.js to healthCheck.ts**.
+  - [ ] **Step 2: Migrate beforeAgentHook.js to beforeAgentHook.ts**.
+  - [ ] **Step 3: Port Templates** (`SOUL.md`, `USER_HANDBOOK.md`, `index.json`).
+  - [ ] **Step 4: Update gemini-extension.json** with all hooks and correct paths.
 - [ ] Task: Conductor - User Manual Verification 'Migration Strategy & Scaffolding' (Protocol in workflow.md)
 
 ## Phase 4: Core Logic Testing and Verification (Completed) [checkpoint: fcd8738]

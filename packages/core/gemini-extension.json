@@ -9,8 +9,36 @@
   "mcpServers": {
     "assa-mcp": {
       "command": "node",
-      "args": ["${extensionPath}/hooks/mcpServer.js"]
+      "args": ["${extensionPath}/dist/hooks/mcpServer.js"]
     }
+  },
+  "hooks": {
+    "BeforeAgent": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "name": "ASSA BeforeAgent",
+            "type": "command",
+            "command": "node ${extensionPath}/dist/hooks/beforeAgentHook.js",
+            "timeout": 60000
+          }
+        ]
+      }
+    ],
+    "AfterTool": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "name": "ASSA AfterTool",
+            "type": "command",
+            "command": "node ${extensionPath}/dist/hooks/afterToolHook.js",
+            "timeout": 60000
+          }
+        ]
+      }
+    ]
   },
   "agents": [
     "agents/distiller.md",

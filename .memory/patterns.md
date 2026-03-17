@@ -120,3 +120,38 @@ hit_count: 1
 
 - **communication/planning/metaphor/user-experience**: When explaining complex, multi-phase technical plans or architectural shifts, use clear, relatable analogies (e.g., "scaffolding as building a foundation", "migration as moving houses") and summarize the strategy in a punchy, memorable phrase. This significantly improves user comprehension and confidence. (from mcp-1773713827009)
 - **tool-workaround/scaffolding/workspace-limits**: Workspace Path Bypassing for Parallel Scaffolding: When creating a parallel repository outside the current active workspace, native tools like `write_file` will fail due to security path restrictions. Rely exclusively on `run_shell_command` (e.g., `mkdir`, `echo >`) to scaffold files in external directories. (from mcp-1773714249368)
+- **migration/scaffolding/state-management**: Selective State Migration: When scaffolding a pristine repository, it is acceptable to strategically migrate project state (like Conductor planning files and ASSA memory ledgers) using targeted shell commands, provided that the legacy codebase and test artifacts are strictly excluded. Always update the migrated planning files to reflect their new context. (from mcp-1773714349984)
+- **monorepo/build-system/json-safety**: Monorepo Build Consistency: When configuring a root package.json for a monorepo, always use '--workspaces' and '--if-present' flags in scripts to ensure safe and comprehensive execution across all packages. Avoid trailing commas in package.json to maintain npm compatibility. (from mcp-1773724474667)
+
+---
+
+id: P-20260317-TDDM
+category: Architecture
+confidence: 10
+status: Active
+hit_count: 1
+
+---
+
+# Verification-Driven Migration (TDD)
+
+**Rationale**: Migrating core logic from a legacy JavaScript environment to a strict TypeScript monorepo introduces risks of regression and structural mismatch. Employing a "Tests-First" or "Tests-Alongside" approach ensures that the new implementation satisfies official contribution requirements (e.g., >80% coverage) while providing immediate empirical proof of correctness for the newly typed interfaces.
+**Rule**: For every logic migration (JS to TS), implement comprehensive unit tests (reaching at least 80% coverage) as part of the initial migration commit. Do not consider a migration complete until the TypeScript types are verified by automated test suites.
+
+---
+
+id: P-20260317-BUILD
+category: Monorepo
+confidence: 10
+status: Active
+hit_count: 1
+
+---
+
+# Workspace-Aware Automation
+
+**Rationale**: In a monorepo, individual packages may diverge in their available scripts (e.g., some have `build`, others don't). Using standard npm commands at the root without workspace awareness leads to fragile build pipelines. The `--workspaces` and `--if-present` flags ensure that the root command orchestrates the entire project safely without manual per-package intervention.
+**Rule**: Always use the `--workspaces --if-present` flags in the root `package.json` for scripts intended to run across the entire monorepo. This maintains a unified entry point (e.g., `make build`) that is resilient to variations in package-level script availability.
+- **monorepo/build-system/json-safety**: Monorepo Build Consistency: When configuring a root package.json for a monorepo, always use '--workspaces' and '--if-present' flags in scripts to ensure safe and comprehensive execution across all packages. Avoid trailing commas in package.json to maintain npm compatibility. (from mcp-1773724474667)
+- **tdd/testing/quality-assurance**: Verification-Driven Migration (L2 Pattern Update): For all critical logic porting from JS to TS, prioritize reaching at least 80% line and branch coverage. Use the --coverage flag during the 'Green' phase of TDD to empirically validate the reach of the test suite. (from mcp-1773724891055)
+- **engineering-philosophy/testing-standards/quality-gate**: Pragmatic Coverage Standard: While the official project minimum is 80%, ASSA should strive for 100% coverage on 'Core Logic' (data processing, state transitions) while maintaining a minimum of 80% on 'Infrastructure/Glue' code (MCP handlers, server setup) to avoid fragile, over-mocked tests. (from mcp-1773724971703)

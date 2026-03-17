@@ -62,6 +62,26 @@ hit_count: [Count]
 
 ASSA V3.2 is a self-evolving system extension for Gemini CLI. It enables autonomous learning from user interactions without hook-spawned latency.
 
+## 🚀 Official Alignment (Gemini CLI Standards)
+
+As of 2026-03-17, this project is being refactored to strictly follow the **Gemini CLI Official Contributing Guidelines**.
+
+### 1. Architectural Mandates
+- **Monorepo Structure**: All logic must reside within `packages/`.
+  - `packages/core`: Core ASSA logic, hooks, and MCP servers.
+  - `packages/cli`: (Future) CLI interface components.
+- **Strict Typing**: All new code and migrated logic MUST be in **TypeScript** with `strict: true`.
+- **Tooling Consistency**:
+  - **Lint**: ESLint (standardized config).
+  - **Format**: Prettier (80-character line width limit).
+  - **Test**: Jest with `ts-jest`.
+  - **Automation**: Root-level `Makefile` for `build`, `test`, `lint`, and `format`.
+
+### 2. Development & PR Workflow
+- **Preflight Requirement**: Before any code is finalized or committed, `npm run preflight` (or equivalent Makefile targets) MUST pass.
+- **Atomic & Documented**: PRs must be small, focused, and include updated documentation in `.memory/` or `docs/`.
+- **Commit Style**: Use [Conventional Commits](https://www.conventionalcommits.org/).
+
 ## Key Architectural Pillar: Subagent-Driven Execution
 
 To avoid "429 MODEL_CAPACITY_EXHAUSTED" errors and context pollution on restricted models, the system uses **Subagent-Driven Execution**:

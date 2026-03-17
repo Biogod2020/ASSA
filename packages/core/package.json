@@ -1,0 +1,14 @@
+{
+  "name": "@assa/core",
+  "version": "3.2.0",
+  "description": "ASSA Core Logic and Hooks",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.6.0"
+  }
+}
