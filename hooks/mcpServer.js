@@ -89,11 +89,11 @@ rl.on('line', (line) => {
                         },
                         {
                             name: 'request_global_promotion',
-                            description: 'Promotes mature L2 patterns to the global L3 library. Call after git push or when patterns have high confidence.',
+                            description: 'Requests the promotion of mature L2 patterns to the Global L3 Library. This tool triggers an AI-led synchronization process using the Syncer agent.',
                             inputSchema: {
                                 type: 'object',
                                 properties: {
-                                    topic: { type: 'string', description: 'The topic to promote, or "all"' }
+                                    topic: { type: 'string', description: 'The domain/topic to focus on (e.g., ARCHITECTURE, PYTHON)' }
                                 }
                             }
                         },
@@ -177,26 +177,11 @@ rl.on('line', (line) => {
                 }
 
             } else if (name === 'request_global_promotion') {
-                const os = require('os');
                 const topic = args.topic || 'all';
-                const patternsPath = path.resolve(process.cwd(), '.memory/patterns.md');
-                const globalLibDir = path.join(os.homedir(), '.gemini', 'assa', 'LIBRARY');
-                if (!fs.existsSync(globalLibDir)) fs.mkdirSync(globalLibDir, { recursive: true });
-                
-                let promoted = 0;
-                if (fs.existsSync(patternsPath)) {
-                    const patterns = fs.readFileSync(patternsPath, 'utf8');
-                    const globalFile = path.join(globalLibDir, 'PROMOTED_PATTERNS.md');
-                    let existing = fs.existsSync(globalFile) ? fs.readFileSync(globalFile, 'utf8') : '# PROMOTED PATTERNS (L3 Global)\n';
-                    const lines = patterns.split('\n').filter(l => l.startsWith('- **'));
-                    const newLines = lines.filter(l => !existing.includes(l));
-                    if (newLines.length > 0) {
-                        existing = existing.trimEnd() + '\n' + newLines.join('\n') + '\n';
-                        fs.writeFileSync(globalFile, existing, 'utf8');
-                        promoted = newLines.length;
-                    }
-                }
-                resultText = `Promoted ${promoted} patterns to L3 Global Library.`;
+                resultText = `GLOBAL PROMOTION REQUESTED [Topic: ${topic}].\n` +
+                    `你必须立即调用 \`generalist\` 工具并派发以下任务给 **ASSA Syncer** 代理：\n` +
+                    `"执行 L2 -> L3 智慧提升任务。读取 .memory/patterns.md 中 confidence >= 8 的模式，执行脱敏和抽象化，并将其归类到全局库的 ${topic === 'all' ? '对应领域文件' : topic + '.md'} 中。"\n` +
+                    `完成后请标记 local 模式为已迁移。`;
 
             } else if (name === 'mark_processed_signals') {
                 const messageIds = args.message_ids || [];

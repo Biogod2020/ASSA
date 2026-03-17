@@ -2254,3 +2254,694 @@ Agent: main, Session: test-sync, Prompt Length: 11, Active Transcript Turns: 0
 Domain match detected: Loading ARCHITECTURE.md
 AfterTool Hook fired at 2026-03-16T12:34:37.309Z
 Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:34:46.398Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:34:59.275Z
+Tool: activate_skill, Status: undefined, ExitCode: undefined -> [SUCCESS: activate_skill]
+AfterTool Hook fired at 2026-03-16T12:35:03.353Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:35:07.522Z
+Tool: run_shell_command, Status: undefined, ExitCode: 128 -> [FAILED: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:35:10.571Z
+Tool: run_shell_command, Status: undefined, ExitCode: 1 -> [FAILED: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:35:19.540Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:35:28.792Z
+Tool: replace, Status: undefined, ExitCode: undefined -> [SUCCESS: replace]
+AfterTool Hook fired at 2026-03-16T12:35:33.126Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:35:36.464Z
+Tool: mcp_assa-mcp_request_global_promotion, Status: undefined, ExitCode: undefined -> [SUCCESS: mcp_assa-mcp_request_global_promotion]
+AfterTool Hook fired at 2026-03-16T12:35:43.511Z
+Tool: generalist, Status: undefined, ExitCode: undefined -> [SUCCESS: generalist]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-16T12:36:20.532Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: c92cd5bc-6fe3-4916-92dd-5b93421906a6, Prompt Length: 56, Active Transcript Turns: 104
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-16T12:36:32.974Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-16T12:36:36.525Z
+Tool: run_shell_command, Status: success, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:36:36.628Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-16T12:37:07.231Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: verify-router, Prompt Length: 11, Active Transcript Turns: 0
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-16T12:37:07.345Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-16T12:38:22.474Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: c92cd5bc-6fe3-4916-92dd-5b93421906a6, Prompt Length: 3746, Active Transcript Turns: 109
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-16T12:39:01.553Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-16T12:39:33.927Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: c92cd5bc-6fe3-4916-92dd-5b93421906a6, Prompt Length: 19, Active Transcript Turns: 112
+REFLEX TRIGGER: Praise detected in prompt or transcript.
+Domain match detected: Loading ARCHITECTURE.md
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-16T12:39:58.051Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: c92cd5bc-6fe3-4916-92dd-5b93421906a6, Prompt Length: 11, Active Transcript Turns: 114
+REFLEX TRIGGER: Praise detected in prompt or transcript.
+Domain match detected: Loading ARCHITECTURE.md
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-16T12:40:37.803Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: verification-session, Prompt Length: 24, Active Transcript Turns: 0
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-16T12:40:37.939Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-16T12:42:57.161Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: c92cd5bc-6fe3-4916-92dd-5b93421906a6, Prompt Length: 40, Active Transcript Turns: 117
+REFLEX TRIGGER: Praise detected in prompt or transcript.
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-16T12:44:26.848Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:44:47.060Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-16T12:46:33.333Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: c92cd5bc-6fe3-4916-92dd-5b93421906a6, Prompt Length: 20, Active Transcript Turns: 121
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-16T12:46:53.277Z
+Tool: run_shell_command, Status: undefined, ExitCode: 2 -> [FAILED: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:48:29.527Z
+Tool: google_web_search, Status: undefined, ExitCode: undefined -> [SUCCESS: google_web_search]
+AfterTool Hook fired at 2026-03-16T12:50:33.960Z
+Tool: replace, Status: undefined, ExitCode: undefined -> [SUCCESS: replace]
+AfterTool Hook fired at 2026-03-16T12:50:54.375Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-16T12:53:39.176Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: c92cd5bc-6fe3-4916-92dd-5b93421906a6, Prompt Length: 44877, Active Transcript Turns: 127
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-16T12:54:55.102Z
+Tool: run_shell_command, Status: undefined, ExitCode: 2 -> [FAILED: run_shell_command]
+AfterTool Hook fired at 2026-03-16T12:57:43.117Z
+Tool: run_shell_command, Status: undefined, ExitCode: 1 -> [FAILED: run_shell_command]
+AfterTool Hook fired at 2026-03-16T13:04:39.944Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T13:05:02.831Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T13:05:25.724Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T13:05:55.159Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T13:06:14.399Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-16T13:40:36.671Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: c92cd5bc-6fe3-4916-92dd-5b93421906a6, Prompt Length: 42, Active Transcript Turns: 136
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-16T13:41:13.398Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-16T13:41:42.766Z
+Tool: replace, Status: undefined, ExitCode: undefined -> [SUCCESS: replace]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-16T13:43:27.068Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: c92cd5bc-6fe3-4916-92dd-5b93421906a6, Prompt Length: 62, Active Transcript Turns: 136
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-16T13:46:09.451Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-16T13:46:52.720Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: c92cd5bc-6fe3-4916-92dd-5b93421906a6, Prompt Length: 148, Active Transcript Turns: 136
+Domain match detected: Loading ARCHITECTURE.md
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-16T13:50:29.069Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: c92cd5bc-6fe3-4916-92dd-5b93421906a6, Prompt Length: 172, Active Transcript Turns: 136
+Domain match detected: Loading ARCHITECTURE.md
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-16T13:59:33.214Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: c92cd5bc-6fe3-4916-92dd-5b93421906a6, Prompt Length: 148, Active Transcript Turns: 136
+Domain match detected: Loading ARCHITECTURE.md
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-16T14:01:17.124Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 170, Active Transcript Turns: 1
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-16T14:01:51.032Z
+Tool: web_fetch, Status: undefined, ExitCode: undefined -> [SUCCESS: web_fetch]
+AfterTool Hook fired at 2026-03-16T14:02:17.894Z
+AfterTool Hook fired at 2026-03-16T14:02:17.894Z
+Tool: list_directory, Status: undefined, ExitCode: undefined -> [SUCCESS: list_directory]
+Tool: list_directory, Status: undefined, ExitCode: undefined -> [SUCCESS: list_directory]
+AfterTool Hook fired at 2026-03-16T14:02:17.913Z
+Tool: list_directory, Status: undefined, ExitCode: undefined -> [SUCCESS: list_directory]
+AfterTool Hook fired at 2026-03-16T14:02:49.423Z
+AfterTool Hook fired at 2026-03-16T14:02:49.422Z
+Tool: glob, Status: undefined, ExitCode: undefined -> [SUCCESS: glob]
+Tool: glob, Status: undefined, ExitCode: undefined -> [SUCCESS: glob]
+AfterTool Hook fired at 2026-03-16T14:02:49.436Z
+Tool: glob, Status: undefined, ExitCode: undefined -> [SUCCESS: glob]
+AfterTool Hook fired at 2026-03-16T14:02:55.274Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-16T14:02:55.281Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T02:06:26.830Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 12603, Active Transcript Turns: 7
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-17T02:06:41.125Z
+AfterTool Hook fired at 2026-03-17T02:06:41.125Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-17T02:06:41.131Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-17T02:08:40.641Z
+Tool: ask_user, Status: undefined, ExitCode: undefined -> [SUCCESS: ask_user]
+AfterTool Hook fired at 2026-03-17T02:09:31.044Z
+Tool: ask_user, Status: undefined, ExitCode: undefined -> [SUCCESS: ask_user]
+AfterTool Hook fired at 2026-03-17T02:10:37.820Z
+Tool: ask_user, Status: undefined, ExitCode: undefined -> [SUCCESS: ask_user]
+AfterTool Hook fired at 2026-03-17T02:11:03.922Z
+Tool: ask_user, Status: undefined, ExitCode: undefined -> [SUCCESS: ask_user]
+AfterTool Hook fired at 2026-03-17T02:11:14.764Z
+Tool: list_directory, Status: undefined, ExitCode: undefined -> [SUCCESS: list_directory]
+AfterTool Hook fired at 2026-03-17T02:11:51.789Z
+Tool: write_file, Status: undefined, ExitCode: undefined -> [SUCCESS: write_file]
+AfterTool Hook fired at 2026-03-17T02:11:51.911Z
+Tool: write_file, Status: undefined, ExitCode: undefined -> [SUCCESS: write_file]
+AfterTool Hook fired at 2026-03-17T02:11:52.117Z
+Tool: write_file, Status: undefined, ExitCode: undefined -> [SUCCESS: write_file]
+AfterTool Hook fired at 2026-03-17T02:11:52.454Z
+Tool: write_file, Status: undefined, ExitCode: undefined -> [SUCCESS: write_file]
+AfterTool Hook fired at 2026-03-17T02:12:02.108Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-17T02:12:14.465Z
+Tool: write_file, Status: undefined, ExitCode: undefined -> [SUCCESS: write_file]
+AfterTool Hook fired at 2026-03-17T02:12:25.006Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:12:54.626Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:13:02.638Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:13:14.904Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:14:18.436Z
+Tool: write_file, Status: undefined, ExitCode: undefined -> [SUCCESS: write_file]
+AfterTool Hook fired at 2026-03-17T02:15:00.554Z
+Tool: distiller, Status: undefined, ExitCode: undefined -> [SUCCESS: distiller]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T02:15:59.881Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 17, Active Transcript Turns: 20
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-17T02:16:11.447Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T02:16:58.972Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 15917, Active Transcript Turns: 23
+REFLEX TRIGGER: Praise detected in prompt or transcript.
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-17T02:17:07.100Z
+Tool: mcp_assa-mcp_submit_memory_signal, Status: undefined, ExitCode: undefined -> [SUCCESS: mcp_assa-mcp_submit_memory_signal]
+AfterTool Hook fired at 2026-03-17T02:17:15.492Z
+AfterTool Hook fired at 2026-03-17T02:17:15.492Z
+AfterTool Hook fired at 2026-03-17T02:17:15.491Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-17T02:17:22.976Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-17T02:21:27.826Z
+Tool: ask_user, Status: undefined, ExitCode: undefined -> [SUCCESS: ask_user]
+AfterTool Hook fired at 2026-03-17T02:21:52.747Z
+Tool: replace, Status: undefined, ExitCode: undefined -> [SUCCESS: replace]
+AfterTool Hook fired at 2026-03-17T02:22:05.995Z
+AfterTool Hook fired at 2026-03-17T02:22:05.995Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-17T02:22:14.178Z
+Tool: replace, Status: undefined, ExitCode: undefined -> [SUCCESS: replace]
+AfterTool Hook fired at 2026-03-17T02:22:57.491Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:23:04.173Z
+Tool: run_shell_command, Status: undefined, ExitCode: 2 -> [FAILED: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:23:17.900Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T02:23:39.273Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 37, Active Transcript Turns: 36
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-17T02:24:09.461Z
+Tool: mcp_assa-mcp_submit_memory_signal, Status: undefined, ExitCode: undefined -> [SUCCESS: mcp_assa-mcp_submit_memory_signal]
+AfterTool Hook fired at 2026-03-17T02:24:11.340Z
+Tool: mcp_assa-mcp_distill_pending, Status: undefined, ExitCode: undefined -> [SUCCESS: mcp_assa-mcp_distill_pending]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T02:25:14.919Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 65, Active Transcript Turns: 39
+REFLEX TRIGGER: Praise detected in prompt or transcript.
+Domain match detected: Loading ARCHITECTURE.md
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T02:25:35.158Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 9, Active Transcript Turns: 42
+REFLEX TRIGGER: Praise detected in prompt or transcript.
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-17T02:25:50.070Z
+Tool: mcp_assa-mcp_submit_memory_signal, Status: undefined, ExitCode: undefined -> [SUCCESS: mcp_assa-mcp_submit_memory_signal]
+AfterTool Hook fired at 2026-03-17T02:26:08.455Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:26:27.973Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:27:07.291Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:27:16.471Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:27:33.243Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:27:59.392Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:28:19.121Z
+Tool: replace, Status: undefined, ExitCode: undefined -> [SUCCESS: replace]
+AfterTool Hook fired at 2026-03-17T02:28:31.180Z
+Tool: ask_user, Status: undefined, ExitCode: undefined -> [SUCCESS: ask_user]
+AfterTool Hook fired at 2026-03-17T02:28:43.929Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:28:51.572Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:29:11.193Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:29:19.787Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:29:20.005Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:29:36.395Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:29:50.559Z
+Tool: replace, Status: undefined, ExitCode: undefined -> [SUCCESS: replace]
+AfterTool Hook fired at 2026-03-17T02:29:58.162Z
+Tool: mcp_assa-mcp_mark_processed_signals, Status: undefined, ExitCode: undefined -> [SUCCESS: mcp_assa-mcp_mark_processed_signals]
+AfterTool Hook fired at 2026-03-17T02:30:08.775Z
+Tool: distiller, Status: undefined, ExitCode: undefined -> [SUCCESS: distiller]
+AfterTool Hook fired at 2026-03-17T02:30:25.786Z
+Tool: replace, Status: undefined, ExitCode: undefined -> [SUCCESS: replace]
+AfterTool Hook fired at 2026-03-17T02:30:37.429Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:30:56.318Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:31:13.072Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:31:25.277Z
+Tool: run_shell_command, Status: undefined, ExitCode: 1 -> [FAILED: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:31:31.946Z
+Tool: grep_search, Status: undefined, ExitCode: undefined -> [SUCCESS: grep_search]
+AfterTool Hook fired at 2026-03-17T02:31:39.410Z
+Tool: grep_search, Status: undefined, ExitCode: undefined -> [SUCCESS: grep_search]
+AfterTool Hook fired at 2026-03-17T02:31:46.326Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:31:55.655Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:32:55.414Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:34:36.063Z
+Tool: write_file, Status: undefined, ExitCode: undefined -> [SUCCESS: write_file]
+AfterTool Hook fired at 2026-03-17T02:34:48.580Z
+Tool: distiller, Status: undefined, ExitCode: undefined -> [SUCCESS: distiller]
+AfterTool Hook fired at 2026-03-17T02:34:56.352Z
+Tool: replace, Status: undefined, ExitCode: undefined -> [SUCCESS: replace]
+AfterTool Hook fired at 2026-03-17T02:35:28.118Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:35:37.172Z
+Tool: run_shell_command, Status: undefined, ExitCode: 2 -> [FAILED: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:35:41.955Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:35:54.535Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:36:01.531Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:36:13.728Z
+Tool: replace, Status: undefined, ExitCode: undefined -> [SUCCESS: replace]
+AfterTool Hook fired at 2026-03-17T02:36:21.815Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:36:30.218Z
+Tool: replace, Status: undefined, ExitCode: undefined -> [SUCCESS: replace]
+AfterTool Hook fired at 2026-03-17T02:37:10.031Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:37:30.055Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:37:36.155Z
+Tool: replace, Status: undefined, ExitCode: undefined -> [SUCCESS: replace]
+AfterTool Hook fired at 2026-03-17T02:40:04.232Z
+Tool: ask_user, Status: undefined, ExitCode: undefined -> [SUCCESS: ask_user]
+AfterTool Hook fired at 2026-03-17T02:40:24.390Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:40:32.735Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T02:40:50.402Z
+Tool: distiller, Status: undefined, ExitCode: undefined -> [SUCCESS: distiller]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T02:41:20.147Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 55, Active Transcript Turns: 76
+Domain match detected: Loading ARCHITECTURE.md
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T02:41:39.935Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 55, Active Transcript Turns: 76
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-17T02:41:49.245Z
+Tool: activate_skill, Status: undefined, ExitCode: undefined -> [SUCCESS: activate_skill]
+AfterTool Hook fired at 2026-03-17T02:41:57.178Z
+Tool: grep_search, Status: undefined, ExitCode: undefined -> [SUCCESS: grep_search]
+AfterTool Hook fired at 2026-03-17T02:42:04.870Z
+Tool: read_file, Status: undefined, ExitCode: 1 -> [FAILED: read_file]
+AfterTool Hook fired at 2026-03-17T02:42:04.879Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-17T02:42:12.715Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-17T02:42:18.007Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-17T02:42:24.237Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-17T02:42:31.433Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-17T02:42:40.001Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-17T02:42:51.063Z
+Tool: replace, Status: undefined, ExitCode: undefined -> [SUCCESS: replace]
+AfterTool Hook fired at 2026-03-17T02:42:56.492Z
+Tool: replace, Status: undefined, ExitCode: undefined -> [SUCCESS: replace]
+AfterTool Hook fired at 2026-03-17T02:43:02.797Z
+Tool: replace, Status: undefined, ExitCode: undefined -> [SUCCESS: replace]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T02:43:16.082Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 67, Active Transcript Turns: 76
+Domain match detected: Loading ARCHITECTURE.md
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T02:45:16.460Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 45, Active Transcript Turns: 78
+REFLEX TRIGGER: Praise detected in prompt or transcript.
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-17T02:45:29.308Z
+Tool: replace, Status: undefined, ExitCode: undefined -> [SUCCESS: replace]
+AfterTool Hook fired at 2026-03-17T02:45:40.703Z
+Tool: mcp_assa-mcp_submit_memory_signal, Status: undefined, ExitCode: undefined -> [SUCCESS: mcp_assa-mcp_submit_memory_signal]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T02:46:05.284Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 33, Active Transcript Turns: 82
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-17T02:46:22.827Z
+Tool: mcp_assa-mcp_distill_pending, Status: undefined, ExitCode: undefined -> [SUCCESS: mcp_assa-mcp_distill_pending]
+AfterTool Hook fired at 2026-03-17T02:46:22.945Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T02:47:30.319Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 57, Active Transcript Turns: 85
+REFLEX TRIGGER: Praise detected in prompt or transcript.
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-17T02:47:40.693Z
+Tool: activate_skill, Status: undefined, ExitCode: undefined -> [SUCCESS: activate_skill]
+AfterTool Hook fired at 2026-03-17T02:47:46.186Z
+Tool: grep_search, Status: undefined, ExitCode: undefined -> [SUCCESS: grep_search]
+AfterTool Hook fired at 2026-03-17T02:47:50.192Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T02:48:36.796Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 30, Active Transcript Turns: 90
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-17T02:48:48.761Z
+Tool: replace, Status: undefined, ExitCode: undefined -> [SUCCESS: replace]
+AfterTool Hook fired at 2026-03-17T02:48:57.724Z
+Tool: mcp_assa-mcp_submit_memory_signal, Status: undefined, ExitCode: undefined -> [SUCCESS: mcp_assa-mcp_submit_memory_signal]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T02:50:20.534Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 119, Active Transcript Turns: 95
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-17T02:50:36.009Z
+AfterTool Hook fired at 2026-03-17T02:50:36.009Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-17T02:50:51.025Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-17T02:50:56.318Z
+Tool: list_directory, Status: undefined, ExitCode: undefined -> [SUCCESS: list_directory]
+AfterTool Hook fired at 2026-03-17T02:51:05.713Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-17T02:51:11.799Z
+Tool: read_file, Status: undefined, ExitCode: 1 -> [FAILED: read_file]
+AfterTool Hook fired at 2026-03-17T02:54:56.967Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T02:59:31.998Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 44, Active Transcript Turns: 103
+Domain match detected: Loading ARCHITECTURE.md
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T03:04:19.017Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 61, Active Transcript Turns: 105
+REFLEX TRIGGER: Praise detected in prompt or transcript.
+Domain match detected: Loading ARCHITECTURE.md
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T03:05:00.810Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 61, Active Transcript Turns: 105
+REFLEX TRIGGER: Praise detected in prompt or transcript.
+Domain match detected: Loading ARCHITECTURE.md
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T03:07:27.023Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 30, Active Transcript Turns: 107
+REFLEX TRIGGER: Praise detected in prompt or transcript.
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-17T03:08:54.151Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-17T03:09:24.208Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T03:59:23.107Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 9, Active Transcript Turns: 111
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-17T04:01:20.039Z
+Tool: mcp_assa-mcp_distill_pending, Status: undefined, ExitCode: undefined -> [SUCCESS: mcp_assa-mcp_distill_pending]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T04:01:43.992Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 16, Active Transcript Turns: 111
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-17T04:04:08.672Z
+Tool: mcp_assa-mcp_distill_pending, Status: undefined, ExitCode: undefined -> [SUCCESS: mcp_assa-mcp_distill_pending]
+AfterTool Hook fired at 2026-03-17T04:04:10.581Z
+Tool: syncer, Status: undefined, ExitCode: undefined -> [SUCCESS: syncer]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T04:04:20.011Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 9, Active Transcript Turns: 111
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-17T04:04:39.127Z
+Tool: replace, Status: undefined, ExitCode: undefined -> [SUCCESS: replace]
+AfterTool Hook fired at 2026-03-17T04:05:53.011Z
+Tool: replace, Status: undefined, ExitCode: undefined -> [SUCCESS: replace]
+AfterTool Hook fired at 2026-03-17T04:06:59.536Z
+Tool: mcp_assa-mcp_submit_memory_signal, Status: undefined, ExitCode: undefined -> [SUCCESS: mcp_assa-mcp_submit_memory_signal]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T04:07:22.706Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 22, Active Transcript Turns: 115
+Domain match detected: Loading ARCHITECTURE.md
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T04:07:51.102Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 13, Active Transcript Turns: 115
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-17T04:08:42.631Z
+Tool: mcp_assa-mcp_check_health, Status: undefined, ExitCode: undefined -> [SUCCESS: mcp_assa-mcp_check_health]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T04:12:58.591Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 23, Active Transcript Turns: 118
+REFLEX TRIGGER: Praise detected in prompt or transcript.
+Domain match detected: Loading ARCHITECTURE.md
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T04:13:04.098Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 21, Active Transcript Turns: 118
+REFLEX TRIGGER: Praise detected in prompt or transcript.
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-17T04:13:23.704Z
+Tool: list_directory, Status: undefined, ExitCode: undefined -> [SUCCESS: list_directory]
+AfterTool Hook fired at 2026-03-17T04:13:23.708Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T04:13:41.420Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 42, Active Transcript Turns: 118
+REFLEX TRIGGER: Praise detected in prompt or transcript.
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-17T04:14:05.359Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-17T04:20:26.436Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:21:07.484Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T04:22:24.214Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 50, Active Transcript Turns: 123
+Domain match detected: Loading ARCHITECTURE.md
+AfterTool Hook fired at 2026-03-17T04:22:45.023Z
+Tool: mcp_assa-mcp_submit_memory_signal, Status: undefined, ExitCode: undefined -> [SUCCESS: mcp_assa-mcp_submit_memory_signal]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T04:22:54.828Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 7, Active Transcript Turns: 125
+REFLEX TRIGGER: Praise detected in prompt or transcript.
+Domain match detected: Loading ARCHITECTURE.md
+CRITICAL: Context explosion detected (21261 bytes). Truncating context.
+AfterTool Hook fired at 2026-03-17T04:23:09.970Z
+Tool: mcp_assa-mcp_distill_pending, Status: undefined, ExitCode: undefined -> [SUCCESS: mcp_assa-mcp_distill_pending]
+AfterTool Hook fired at 2026-03-17T04:23:26.774Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:23:30.899Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:23:37.402Z
+Tool: replace, Status: undefined, ExitCode: undefined -> [SUCCESS: replace]
+AfterTool Hook fired at 2026-03-17T04:23:46.889Z
+Tool: replace, Status: undefined, ExitCode: undefined -> [SUCCESS: replace]
+AfterTool Hook fired at 2026-03-17T04:24:02.430Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:24:15.752Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:24:42.025Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:24:46.079Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:24:50.017Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-17T04:24:57.260Z
+Tool: run_shell_command, Status: undefined, ExitCode: 1 -> [FAILED: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:25:03.603Z
+Tool: run_shell_command, Status: undefined, ExitCode: 1 -> [FAILED: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:25:09.276Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:25:20.800Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:25:26.684Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:25:35.466Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-17T04:26:00.652Z
+Tool: write_file, Status: undefined, ExitCode: undefined -> [SUCCESS: write_file]
+AfterTool Hook fired at 2026-03-17T04:26:05.074Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:26:14.005Z
+Tool: distiller, Status: undefined, ExitCode: undefined -> [SUCCESS: distiller]
+AfterTool Hook fired at 2026-03-17T04:26:22.306Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-17T04:26:22.331Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-17T04:26:22.333Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-17T04:26:36.922Z
+Tool: ask_user, Status: undefined, ExitCode: undefined -> [SUCCESS: ask_user]
+AfterTool Hook fired at 2026-03-17T04:27:08.172Z
+Tool: replace, Status: undefined, ExitCode: undefined -> [SUCCESS: replace]
+AfterTool Hook fired at 2026-03-17T04:27:33.711Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-17T04:27:42.762Z
+Tool: replace, Status: undefined, ExitCode: undefined -> [SUCCESS: replace]
+AfterTool Hook fired at 2026-03-17T04:28:50.842Z
+Tool: ask_user, Status: undefined, ExitCode: undefined -> [SUCCESS: ask_user]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T04:32:24.200Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 12510, Active Transcript Turns: 141
+Domain match detected: Loading ARCHITECTURE.md
+CRITICAL: Context explosion detected (20486 bytes). Truncating context.
+AfterTool Hook fired at 2026-03-17T04:32:34.659Z
+AfterTool Hook fired at 2026-03-17T04:32:34.659Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+Tool: list_directory, Status: undefined, ExitCode: undefined -> [SUCCESS: list_directory]
+AfterTool Hook fired at 2026-03-17T04:35:54.163Z
+Tool: ask_user, Status: undefined, ExitCode: undefined -> [SUCCESS: ask_user]
+AfterTool Hook fired at 2026-03-17T04:36:16.257Z
+AfterTool Hook fired at 2026-03-17T04:36:16.257Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-17T04:36:16.261Z
+Tool: read_file, Status: undefined, ExitCode: undefined -> [SUCCESS: read_file]
+AfterTool Hook fired at 2026-03-17T04:36:16.261Z
+Tool: list_directory, Status: undefined, ExitCode: undefined -> [SUCCESS: list_directory]
+AfterTool Hook fired at 2026-03-17T04:36:27.913Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:36:42.449Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:36:54.031Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:37:13.200Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:37:27.727Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:37:36.559Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:37:40.576Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:37:54.672Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:38:13.564Z
+Tool: run_shell_command, Status: undefined, ExitCode: 2 -> [FAILED: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:38:22.642Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:38:35.557Z
+Tool: run_shell_command, Status: undefined, ExitCode: 2 -> [FAILED: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:38:43.184Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:39:09.923Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:39:16.802Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:39:21.385Z
+Tool: run_shell_command, Status: undefined, ExitCode: 2 -> [FAILED: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:39:32.025Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:39:46.024Z
+Tool: run_shell_command, Status: undefined, ExitCode: 1 -> [FAILED: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:40:00.111Z
+Tool: run_shell_command, Status: undefined, ExitCode: 1 -> [FAILED: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:40:11.779Z
+Tool: run_shell_command, Status: undefined, ExitCode: 1 -> [FAILED: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:40:21.077Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:40:34.857Z
+Tool: run_shell_command, Status: undefined, ExitCode: 1 -> [FAILED: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:40:44.607Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:40:54.209Z
+Tool: run_shell_command, Status: undefined, ExitCode: undefined -> [SUCCESS: run_shell_command]
+AfterTool Hook fired at 2026-03-17T04:44:41.882Z
+Tool: ask_user, Status: undefined, ExitCode: undefined -> [SUCCESS: ask_user]
+BeforeAgent Script Execution Started
+BeforeAgent Hook Fired at 2026-03-17T04:45:07.420Z
+CWD: /Users/jay/LocalProjects/self_evolement
+Agent: main, Session: e0bcc8b3-bf67-48c2-a065-0b8612662ee0, Prompt Length: 14, Active Transcript Turns: 170
+Domain match detected: Loading ARCHITECTURE.md
+CRITICAL: Context explosion detected (20671 bytes). Truncating context.

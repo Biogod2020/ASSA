@@ -61,6 +61,6 @@ To avoid "429 MODEL_CAPACITY_EXHAUSTED" errors and context pollution on restrict
 |-----------|------------------------|
 | 1-4 PENDING | Call `distill_pending` (quick tool) |
 | ≥ 5 PENDING | Dispatch **Distiller** via `generalist` |
-| After `git commit` | Dispatch **Distiller** via `generalist` |
+| After `git commit` | **Evaluate Significance**: ONLY dispatch **Distiller** if the commit introduces new architectural patterns, critical bug fixes, or significant logic changes. Skip for chores/docs. |
 | After `git push` | Dispatch **Syncer** via `generalist` |
 | User says `/assa promote` | Dispatch **Syncer** via `generalist` |

@@ -69,7 +69,7 @@ function main() {
             const cmd = toolInput.command || '';
             if (cmd.includes('git commit')) {
                 additionalContext += '### ASSA TRIGGER: GIT COMMIT DETECTED ###\n' +
-                    'A git commit just occurred. 你必须立即调用 `distiller` 工具作为子代理（Subagent）执行提炼任务。\n';
+                    'A git commit just occurred. 请根据 `git diff HEAD~1` 评估此提交的意义。如果包含架构变更、核心逻辑修改或新模式，请调用 `distiller`；如果是琐碎改动（如更新计划、文档或格式），请跳过深度提炼。\n';
             } else if (cmd.includes('git push')) {
                 additionalContext += '### ASSA TRIGGER: GIT PUSH DETECTED ###\n' +
                     'A git push just occurred. 你必须立即调用 `syncer` 工具作为子代理（Subagent）执行同步任务。\n';
