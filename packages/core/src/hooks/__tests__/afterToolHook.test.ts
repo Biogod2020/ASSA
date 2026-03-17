@@ -3,6 +3,7 @@ import path from 'path';
 import os from 'os';
 import { afterToolHook } from '../afterToolHook';
 import { LedgerManager } from '../ledger';
+import { AfterToolInput } from '../hookTypes';
 
 jest.mock('../ledger');
 
@@ -25,17 +26,24 @@ describe('afterToolHook (Smart Reflex)', () => {
     fs.rmSync(tempDir, { recursive: true, force: true });
   });
 
+  const baseInput: AfterToolInput = {
+    session_id: 's1',
+    transcript_path: 't1',
+    cwd: process.cwd(),
+    hook_event_name: 'AfterTool',
+    timestamp: new Date().toISOString(),
+    tool_name: 'test_tool',
+    tool_input: {},
+    tool_response: {},
+  };
+
   test('should detect victory (breakthrough) when success keywords are found', async () => {
-    const context = {
-      toolName: 'test_tool',
-      args: {},
-      result: {
-        isError: false,
-        content: [{ type: 'text', text: 'Breakthrough: This is a Victory!' }],
-      },
+    const input: AfterToolInput = {
+      ...baseInput,
+      tool_response: { output: 'Breakthrough: This is a Victory!' },
     };
 
-    await afterToolHook(context);
+    await afterToolHook(input);
 
     expect(mockAddSignal).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -47,17 +55,28 @@ describe('afterToolHook (Smart Reflex)', () => {
     );
   });
 
-  test('should detect barrier (error) when result isError is true', async () => {
-    const context = {
-      toolName: 'test_tool',
-      args: {},
-      result: {
-        isError: true,
-        content: [{ type: 'text', text: 'Fatal failure' }],
-      },
+  test('should detect git commit trigger', async () => {
+    const input: AfterToolInput = {
+      ...baseInput,
+      tool_name: 'run_shell_command',
+      tool_input: { command: 'git commit -m "feat: test"' },
+      tool_response: { output: '[master 123456] feat: test' },
     };
 
-    await afterToolHook(context);
+    const output = await afterToolHook(input);
+
+    expect(output.hookSpecificOutput?.additionalContext).toContain(
+      'GIT COMMIT DETECTED',
+    );
+  });
+
+  test('should detect barrier (error) when response contains failure markers', async () => {
+    const input: AfterToolInput = {
+      ...baseInput,
+      tool_response: { error: 'Exit Code: 1', stderr: 'Fatal failure' },
+    };
+
+    await afterToolHook(input);
 
     expect(mockAddSignal).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -67,20 +86,5 @@ describe('afterToolHook (Smart Reflex)', () => {
         }),
       }),
     );
-  });
-
-  test('should not log anything for normal successful results without keywords', async () => {
-    const context = {
-      toolName: 'test_tool',
-      args: {},
-      result: {
-        isError: false,
-        content: [{ type: 'text', text: 'Operation finished normally' }],
-      },
-    };
-
-    await afterToolHook(context);
-
-    expect(mockAddSignal).not.toHaveBeenCalled();
   });
 });

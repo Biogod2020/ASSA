@@ -302,5 +302,21 @@
       ]
     },
     "git_anchor": ""
+  },
+  {
+    "session_id": "unknown",
+    "message_id": "mcp-1773746985288",
+    "type": "positive",
+    "payload": {
+      "rule": "Diagnostic Trigger Test",
+      "context": "Testing if hooks are active after official installation.",
+      "tags": [
+        "test",
+        "diagnostic"
+      ]
+    },
+    "timestamp": "2026-03-17T11:29:45.290Z",
+    "status": "PENDING",
+    "git_anchor": ""
   }
 ]
