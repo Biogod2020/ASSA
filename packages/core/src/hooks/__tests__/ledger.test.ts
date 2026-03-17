@@ -76,4 +76,19 @@ describe('LedgerManager', () => {
     const pending = ledgerManager.getPending();
     expect(pending.length).toBe(0);
   });
+
+  test('should handle lock acquisition failure after retries', () => {
+    const lockPath = path.join(tempDir, '.memory', 'evolution_ledger.json.lock');
+    fs.mkdirSync(lockPath, { recursive: true });
+
+    // This should fail because the lock dir already exists
+    expect(() => {
+      ledgerManager.addSignal({
+        session_id: 's1',
+        message_id: 'm1',
+        type: 'positive',
+        payload: { rule: 'R1', context: 'C1', tags: [] },
+      });
+    }).toThrow('Could not acquire ledger lock after max retries.');
+  });
 });

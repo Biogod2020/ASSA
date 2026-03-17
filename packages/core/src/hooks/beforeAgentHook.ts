@@ -201,7 +201,7 @@ function safeReadFile(filepath: string): string {
   return '';
 }
 
-async function main() {
+export async function main() {
   try {
     const inputData = fs.readFileSync(0, 'utf8');
     if (!inputData) {
@@ -312,4 +312,6 @@ async function main() {
   }
 }
 
-main();
+if (typeof require !== 'undefined' && require.main === module) {
+  main();
+}
