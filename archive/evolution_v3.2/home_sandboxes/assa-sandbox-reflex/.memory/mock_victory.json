@@ -1,0 +1,7 @@
+{
+  "messages": [
+    { "type": "user", "content": "fix the bug" },
+    { "type": "gemini", "toolCalls": [{ "name": "run_shell_command", "result": "<!-- ASSA_METADATA: [FAILED: run_shell_command] -->" }] },
+    { "type": "gemini", "toolCalls": [{ "name": "run_shell_command", "result": "<!-- ASSA_METADATA: [SUCCESS: run_shell_command] -->" }] }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "messages": [
+    { "messageId": "msg-001", "role": "user", "content": "test" }
+  ]
+}

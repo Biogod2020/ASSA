@@ -1,0 +1,7 @@
+{
+  "messages": [
+    { "type": "gemini", "toolCalls": [{ "name": "run_shell_command", "result": "Error 1. Exit Code: 1" }] },
+    { "type": "gemini", "toolCalls": [{ "name": "run_shell_command", "result": "Error 2. Exit Code: 1" }] },
+    { "type": "gemini", "toolCalls": [{ "name": "run_shell_command", "result": "Error 3. Exit Code: 1" }] }
+  ]
+}

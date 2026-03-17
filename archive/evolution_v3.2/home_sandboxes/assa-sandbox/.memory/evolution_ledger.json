@@ -1,0 +1,33 @@
+[
+  {
+    "session_id": "unknown",
+    "message_id": "mcp-1773564390607",
+    "timestamp": "2026-03-15T08:46:30.607Z",
+    "status": "PROCESSED",
+    "type": "positive",
+    "payload": {
+      "rule": "Use 'const' for all immutable variables in JavaScript.",
+      "context": "User preference",
+      "tags": [
+        "javascript",
+        "style"
+      ]
+    },
+    "git_anchor": ""
+  },
+  {
+    "session_id": "unknown",
+    "message_id": "mcp-1773564390612",
+    "timestamp": "2026-03-15T08:46:30.612Z",
+    "status": "PROCESSED",
+    "type": "positive",
+    "payload": {
+      "rule": "Test rule",
+      "context": "",
+      "tags": [
+        "test"
+      ]
+    },
+    "git_anchor": ""
+  }
+]

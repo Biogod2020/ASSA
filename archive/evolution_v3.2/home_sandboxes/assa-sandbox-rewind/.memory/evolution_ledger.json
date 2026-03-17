@@ -1,0 +1,38 @@
+[
+  {
+    "session_id": "rewind-test",
+    "message_id": "msg-001",
+    "timestamp": "2026-03-15T13:00:01Z",
+    "status": "PENDING",
+    "type": "negative",
+    "payload": {
+      "rule": "Bad rule from turn 1",
+      "context": "Error",
+      "tags": []
+    }
+  },
+  {
+    "session_id": "rewind-test",
+    "message_id": "msg-002",
+    "timestamp": "2026-03-15T13:00:02Z",
+    "status": "REWOUND",
+    "type": "positive",
+    "payload": {
+      "rule": "Good rule from turn 2",
+      "context": "Correct",
+      "tags": []
+    }
+  },
+  {
+    "session_id": "other-session",
+    "message_id": "other-msg-001",
+    "timestamp": "2026-03-15T13:00:03Z",
+    "status": "PENDING",
+    "type": "positive",
+    "payload": {
+      "rule": "Rule from another session",
+      "context": "Cross-Session",
+      "tags": []
+    }
+  }
+]
