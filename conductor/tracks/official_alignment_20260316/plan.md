@@ -36,7 +36,7 @@
 - [ ] Task: Conductor - User Manual Verification 'Migration Strategy & Scaffolding' (Protocol in workflow.md)
 
 ## Phase 4: Core Logic Testing and Verification (In Progress)
-- [x] Task 1: Test LedgerManager (checkpoint: b66f272)
+- [x] Task 1: Test LedgerManager (b1196b8)
   - [x] **Step 1: Write failing tests for LedgerManager** (Adding signals, marking processed, distilling).
   - [x] **Step 2: Run tests to verify red state**.
   - [x] **Step 3: Fix/Verify LedgerManager implementation** (Minimal code for green state).
