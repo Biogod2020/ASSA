@@ -30,3 +30,6 @@
 - [x] Task: Prepare for Logic Migration
     - [x] Create stub files for MCP server and hooks in TypeScript (`packages/core/src/hooks/mcpServer.ts`, etc.) to prepare for porting logic from the old repo.
 - [x] Task: Conductor - User Manual Verification 'Migration Strategy & Scaffolding' (Protocol in workflow.md) [checkpoint: 12ff532]
+
+## Phase: Review Fixes
+- [x] Task: Apply review suggestions [checkpoint: 69cad16]
