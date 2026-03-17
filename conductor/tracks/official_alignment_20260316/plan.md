@@ -59,3 +59,10 @@
   - [x] **Step 2: Run tests to verify red state**.
   - [x] **Step 3: Fix/Verify AssaMcpServer implementation**.
   - [x] **Step 4: Run tests to verify green state**.
+
+## Phase: Review Fixes (Completed)
+- [x] Task: Apply review suggestions (270c262)
+  - [x] Increase `beforeAgentHook.ts` coverage to >80%.
+  - [x] Add tests for `healthCheck.ts`.
+  - [x] Add tests for `ledger.ts` locking logic.
+
