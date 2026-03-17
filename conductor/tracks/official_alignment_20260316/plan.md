@@ -43,12 +43,12 @@
   - [x] **Step 4: Run tests to verify green state**.
   - [x] **Step 5: Verify >80% coverage for ledger.ts**.
 
-- [ ] Task 2: Test AfterToolHook (Smart Reflex)
-  - [ ] **Step 1: Write failing tests for AfterToolHook** (Victory detection, Barrier detection).
-  - [ ] **Step 2: Run tests to verify red state**.
-  - [ ] **Step 3: Fix/Verify AfterToolHook implementation**.
-  - [ ] **Step 4: Run tests to verify green state**.
-  - [ ] **Step 5: Verify >80% coverage for afterToolHook.ts**.
+- [x] Task 2: Test AfterToolHook (Smart Reflex) (4b27c2a)
+  - [x] **Step 1: Write failing tests for AfterToolHook** (Victory detection, Barrier detection).
+  - [x] **Step 2: Run tests to verify red state**.
+  - [x] **Step 3: Fix/Verify AfterToolHook implementation**.
+  - [x] **Step 4: Run tests to verify green state**.
+  - [x] **Step 5: Verify >80% coverage for afterToolHook.ts**.
 
 - [ ] Task 3: Test MCP Server Integration (Mocked SDK)
   - [ ] **Step 1: Write failing tests for AssaMcpServer** (Handler registration, Tool calling logic).
