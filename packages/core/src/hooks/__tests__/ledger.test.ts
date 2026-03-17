@@ -78,7 +78,11 @@ describe('LedgerManager', () => {
   });
 
   test('should handle lock acquisition failure after retries', () => {
-    const lockPath = path.join(tempDir, '.memory', 'evolution_ledger.json.lock');
+    const lockPath = path.join(
+      tempDir,
+      '.memory',
+      'evolution_ledger.json.lock',
+    );
     fs.mkdirSync(lockPath, { recursive: true });
 
     // This should fail because the lock dir already exists

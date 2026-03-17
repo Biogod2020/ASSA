@@ -26,7 +26,7 @@ export class AssaMcpServer {
         capabilities: {
           tools: {},
         },
-      }
+      },
     );
 
     this.ledgerManager = new LedgerManager(process.cwd());
@@ -38,7 +38,8 @@ export class AssaMcpServer {
       tools: [
         {
           name: 'submit_memory_signal',
-          description: 'Submits a semantic memory realization to the local ledger.',
+          description:
+            'Submits a semantic memory realization to the local ledger.',
           inputSchema: {
             type: 'object',
             properties: {
@@ -79,7 +80,8 @@ export class AssaMcpServer {
         },
         {
           name: 'request_global_promotion',
-          description: 'Requests promotion of L2 patterns to L3 Global Library.',
+          description:
+            'Requests promotion of L2 patterns to L3 Global Library.',
           inputSchema: {
             type: 'object',
             properties: {
@@ -138,7 +140,11 @@ export class AssaMcpServer {
           }
 
           case 'distill_pending': {
-            const patternsPath = path.join(process.cwd(), '.memory', 'patterns.md');
+            const patternsPath = path.join(
+              process.cwd(),
+              '.memory',
+              'patterns.md',
+            );
             const result = this.ledgerManager.distillPending(patternsPath);
             return {
               content: [{ type: 'text', text: result }],

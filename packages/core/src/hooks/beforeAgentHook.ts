@@ -45,18 +45,21 @@ function ensureLocalSetup(): void {
   if (!fs.existsSync(memoryDir)) {
     fs.mkdirSync(memoryDir, { recursive: true });
   }
-  ['patterns.md', 'decisions.md', 'local_habits.md', 'LESSONS_LEARNED.md'].forEach(
-    (file) => {
-      const filePath = path.join(memoryDir, file);
-      if (!fs.existsSync(filePath)) {
-        fs.writeFileSync(
-          filePath,
-          `# ${file.split('.')[0].replace(/_/g, ' ').toUpperCase()}\n`,
-          'utf8'
-        );
-      }
+  [
+    'patterns.md',
+    'decisions.md',
+    'local_habits.md',
+    'LESSONS_LEARNED.md',
+  ].forEach((file) => {
+    const filePath = path.join(memoryDir, file);
+    if (!fs.existsSync(filePath)) {
+      fs.writeFileSync(
+        filePath,
+        `# ${file.split('.')[0].replace(/_/g, ' ').toUpperCase()}\n`,
+        'utf8',
+      );
     }
-  );
+  });
 }
 
 function extractAllText(turn: TranscriptTurn): string {
@@ -74,7 +77,11 @@ function extractAllText(turn: TranscriptTurn): string {
           tc.result.forEach((r: any) => {
             if (r.functionResponse && r.functionResponse.response) {
               const resp = r.functionResponse.response;
-              text += ' ' + (typeof resp === 'string' ? resp : (resp.output || JSON.stringify(resp)));
+              text +=
+                ' ' +
+                (typeof resp === 'string'
+                  ? resp
+                  : resp.output || JSON.stringify(resp));
             } else {
               text += ' ' + JSON.stringify(r);
             }
@@ -102,7 +109,9 @@ function isToolFailure(turn: TranscriptTurn): boolean {
     return turn.toolCalls.some((tc) => {
       if (tc.status === 'error') return true;
       const res = JSON.stringify(tc.result || '');
-      return res.includes('Exit Code: 1') || res.toLowerCase().includes('error:');
+      return (
+        res.includes('Exit Code: 1') || res.toLowerCase().includes('error:')
+      );
     });
   }
   return false;
@@ -117,7 +126,9 @@ function isToolSuccess(turn: TranscriptTurn): boolean {
     return turn.toolCalls.every((tc) => {
       if (tc.status === 'success') return true;
       const res = JSON.stringify(tc.result || '');
-      return !res.includes('Exit Code: 1') && !res.toLowerCase().includes('error:');
+      return (
+        !res.includes('Exit Code: 1') && !res.toLowerCase().includes('error:')
+      );
     });
   }
   return false;
@@ -128,12 +139,34 @@ function isToolSuccess(turn: TranscriptTurn): boolean {
  * Detects implicit learning opportunities beyond simple keywords.
  */
 const POTENTIAL_SIGNAL_HINTS = [
-  'perfect', 'exactly', 'better', 'prefer', 'instead', 'wrong', 'correct',
-  'should', 'must', 'always', 'never', 'refactor', 'standard',
-  '很好', '不错', '不对', '建议', '喜欢', '习惯', '应该', '千万', '记得'
+  'perfect',
+  'exactly',
+  'better',
+  'prefer',
+  'instead',
+  'wrong',
+  'correct',
+  'should',
+  'must',
+  'always',
+  'never',
+  'refactor',
+  'standard',
+  '很好',
+  '不错',
+  '不对',
+  '建议',
+  '喜欢',
+  '习惯',
+  '应该',
+  '千万',
+  '记得',
 ];
 
-function detectReflectionOpportunity(transcript: TranscriptTurn[], currentPrompt: string): string {
+function detectReflectionOpportunity(
+  transcript: TranscriptTurn[],
+  currentPrompt: string,
+): string {
   let reflexContext = '';
 
   const currentText = currentPrompt.toLowerCase();
@@ -142,7 +175,8 @@ function detectReflectionOpportunity(transcript: TranscriptTurn[], currentPrompt
 
   // 1. Interaction Reflection
   if (hasHint || isSubstantial) {
-    reflexContext += '### ASSA REFLEX: SEMANTIC INTERACTION AUDIT ###\n' +
+    reflexContext +=
+      '### ASSA REFLEX: SEMANTIC INTERACTION AUDIT ###\n' +
       'Recent user guidance contains potential architectural or stylistic preferences. ' +
       'You MUST analyze the semantic intent. Does this imply a recurring rule or a "Golden Standard"? ' +
       'Record any distilled wisdom into the L1 ledger immediately. ' +
@@ -150,11 +184,14 @@ function detectReflectionOpportunity(transcript: TranscriptTurn[], currentPrompt
   }
 
   // 2. Victory/Barrier detection (remains structural but with semantic prompt)
-  const toolTurns = transcript.filter((t) => t.toolCalls && t.toolCalls.length > 0);
+  const toolTurns = transcript.filter(
+    (t) => t.toolCalls && t.toolCalls.length > 0,
+  );
   if (toolTurns.length >= 2) {
     for (let i = 1; i < toolTurns.length; i++) {
       if (isToolFailure(toolTurns[i - 1]) && isToolSuccess(toolTurns[i])) {
-        reflexContext += '### ASSA REFLEX: BREAKTHROUGH ANALYSIS ###\n' +
+        reflexContext +=
+          '### ASSA REFLEX: BREAKTHROUGH ANALYSIS ###\n' +
           'A tool just succeeded after a failure. This is a "Victory". ' +
           'Analyze the semantic difference between the failed attempt and the success. ' +
           'Formalize the technical adjustment into a reusable rule via `submit_memory_signal`.\n\n';
@@ -163,8 +200,13 @@ function detectReflectionOpportunity(transcript: TranscriptTurn[], currentPrompt
     }
 
     for (let i = 2; i < toolTurns.length; i++) {
-      if (isToolFailure(toolTurns[i - 2]) && isToolFailure(toolTurns[i - 1]) && isToolFailure(toolTurns[i])) {
-        reflexContext += '### ASSA REFLEX: BARRIER IDENTIFICATION ###\n' +
+      if (
+        isToolFailure(toolTurns[i - 2]) &&
+        isToolFailure(toolTurns[i - 1]) &&
+        isToolFailure(toolTurns[i])
+      ) {
+        reflexContext +=
+          '### ASSA REFLEX: BARRIER IDENTIFICATION ###\n' +
           'Three consecutive tool failures detected. You are facing a significant technical barrier. ' +
           'Analyze the Root Cause (environmental, logical, or stylistic) and record it as a "Technical Barrier" to prevent future deadlocks.\n\n';
         break;
@@ -175,7 +217,11 @@ function detectReflectionOpportunity(transcript: TranscriptTurn[], currentPrompt
   return reflexContext;
 }
 
-function cascadeRewound(ledger: SignalRecord[], transcript: TranscriptTurn[], sessionId: string): boolean {
+function cascadeRewound(
+  ledger: SignalRecord[],
+  transcript: TranscriptTurn[],
+  sessionId: string,
+): boolean {
   if (!sessionId) return false;
 
   let allTranscriptContent = '';
@@ -189,7 +235,10 @@ function cascadeRewound(ledger: SignalRecord[], transcript: TranscriptTurn[], se
     if (entry.session_id === sessionId) {
       const isPresent = allTranscriptContent.includes(entry.message_id);
 
-      if ((entry.status === 'PENDING' || entry.status === 'PROCESSED') && !isPresent) {
+      if (
+        (entry.status === 'PENDING' || entry.status === 'PROCESSED') &&
+        !isPresent
+      ) {
         entry.status = 'REWOUND';
         changed = true;
       } else if (entry.status === 'REWOUND' && isPresent) {
@@ -226,12 +275,16 @@ export async function main() {
       try {
         const fileContent = fs.readFileSync(payload.transcript_path, 'utf8');
         const history = JSON.parse(fileContent);
-        transcript = history.messages || (Array.isArray(history) ? history : []);
+        transcript =
+          history.messages || (Array.isArray(history) ? history : []);
       } catch (e) {}
     }
 
     // Bypass for evolution agents
-    if (['distiller', 'syncer'].includes(agentName.toLowerCase()) || process.env.ASSA_EVOLVING) {
+    if (
+      ['distiller', 'syncer'].includes(agentName.toLowerCase()) ||
+      process.env.ASSA_EVOLVING
+    ) {
       process.stdout.write(JSON.stringify({ decision: 'allow' }) + '\n');
       return;
     }
@@ -247,15 +300,23 @@ export async function main() {
     });
 
     const health = checkSystemHealth(process.cwd(), overrides);
-    const reflexContext = detectReflectionOpportunity(transcript, currentPrompt);
+    const reflexContext = detectReflectionOpportunity(
+      transcript,
+      currentPrompt,
+    );
     const globalDir = path.join(os.homedir(), '.gemini', 'assa');
 
     let additionalContext = '';
     if (health.status !== 'healthy') {
-      additionalContext += '### ASSA HEALTH WARNING ###\n' +
+      additionalContext +=
+        '### ASSA HEALTH WARNING ###\n' +
         '⚠️ Your self-evolution environment has issues:\n' +
-        health.warnings.map((w) => `- ${w}`).join('\n') + '\n' +
-        (health.fixSuggestion ? `💡 Suggestion: ${health.fixSuggestion}\n` : '') + '\n';
+        health.warnings.map((w) => `- ${w}`).join('\n') +
+        '\n' +
+        (health.fixSuggestion
+          ? `💡 Suggestion: ${health.fixSuggestion}\n`
+          : '') +
+        '\n';
     }
 
     additionalContext += `### ASSA SESSION ID: ${sessionId} ###\n\n`;
@@ -266,7 +327,9 @@ export async function main() {
     additionalContext += '\n### L3 GLOBAL WISDOM ###\n';
     additionalContext += safeReadFile(path.join(globalDir, 'SOUL.md'));
     additionalContext += safeReadFile(path.join(globalDir, 'USER_HANDBOOK.md'));
-    additionalContext += safeReadFile(path.join(globalDir, 'LIBRARY', 'PROMOTED_PATTERNS.md'));
+    additionalContext += safeReadFile(
+      path.join(globalDir, 'LIBRARY', 'PROMOTED_PATTERNS.md'),
+    );
 
     // Domain-Aware Loading
     const libraryDir = path.join(globalDir, 'LIBRARY');
@@ -278,7 +341,9 @@ export async function main() {
         if (index.mappings && Array.isArray(index.mappings)) {
           index.mappings.forEach((m: any) => {
             if (m.domains.some((d: string) => cwd.includes(d.toLowerCase()))) {
-              additionalContext += safeReadFile(path.join(libraryDir, m.pattern));
+              additionalContext += safeReadFile(
+                path.join(libraryDir, m.pattern),
+              );
             }
           });
         }
@@ -292,7 +357,8 @@ export async function main() {
       additionalContext += `⚠️ ${pendingItems.length} signals accumulated. Invoke \`distiller\` as subagent.\n`;
       additionalContext += JSON.stringify(pendingItems, null, 2) + '\n';
     } else if (pendingItems.length > 0) {
-      additionalContext += '\n### L1 PENDING SIGNALS (use distill_pending tool for quick processing) ###\n';
+      additionalContext +=
+        '\n### L1 PENDING SIGNALS (use distill_pending tool for quick processing) ###\n';
       additionalContext += JSON.stringify(pendingItems, null, 2) + '\n';
     }
 
@@ -302,16 +368,18 @@ export async function main() {
 
     // Context Explosion Guard
     if (additionalContext.length > 20480) {
-      additionalContext = `### ASSA SESSION ID: ${sessionId} ###\n\n` +
+      additionalContext =
+        `### ASSA SESSION ID: ${sessionId} ###\n\n` +
         `⚠️ CONTEXT SAFETY LIMIT EXCEEDED (${Math.round(additionalContext.length / 1024)} KB) ⚠️\n` +
         'Invoke `distiller` to distill signals.\n';
     }
 
-    process.stdout.write(JSON.stringify({
-      decision: 'allow',
-      hookSpecificOutput: { additionalContext }
-    }) + '\n');
-
+    process.stdout.write(
+      JSON.stringify({
+        decision: 'allow',
+        hookSpecificOutput: { additionalContext },
+      }) + '\n',
+    );
   } catch (err) {
     process.stdout.write(JSON.stringify({ decision: 'allow' }) + '\n');
   }

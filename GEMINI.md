@@ -67,6 +67,7 @@ ASSA V3.2 is a self-evolving system extension for Gemini CLI. It enables autonom
 As of 2026-03-17, this project is being refactored to strictly follow the **Gemini CLI Official Contributing Guidelines**.
 
 ### 1. Architectural Mandates
+
 - **Monorepo Structure**: All logic must reside within `packages/`.
   - `packages/core`: Core ASSA logic, hooks, and MCP servers.
   - `packages/cli`: (Future) CLI interface components.
@@ -78,6 +79,7 @@ As of 2026-03-17, this project is being refactored to strictly follow the **Gemi
   - **Automation**: Root-level `Makefile` for `build`, `test`, `lint`, and `format`.
 
 ### 2. Development & PR Workflow
+
 - **Preflight Requirement**: Before any code is finalized or committed, `npm run preflight` (or equivalent Makefile targets) MUST pass.
 - **Atomic & Documented**: PRs must be small, focused, and include updated documentation in `.memory/` or `docs/`.
 - **Commit Style**: Use [Conventional Commits](https://www.conventionalcommits.org/).
@@ -105,14 +107,18 @@ To avoid "429 MODEL_CAPACITY_EXHAUSTED" errors and context pollution on restrict
 # 💓 Evolutionary Mandates
 
 ### ⚡ Smart Reflex (Hyper-Sensitivity Evolution)
+
 You are equipped with a high-sensitivity introspective reflex. When you see the `🚨 ASSA IMMEDIATE REFLEXES 🚨` block at the bottom of your context, you MUST:
+
 - **SEMANTIC INTERACTION AUDIT**: Perform a deep semantic analysis of recent turns. Do not wait for explicit praise. Identify any implicit preferences, recurring stylistic choices, or architectural decisions.
 - **BREAKTHROUGH ANALYSIS**: When a victory is detected, dissect the specific technical or logical adjustment that turned a failure into a success.
 - **BARRIER RCA**: Perform an immediate Root Cause Analysis (RCA) on persistent failures.
 - **Silent & Proactive**: Perform these signalings autonomously. Your goal is to capture the "Architectural Why" even from subtle cues.
 
 ### 💓 Self-Evolution Heartbeat
+
 Every turn (or when prompted by a reflex), perform an "Internal Audit":
+
 - Check if the user's guidance implies a new rule or preference.
 - Ask: "Is there a pattern here that I can formalize?"
 - If a realization occurs, SIGNAL IT immediately to L1 via `submit_memory_signal`.

@@ -5,18 +5,33 @@ import { LedgerManager } from './ledger';
  * Smart Reflex: After Tool Hook
  * Automatically detects successes/failures and logs signals.
  */
-export const afterToolHook = async (context: AfterToolHookContext): Promise<void> => {
+export const afterToolHook = async (
+  context: AfterToolHookContext,
+): Promise<void> => {
   const { toolName, result } = context;
   const ledgerManager = new LedgerManager(process.cwd());
 
   // Victory Detection: Successful breakthrough or significant completion
   if (!result.isError) {
     const successMarkers = [
-      'success', 'breakthrough', 'victory', 'done', 'fixed', 'resolved',
-      'improved', 'perfect', 'correct', '完成', '修复', '解决'
+      'success',
+      'breakthrough',
+      'victory',
+      'done',
+      'fixed',
+      'resolved',
+      'improved',
+      'perfect',
+      'correct',
+      '完成',
+      '修复',
+      '解决',
     ];
-    const resultContent = result.content.map((c) => c.text || '').join(' ').toLowerCase();
-    
+    const resultContent = result.content
+      .map((c) => c.text || '')
+      .join(' ')
+      .toLowerCase();
+
     const hasMarker = successMarkers.some((k) => resultContent.includes(k));
     const isSignificant = resultContent.length > 200; // Large outputs often contain patterns
 

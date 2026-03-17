@@ -14,7 +14,7 @@ export interface SystemHealth {
 
 export function checkSystemHealth(
   workspaceRoot: string = process.cwd(),
-  overrides: Record<string, any> = {}
+  overrides: Record<string, any> = {},
 ): SystemHealth {
   const health: SystemHealth = {
     status: 'healthy',
@@ -27,8 +27,7 @@ export function checkSystemHealth(
 
   // 1. Check experimental.enableAgents in settings.json
   const settingsPath =
-    overrides.settingsPath ||
-    path.join(os.homedir(), '.gemini/settings.json');
+    overrides.settingsPath || path.join(os.homedir(), '.gemini/settings.json');
   if (fs.existsSync(settingsPath)) {
     try {
       const settings = JSON.parse(fs.readFileSync(settingsPath, 'utf8'));
@@ -36,7 +35,7 @@ export function checkSystemHealth(
       if (!health.enableAgents) {
         health.status = 'warning';
         health.warnings.push(
-          'Subagents are disabled (experimental.enableAgents: false in settings.json). ASSA Distillation will not work.'
+          'Subagents are disabled (experimental.enableAgents: false in settings.json). ASSA Distillation will not work.',
         );
         health.fixSuggestion =
           'To fix, run: gemini /settings -> Experimental -> Enable Agents -> Enabled (or edit ~/.gemini/settings.json manually).';
@@ -89,7 +88,7 @@ export function checkSystemHealth(
       if (!mcpServers['assa-mcp']) {
         health.status = 'warning';
         health.warnings.push(
-          'assa-mcp server is not defined in gemini-extension.json.'
+          'assa-mcp server is not defined in gemini-extension.json.',
         );
       }
     } catch (e: any) {

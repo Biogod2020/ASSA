@@ -39,7 +39,7 @@ describe('AssaMcpServer', () => {
 
   test('should call ledgerManager.addSignal when submit_memory_signal is called', async () => {
     const server = new AssaMcpServer();
-    
+
     // ListTools is usually index 0, CallTool index 1
     const callToolHandler = setRequestHandlerSpy.mock.calls[1][1];
 
@@ -52,10 +52,12 @@ describe('AssaMcpServer', () => {
       },
     });
 
-    expect(mockLedgerManager.addSignal).toHaveBeenCalledWith(expect.objectContaining({
-      session_id: 's1',
-      payload: expect.objectContaining({ rule: 'Test Rule' }),
-    }));
+    expect(mockLedgerManager.addSignal).toHaveBeenCalledWith(
+      expect.objectContaining({
+        session_id: 's1',
+        payload: expect.objectContaining({ rule: 'Test Rule' }),
+      }),
+    );
     expect(result.content[0].text).toContain('Signal appended');
   });
 

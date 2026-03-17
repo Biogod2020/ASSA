@@ -7,8 +7,16 @@ export class LedgerManager {
   private lockPath: string;
 
   constructor(workspaceRoot: string) {
-    this.ledgerPath = path.join(workspaceRoot, '.memory', 'evolution_ledger.json');
-    this.lockPath = path.join(workspaceRoot, '.memory', 'evolution_ledger.json.lock');
+    this.ledgerPath = path.join(
+      workspaceRoot,
+      '.memory',
+      'evolution_ledger.json',
+    );
+    this.lockPath = path.join(
+      workspaceRoot,
+      '.memory',
+      'evolution_ledger.json.lock',
+    );
   }
 
   private ensureMemoryDir(): void {
@@ -79,7 +87,7 @@ export class LedgerManager {
   }
 
   public addSignal(
-    signal: Omit<SignalRecord, 'timestamp' | 'status' | 'git_anchor'>
+    signal: Omit<SignalRecord, 'timestamp' | 'status' | 'git_anchor'>,
   ): SignalRecord {
     return this.withLock(() => {
       const ledger = this.readLedger();
@@ -114,9 +122,7 @@ export class LedgerManager {
   /**
    * Batch update status based on a filter function
    */
-  public updateStatus(
-    updateFn: (ledger: SignalRecord[]) => void
-  ): void {
+  public updateStatus(updateFn: (ledger: SignalRecord[]) => void): void {
     this.withLock(() => {
       const ledger = this.readLedger();
       updateFn(ledger);

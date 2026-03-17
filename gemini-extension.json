@@ -1,0 +1,48 @@
+{
+  "id": "assa-evolution",
+  "name": "assa-evolution",
+  "version": "3.2.0",
+  "author": "Biogod2020",
+  "description": "ASSA (Autonomous Self-Sovereign Agent): A self-evolving system with L1/L2/L3 memory hierarchy, Smart Reflex, and domain-aware context routing.",
+  "repository": "https://github.com/Biogod2020/ASSA",
+  "contextFileName": "GEMINI.md",
+  "mcpServers": {
+    "assa-mcp": {
+      "command": "node",
+      "args": ["${extensionPath}/dist/mcpServer.js"]
+    }
+  },
+  "hooks": {
+    "BeforeAgent": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "name": "ASSA BeforeAgent",
+            "type": "command",
+            "command": "node ${extensionPath}/dist/beforeAgentHook.js",
+            "timeout": 60000
+          }
+        ]
+      }
+    ],
+    "AfterTool": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "name": "ASSA AfterTool",
+            "type": "command",
+            "command": "node ${extensionPath}/dist/afterToolHook.js",
+            "timeout": 60000
+          }
+        ]
+      }
+    ]
+  },
+  "agents": [
+    "packages/core/agents/distiller.md",
+    "packages/core/agents/syncer.md",
+    "packages/core/agents/skill_generator.md"
+  ]
+}

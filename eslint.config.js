@@ -1,26 +1,36 @@
 const eslint = require('@eslint/js');
 const tseslint = require('typescript-eslint');
-const prettier = require('eslint-plugin-prettier');
+const prettierPlugin = require('eslint-plugin-prettier');
 const eslintConfigPrettier = require('eslint-config-prettier');
 const globals = require('globals');
 
 module.exports = tseslint.config(
+  {
+    ignores: [
+      'dist/**',
+      'coverage/**',
+      'node_modules/**',
+      'packages/core/dist/**',
+    ],
+  },
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
-  eslintConfigPrettier,
   {
+    files: ['**/*.ts', '**/*.tsx'],
     languageOptions: {
       globals: {
         ...globals.node,
+        ...globals.jest,
       },
     },
     plugins: {
-      prettier,
+      prettier: prettierPlugin,
     },
     rules: {
       'prettier/prettier': 'error',
-      '@typescript-eslint/no-require-imports': 'off',
-      '@typescript-eslint/no-var-requires': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unused-vars': 'warn',
+      'no-empty': 'warn',
     },
   },
   {
@@ -29,4 +39,5 @@ module.exports = tseslint.config(
       '@typescript-eslint/no-require-imports': 'off',
     },
   },
+  eslintConfigPrettier,
 );

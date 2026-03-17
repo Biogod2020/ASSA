@@ -250,5 +250,57 @@
       ]
     },
     "git_anchor": ""
+  },
+  {
+    "session_id": "1b3c323a-1683-42fd-b557-6e3405021e4f",
+    "message_id": "mcp-1773734421734",
+    "timestamp": "2026-03-17T08:00:21.735Z",
+    "status": "PROCESSED",
+    "type": "positive",
+    "payload": {
+      "rule": "Evolution Transparency: When modifying core evolutionary logic or triggers, provide a structured breakdown of the 'Before vs After' state to ensure the user fully understands the shift in the agent's cognitive behavior.",
+      "context": "The user specifically asked for a detailed breakdown of the internal logic changes (transition to semantic reflection). This confirms the importance of high transparency in self-evolutionary steps.",
+      "tags": [
+        "transparency",
+        "user-preference",
+        "logic-audit"
+      ]
+    },
+    "git_anchor": ""
+  },
+  {
+    "session_id": "1b3c323a-1683-42fd-b557-6e3405021e4f",
+    "message_id": "mcp-1773734617758",
+    "timestamp": "2026-03-17T08:03:37.759Z",
+    "status": "PROCESSED",
+    "type": "positive",
+    "payload": {
+      "rule": "Archive Protocol: Before requesting or performing a track archive (cleanup), the agent MUST: 1) Provide a comprehensive report of all changes and achievements, and 2) Execute the full project test suite to verify 100% correctness and coverage compliance.",
+      "context": "The user mandated a strict protocol for archiving tracks: always provide a detailed report and perform a complete test suite verification before requesting an archive.",
+      "tags": [
+        "procedure",
+        "archiving",
+        "quality-assurance",
+        "reporting"
+      ]
+    },
+    "git_anchor": ""
+  },
+  {
+    "session_id": "1b3c323a-1683-42fd-b557-6e3405021e4f",
+    "message_id": "mcp-1773735501677",
+    "timestamp": "2026-03-17T08:18:21.677Z",
+    "status": "PROCESSED",
+    "type": "positive",
+    "payload": {
+      "rule": "Official Preflight Implementation: To achieve 100% official alignment, ASSA projects must implement a 'preflight' command (via Makefile or npm script) that combines Build, Format, Lint, and Test into a single atomic verification step.",
+      "context": "The user emphasized finding the exact 'Official' way to run full tests. This led to the discovery of the 'preflight' pattern in Google repositories.",
+      "tags": [
+        "official-alignment",
+        "dev-workflow",
+        "preflight"
+      ]
+    },
+    "git_anchor": ""
   }
 ]

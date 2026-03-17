@@ -13,7 +13,7 @@ describe('afterToolHook (Smart Reflex)', () => {
   beforeEach(() => {
     tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'hook-test-'));
     jest.spyOn(process, 'cwd').mockReturnValue(tempDir);
-    
+
     mockAddSignal = jest.fn();
     (LedgerManager as jest.Mock).mockImplementation(() => ({
       addSignal: mockAddSignal,
@@ -37,12 +37,14 @@ describe('afterToolHook (Smart Reflex)', () => {
 
     await afterToolHook(context);
 
-    expect(mockAddSignal).toHaveBeenCalledWith(expect.objectContaining({
-      type: 'breakthrough',
-      payload: expect.objectContaining({
-        rule: expect.stringContaining('Potential Breakthrough'),
+    expect(mockAddSignal).toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: 'breakthrough',
+        payload: expect.objectContaining({
+          rule: expect.stringContaining('Potential Breakthrough'),
+        }),
       }),
-    }));
+    );
   });
 
   test('should detect barrier (error) when result isError is true', async () => {
@@ -57,12 +59,14 @@ describe('afterToolHook (Smart Reflex)', () => {
 
     await afterToolHook(context);
 
-    expect(mockAddSignal).toHaveBeenCalledWith(expect.objectContaining({
-      type: 'barrier',
-      payload: expect.objectContaining({
-        rule: expect.stringContaining('Barrier encountered'),
+    expect(mockAddSignal).toHaveBeenCalledWith(
+      expect.objectContaining({
+        type: 'barrier',
+        payload: expect.objectContaining({
+          rule: expect.stringContaining('Barrier encountered'),
+        }),
       }),
-    }));
+    );
   });
 
   test('should not log anything for normal successful results without keywords', async () => {

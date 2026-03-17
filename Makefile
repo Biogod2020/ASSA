@@ -9,3 +9,6 @@ lint:
 
 format:
 	npm run format
+
+preflight:
+	npm run preflight
