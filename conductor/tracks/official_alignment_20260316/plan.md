@@ -31,16 +31,16 @@
 
 ## Phase 3: Migration Strategy & Scaffolding (In Progress)
 
-- [~] Task: Scaffold Official-Aligned Package Structure
+- [x] Task: Scaffold Official-Aligned Package Structure
   - [x] `packages/core` created with `package.json`, `src/hooks`, `src/__tests__`.
-- [~] Task: Port Logic with Strict Typing
+- [x] Task: Port Logic with Strict Typing
   - [x] Migrated `ledger.js` logic to `ledger.ts` (Locking logic included).
   - [x] Migrated `afterToolHook.js` logic to `afterToolHook.ts`.
   - [x] Migrated `mcpServer.js` logic to `mcpServer.ts`.
   - [x] **Step 1: Migrate healthCheck.js to healthCheck.ts**.
   - [x] **Step 2: Migrate beforeAgentHook.js to beforeAgentHook.ts**.
   - [x] **Step 3: Port Templates** (`SOUL.md`, `USER_HANDBOOK.md`, `index.json`).
-  - [ ] **Step 4: Update gemini-extension.json** with all hooks and correct paths.
+  - [x] **Step 4: Update gemini-extension.json** with all hooks and correct paths.
 - [x] Task: Conductor - User Manual Verification 'Migration Strategy & Scaffolding' (Protocol in workflow.md)
 
 ## Phase 4: Core Logic Testing and Verification (Completed) [checkpoint: fcd8738]
@@ -71,3 +71,13 @@
   - [x] Increase `beforeAgentHook.ts` coverage to >80%.
   - [x] Add tests for `healthCheck.ts`.
   - [x] Add tests for `ledger.ts` locking logic.
+
+## Phase 5: Integration Testing and Finalization (Completed)
+
+- [x] Task: Perform Integration Smoke Test
+  - [x] Build project and verify `dist/` output.
+  - [x] Run `healthCheck` in a real environment.
+  - [x] Verify `gemini-extension.json` path alignment.
+- [x] Task: Final Cleanup
+  - [x] Ensure all tests pass.
+  - [x] Update documentation.
