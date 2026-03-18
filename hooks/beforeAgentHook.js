@@ -154,8 +154,17 @@ function resolveGraph(seedIds, graph) {
         meat: new Set(),    // Full content needed
         skeleton: new Set() // Only metadata/rationale needed
     };
-    const queue = [...seedIds];
-    
+
+    // Refactor: V3.5 Foundation/Domain (G1/G2) always Meat
+    if (graph && graph.rules) {
+        Object.entries(graph.rules).forEach(([id, rule]) => {
+            if (rule.level === NODE_LEVELS.G1_FOUNDATION || rule.level === NODE_LEVELS.G2_DOMAIN) {
+                resolved.meat.add(id);
+            }
+        });
+    }
+
+    const queue = [...seedIds, ...Array.from(resolved.meat)];
     seedIds.forEach(id => resolved.meat.add(id));
 
     while (queue.length > 0) {
@@ -164,6 +173,7 @@ function resolveGraph(seedIds, graph) {
         if (rule && rule.depends_on) {
             rule.depends_on.forEach(depId => {
                 if (!resolved.meat.has(depId) && !resolved.skeleton.has(depId)) {
+                    // All other dependencies go to skeleton unless they were already added to meat
                     resolved.skeleton.add(depId);
                     queue.push(depId);
                 }
