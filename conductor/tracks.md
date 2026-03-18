@@ -20,4 +20,4 @@ This file tracks all major development tracks for the project. Each track has it
 ---
 
 - [x] **Track: Align Project with Official Gemini CLI Contribution Guidelines**
-  _Link: [./tracks/official_alignment_20260316/](./tracks/official_alignment_20260316/)_
+      _Link: [./tracks/official_alignment_20260316/](./tracks/official_alignment_20260316/)_

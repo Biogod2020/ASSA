@@ -122,7 +122,7 @@ export class AssaMcpServer {
             const tags = Array.isArray(args?.tags) ? args.tags : [];
             const sessionId = String(args?.session_id || 'unknown');
 
-            const record = this.ledgerManager.addSignal({
+            const record = await this.ledgerManager.addSignal({
               session_id: sessionId,
               message_id: `mcp-${Date.now()}`,
               type,
@@ -145,7 +145,8 @@ export class AssaMcpServer {
               '.memory',
               'patterns.md',
             );
-            const result = this.ledgerManager.distillPending(patternsPath);
+            const result =
+              await this.ledgerManager.distillPending(patternsPath);
             return {
               content: [{ type: 'text', text: result }],
             };
@@ -164,7 +165,7 @@ export class AssaMcpServer {
 
           case 'mark_processed_signals': {
             const messageIds = (args?.message_ids as string[]) || [];
-            this.ledgerManager.markProcessed(messageIds);
+            await this.ledgerManager.markProcessed(messageIds);
             return {
               content: [
                 {

@@ -22,9 +22,9 @@ class LedgerManager {
     /**
      * Atomic file lock using mkdirSync with retries
      */
-    async withLock(callback) {
+    withLock(callback) {
         this.ensureMemoryDir();
-        const maxRetries = 100;
+        const maxRetries = 50;
         let lockAcquired = false;
         for (let i = 0; i < maxRetries; i++) {
             try {
@@ -34,8 +34,12 @@ class LedgerManager {
             }
             catch (err) {
                 if (err.code === 'EEXIST') {
-                    // Use async delay to prevent blocking the event loop
-                    await new Promise((resolve) => setTimeout(resolve, Math.floor(Math.random() * 50) + 10));
+                    // Blocking wait with small random delay
+                    const retryDelay = Math.floor(Math.random() * 50) + 10;
+                    const start = Date.now();
+                    while (Date.now() - start < retryDelay) {
+                        /* block */
+                    }
                     continue;
                 }
                 throw err;
@@ -45,7 +49,7 @@ class LedgerManager {
             throw new Error('Could not acquire ledger lock after max retries.');
         }
         try {
-            return await callback();
+            return callback();
         }
         finally {
             try {
@@ -73,8 +77,8 @@ class LedgerManager {
         this.ensureMemoryDir();
         fs_1.default.writeFileSync(this.ledgerPath, JSON.stringify(ledger, null, 2), 'utf8');
     }
-    async addSignal(signal) {
-        return await this.withLock(() => {
+    addSignal(signal) {
+        return this.withLock(() => {
             const ledger = this.readLedger();
             const record = {
                 ...signal,
@@ -90,8 +94,8 @@ class LedgerManager {
     getPending() {
         return this.readLedger().filter((s) => s.status === 'PENDING');
     }
-    async markProcessed(messageIds) {
-        await this.withLock(() => {
+    markProcessed(messageIds) {
+        this.withLock(() => {
             const ledger = this.readLedger();
             ledger.forEach((s) => {
                 if (messageIds.includes(s.message_id)) {
@@ -104,15 +108,15 @@ class LedgerManager {
     /**
      * Batch update status based on a filter function
      */
-    async updateStatus(updateFn) {
-        await this.withLock(() => {
+    updateStatus(updateFn) {
+        this.withLock(() => {
             const ledger = this.readLedger();
             updateFn(ledger);
             this.writeLedger(ledger);
         });
     }
-    async distillPending(patternsPath) {
-        return await this.withLock(() => {
+    distillPending(patternsPath) {
+        return this.withLock(() => {
             const ledger = this.readLedger();
             const pending = ledger.filter((s) => s.status === 'PENDING');
             if (pending.length === 0) {

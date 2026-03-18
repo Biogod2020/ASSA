@@ -46,9 +46,6 @@ function ensureLocalSetup(workspaceRoot) {
         }
     });
 }
-/**
- * Keywords to trigger semantic reflection
- */
 const POTENTIAL_SIGNAL_HINTS = [
     'perfect',
     'exactly',
@@ -63,15 +60,15 @@ const POTENTIAL_SIGNAL_HINTS = [
     'never',
     'refactor',
     'standard',
-    'very good',
-    'nice',
-    'exactly',
-    'correct',
-    'suggest',
-    'like',
-    'habit',
-    'should',
-    'remember',
+    '很好',
+    '不错',
+    '不对',
+    '建议',
+    '喜欢',
+    '习惯',
+    '应该',
+    '千万',
+    '记得',
 ];
 function detectReflectionOpportunity(prompt) {
     let reflexContext = '';
@@ -92,102 +89,27 @@ function safeReadFile(filepath) {
         return fs_1.default.readFileSync(filepath, 'utf8') + '\n';
     return '';
 }
-/**
- * Extract all text content from a transcript turn, including tool calls and results.
- */
-function extractAllText(turn) {
-    let text = turn.content || '';
-    if (Array.isArray(text)) {
-        text = text.map((c) => c.text || '').join(' ');
-    }
-    if (turn.toolCalls) {
-        turn.toolCalls.forEach((tc) => {
-            if (tc.result) {
-                if (Array.isArray(tc.result)) {
-                    tc.result.forEach((r) => {
-                        if (r.functionResponse && r.functionResponse.response) {
-                            const resp = r.functionResponse.response;
-                            text +=
-                                ' ' +
-                                    (typeof resp === 'string'
-                                        ? resp
-                                        : resp.output || JSON.stringify(resp));
-                        }
-                        else {
-                            text += ' ' + JSON.stringify(r);
-                        }
-                    });
-                }
-                else if (typeof tc.result === 'string') {
-                    text += ' ' + tc.result;
-                }
-                else {
-                    text += ' ' + JSON.stringify(tc.result);
-                }
-            }
-            if (tc.resultDisplay) {
-                text += ' ' + tc.resultDisplay;
-            }
-        });
-    }
-    return text;
-}
 async function main() {
-    // Redirect logs to stderr to keep stdout pure for CLI JSON communication
-    console.log = console.error;
-    console.warn = console.error;
     try {
         const inputData = fs_1.default.readFileSync(0, 'utf8');
         if (!inputData)
             return;
         const input = JSON.parse(inputData);
-        const { cwd, transcript_path } = input;
-        const userPrompt = input.prompt || '';
-        const session_id = input.session_id || input.sessionId || 'unknown';
-        const agent_name = input.agent_name || input.agentName || 'main';
-        // Bypass for evolution subagents (distiller, syncer, etc.) or explicit evolution flag
-        const isEvolutionSubagent = agent_name &&
-            ['distiller', 'syncer', 'skill_generator'].includes(agent_name.toLowerCase());
-        if (process.env.ASSA_EVOLVING || isEvolutionSubagent) {
+        const { session_id, prompt, cwd } = input;
+        // Bypass for evolution subagents (if they set this env)
+        if (process.env.ASSA_EVOLVING) {
             process.stdout.write(JSON.stringify({ decision: 'allow' }) + '\n');
             return;
         }
-        let transcript = [];
-        if (transcript_path && fs_1.default.existsSync(transcript_path)) {
-            try {
-                const fileContent = fs_1.default.readFileSync(transcript_path, 'utf8');
-                const history = JSON.parse(fileContent);
-                transcript =
-                    history.messages || (Array.isArray(history) ? history : []);
-            }
-            catch (e) {
-                // Silently catch transcript errors
-            }
-        }
         ensureLocalSetup(cwd);
+        // DIAGNOSTIC LOGGING
+        const debugDir = path_1.default.join(cwd, '.memory', 'debug');
+        if (!fs_1.default.existsSync(debugDir))
+            fs_1.default.mkdirSync(debugDir, { recursive: true });
+        fs_1.default.writeFileSync(path_1.default.join(debugDir, `beforeAgent_${Date.now()}.json`), JSON.stringify({ input, env: { ASSA_EVOLVING: process.env.ASSA_EVOLVING } }, null, 2));
         const ledgerManager = new ledger_1.LedgerManager(cwd);
-        // Cascade Rewound Status
-        await ledgerManager.updateStatus((ledger) => {
-            let allTranscriptContent = '';
-            transcript.forEach((turn) => {
-                allTranscriptContent += (turn.id || '') + ' ';
-                allTranscriptContent += extractAllText(turn) + ' ';
-            });
-            ledger.forEach((entry) => {
-                if (entry.session_id === session_id) {
-                    const isPresent = allTranscriptContent.includes(entry.message_id);
-                    if ((entry.status === 'PENDING' || entry.status === 'PROCESSED') &&
-                        !isPresent) {
-                        entry.status = 'REWOUND';
-                    }
-                    else if (entry.status === 'REWOUND' && isPresent) {
-                        entry.status = 'PENDING';
-                    }
-                }
-            });
-        });
         const health = (0, healthCheck_1.checkSystemHealth)(cwd);
-        const reflexContext = detectReflectionOpportunity(userPrompt);
+        const reflexContext = detectReflectionOpportunity(prompt);
         const globalDir = path_1.default.join(os_1.default.homedir(), '.gemini', 'assa');
         let additionalContext = '';
         if (health.status !== 'healthy') {
@@ -218,10 +140,7 @@ async function main() {
             additionalContext =
                 `### ASSA SESSION ID: ${session_id} ###\n\n` +
                     `⚠️ CONTEXT SAFETY LIMIT EXCEEDED (${Math.round(additionalContext.length / 1024)} KB) ⚠️\n` +
-                    'You have injected too many memories, which may cause slow responses or context loss.\n' +
-                    'You MUST immediately invoke the `distiller` tool to distill signals into patterns.md, ' +
-                    'instead of attempting to read detailed PENDING SIGNALS.\n' +
-                    `There are currently ${pendingItems.length} pending signals.\n`;
+                    'Invoke `distiller` to distill signals.\n';
         }
         const output = {
             decision: 'allow',
@@ -233,7 +152,10 @@ async function main() {
         process.stdout.write(JSON.stringify(output) + '\n');
     }
     catch (err) {
-        console.error('[ASSA Fatal] BeforeAgent Hook Error:', err.message);
+        const debugDir = path_1.default.join(process.cwd(), '.memory', 'debug');
+        if (!fs_1.default.existsSync(debugDir))
+            fs_1.default.mkdirSync(debugDir, { recursive: true });
+        fs_1.default.writeFileSync(path_1.default.join(debugDir, `error_${Date.now()}.txt`), err.stack || err.message);
         process.stdout.write(JSON.stringify({ decision: 'allow' }) + '\n');
     }
 }

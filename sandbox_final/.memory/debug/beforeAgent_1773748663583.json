@@ -1,0 +1,10 @@
+{
+  "input": {
+    "session_id": "final-llm-test",
+    "hook_event_name": "BeforeAgent",
+    "cwd": "/Users/jay/LocalProjects/assa-core-ts/sandbox_final",
+    "prompt": "Verify signals",
+    "timestamp": "2026-03-17T17:10:00Z"
+  },
+  "env": {}
+}

@@ -51,6 +51,9 @@ function ensureLocalSetup(workspaceRoot: string): void {
   });
 }
 
+/**
+ * Keywords to trigger semantic reflection
+ */
 const POTENTIAL_SIGNAL_HINTS = [
   'perfect',
   'exactly',
@@ -65,15 +68,15 @@ const POTENTIAL_SIGNAL_HINTS = [
   'never',
   'refactor',
   'standard',
-  '很好',
-  '不错',
-  '不对',
-  '建议',
-  '喜欢',
-  '习惯',
-  '应该',
-  '千万',
-  '记得',
+  'very good',
+  'nice',
+  'exactly',
+  'correct',
+  'suggest',
+  'like',
+  'habit',
+  'should',
+  'remember',
 ];
 
 function detectReflectionOpportunity(prompt: string): string {
@@ -99,33 +102,112 @@ function safeReadFile(filepath: string): string {
   return '';
 }
 
+/**
+ * Extract all text content from a transcript turn, including tool calls and results.
+ */
+function extractAllText(turn: any): string {
+  let text = turn.content || '';
+  if (Array.isArray(text)) {
+    text = text.map((c: any) => c.text || '').join(' ');
+  }
+  if (turn.toolCalls) {
+    turn.toolCalls.forEach((tc: any) => {
+      if (tc.result) {
+        if (Array.isArray(tc.result)) {
+          tc.result.forEach((r: any) => {
+            if (r.functionResponse && r.functionResponse.response) {
+              const resp = r.functionResponse.response;
+              text +=
+                ' ' +
+                (typeof resp === 'string'
+                  ? resp
+                  : resp.output || JSON.stringify(resp));
+            } else {
+              text += ' ' + JSON.stringify(r);
+            }
+          });
+        } else if (typeof tc.result === 'string') {
+          text += ' ' + tc.result;
+        } else {
+          text += ' ' + JSON.stringify(tc.result);
+        }
+      }
+      if (tc.resultDisplay) {
+        text += ' ' + tc.resultDisplay;
+      }
+    });
+  }
+  return text;
+}
+
 export async function main() {
+  // Redirect logs to stderr to keep stdout pure for CLI JSON communication
+  console.log = console.error;
+  console.warn = console.error;
+
   try {
     const inputData = fs.readFileSync(0, 'utf8');
     if (!inputData) return;
 
     const input: BeforeAgentInput = JSON.parse(inputData);
-    const { session_id, prompt, cwd } = input;
+    const { cwd, transcript_path } = input;
+    const userPrompt = input.prompt || '';
+    const session_id = input.session_id || input.sessionId || 'unknown';
+    const agent_name = input.agent_name || input.agentName || 'main';
 
-    // Bypass for evolution subagents (if they set this env)
-    if (process.env.ASSA_EVOLVING) {
+    // Bypass for evolution subagents (distiller, syncer, etc.) or explicit evolution flag
+    const isEvolutionSubagent =
+      agent_name &&
+      ['distiller', 'syncer', 'skill_generator'].includes(
+        agent_name.toLowerCase(),
+      );
+
+    if (process.env.ASSA_EVOLVING || isEvolutionSubagent) {
       process.stdout.write(JSON.stringify({ decision: 'allow' }) + '\n');
       return;
     }
 
+    let transcript: any[] = [];
+    if (transcript_path && fs.existsSync(transcript_path)) {
+      try {
+        const fileContent = fs.readFileSync(transcript_path, 'utf8');
+        const history = JSON.parse(fileContent);
+        transcript =
+          history.messages || (Array.isArray(history) ? history : []);
+      } catch (e) {
+        // Silently catch transcript errors
+      }
+    }
+
     ensureLocalSetup(cwd);
 
-    // DIAGNOSTIC LOGGING
-    const debugDir = path.join(cwd, '.memory', 'debug');
-    if (!fs.existsSync(debugDir)) fs.mkdirSync(debugDir, { recursive: true });
-    fs.writeFileSync(
-      path.join(debugDir, `beforeAgent_${Date.now()}.json`),
-      JSON.stringify({ input, env: { ASSA_EVOLVING: process.env.ASSA_EVOLVING } }, null, 2),
-    );
-
     const ledgerManager = new LedgerManager(cwd);
+
+    // Cascade Rewound Status
+    await ledgerManager.updateStatus((ledger) => {
+      let allTranscriptContent = '';
+      transcript.forEach((turn) => {
+        allTranscriptContent += (turn.id || '') + ' ';
+        allTranscriptContent += extractAllText(turn) + ' ';
+      });
+
+      ledger.forEach((entry) => {
+        if (entry.session_id === session_id) {
+          const isPresent = allTranscriptContent.includes(entry.message_id);
+          if (
+            (entry.status === 'PENDING' || entry.status === 'PROCESSED') &&
+            !isPresent
+          ) {
+            entry.status = 'REWOUND';
+          } else if (entry.status === 'REWOUND' && isPresent) {
+            entry.status = 'PENDING';
+          }
+        }
+      });
+    });
+
     const health = checkSystemHealth(cwd);
-    const reflexContext = detectReflectionOpportunity(prompt);
+    const reflexContext = detectReflectionOpportunity(userPrompt);
     const globalDir = path.join(os.homedir(), '.gemini', 'assa');
 
     let additionalContext = '';
@@ -162,7 +244,10 @@ export async function main() {
       additionalContext =
         `### ASSA SESSION ID: ${session_id} ###\n\n` +
         `⚠️ CONTEXT SAFETY LIMIT EXCEEDED (${Math.round(additionalContext.length / 1024)} KB) ⚠️\n` +
-        'Invoke `distiller` to distill signals.\n';
+        'You have injected too many memories, which may cause slow responses or context loss.\n' +
+        'You MUST immediately invoke the `distiller` tool to distill signals into patterns.md, ' +
+        'instead of attempting to read detailed PENDING SIGNALS.\n' +
+        `There are currently ${pendingItems.length} pending signals.\n`;
     }
 
     const output: BeforeAgentOutput = {
@@ -175,9 +260,7 @@ export async function main() {
 
     process.stdout.write(JSON.stringify(output) + '\n');
   } catch (err: any) {
-    const debugDir = path.join(process.cwd(), '.memory', 'debug');
-    if (!fs.existsSync(debugDir)) fs.mkdirSync(debugDir, { recursive: true });
-    fs.writeFileSync(path.join(debugDir, `error_${Date.now()}.txt`), err.stack || err.message);
+    console.error('[ASSA Fatal] BeforeAgent Hook Error:', err.message);
     process.stdout.write(JSON.stringify({ decision: 'allow' }) + '\n');
   }
 }

@@ -61,9 +61,10 @@ describe('beforeAgentHook', () => {
     };
     setupMocks(input);
     await main();
-    
+
     expect(mockStdoutWrite).toHaveBeenCalled();
-    const lastCall = mockStdoutWrite.mock.calls[mockStdoutWrite.mock.calls.length - 1][0];
+    const lastCall =
+      mockStdoutWrite.mock.calls[mockStdoutWrite.mock.calls.length - 1][0];
     const output = JSON.parse(lastCall as string);
     expect(output.hookSpecificOutput?.additionalContext).toContain(
       '### ASSA REFLEX: SEMANTIC INTERACTION AUDIT ###',
@@ -74,13 +75,14 @@ describe('beforeAgentHook', () => {
     const input: BeforeAgentInput = {
       ...baseInput,
       cwd: tempDir,
-      prompt: '很好!',
+      prompt: 'Excellent job, please remember to follow this pattern!',
     };
     setupMocks(input);
-    
+
     await main();
     expect(mockStdoutWrite).toHaveBeenCalled();
-    const lastCall = mockStdoutWrite.mock.calls[mockStdoutWrite.mock.calls.length - 1][0];
+    const lastCall =
+      mockStdoutWrite.mock.calls[mockStdoutWrite.mock.calls.length - 1][0];
     const output = JSON.parse(lastCall as string);
     expect(output.hookSpecificOutput?.additionalContext).toContain(
       '### ASSA REFLEX: SEMANTIC INTERACTION AUDIT ###',

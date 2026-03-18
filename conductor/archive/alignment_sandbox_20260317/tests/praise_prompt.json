@@ -1,1 +1,5 @@
-{"agentName": "main", "sessionId": "sandbox-1", "prompt": "很好! 这种重构方式非常符合我的习惯，以后请一直保持这种风格。"}
+{
+  "agentName": "main",
+  "sessionId": "sandbox-1",
+  "prompt": "很好! 这种重构方式非常符合我的习惯，以后请一直保持这种风格。"
+}

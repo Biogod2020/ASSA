@@ -1,9 +1,12 @@
 export interface HookInput {
-  session_id: string;
-  transcript_path: string;
+  session_id?: string;
+  sessionId?: string;
+  transcript_path?: string;
   cwd: string;
   hook_event_name: string;
   timestamp: string;
+  agent_name?: string;
+  agentName?: string;
 }
 
 export interface AfterToolInput extends HookInput {

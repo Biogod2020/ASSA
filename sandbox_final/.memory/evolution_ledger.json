@@ -1,0 +1,68 @@
+[
+  {
+    "session_id": "final-llm-test",
+    "message_id": "sig-1",
+    "timestamp": "2026-03-17T17:01:00Z",
+    "status": "PENDING",
+    "type": "positive",
+    "payload": {
+      "rule": "Rule 1: Always add a README to new packages.",
+      "tags": ["docs"]
+    }
+  },
+  {
+    "session_id": "final-llm-test",
+    "message_id": "sig-2",
+    "timestamp": "2026-03-17T17:02:00Z",
+    "status": "PENDING",
+    "type": "positive",
+    "payload": {
+      "rule": "Rule 2: Use 2 spaces for indentation in YAML files.",
+      "tags": ["style"]
+    }
+  },
+  {
+    "session_id": "final-llm-test",
+    "message_id": "sig-3",
+    "timestamp": "2026-03-17T17:03:00Z",
+    "status": "PENDING",
+    "type": "positive",
+    "payload": {
+      "rule": "Rule 3: Export all public types from index.ts.",
+      "tags": ["ts"]
+    }
+  },
+  {
+    "session_id": "final-llm-test",
+    "message_id": "sig-4",
+    "timestamp": "2026-03-17T17:04:00Z",
+    "status": "PENDING",
+    "type": "positive",
+    "payload": {
+      "rule": "Rule 4: Use descriptive variable names.",
+      "tags": ["style"]
+    }
+  },
+  {
+    "session_id": "final-llm-test",
+    "message_id": "sig-5",
+    "timestamp": "2026-03-17T17:05:00Z",
+    "status": "PENDING",
+    "type": "positive",
+    "payload": {
+      "rule": "Rule 5: Implement unit tests for all new functions.",
+      "tags": ["test"]
+    }
+  },
+  {
+    "session_id": "final-llm-test",
+    "message_id": "sig-6",
+    "timestamp": "2026-03-17T17:06:00Z",
+    "status": "PENDING",
+    "type": "positive",
+    "payload": {
+      "rule": "Rule 6: Use semantic versioning for all releases.",
+      "tags": ["release"]
+    }
+  }
+]

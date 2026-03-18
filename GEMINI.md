@@ -20,7 +20,7 @@ When you see `DEEP DISTILLATION REQUIRED` (>= 5 signals) or after a `git commit`
 
 After a `git push`, you MUST delegate to a subagent:
 
-- **Workflow**: Call the `generalist` tool and instruct it to assume the **ASSA Syncer** persona. Instruct it to audit L2 patterns → identify high-confidence (>=8) rules → strip project-specific details → promote to L3 全局库 (`~/.gemini/assa/LIBRARY/`).
+- **Workflow**: Call the `generalist` tool and instruct it to assume the **ASSA Syncer** persona. Instruct it to audit L2 patterns → identify high-confidence (>=8) rules → strip project-specific details → promote to L3 Global Library (`~/.gemini/assa/LIBRARY/`).
 - **Constraint**: You must dispatch this task and return immediately. Do not perform the sync yourself.
 
 ---

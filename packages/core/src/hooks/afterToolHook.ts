@@ -11,8 +11,21 @@ import { LedgerManager } from './ledger';
 export const afterToolHook = async (
   input: AfterToolInput,
 ): Promise<AfterToolOutput> => {
-  const { tool_name, tool_input, tool_response, session_id } = input;
-  const ledgerManager = new LedgerManager(process.cwd());
+  const { tool_name, tool_input, tool_response, session_id, cwd, agent_name } =
+    input;
+
+  // Bypass for evolution subagents (distiller, syncer, etc.) or explicit evolution flag
+  const isEvolutionSubagent =
+    agent_name &&
+    ['distiller', 'syncer', 'skill_generator'].includes(
+      agent_name.toLowerCase(),
+    );
+
+  if (process.env.ASSA_EVOLVING || isEvolutionSubagent) {
+    return { decision: 'allow' };
+  }
+
+  const ledgerManager = new LedgerManager(cwd);
 
   let additionalContext = '';
 
@@ -28,14 +41,14 @@ export const afterToolHook = async (
     if (cmd.includes('git commit') && !isError) {
       additionalContext +=
         '\n### ASSA TRIGGER: GIT COMMIT DETECTED ###\n' +
-        'A git commit just occurred. 请根据 `git diff HEAD~1` 评估此提交的意义。如果包含架构变更、核心逻辑修改或新模式，请调用 `distiller`；如果是琐碎改动（如更新计划、文档或格式），请跳过深度提炼。\n\n';
+        'A git commit just occurred. Please evaluate the significance of this commit based on `git diff HEAD~1`. If it contains architectural changes, core logic modifications, or new patterns, invoke `distiller`. If it contains trivial changes (e.g., updates to plans, docs, or formatting), skip deep distillation.\n\n';
     }
 
     // 2. Git Push Trigger
     if (cmd.includes('git push') && !isError) {
       additionalContext +=
         '\n### ASSA TRIGGER: GIT PUSH DETECTED ###\n' +
-        'A git push just occurred. 你必须立即调用 `request_global_promotion` 工具（或分派 `syncer` 子代理）来评估 L2 模式库中的成熟条目并将其提升到 L3 全局库。\n\n';
+        'A git push just occurred. You MUST immediately invoke the `request_global_promotion` tool (or dispatch the `syncer` subagent) to audit mature entries in the L2 pattern library and promote them to the L3 Global Library.\n\n';
     }
   }
 
@@ -60,7 +73,7 @@ export const afterToolHook = async (
     const isSignificant = responseContent.length > 500;
 
     if (hasMarker || isSignificant) {
-      ledgerManager.addSignal({
+      await ledgerManager.addSignal({
         session_id: session_id || 'auto-detect',
         message_id: `auto-${Date.now()}`,
         type: 'breakthrough',
@@ -75,7 +88,7 @@ export const afterToolHook = async (
 
   // 4. Barrier Detection
   if (isError) {
-    ledgerManager.addSignal({
+    await ledgerManager.addSignal({
       session_id: session_id || 'auto-detect',
       message_id: `auto-${Date.now()}`,
       type: 'barrier',
@@ -105,24 +118,36 @@ export const afterToolHook = async (
  * Entry point for AfterTool command-type hook
  */
 async function main() {
+  // Redirect logs to stderr to keep stdout pure for CLI JSON communication
+  console.log = console.error;
+  console.warn = console.error;
+
   try {
     const inputData = fs.readFileSync(0, 'utf8');
-    if (!inputData) return;
+    if (!inputData) {
+      return;
+    }
 
     const input: AfterToolInput = JSON.parse(inputData);
+    const { cwd } = input;
+    const session_id = input.session_id || input.sessionId || 'unknown';
+    const agent_name = input.agent_name || input.agentName || 'main';
+
+    // Normalize input for the hook function
+    const normalizedInput = { ...input, session_id, agent_name };
 
     // DIAGNOSTIC LOGGING
-    const debugDir = path.join(process.cwd(), '.memory', 'debug');
+    const debugDir = path.join(cwd, '.memory', 'debug');
     if (!fs.existsSync(debugDir)) fs.mkdirSync(debugDir, { recursive: true });
     fs.writeFileSync(
       path.join(debugDir, `afterTool_${Date.now()}.json`),
-      JSON.stringify({ input, cwd: process.cwd() }, null, 2),
+      JSON.stringify({ input: normalizedInput }, null, 2),
     );
 
-    const output = await afterToolHook(input);
+    const output = await afterToolHook(normalizedInput);
     process.stdout.write(JSON.stringify(output) + '\n');
-  } catch (err) {
-    // Silent fail for hooks to not disrupt the main flow
+  } catch (err: any) {
+    console.error('[ASSA Debug] AfterTool Hook: FATAL ERROR:', err.stack || err.message);
   }
 }
 

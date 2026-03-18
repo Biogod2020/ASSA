@@ -111,7 +111,7 @@ class AssaMcpServer {
                         const type = args?.type || 'positive';
                         const tags = Array.isArray(args?.tags) ? args.tags : [];
                         const sessionId = String(args?.session_id || 'unknown');
-                        const record = await this.ledgerManager.addSignal({
+                        const record = this.ledgerManager.addSignal({
                             session_id: sessionId,
                             message_id: `mcp-${Date.now()}`,
                             type,
@@ -128,7 +128,7 @@ class AssaMcpServer {
                     }
                     case 'distill_pending': {
                         const patternsPath = path_1.default.join(process.cwd(), '.memory', 'patterns.md');
-                        const result = await this.ledgerManager.distillPending(patternsPath);
+                        const result = this.ledgerManager.distillPending(patternsPath);
                         return {
                             content: [{ type: 'text', text: result }],
                         };
@@ -144,7 +144,7 @@ class AssaMcpServer {
                     }
                     case 'mark_processed_signals': {
                         const messageIds = args?.message_ids || [];
-                        await this.ledgerManager.markProcessed(messageIds);
+                        this.ledgerManager.markProcessed(messageIds);
                         return {
                             content: [
                                 {

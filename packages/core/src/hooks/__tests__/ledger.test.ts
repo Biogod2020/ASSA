@@ -20,7 +20,7 @@ describe('LedgerManager', () => {
     fs.rmSync(tempDir, { recursive: true, force: true });
   });
 
-  test('should add a signal to the ledger', () => {
+  test('should add a signal to the ledger', async () => {
     const signal = {
       session_id: 'test-session',
       message_id: 'msg-1',
@@ -32,7 +32,7 @@ describe('LedgerManager', () => {
       },
     };
 
-    const record = ledgerManager.addSignal(signal);
+    const record = await ledgerManager.addSignal(signal);
 
     expect(record.message_id).toBe('msg-1');
     expect(record.status).toBe('PENDING');
@@ -43,29 +43,29 @@ describe('LedgerManager', () => {
     expect(pending[0].payload.rule).toBe('Always use TDD');
   });
 
-  test('should mark signals as processed', () => {
-    ledgerManager.addSignal({
+  test('should mark signals as processed', async () => {
+    await ledgerManager.addSignal({
       session_id: 's1',
       message_id: 'm1',
       type: 'positive',
       payload: { rule: 'R1', context: 'C1', tags: [] },
     });
 
-    ledgerManager.markProcessed(['m1']);
+    await ledgerManager.markProcessed(['m1']);
 
     const pending = ledgerManager.getPending();
     expect(pending.length).toBe(0);
   });
 
-  test('should distill pending signals into patterns.md', () => {
-    ledgerManager.addSignal({
+  test('should distill pending signals into patterns.md', async () => {
+    await ledgerManager.addSignal({
       session_id: 's1',
       message_id: 'm1',
       type: 'positive',
       payload: { rule: 'Rule 1', context: 'C1', tags: ['arch'] },
     });
 
-    const result = ledgerManager.distillPending(patternsPath);
+    const result = await ledgerManager.distillPending(patternsPath);
 
     expect(result).toContain('Distilled 1 signals');
     expect(result).toContain('Rule 1');
@@ -77,7 +77,7 @@ describe('LedgerManager', () => {
     expect(pending.length).toBe(0);
   });
 
-  test('should handle lock acquisition failure after retries', () => {
+  test('should handle lock acquisition failure after retries', async () => {
     const lockPath = path.join(
       tempDir,
       '.memory',
@@ -86,13 +86,13 @@ describe('LedgerManager', () => {
     fs.mkdirSync(lockPath, { recursive: true });
 
     // This should fail because the lock dir already exists
-    expect(() => {
-      ledgerManager.addSignal({
+    await expect(async () => {
+      await ledgerManager.addSignal({
         session_id: 's1',
         message_id: 'm1',
         type: 'positive',
         payload: { rule: 'R1', context: 'C1', tags: [] },
       });
-    }).toThrow('Could not acquire ledger lock after max retries.');
+    }).rejects.toThrow('Could not acquire ledger lock after max retries.');
   });
 });

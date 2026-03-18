@@ -29,9 +29,9 @@ export class LedgerManager {
   /**
    * Atomic file lock using mkdirSync with retries
    */
-  private withLock<T>(callback: () => T): T {
+  private async withLock<T>(callback: () => T | Promise<T>): Promise<T> {
     this.ensureMemoryDir();
-    const maxRetries = 50;
+    const maxRetries = 100;
     let lockAcquired = false;
 
     for (let i = 0; i < maxRetries; i++) {
@@ -41,12 +41,10 @@ export class LedgerManager {
         break;
       } catch (err: any) {
         if (err.code === 'EEXIST') {
-          // Blocking wait with small random delay
-          const retryDelay = Math.floor(Math.random() * 50) + 10;
-          const start = Date.now();
-          while (Date.now() - start < retryDelay) {
-            /* block */
-          }
+          // Use async delay to prevent blocking the event loop
+          await new Promise((resolve) =>
+            setTimeout(resolve, Math.floor(Math.random() * 50) + 10),
+          );
           continue;
         }
         throw err;
@@ -58,7 +56,7 @@ export class LedgerManager {
     }
 
     try {
-      return callback();
+      return await callback();
     } finally {
       try {
         fs.rmdirSync(this.lockPath);
@@ -86,10 +84,10 @@ export class LedgerManager {
     fs.writeFileSync(this.ledgerPath, JSON.stringify(ledger, null, 2), 'utf8');
   }
 
-  public addSignal(
+  public async addSignal(
     signal: Omit<SignalRecord, 'timestamp' | 'status' | 'git_anchor'>,
-  ): SignalRecord {
-    return this.withLock(() => {
+  ): Promise<SignalRecord> {
+    return await this.withLock(() => {
       const ledger = this.readLedger();
       const record: SignalRecord = {
         ...signal,
@@ -107,8 +105,8 @@ export class LedgerManager {
     return this.readLedger().filter((s) => s.status === 'PENDING');
   }
 
-  public markProcessed(messageIds: string[]): void {
-    this.withLock(() => {
+  public async markProcessed(messageIds: string[]): Promise<void> {
+    await this.withLock(() => {
       const ledger = this.readLedger();
       ledger.forEach((s) => {
         if (messageIds.includes(s.message_id)) {
@@ -122,16 +120,18 @@ export class LedgerManager {
   /**
    * Batch update status based on a filter function
    */
-  public updateStatus(updateFn: (ledger: SignalRecord[]) => void): void {
-    this.withLock(() => {
+  public async updateStatus(
+    updateFn: (ledger: SignalRecord[]) => void,
+  ): Promise<void> {
+    await this.withLock(() => {
       const ledger = this.readLedger();
       updateFn(ledger);
       this.writeLedger(ledger);
     });
   }
 
-  public distillPending(patternsPath: string): string {
-    return this.withLock(() => {
+  public async distillPending(patternsPath: string): Promise<string> {
+    return await this.withLock(() => {
       const ledger = this.readLedger();
       const pending = ledger.filter((s) => s.status === 'PENDING');
 

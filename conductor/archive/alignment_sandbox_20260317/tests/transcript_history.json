@@ -1,1 +1,7 @@
-{"messages": [{"type": "agent", "toolCalls": [{"status": "error"}]}, {"type": "agent", "toolCalls": [{"status": "error"}]}, {"type": "agent", "toolCalls": [{"status": "error"}]}]}
+{
+  "messages": [
+    { "type": "agent", "toolCalls": [{ "status": "error" }] },
+    { "type": "agent", "toolCalls": [{ "status": "error" }] },
+    { "type": "agent", "toolCalls": [{ "status": "error" }] }
+  ]
+}
