@@ -2,7 +2,7 @@
 
 # ASSA Evolution (自动进化代理)
 
-[![ASSA Version](https://img.shields.io/badge/ASSA-v3.2--SOTA-blueviolet?style=for-the-badge)](https://github.com/google-gemini/gemini-cli)
+[![ASSA Version](https://img.shields.io/badge/ASSA-v3.5--WEAVER-blueviolet?style=for-the-badge)](https://github.com/google-gemini/gemini-cli)
 [![Gemini CLI](https://img.shields.io/badge/Gemini_CLI-Compatible-blue?style=for-the-badge)](https://github.com/google-gemini/gemini-cli)
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
 
@@ -55,6 +55,7 @@ flowchart TD
 ```
 
 ### 关键架构：
+- **Weaver 织网者 (V3.5 自动化索引)**：从手动维护 JSON 转向全自动的文件驱动系统。Markdown 成为 **Single Source of Truth**；脚本自动生成高性能索引并具备严格的 ID 冲突和死链检测。
 - **显著性评估 (Judgment Layer)**：进化过程不再对每一个琐碎的 commit (如文案修改) 盲目执行。它会通过一层语义评估，仅针对有架构突破或逻辑变更的提交派发 Distiller 任务，节省算力并提升记忆质量。
 - **结构化成果检测 (Metadata-Aware)**：通过 Hook 注入 `ASSA_METADATA` 标记，精确捕捉工具调用从失败到成功的“胜利时刻 (Victory)”，避免了脆弱的正则匹配。
 

@@ -2,7 +2,7 @@
 
 # ASSA Evolution (Autonomous Self-Sovereign Agent)
 
-[![ASSA Version](https://img.shields.io/badge/ASSA-v3.2--SOTA-blueviolet?style=for-the-badge)](https://github.com/google-gemini/gemini-cli)
+[![ASSA Version](https://img.shields.io/badge/ASSA-v3.5--WEAVER-blueviolet?style=for-the-badge)](https://github.com/google-gemini/gemini-cli)
 [![Gemini CLI](https://img.shields.io/badge/Gemini_CLI-Compatible-blue?style=for-the-badge)](https://github.com/google-gemini/gemini-cli)
 [![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
 
@@ -55,6 +55,7 @@ flowchart TD
 ```
 
 ### Key Architectural Pillars:
+- **The Weaver (V3.5 Automated Indexing)**: Transitioned from manual JSON maintenance to a fully automated, file-driven system. Markdown is now the **Single Source of Truth**; the `rebuildGraph.js` engine automatically generates high-performance JSON indexes (`graph.json`, `index.json`) with strict ID-collision and broken-link detection.
 - **Significance Evaluation (Judgment Layer)**: Evolution doesn't blindly trigger on every trivial commit (like typo fixes). It uses a semantic layer to dispatch Distiller tasks only for architectural breakthroughs or logic shifts, saving tokens and improving memory quality.
 - **Metadata-Aware Victory Detection**: By injecting `ASSA_METADATA` markers via system hooks, ASSA accurately captures the "Victory" moment when a tool succeeds after a failure, avoiding fragile regex matching.
 
