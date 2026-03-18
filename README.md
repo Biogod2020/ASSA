@@ -55,9 +55,9 @@ flowchart TD
 ```
 
 ### Key Architectural Pillars:
-- **The Weaver (V3.5 Automated Indexing)**: Transitioned from manual JSON maintenance to a fully automated, file-driven system. Markdown is now the **Single Source of Truth**; the `rebuildGraph.js` engine automatically generates high-performance JSON indexes (`graph.json`, `index.json`) with strict ID-collision and broken-link detection.
+- **The Weaver (V3.5 Automated Indexing)**: Transitioned from manual JSON maintenance to a fully automated, file-driven system. Markdown is now the **Single Source of Truth**; the `rebuildGraph.js` engine automatically generates high-performance JSON indexes (`graph.json`, `index.json`) with strict ID-collision and broken-link detection. In V3.5, it supports **G1/G2 Full Injection** (Foundation/Domain rules are always present) and **Dynamic Context Warnings** (replacing hard truncation at 20KB).
+- **Decision Persistence (Architecture Log)**: Major architectural breakthroughs are now automatically recorded in `.memory/decisions.md` during distillation. This provides a chronological "Architectural Trail" of fundamental design choices, separate from transient coding patterns.
 - **Significance Evaluation (Judgment Layer)**: Evolution doesn't blindly trigger on every trivial commit (like typo fixes). It uses a semantic layer to dispatch Distiller tasks only for architectural breakthroughs or logic shifts, saving tokens and improving memory quality.
-- **Metadata-Aware Victory Detection**: By injecting `ASSA_METADATA` markers via system hooks, ASSA accurately captures the "Victory" moment when a tool succeeds after a failure, avoiding fragile regex matching.
 
 ---
 
@@ -73,6 +73,8 @@ ASSA doesn't bloat the AI's context with everything. It organizes memory like a 
 ASSA is equipped with a highly sensitive semantic emotion sensor:
 - **Recognizes Praise**: When you say "Perfect", "Good job", or "Exactly", it triggers an immediate reflex to record the successful path.
 - **Reflective Evolution**: If the AI succeeds after a failed attempt, it automatically compares the "Failure vs. Success" diff to distill "pitfall avoidance" patterns.
+- **Internal Memory Judgment**: The agent autonomously evaluates its own breakthroughs even without explicit praise.
+- **Traceability (Source Citation)**: Whenever a rule is applied, the agent is mandated to briefly cite its Rule ID (e.g., [Rule: G1_CORE]) to maintain the evolution chain.
 
 ### 3. Subagent-Driven & Zero Friction
 All time-consuming analysis (distillation, synchronization, index updates) is handled by isolated background sub-agents (Distiller / Syncer). The main interface remains lightning-fast.

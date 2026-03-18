@@ -194,7 +194,7 @@
     "session_id": "unknown",
     "message_id": "mcp-1773824965574",
     "timestamp": "2026-03-18T09:09:25.575Z",
-    "status": "PROCESSED",
+    "status": "REWOUND",
     "type": "positive",
     "payload": {
       "rule": "在构建全局知识图谱时，必须为每个节点分配 Tier 等级。BeforeHook 加载顺序应严格遵循 Tier 1 > Tier 2 > Tier 3，并支持基于层级的递归剪枝。",
@@ -267,6 +267,23 @@
         "proactive-promotion",
         "instant-sync",
         "architecture-v3.4"
+      ]
+    },
+    "git_anchor": ""
+  },
+  {
+    "session_id": "test-session",
+    "message_id": "mcp-1773830000000",
+    "timestamp": "2026-03-18T10:00:00.000Z",
+    "status": "REWOUND",
+    "type": "positive",
+    "payload": {
+      "rule": "Architecture: Implementing a \"Decision Persistence SOP\" ensures that major architectural breakthroughs are recorded in decisions.md, not just patterns.md.",
+      "context": "[Symptom/Intent]\nNeed a permanent record for major decisions.\n\n[Breakthrough]\nExpanded Distiller SOP to update decisions.md for high-significance signals.",
+      "tags": [
+        "architecture",
+        "decision-sop",
+        "distiller-v3.5"
       ]
     },
     "git_anchor": ""
