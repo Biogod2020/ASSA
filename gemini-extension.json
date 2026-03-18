@@ -16,5 +16,11 @@
     "agents/distiller.md",
     "agents/syncer.md",
     "agents/skill_generator.md"
+  ],
+  "skills": [
+    "skills/assa-core",
+    "skills/assa-promoter",
+    "skills/assa-distiller",
+    "skills/smart-github"
   ]
 }
