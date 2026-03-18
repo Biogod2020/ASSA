@@ -133,6 +133,30 @@ function extractAllText(turn) {
     return text;
 }
 
+function resolveGraph(seedIds, graph) {
+    const resolved = {
+        meat: new Set(),    // Full content needed
+        skeleton: new Set() // Only metadata/rationale needed
+    };
+    const queue = [...seedIds];
+    
+    seedIds.forEach(id => resolved.meat.add(id));
+
+    while (queue.length > 0) {
+        const currentId = queue.shift();
+        const rule = graph.rules && graph.rules[currentId];
+        if (rule && rule.depends_on) {
+            rule.depends_on.forEach(depId => {
+                if (!resolved.meat.has(depId) && !resolved.skeleton.has(depId)) {
+                    resolved.skeleton.add(depId);
+                    queue.push(depId);
+                }
+            });
+        }
+    }
+    return resolved;
+}
+
 function isToolFailure(turn) {
     const text = extractAllText(turn);
     if (text.includes('ASSA_METADATA: [FAILED:')) return true;
@@ -310,14 +334,17 @@ function main() {
         additionalContext += safeReadFile(path.join(globalDir, 'SOUL.md'));
         additionalContext += safeReadFile(path.join(globalDir, 'USER_HANDBOOK.md'));
         
-        // Load the centralized pool of promoted patterns (always loaded)
-        additionalContext += safeReadFile(path.join(globalDir, 'LIBRARY', 'PROMOTED_PATTERNS.md'));
-
-        // Domain-Aware Loading: Load specific library files based on index.json mappings
+        // Domain-Aware Graph Loading (V3.4 Skeleton Strategy)
         const libraryDir = path.join(globalDir, 'LIBRARY');
+        const graphPath = path.join(globalDir, 'graph.json');
         const indexPath = path.join(libraryDir, 'index.json');
-        let matchedFiles = new Set();
+        
+        let graph = { rules: {} };
+        if (fs.existsSync(graphPath)) {
+            try { graph = JSON.parse(fs.readFileSync(graphPath, 'utf8')); } catch(e) { log(`Graph parse error: ${e.message}`); }
+        }
 
+        let seedIds = new Set();
         if (fs.existsSync(indexPath)) {
             try {
                 const index = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
@@ -326,15 +353,33 @@ function main() {
                     index.mappings.forEach(m => {
                         const match = m.domains.some(domain => cwd.includes(domain.toLowerCase()));
                         if (match) {
-                            log(`Domain match detected: Loading ${m.pattern}`);
-                            matchedFiles.add(m.pattern);
-                            additionalContext += safeReadFile(path.join(libraryDir, m.pattern));
+                            log(`Seed match detected: ${m.rule_id || m.pattern}`);
+                            if (m.rule_id) seedIds.add(m.rule_id);
                         }
                     });
                 }
-            } catch (e) {
-                log(`Error parsing library index: ${e.message}`);
+            } catch (e) { log(`Index parse error: ${e.message}`); }
+        }
+
+        const resolved = resolveGraph(Array.from(seedIds), graph);
+
+        additionalContext += '\n### L3 KNOWLEDGE GRAPH (Active Meat) ###\n';
+        resolved.meat.forEach(id => {
+            const rule = graph.rules[id];
+            if (rule && rule.path) {
+                additionalContext += `\n#### RULE: ${id}\n`;
+                additionalContext += safeReadFile(path.join(globalDir, rule.path));
             }
+        });
+
+        if (resolved.skeleton.size > 0) {
+            additionalContext += '\n### L3 KNOWLEDGE GRAPH (Background Skeleton) ###\n';
+            resolved.skeleton.forEach(id => {
+                const rule = graph.rules[id];
+                if (rule) {
+                    additionalContext += `- **${id}**: ${rule.rationale || 'No rationale provided.'} (Path: ${rule.path})\n`;
+                }
+            });
         }
 
         // If no domain-specific files were loaded (other than PROMOTED_PATTERNS),
