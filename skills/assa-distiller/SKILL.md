@@ -27,8 +27,13 @@ For each signal, perform a deep critique:
     - If no match: Create a new rule following the [distillation_schema.md](references/distillation_schema.md).
 - **Anti-Patterns**: Explicitly document forbidden patterns discovered in `REWOUND` data to prevent "Recurrence Drift".
 
-### 4. Persistence & Marking
+### 4. Decision Documentation
+- **Identify Significance**: If a signal represents a major architectural shift, a permanent design choice, or a "V-version" milestone (e.g., Skeleton Graph, Hook Interception), it MUST be recorded in `.memory/decisions.md`.
+- **Format**: Append to the list using the format: `- **YYYY-MM-DD**: [Concise summary of the decision] (from [message_id])`.
+
+### 5. Persistence & Marking
 - **Update Patterns**: Use `replace` or `write_file` to update `.memory/patterns.md`.
+- **Update Decisions**: Append new decisions to `.memory/decisions.md`.
 - **Mark Processed**: You MUST call the `mcp_assa-mcp_mark_processed_signals` tool for every message ID you have successfully distilled.
 
 ## ⚙️ Core Operational Mandates

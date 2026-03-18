@@ -207,6 +207,17 @@ hit_count: 1
 4. **Instant Promotion**: Proactively trigger the Syncer sub-agent for "Instant Promotion" of high-value L3 patterns to the Global Library if semantic analysis detects strong, explicit cross-project user intent, bypassing git-push latency.
 
 ---
+id: P-20260318-DSOP
+category: Architecture
+confidence: 10
+status: Active
+hit_count: 1
+---
+# Decision Persistence SOP
+**Rationale**: Major architectural breakthroughs are often lost in the noise of transient patterns or overshadowed by rapid iteration. A dedicated persistence SOP ensures that fundamental design choices are documented in a chronological log (`decisions.md`), providing a clear "Architectural Trail" for both human developers and AI agents.
+**Rule**: During distillation, evaluate every signal for its "Architectural Significance." If a signal represents a major shift, milestone, or permanent design choice, you MUST append a concise record to `.memory/decisions.md` in addition to updating `.memory/patterns.md`. Use the format: `- **YYYY-MM-DD**: [Summary] (from [message_id])`.
+
+---
 id: P-20260318-SKELR
 category: Logic
 confidence: 10
