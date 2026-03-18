@@ -1,8 +1,0 @@
-{
-  "track_id": "official_alignment_20260316",
-  "type": "chore",
-  "status": "new",
-  "created_at": "2026-03-16T00:00:00Z",
-  "updated_at": "2026-03-16T00:00:00Z",
-  "description": "请你严格按照官方的https://github.com/google-gemini/gemini-cli/blob/main/CONTRIBUTING.md文档对我们的项目进行改进"
-}

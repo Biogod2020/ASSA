@@ -162,3 +162,4 @@ hit_count: 1
 # Workspace Path Bypassing (External Scaffolding)
 **Rationale**: Security restrictions in native file tools (like `write_file`) often prevent operations outside the primary workspace. Using low-level shell commands (`mkdir`, `echo`) provides a necessary bypass for scaffolding external repositories or directories.
 **Rule**: When creating or modifying files in directories outside the current active workspace (e.g., during parallel repository initialization), rely exclusively on `run_shell_command` to bypass path restrictions enforced on native file-system tools.
+- **eslint/monorepo/flat-config/victory-pattern**: In ESLint Flat Config (eslint.config.js) within monorepos or projects with nested sandboxes, always use deep globs (e.g., `**/dist/**`, `**/node_modules/**`) in the `ignores` array. Root-level globs (`dist/**`) will fail to exclude nested build artifacts, causing massive linting failures. (from mcp-1773795558037)

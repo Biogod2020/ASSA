@@ -204,3 +204,76 @@ Sent result for submit_memory_signal
 Received: {"method":"tools/call","params":{"name":"distill_pending","arguments":{},"_meta":{"progressToken":"d2c1f4e9-8780-4ded-8892-115a1dda0f90"}},"jsonrpc":"2.0","id":15}
 Calling tool: distill_pending
 Sent result for distill_pending
+Received: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"roots":{"listChanged":true}},"clientInfo":{"name":"gemini-cli-mcp-client","version":"0.33.1"}},"jsonrpc":"2.0","id":0}
+Sent Initialize response
+Received: {"method":"notifications/initialized","jsonrpc":"2.0"}
+MCP Client Initialized.
+Received: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1}
+Sent Tools List
+Received: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"roots":{"listChanged":true}},"clientInfo":{"name":"gemini-cli-mcp-client","version":"0.33.1"}},"jsonrpc":"2.0","id":0}
+Sent Initialize response
+Received: {"method":"notifications/initialized","jsonrpc":"2.0"}
+MCP Client Initialized.
+Received: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1}
+Sent Tools List
+Received: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"roots":{"listChanged":true}},"clientInfo":{"name":"gemini-cli-mcp-client","version":"0.33.1"}},"jsonrpc":"2.0","id":0}
+Sent Initialize response
+Received: {"method":"notifications/initialized","jsonrpc":"2.0"}
+MCP Client Initialized.
+Received: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1}
+Sent Tools List
+Received: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"roots":{"listChanged":true}},"clientInfo":{"name":"gemini-cli-mcp-client","version":"0.33.1"}},"jsonrpc":"2.0","id":0}
+Sent Initialize response
+Received: {"method":"notifications/initialized","jsonrpc":"2.0"}
+MCP Client Initialized.
+Received: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1}
+Sent Tools List
+Received: {"method":"tools/call","params":{"name":"distill_pending","arguments":{},"_meta":{"progressToken":"26325bd3-b327-43db-a661-041c97135c75"}},"jsonrpc":"2.0","id":2}
+Calling tool: distill_pending
+Sent result for distill_pending
+Received: {"method":"tools/call","params":{"name":"submit_memory_signal","arguments":{"rule":"Monorepo Build Consistency: When configuring a root package.json for a monorepo, always use '--workspaces' and '--if-present' flags in scripts to ensure safe and comprehensive execution across all packages. Avoid trailing commas in package.json to maintain npm compatibility.","type":"positive","session_id":"1b3c323a-1683-42fd-b557-6e3405021e4f","context":"Fixed root-level build by adding workspace-aware npm scripts and ensuring valid JSON syntax. This enabled a unified 'make build' command for the entire monorepo.","tags":["monorepo","build-system","json-safety"]},"_meta":{"progressToken":"a5324bf1-db0b-4174-b3c7-24b17b3fa641"}},"jsonrpc":"2.0","id":3}
+Calling tool: submit_memory_signal
+Sent result for submit_memory_signal
+Received: {"method":"notifications/roots/list_changed","jsonrpc":"2.0"}
+Roots changed notification received.
+Received: {"method":"notifications/roots/list_changed","jsonrpc":"2.0"}
+Roots changed notification received.
+Received: {"method":"notifications/roots/list_changed","jsonrpc":"2.0"}
+Roots changed notification received.
+Received: {"method":"tools/call","params":{"name":"distill_pending","arguments":{},"_meta":{"progressToken":"3930156e-8765-468d-af30-0934d5204335"}},"jsonrpc":"2.0","id":4}
+Calling tool: distill_pending
+Sent result for distill_pending
+Received: {"method":"tools/call","params":{"name":"submit_memory_signal","arguments":{"rule":"Verification-Driven Migration (L2 Pattern Update): For all critical logic porting from JS to TS, prioritize reaching at least 80% line and branch coverage. Use the --coverage flag during the 'Green' phase of TDD to empirically validate the reach of the test suite.","context":"Successfully implemented and verified core logic with >80% coverage using Jest and ts-jest in a monorepo setup. This satisfies official standards and provides a safety net for future refactoring.","type":"positive","session_id":"1b3c323a-1683-42fd-b557-6e3405021e4f","tags":["tdd","testing","quality-assurance"]},"_meta":{"progressToken":"3a68d6c2-15a8-4908-84d9-f67be29c2086"}},"jsonrpc":"2.0","id":5}
+Calling tool: submit_memory_signal
+Sent result for submit_memory_signal
+Received: {"method":"tools/call","params":{"name":"submit_memory_signal","arguments":{"type":"positive","session_id":"1b3c323a-1683-42fd-b557-6e3405021e4f","rule":"Pragmatic Coverage Standard: While the official project minimum is 80%, ASSA should strive for 100% coverage on 'Core Logic' (data processing, state transitions) while maintaining a minimum of 80% on 'Infrastructure/Glue' code (MCP handlers, server setup) to avoid fragile, over-mocked tests.","context":"The user questioned the necessity of 100% test coverage. This highlights a preference for high technical integrity while maintaining pragmatic engineering balance.","tags":["engineering-philosophy","testing-standards","quality-gate"]},"_meta":{"progressToken":"31e50f0f-0e05-4ccd-bda5-45cc00656057"}},"jsonrpc":"2.0","id":6}
+Calling tool: submit_memory_signal
+Sent result for submit_memory_signal
+Received: {"method":"tools/call","params":{"name":"distill_pending","arguments":{},"_meta":{"progressToken":"167c01ff-8052-4b24-ac51-0763cc2e31da"}},"jsonrpc":"2.0","id":7}
+Calling tool: distill_pending
+Sent result for distill_pending
+Received: {"method":"notifications/roots/list_changed","jsonrpc":"2.0"}
+Roots changed notification received.
+Received: {"method":"tools/call","params":{"name":"submit_memory_signal","arguments":{"rule":"Evolution Transparency: When modifying core evolutionary logic or triggers, provide a structured breakdown of the 'Before vs After' state to ensure the user fully understands the shift in the agent's cognitive behavior.","tags":["transparency","user-preference","logic-audit"],"context":"The user specifically asked for a detailed breakdown of the internal logic changes (transition to semantic reflection). This confirms the importance of high transparency in self-evolutionary steps.","type":"positive","session_id":"1b3c323a-1683-42fd-b557-6e3405021e4f"},"_meta":{"progressToken":"11b85878-d952-4a72-b124-ed138449d19e"}},"jsonrpc":"2.0","id":8}
+Calling tool: submit_memory_signal
+Sent result for submit_memory_signal
+Received: {"method":"tools/call","params":{"name":"submit_memory_signal","arguments":{"session_id":"1b3c323a-1683-42fd-b557-6e3405021e4f","tags":["procedure","archiving","quality-assurance","reporting"],"context":"The user mandated a strict protocol for archiving tracks: always provide a detailed report and perform a complete test suite verification before requesting an archive.","type":"positive","rule":"Archive Protocol: Before requesting or performing a track archive (cleanup), the agent MUST: 1) Provide a comprehensive report of all changes and achievements, and 2) Execute the full project test suite to verify 100% correctness and coverage compliance."},"_meta":{"progressToken":"8802fdcf-122a-4c46-8141-ad395dee2bb5"}},"jsonrpc":"2.0","id":9}
+Calling tool: submit_memory_signal
+Sent result for submit_memory_signal
+Received: {"method":"tools/call","params":{"name":"mark_processed_signals","arguments":{"message_ids":["mcp-1773734421734","mcp-1773734617758"]},"_meta":{"progressToken":"643537d3-b51a-4049-b00d-ff0eddb95bd5"}},"jsonrpc":"2.0","id":10}
+Calling tool: mark_processed_signals
+Sent result for mark_processed_signals
+Received: {"method":"tools/call","params":{"name":"submit_memory_signal","arguments":{"context":"The user emphasized finding the exact 'Official' way to run full tests. This led to the discovery of the 'preflight' pattern in Google repositories.","type":"positive","tags":["official-alignment","dev-workflow","preflight"],"session_id":"1b3c323a-1683-42fd-b557-6e3405021e4f","rule":"Official Preflight Implementation: To achieve 100% official alignment, ASSA projects must implement a 'preflight' command (via Makefile or npm script) that combines Build, Format, Lint, and Test into a single atomic verification step."},"_meta":{"progressToken":"65ee3df6-792f-4957-902f-c1b8b824cea7"}},"jsonrpc":"2.0","id":11}
+Calling tool: submit_memory_signal
+Sent result for submit_memory_signal
+Received: {"method":"tools/call","params":{"name":"distill_pending","arguments":{},"_meta":{"progressToken":"b1734983-9fd5-469b-b12f-cd61acaad8a1"}},"jsonrpc":"2.0","id":12}
+Calling tool: distill_pending
+Sent result for distill_pending
+Received: {"method":"initialize","params":{"protocolVersion":"2025-11-25","capabilities":{"roots":{"listChanged":true}},"clientInfo":{"name":"gemini-cli-mcp-client","version":"0.33.1"}},"jsonrpc":"2.0","id":0}
+Sent Initialize response
+Received: {"method":"notifications/initialized","jsonrpc":"2.0"}
+MCP Client Initialized.
+Received: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1}
+Sent Tools List
+Received: {"method":"notifications/roots/list_changed","jsonrpc":"2.0"}
+Roots changed notification received.
