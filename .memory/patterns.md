@@ -13,7 +13,7 @@ id: P-20260316-REFLX
 category: Architecture
 confidence: 10
 status: Active
-hit_count: 1
+hit_count: 2
 
 ---
 
@@ -28,7 +28,7 @@ id: P-20260316-METAD
 category: Logic
 confidence: 10
 status: Active
-hit_count: 1
+hit_count: 2
 
 ---
 
@@ -43,7 +43,7 @@ id: P-20260316-RESRC
 category: Logic
 confidence: 10
 status: Active
-hit_count: 1
+hit_count: 2
 
 ---
 
@@ -51,12 +51,6 @@ hit_count: 1
 
 **Rationale**: Automated analysis tools often clone repositories or stage documentation in extension-specific temporary directories (e.g., `~/.gemini/tmp`) rather than the primary workspace. Limiting audits to known project folders leads to "missing link" failures where existing local resources are ignored.
 **Rule**: When performing deep research or codebase mapping, systematically scan extension temporary directories (e.g., `~/.gemini/tmp`) in addition to primary workspace paths to identify hidden framework clones or research artifacts.
-
-- **documentation-fix/release-integrity/victory-pattern**: Documentation Consistency & Legal Alignment: Before any release or public push, perform a mandatory cross-check between the physical LICENSE file and the README badges/sections. Legal consistency is a pillar of 'SOTA' technical integrity. (from mcp-1773663082852)
-- **workspace-hygiene/maintenance/release-readiness**: Periodic Workspace Hygiene & Archiving: As the project reaches a release milestone or version boundary, version-specific tests and artifacts should be moved to an 'archive/' directory. This maintains a lean root, reduces cognitive load, and signals release readiness for the next phase. (from mcp-1773663723569)
-
-- **architecture/context-router**: Context Router: Implement domain-aware library loading in system hooks to surgically inject L3 patterns based on CWD-to-Domain mappings. This prevents context explosion while maintaining high-signal operational mandates. (from mcp-1773663723570)
-- **lifecycle/syncer-auto-indexing**: Syncer Auto-Indexing: Automate the update of global library metadata (index.json) during the L2->L3 promotion process. This ensures that new promoted patterns are immediately routable by the Context Router without manual intervention. (from mcp-1773663723571)
 
 ---
 
@@ -90,21 +84,6 @@ hit_count: 1
 
 ---
 
-id: P-20260316-TEST-PROMO
-category: Architecture
-confidence: 10
-status: Active
-hit_count: 5
-
----
-
-# Test Promotion Pattern
-
-**Rationale**: Verification of syncer auto-index logic.
-**Rule**: Test rule for syncer.
-
----
-
 id: P-20260317-SCAFF
 category: Architecture
 confidence: 8
@@ -118,18 +97,13 @@ hit_count: 1
 **Rationale**: Directly applying strict official guidelines (e.g., monorepo structure, new toolchains like TypeScript/ESLint) to a legacy repository can disrupt the working state and introduce regressions. A "Pristine Start" in a separate directory allows for clean scaffolding without legacy baggage.
 **Rule**: When adopting strict official project structures or fundamental architectural changes, initialize a completely new, parallel Git repository for scaffolding. Set up the core infrastructure (TypeScript, linting, formatting, Makefile, Monorepo layout) first, and only incrementally migrate logic from the legacy repo once the foundation is solid.
 
-- **communication/planning/metaphor/user-experience**: When explaining complex, multi-phase technical plans or architectural shifts, use clear, relatable analogies (e.g., "scaffolding as building a foundation", "migration as moving houses") and summarize the strategy in a punchy, memorable phrase. This significantly improves user comprehension and confidence. (from mcp-1773713827009)
-- **tool-workaround/scaffolding/workspace-limits**: Workspace Path Bypassing for Parallel Scaffolding: When creating a parallel repository outside the current active workspace, native tools like `write_file` will fail due to security path restrictions. Rely exclusively on `run_shell_command` (e.g., `mkdir`, `echo >`) to scaffold files in external directories. (from mcp-1773714249368)
-- **migration/scaffolding/state-management**: Selective State Migration: When scaffolding a pristine repository, it is acceptable to strategically migrate project state (like Conductor planning files and ASSA memory ledgers) using targeted shell commands, provided that the legacy codebase and test artifacts are strictly excluded. Always update the migrated planning files to reflect their new context. (from mcp-1773714349984)
-- **monorepo/build-system/json-safety**: Monorepo Build Consistency: When configuring a root package.json for a monorepo, always use '--workspaces' and '--if-present' flags in scripts to ensure safe and comprehensive execution across all packages. Avoid trailing commas in package.json to maintain npm compatibility. (from mcp-1773724474667)
-
 ---
 
 id: P-20260317-TDDM
 category: Architecture
 confidence: 10
 status: Active
-hit_count: 1
+hit_count: 2
 
 ---
 
@@ -144,7 +118,7 @@ id: P-20260317-BUILD
 category: Monorepo
 confidence: 10
 status: Active
-hit_count: 1
+hit_count: 2
 
 ---
 
@@ -153,17 +127,13 @@ hit_count: 1
 **Rationale**: In a monorepo, individual packages may diverge in their available scripts (e.g., some have `build`, others don't). Using standard npm commands at the root without workspace awareness leads to fragile build pipelines. The `--workspaces` and `--if-present` flags ensure that the root command orchestrates the entire project safely without manual per-package intervention.
 **Rule**: Always use the `--workspaces --if-present` flags in the root `package.json` for scripts intended to run across the entire monorepo. This maintains a unified entry point (e.g., `make build`) that is resilient to variations in package-level script availability.
 
-- **monorepo/build-system/json-safety**: Monorepo Build Consistency: When configuring a root package.json for a monorepo, always use '--workspaces' and '--if-present' flags in scripts to ensure safe and comprehensive execution across all packages. Avoid trailing commas in package.json to maintain npm compatibility. (from mcp-1773724474667)
-- **tdd/testing/quality-assurance**: Verification-Driven Migration (L2 Pattern Update): For all critical logic porting from JS to TS, prioritize reaching at least 80% line and branch coverage. Use the --coverage flag during the 'Green' phase of TDD to empirically validate the reach of the test suite. (from mcp-1773724891055)
-- **engineering-philosophy/testing-standards/quality-gate**: Pragmatic Coverage Standard: While the official project minimum is 80%, ASSA should strive for 100% coverage on 'Core Logic' (data processing, state transitions) while maintaining a minimum of 80% on 'Infrastructure/Glue' code (MCP handlers, server setup) to avoid fragile, over-mocked tests. (from mcp-1773724971703)
-
 ---
 
 id: P-20260317-SEMRE
 category: Architecture
 confidence: 10
 status: Active
-hit_count: 1
+hit_count: 2
 
 ---
 
@@ -171,13 +141,6 @@ hit_count: 1
 
 **Rationale**: Reactive, keyword-based triggers (e.g., waiting for "Good job") are too brittle and miss the majority of subtle architectural or stylistic preferences. Transitioning to "Semantic Reflection" allows the agent to proactively analyze the _intent_ and _substance_ of interactions. By monitoring "Victory" (success after failure) and "Barrier" (repeated failure) states via structured metadata and semantic hints, ASSA transforms from a reactive tool into a proactive, self-correcting organism.
 **Rule**: Prioritize "Semantic Reflexes" over simple keyword matches. System hooks must inject immediate prompts (🚨 ASSA IMMEDIATE REFLEXES 🚨) when they detect: 1) High-sentiment hints (e.g., "prefer", "instead", "should"), 2) "Victory" sequences (Failure -> Success), or 3) "Barrier" deadlocks (3+ consecutive failures). Treat these as mandatory sub-conscious impulses for immediate L1 signal distillation.
-
-- **evolution/logic/semantic-reflection**: Transitioned from simple keyword triggers to hyper-sensitive semantic reflection logic. (from commit 4107b2c)
-- **architecture/hooks/metadata-validation**: Using `ASSA_METADATA: [SUCCESS/FAILED: tool]` for reliable cross-process state detection. (from commit 4107b2c)
-- **transparency/user-preference/logic-audit**: Evolution Transparency: When modifying core evolutionary logic or triggers, provide a structured breakdown of the 'Before vs After' state to ensure the user fully understands the shift in the agent's cognitive behavior. (from mcp-1773734421734)
-- **procedure/archiving/quality-assurance/reporting**: Archive Protocol: Before requesting or performing a track archive (cleanup), the agent MUST: 1) Provide a comprehensive report of all changes and achievements, and 2) Execute the full project test suite to verify 100% correctness and coverage compliance. (from mcp-1773734617758)
-- **communication/planning/metaphor/user-experience**: Relatable Scaffolding: Use clear, relatable analogies (e.g., "scaffolding as building a foundation") and summarize the strategy in a punchy phrase to improve user comprehension during complex shifts. (from mcp-1773713827009)
-- **tool-workaround/scaffolding/workspace-limits**: Out-of-Workspace Scaffolding: When creating files outside the active workspace, rely on `run_shell_command` (e.g., `echo >`) to bypass security restrictions of native file tools. (from mcp-1773714249368)
 
 ---
 
@@ -253,3 +216,48 @@ hit_count: 1
 
 **Rationale**: To achieve 100% official alignment and technical integrity, verification must be atomic and comprehensive. Combining build, format, lint, and test phases into a single command prevents partial successes and ensures that every commit or release meets the "Golden Standard" of the project.
 **Rule**: Implement a mandatory `preflight` command (via Makefile or root `package.json`) that executes Build, Format, Lint, and Test in a single atomic sequence. This command MUST pass with 100% success before any major commit or track archive (per P-20260317-ARCHV).
+
+---
+
+id: P-20260317-RECUR
+category: Architecture
+confidence: 10
+status: Active
+hit_count: 1
+
+---
+
+# Recursion-Free Self-Evolution
+
+**Rationale**: When an agent performs self-evolution (e.g., distilling signals or generating skills), system hooks that inject evolutionary context can create a feedback loop or a deadlock, especially if the evolution tools themselves trigger the hooks. Using environment flags and agent-name filtering ensures the evolution logic operates in a "clean room" environment.
+**Rule**: For any evolutionary task (Distillation, Promotion, Skill Generation), the orchestrator MUST set the `ASSA_EVOLVING=true` environment variable and ensure the subagent's name is explicitly filtered in system hooks. This prevents hooks from recursing into evolutionary logic and avoids context pollution during the learning phase.
+
+---
+
+id: P-20260317-REWND
+category: Logic
+confidence: 10
+status: Active
+hit_count: 1
+
+---
+
+# Transcript-Aware Ledger (Cascading Rewind)
+
+**Rationale**: Users frequently use "undo" or "rewind" features in the CLI, which removes messages from the conversation history. If the evolutionary ledger contains signals from those removed turns, it becomes out-of-sync with the current "reality" of the session.
+**Rule**: System hooks MUST perform a cascading status update on the memory ledger by cross-referencing signal message IDs with the current transcript history. Signals that are no longer present in the transcript must be marked as `REWOUND`, while signals that reappear (e.g., via a "redo") must be restored to `PENDING`.
+
+---
+
+id: P-20260317-MONOR
+category: Architecture
+confidence: 10
+status: Active
+hit_count: 1
+
+---
+
+# Monorepo Structural Integrity
+
+**Rationale**: Migrating to a monorepo requires strict separation of concerns to maintain long-term scalability. Following official Gemini CLI monorepo conventions (e.g., logic in `packages/core`, shared scripts in root) ensures the project remains compatible with official toolchains and discovery mechanisms.
+**Rule**: All core ASSA logic, hooks, and MCP servers MUST reside within `packages/core`. The root directory should only contain global configuration, orchestration scripts (Makefile, root package.json), and planning documentation. Use TypeScript with `strict: true` for all package logic.
