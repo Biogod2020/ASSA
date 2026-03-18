@@ -452,20 +452,12 @@ function main() {
             additionalContext += `\n🚨 ASSA IMMEDIATE REFLEXES 🚨\n${reflexContext}\n`;
         }
 
-        // Context Explosion Guard: If prompt overhead exceeds 20KB (~5k tokens), force summarization
+        // Context Explosion Guard: If prompt overhead exceeds 20KB (~5k tokens), prepend a warning
         if (additionalContext.length > 20480) {
-            log(`CRITICAL: Context explosion detected (${additionalContext.length} bytes). Truncating context.`);
-            additionalContext = healthContext + 
-                `### ASSA SESSION ID: ${sessionId} ###\n\n` +
-                `⚠️ CONTEXT OVERHEAD EXCEEDED SAFETY LIMIT (${Math.round(additionalContext.length / 1024)} KB) ⚠️\n` +
-                "你当前注入的记忆过多，可能导致响应变慢或上下文丢失。\n" +
-                "你必须立即调用 `distiller` 工具对信号进行提炼，而不是试图读取详细的 PENDING SIGNALS。\n" +
-                `目前有 ${pendingItems.length} 条待处理信号。\n`;
-                
-            // Restore highest priority reflexes even if truncated
-            if (reflexContext) {
-                additionalContext += `\n🚨 ASSA IMMEDIATE REFLEXES 🚨\n${reflexContext}\n`;
-            }
+            log(`CRITICAL: Context overhead detected (${additionalContext.length} bytes). Prepending warning.`);
+            const warning = `\n⚠️ CONTEXT OVERHEAD EXCEEDED SAFETY LIMIT (${Math.round(additionalContext.length / 1024)} KB) ⚠️\n` +
+                "你当前注入的记忆过多，可能导致响应变慢或上下文丢失。请注意保持操作的原子性，并考虑及时进行提炼。\n";
+            additionalContext = warning + additionalContext;
         }
         
         // Semantic Emotion Sensor (Subconscious Directive)
@@ -475,6 +467,8 @@ function main() {
             'If you detect implicit or explicit POSITIVE reinforcement (e.g., "This is a great idea", "I agree", "That worked perfectly"), OR strong NEGATIVE frustration (e.g., "Why is this still failing?", "This is wrong"), you MUST:\n' +
             '1. Briefly acknowledge the learning in your chat response.\n' +
             '2. Immediately call `submit_memory_signal` to record the exact raw symptom, failed attempts, and the breakthrough/rule.\n' +
+            '3. **Internal Memory Judgment**: Proactively submit signals for your own breakthroughs even if the user doesn\'t explicitly praise them.\n' +
+            '4. **Traceability**: When applying an established rule, briefly cite its Rule ID (e.g., [Rule: G1_CORE]) to maintain the evolution chain.\n' +
             'Do NOT wait for a hardcoded keyword. Trust your semantic understanding of the conversation.\n';
 
         process.stdout.write(JSON.stringify({
