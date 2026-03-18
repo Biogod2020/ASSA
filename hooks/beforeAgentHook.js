@@ -246,7 +246,6 @@ log('BeforeAgent Script Execution Started');
 function main() {
     try {
         log(`BeforeAgent Hook Fired at ${new Date().toISOString()}`);
-        log(`CWD: ${process.cwd()}`);
         
         let inputData = '';
         try {
@@ -266,6 +265,28 @@ function main() {
         } catch (e) {
             log(`JSON parse error in BeforeAgent: ${e.message}`);
             process.stdout.write(JSON.stringify({ decision: 'allow' }) + '\n');
+            return;
+        }
+
+        const userPrompt = payload.prompt || '';
+
+        // --- COMMAND INTERCEPTION (V3.4 Slash Commands) ---
+        if (userPrompt.trim().startsWith('/assa promote')) {
+            log('SLASH COMMAND DETECTED: /assa promote');
+            const promotionContext = '### SYSTEM DIRECTIVE: MANUAL PROMOTION REQUESTED ###\n' +
+                '用户明确要求执行全局晋升。你必须立即：\n' +
+                '1. 启动 `generalist` 子代理并指定其担任 **Promoter** 角色。\n' +
+                '2. 指令其执行全量 Ingestion 并根据 V3.4 规则（层级化、版本化）同步本地 L2 模式到全局 L3。\n' +
+                '3. 完成后向用户报告晋升结果。\n' +
+                '请直接开始执行，不要询问。';
+                
+            process.stdout.write(JSON.stringify({
+                decision: 'allow',
+                hookSpecificOutput: { 
+                    hookEventName: 'BeforeAgent',
+                    additionalContext: promotionContext 
+                }
+            }) + '\n');
             return;
         }
 
