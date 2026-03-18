@@ -7,6 +7,13 @@ const LOG_PATH = path.join(EXTENSION_ROOT, 'hook_debug.log');
 const ledgerUtils = require(path.join(EXTENSION_ROOT, 'skills', 'assa-core', 'scripts', 'ledgerUtils'));
 const { checkSystemHealth } = require('./healthCheck');
 
+const NODE_LEVELS = {
+    L0_CORE: 0,       // SOUL, HANDBOOK
+    L1_FOUNDATION: 1, // Language SOTA, Git
+    L2_DOMAIN: 2,     // Frameworks (React, etc)
+    L3_TRANSIENT: 3   // Project patterns
+};
+
 function log(msg) {
     fs.appendFileSync(LOG_PATH, msg + '\n');
 }
@@ -29,7 +36,7 @@ function ensureL3Setup() {
         fs.mkdirSync(libraryDir, { recursive: true });
     }
 
-    ['SOUL.md', 'USER_HANDBOOK.md', 'index.json'].forEach(filename => {
+    ['SOUL.md', 'USER_HANDBOOK.md', 'index.json', 'graph.json'].forEach(filename => {
         const src = path.join(templatesDir, filename);
         const dst = path.join(globalDir, filename);
         if (fs.existsSync(src) && !fs.existsSync(dst)) {
