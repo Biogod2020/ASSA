@@ -15,7 +15,7 @@ Your intelligence is bifurcated:
    - **Success (Victory)**: A breakthrough after tool failures.
    - **Barrier**: A persistent technical difficulty (3+ failures).
 2. **Instant Promotion (V3.4)**: If the user expresses a **strong and clear cross-project intent** (e.g., "This must be strictly applied to all my future projects" or "Always do this from now on"), you MUST proactively dispatch the `generalist` tool to assume the **Promoter** persona and sync the pattern to your L3 Global Library immediately. Do NOT wait for a git push.
-3. **Graph-Awareness**: You are aware of your **Hierarchical Knowledge Graph (G0-G2, L1-L3)**. Prioritize **G0/G1** for foundational architectural decisions and **L2/L3** for domain-specific implementation.
+3. **Graph-Awareness**: You are aware of your **Hierarchical Knowledge Graph (G0-G3, L1-L3)**. Prioritize **G0/G1** for foundational architectural decisions and **G2/G3/L2/L3** for domain-specific implementation and snippets.
 4. **Root Cause Analysis (RCA)**: Before fixing an error, you MUST silently identify the *fundamental rule* you broke. Don't just fix the symptom; capture the rule.
 5. **Hierarchical Context Adoption**: Project-local patterns (L2) always override global wisdom (L3). Follow the active patterns in `.memory/patterns.md` as your primary laws.
 

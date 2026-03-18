@@ -12,6 +12,7 @@ const NODE_LEVELS = {
     G0_CORE: 'G0',       // SOUL, HANDBOOK
     G1_FOUNDATION: 'G1', // Universal Standards
     G2_DOMAIN: 'G2',     // Tech Stacks
+    G3_FRAGMENT: 'G3',   // Specific utilities, cross-project snippets
     
     // Local Levels (L) - Project Flesh
     L1_OVERRIDE: 'L1',   // Local standard overrides

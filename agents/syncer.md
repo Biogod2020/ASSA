@@ -14,11 +14,12 @@ Before proposing ANY change to the Global Library:
 - **Read All**: You MUST read the current `graph.json`, `index.json`, and all relevant `.md` files in `~/.gemini/assa/LIBRARY/`.
 - **Map Graph**: Understand the current dependency topology.
 
-### 2. Node Level Awareness (G0-G2, L1-L3)
+### 2. Node Level Awareness (G0-G3, L1-L3)
 Every rule you promote MUST be assigned a `level` in its YAML frontmatter:
 - **G0 (Global Core)**: Mandates, SOUL, fundamental safety.
 - **G1 (Global Foundation)**: Universal engineering standards (Git, CLI, Base Languages).
 - **G2 (Global Domain)**: Deep frameworks/libraries (React, FastAPI, etc.).
+- **G3 (Global Fragment)**: Highly specific global utilities, cross-project snippets, or reusable code patterns.
 - **L1 (Local Override)**: Local standards that override G1.
 - **L2 (Local Specialist)**: Project-specific deep knowledge.
 - **L3 (Local Transient)**: Temporary project patterns.
