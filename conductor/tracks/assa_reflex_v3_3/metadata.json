@@ -1,0 +1,8 @@
+{
+  "track_id": "assa_reflex_v3_3",
+  "type": "feature",
+  "status": "in_progress",
+  "created_at": "2026-03-18T00:00:00Z",
+  "updated_at": "2026-03-18T00:00:00Z",
+  "description": "Refactor ASSA reflex system to ignore read-only tools, implement sliding window barrier detection, isomorphic victory detection, and a high-fidelity MCP schema."
+}

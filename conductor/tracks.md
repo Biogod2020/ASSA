@@ -15,4 +15,5 @@ This file tracks all major development tracks for the project. Each track has it
 ---
 
 - [x] **Track: Autonomous Skill Evolution (Pattern-to-.skill)**
-*Link: [./tracks/skill_creation_20260315/](./tracks/skill_creation_20260315/)*
+*Link: [./tracks/skill_creation_20260315/](./tracks/skill_creation_20260315/)*- [assa_reflex_v3_3](./tracks/assa_reflex_v3_3/index.md)
+- [assa_reflex_v3_3](./tracks/assa_reflex_v3_3/index.md)
