@@ -65,14 +65,17 @@ function rebuild() {
     });
 
     if (hasError) {
+        console.error('--- ASSA WEAVER: Indexing Failed with Errors ---');
         process.exit(1);
     }
 
     // Broken Link Detection
+    let hasWarning = false;
     Object.values(rules).forEach(rule => {
         rule.depends_on.forEach(depId => {
             if (!rules[depId]) {
                 console.warn(`Warning: Rule ${rule.id} depends on missing rule: ${depId}`);
+                hasWarning = true;
             }
         });
     });
@@ -82,7 +85,7 @@ function rebuild() {
     // Write index.json (inside LIBRARY to keep it with the data)
     fs.writeFileSync(path.join(LIBRARY_DIR, 'index.json'), JSON.stringify({ version: "3.5", mappings: indexMappings }, null, 2));
     
-    console.log(`Success: Indexed ${Object.keys(rules).length} rules.`);
+    console.log(`Success: Indexed ${Object.keys(rules).length} rules.${hasWarning ? ' (with warnings)' : ''}`);
 }
 
 if (require.main === module) rebuild();
