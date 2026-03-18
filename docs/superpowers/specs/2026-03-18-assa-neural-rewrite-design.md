@@ -15,19 +15,19 @@ Instead of matching arrays of strings (`PRAISE_KEYWORDS`), we will inject a pers
 
 ### 2.2. Robust Tool State Tracking (Sliding Window & Mutator Filtering)
 We will rewrite `isToolFailure` and `isToolSuccess` and the array traversal logic.
-- **Filter Read-Only Tools**: `list_directory`, `read_file`, `grep_search`, `glob` will be entirely filtered out of the Victory/Barrier trajectory analysis. We only track "Mutators" (`run_shell_command`, `write_file`, `replace`).
+- **Filter Read-Only Tools**: We will maintain a `READ_ONLY_TOOLS` array (e.g., `list_directory`, `read_file`, `grep_search`, `glob`, `cli_help`, `get_internal_docs`). Any tool not in this list is assumed to be a Mutator. Read-Only tools are entirely filtered out of the Victory/Barrier trajectory analysis.
 - **Barrier (Sliding Window)**: We will look at the last 5 Mutator tool calls. If >= 3 are failures, we inject the Barrier trigger. *Edge Case Handling: If fewer than 3 Mutator tool calls exist in the current session history, no Barrier is triggered.*
 - **Victory (Isomorphic Breakthrough)**: A Victory is only triggered if a Mutator tool sequence transitions from Failure to Success (ignoring read-only tools in between).
 
 ### 2.3. High-Fidelity MCP Schema (The "Four-Part" Signal)
 We will refactor the `mcpServer.js` schema for `submit_memory_signal`.
-- **New Schema Properties**:
+- **New Schema Properties**: (Retaining `type`, `tags`, and `session_id`)
   1. `raw_symptom` (string): The exact error log, failure state, or initial problem (include snippets).
   2. `failed_attempts` (string): What did we try that didn't work and why?
   3. `breakthrough` (string): The exact code diff, command, or paradigm shift that solved it.
   4. `rule` (string): The distilled, abstract rule for future reference.
-- **Validation & Error Handling**: All four fields will be marked as `required`. If the LLM omits a field or provides an empty payload, the MCP server will return a descriptive error message: `Schema Validation Error: You must provide raw_symptom, failed_attempts, breakthrough, and rule to submit a high-fidelity memory signal.` This forces the LLM to auto-correct and retry.
-- **Ledger Alignment**: The L1 Ledger (`evolution_ledger.json`) `payload` object will be updated to store these new structured fields instead of the legacy `context` string.
+- **Validation & Error Handling**: The four new fields will be marked as `required`. If the LLM omits a field or provides an empty payload, the MCP server will return a descriptive error message: `Schema Validation Error: You must provide raw_symptom, failed_attempts, breakthrough, and rule to submit a high-fidelity memory signal.` This forces the LLM to auto-correct and retry.
+- **Ledger Alignment & Backward Compatibility**: The L1 Ledger (`evolution_ledger.json`) `payload` object will be updated to store these new structured fields. When `distiller` parses the ledger, it will implement a fallback: if `payload.raw_symptom` is undefined, it assumes a legacy record and parses the old `payload.context` string, ensuring old data does not break the distillation loop.
 
 ## 3. Data Flow
 1. **Hook Interception**: `beforeAgentHook.js` filters transcript tools -> computes Sliding Window Barrier / Isomorphic Victory -> injects Triggers + Semantic Sentiment Directive.
@@ -38,3 +38,4 @@ We will refactor the `mcpServer.js` schema for `submit_memory_signal`.
 - **Positive Path**: Simulate a transcript with failed shell commands interspersed with `read_file` to prove Barrier triggers and False-Victories are handled correctly.
 - **Negative Path (Schema)**: Send an incomplete payload to the `submit_memory_signal` MCP endpoint and verify it returns the correct validation error string.
 - **Negative Path (Windowing)**: Simulate a transcript with exactly 2 failing Mutator commands and verify the Barrier is NOT triggered.
+- **Backward Compatibility**: Ensure `distiller` can successfully parse a legacy `evolution_ledger.json` entry alongside a new one.
