@@ -3,7 +3,7 @@
     "session_id": "unknown",
     "message_id": "mcp-1773565770047",
     "timestamp": "2026-03-15T09:09:30.047Z",
-    "status": "PROCESSED",
+    "status": "REWOUND",
     "type": "positive",
     "payload": {
       "rule": "The 'Native Subagent Dispatch' architecture combined with 'Session-Aware Rewind Isolation' and 'Continuous Ledger Pruning' provides a production-grade self-evolution loop that the user finds 'Very Good'.",
@@ -19,7 +19,7 @@
     "session_id": "unknown",
     "message_id": "mcp-1773566031658",
     "timestamp": "2026-03-15T09:13:51.658Z",
-    "status": "PROCESSED",
+    "status": "REWOUND",
     "type": "negative",
     "payload": {
       "rule": "Enhance 'Signal Sensitivity': The agent must actively scan every user turn for high-sentiment keywords (e.g., '很好', 'Perfect', 'Exactly', '不错') and immediately trigger 'submit_memory_signal' without waiting for manual correction. Missing a praise is as critical as missing a bug.",
@@ -35,7 +35,7 @@
     "session_id": "unknown",
     "message_id": "mcp-1773580026052",
     "timestamp": "2026-03-15T13:07:06.052Z",
-    "status": "PROCESSED",
+    "status": "REWOUND",
     "type": "positive",
     "payload": {
       "rule": "When dispatching evolution subagents, use 'ASSA_EVOLVING=true' to bypass hook recursion and ensure the distiller has '*' tool permissions in its .md profile.",
@@ -51,7 +51,7 @@
     "session_id": "unknown",
     "message_id": "mcp-1773659112844",
     "timestamp": "2026-03-16T11:05:12.844Z",
-    "status": "PROCESSED",
+    "status": "REWOUND",
     "type": "positive",
     "payload": {
       "rule": "Cross-Platform Signal Validation: When syncing memory ledger with framework transcripts (Gemini CLI), never rely on single ID fields. Perform exhaustive text-searches across the entire turn content to bridge disparate ID namespaces (UUID vs MCP-ID).",
@@ -68,7 +68,7 @@
     "session_id": "unknown",
     "message_id": "mcp-1773661627792",
     "timestamp": "2026-03-16T11:47:07.792Z",
-    "status": "PROCESSED",
+    "status": "REWOUND",
     "type": "positive",
     "payload": {
       "rule": "Evolutionary Milestone: The ASSA V3.2 core reliability patch (incorporating enhanced praise detection, exhaustive ID search for rollbacks, and recovery logic) has been successfully deployed and verified in a live session. This architectural pattern for hook-based memory synchronization is now considered a 'Golden Standard' for future self-evolving extensions.",
@@ -85,7 +85,7 @@
     "session_id": "unknown",
     "message_id": "mcp-1773662122498",
     "timestamp": "2026-03-16T11:55:22.498Z",
-    "status": "PROCESSED",
+    "status": "REWOUND",
     "type": "positive",
     "payload": {
       "rule": "Deep Sourcing Protocol: For any project involving rapidly evolving third-party frameworks or CLIs, DO NOT rely on internal training data or general web searches. You MUST clone the official repository or fetch raw source/docs to verify exact API signatures and payload structures. Empirical source analysis is the only path to 100% reliability in these contexts.",
@@ -102,7 +102,7 @@
     "session_id": "unknown",
     "message_id": "mcp-1773662651198",
     "timestamp": "2026-03-16T12:04:11.198Z",
-    "status": "PROCESSED",
+    "status": "REWOUND",
     "type": "positive",
     "payload": {
       "rule": "Comprehensive Research Discovery: When searching for official framework clones or research artifacts, do not limit audits to primary workspace folders. Systematically scan extension-specific temporary directories (e.g., '~/.gemini/tmp') to identify clones staged during automated analysis sessions.",
@@ -118,7 +118,7 @@
     "session_id": "unknown",
     "message_id": "mcp-1773663082852",
     "timestamp": "2026-03-16T12:11:22.852Z",
-    "status": "PROCESSED",
+    "status": "REWOUND",
     "type": "positive",
     "payload": {
       "rule": "Documentation Consistency & Legal Alignment: Before any release or public push, perform a mandatory cross-check between the physical LICENSE file and the README badges/sections. Legal consistency is a pillar of 'SOTA' technical integrity.",
@@ -135,7 +135,7 @@
     "session_id": "unknown",
     "message_id": "mcp-1773663723569",
     "timestamp": "2026-03-16T12:22:03.570Z",
-    "status": "PROCESSED",
+    "status": "REWOUND",
     "type": "positive",
     "payload": {
       "rule": "Periodic Workspace Hygiene & Archiving: As the project reaches a release milestone or version boundary, version-specific tests and artifacts should be moved to an 'archive/' directory. This maintains a lean root, reduces cognitive load, and signals release readiness for the next phase.",

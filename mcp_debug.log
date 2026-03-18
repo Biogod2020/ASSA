@@ -277,3 +277,7 @@ Received: {"method":"tools/list","params":{},"jsonrpc":"2.0","id":1}
 Sent Tools List
 Received: {"method":"notifications/roots/list_changed","jsonrpc":"2.0"}
 Roots changed notification received.
+Received: {"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}
+Sent Tools List
+Received: {"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}
+Sent Tools List
