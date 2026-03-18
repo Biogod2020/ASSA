@@ -133,6 +133,22 @@ The real magic of ASSA is turning your **"feedback"** and **"corrections"** into
 
 **[Outcome]**: Through this single interaction, ASSA automatically distilled the "Mermaid Forced Line-break Standard" and "Linear Interception Logic". In any future project, it will follow these rules by default without being re-taught.
 
+### Case 2: Significance Evaluation (Judgment Layer)
+
+ASSA is smart enough to avoid "distillation noise". When you make trivial changes (like translating documentation), it autonomously decides to skip the heavy analysis:
+
+```text
+> Localization to English completed. Commit the changes.
+
+╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ ✓  Shell git add README.md README_CN.md && git commit -m "docs: localize README to English..."                                                   │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+✦ I'll skip the distillation for this commit since it only involves documentation localization and doesn't introduce any architectural or logic changes.
+```
+
+**[Why this matters]**: This prevents the "Global Wisdom" library from being polluted by project-specific chores, keeping the AI's long-term memory high-signal and cost-efficient.
+
 ---
 
 ## 📦 Installation
