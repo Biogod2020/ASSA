@@ -8,10 +8,15 @@ const ledgerUtils = require(path.join(EXTENSION_ROOT, 'skills', 'assa-core', 'sc
 const { checkSystemHealth } = require('./healthCheck');
 
 const NODE_LEVELS = {
-    L0_CORE: 0,       // SOUL, HANDBOOK
-    L1_FOUNDATION: 1, // Language SOTA, Git
-    L2_DOMAIN: 2,     // Frameworks (React, etc)
-    L3_TRANSIENT: 3   // Project patterns
+    // Global Levels (G) - Library Wisdom
+    G0_CORE: 'G0',       // SOUL, HANDBOOK
+    G1_FOUNDATION: 'G1', // Universal Standards
+    G2_DOMAIN: 'G2',     // Tech Stacks
+    
+    // Local Levels (L) - Project Flesh
+    L1_OVERRIDE: 'L1',   // Local standard overrides
+    L2_SPECIALIST: 'L2', // Project-specific deep knowledge
+    L3_TRANSIENT: 'L3'   // Temporary patterns
 };
 
 function log(msg) {

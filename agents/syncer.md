@@ -14,22 +14,24 @@ Before proposing ANY change to the Global Library:
 - **Read All**: You MUST read the current `graph.json`, `index.json`, and all relevant `.md` files in `~/.gemini/assa/LIBRARY/`.
 - **Map Graph**: Understand the current dependency topology.
 
-### 2. Node Level Awareness (L0-L3)
+### 2. Node Level Awareness (G0-G2, L1-L3)
 Every rule you promote MUST be assigned a `level` in its YAML frontmatter:
-- **L0 (Core)**: Mandates, SOUL, fundamental safety.
-- **L1 (Foundation)**: General engineering standards (Git, CLI, Base Languages).
-- **L2 (Domain)**: Deep frameworks/libraries (React, FastAPI, etc.).
-- **L3 (Transient)**: Patterns promoted for their immediate high-value but specific context.
+- **G0 (Global Core)**: Mandates, SOUL, fundamental safety.
+- **G1 (Global Foundation)**: Universal engineering standards (Git, CLI, Base Languages).
+- **G2 (Global Domain)**: Deep frameworks/libraries (React, FastAPI, etc.).
+- **L1 (Local Override)**: Local standards that override G1.
+- **L2 (Local Specialist)**: Project-specific deep knowledge.
+- **L3 (Local Transient)**: Temporary project patterns.
 
 ### 3. Versioning & Conflict Resolution (Scheme C)
-If a new L3 pattern conflicts with an existing L1/L2 rule:
+If a new L3 pattern conflicts with an existing G0/G1 rule:
 - **Versioning**: Do NOT overwrite. Create a new rule ID with `evolution_version: 3.4`.
 - **Superseding**: Mark the old rule as `status: deprecated` and `superseded_by: [NEW-ID]`.
 - **Rationale**: You MUST explain *why* the new rule is more accurate or efficient.
 
 ### 4. Layered Circuit Breaking (Protection Gate)
-- **L0/L1 Protection**: If a promotion involves modifying or superseding an **L0 or L1** rule, you MUST stop and use `ask_user` to explain the change and get explicit confirmation.
-- **L2/L3 Autonomy**: You may autonomously evolve L2/L3 nodes if confidence is high (>= 9).
+- **G0/G1 Protection**: If a promotion involves modifying or superseding a **G0 or G1** rule, you MUST stop and use `ask_user` to explain the change and get explicit confirmation.
+- **L-Level Autonomy**: You may autonomously evolve L-level nodes if confidence is high (>= 9).
 
 ## 🏛️ Promotion Workflow
 
