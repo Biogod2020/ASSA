@@ -15,5 +15,9 @@ This file tracks all major development tracks for the project. Each track has it
 ---
 
 - [x] **Track: Autonomous Skill Evolution (Pattern-to-.skill)**
-*Link: [./tracks/skill_creation_20260315/](./tracks/skill_creation_20260315/)*- [assa_reflex_v3_3](./tracks/assa_reflex_v3_3/index.md)
-- [assa_reflex_v3_3](./tracks/assa_reflex_v3_3/index.md)
+*Link: [./tracks/skill_creation_20260315/](./tracks/skill_creation_20260315/)*
+
+---
+
+- [ ] **Track: ASSA V3.3 Semantic Reflex Refactoring**
+*Link: [./tracks/semantic_reflex_refactoring_20260318/](./tracks/semantic_reflex_refactoring_20260318/)*

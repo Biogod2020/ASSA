@@ -1,0 +1,8 @@
+{
+  "track_id": "semantic_reflex_refactoring_20260318",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-03-18T00:00:00Z",
+  "updated_at": "2026-03-18T00:00:00Z",
+  "description": "ASSA V3.3 Semantic Reflex Refactoring: 1. Filter out read-only tools and fix false victories (Isomorphic Victory). 2. Completely overhaul the Emotion Sensor to use the LLM's semantic understanding. 3. Overhaul the MCP schema for submit_memory_signal. 4. Implement a sliding window for Barrier detection."
+}
