@@ -60,10 +60,7 @@ function safeReadFile(filepath) {
     return '';
 }
 
-const PRAISE_KEYWORDS = [
-    '很好', 'Perfect', 'Exactly', '不错', '太棒了', 'Great', 'Awesome', '完美', '干得漂亮', '棒', '赞',
-    '有道理', '我认可', '就是这样', '没毛病', '就是这个意思', '可以', '同意', 'ok', 'OK'
-];
+const PRAISE_KEYWORDS = ['很好', 'Perfect', 'Exactly', '不错', '太棒了', 'Great', 'Awesome', '完美', '干得漂亮', '棒', '赞'];
 
 function cascadeRewound(ledger, transcript, sessionId) {
     if (!sessionId) return { ledger, changed: false };
@@ -185,10 +182,10 @@ function recognizeReflex(transcript, currentPrompt) {
             '你刚才收到了用户的正面反馈。你必须评估这是否代表了一个成功的模式（Success Pattern）。如果是，请立即调用 `submit_memory_signal` 记录它。\n\n';
     }
 
-    const READ_ONLY_TOOLS = ['read_file', 'list_directory', 'grep_search', 'glob', 'ask_user', 'cli_help', 'get_internal_docs'];
+    const READ_ONLY_TOOLS = ['read_file', 'list_directory', 'grep_search', 'glob', 'ask_user', 'cli_help', 'get_internal_docs', 'web_fetch'];
     
     // Filter to only include turns that have state-mutating tool calls
-    const stateMutatingTurns = transcript.filter(t => {
+    const stateMutatingTurns = (transcript || []).filter(t => {
         if (!t.toolCalls || t.toolCalls.length === 0) return false;
         // Keep turn if it contains at least one tool call that is NOT in the read-only list
         return t.toolCalls.some(tc => !READ_ONLY_TOOLS.includes(tc.name || (tc.functionCall && tc.functionCall.name)));
@@ -208,7 +205,7 @@ function recognizeReflex(transcript, currentPrompt) {
                     reflexContext += '### ASSA REFLEX: VICTORY DETECTED ###\n' +
                         'Detected a breakthrough: A previously failing tool has now succeeded.\n' +
                         '请总结导致成功的关键变动，并调用 `submit_memory_signal` 记录这个 "Success Pattern"。\n' +
-                        '注意：你必须详细填写 `raw_symptom` (最初的报错), `failed_attempts` (失败尝试), 和 `breakthrough_diff` (修复代码) 字段！\n\n';
+                        '注意：你必须详细填写 `raw_symptom` (最初的报错), `failed_attempts` (失败尝试), 和 `breakthrough` (修复代码) 字段！\n\n';
                     break;
                 }
             }
@@ -225,7 +222,7 @@ function recognizeReflex(transcript, currentPrompt) {
                     reflexContext += '### ASSA REFLEX: BARRIER DETECTED ###\n' +
                         'Detected a technical barrier: ' + failureCount + ' failures in the last ' + recentMutating.length + ' operations.\n' +
                         '你似乎遇到了阻碍。请分析根本原因，并调用 `submit_memory_signal` (type: negative) 记录这个 "Technical Barrier"。\n' +
-                        '注意：你必须详细填写 `raw_symptom` (当前的持续报错), `failed_attempts` (你试过的无效方法), 和 `breakthrough_diff` (目前缺少的关键信息) 字段！\n\n';
+                        '注意：你必须详细填写 `raw_symptom` (当前的持续报错), `failed_attempts` (你试过的无效方法), 和 `breakthrough` (目前缺少的关键信息) 字段！\n\n';
                 }
             }
         }
@@ -386,6 +383,11 @@ function main() {
                 "你当前注入的记忆过多，可能导致响应变慢或上下文丢失。\n" +
                 "你必须立即调用 `distiller` 工具对信号进行提炼，而不是试图读取详细的 PENDING SIGNALS。\n" +
                 `目前有 ${pendingItems.length} 条待处理信号。\n`;
+                
+            // Restore highest priority reflexes even if truncated
+            if (reflexContext) {
+                additionalContext += `\n🚨 ASSA IMMEDIATE REFLEXES 🚨\n${reflexContext}\n`;
+            }
         }
 
         process.stdout.write(JSON.stringify({

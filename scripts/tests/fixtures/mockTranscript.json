@@ -1,0 +1,24 @@
+[
+    {
+        "type": "agent",
+        "toolCalls": [
+            { "name": "run_shell_command", "status": "error", "result": "Exit Code: 1", "functionCall": {"name": "run_shell_command"} }
+        ]
+    },
+    {
+        "type": "agent",
+        "toolCalls": [
+            { "name": "read_file", "status": "success", "result": "File content", "functionCall": {"name": "read_file"} }
+        ]
+    },
+    {
+        "type": "agent",
+        "toolCalls": [
+            { "name": "run_shell_command", "status": "success", "result": "Success", "functionCall": {"name": "run_shell_command"} }
+        ]
+    },
+    {
+        "type": "user",
+        "content": "ok"
+    }
+]
