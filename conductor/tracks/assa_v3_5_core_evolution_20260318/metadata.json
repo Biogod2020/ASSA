@@ -1,0 +1,8 @@
+{
+  "track_id": "assa_v3_5_core_evolution_20260318",
+  "type": "feature",
+  "status": "completed",
+  "created_at": "2026-03-18T14:00:00Z",
+  "updated_at": "2026-03-24T10:00:00Z",
+  "description": "ASSA V3.5 Core Evolution: 1. Distiller updates decisions.md. 2. Enhanced BeforeAgent injection (G1+G2 full). 3. Internal Memory Judgment prompt. 4. Traceability guidance."
+}
