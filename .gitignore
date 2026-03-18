@@ -32,3 +32,4 @@ coverage/
 # Extension temp files
 .superpowers/
 .gemini-clipboard
+.worktrees/
