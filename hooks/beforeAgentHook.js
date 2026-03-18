@@ -36,17 +36,27 @@ process.on('uncaughtException', (err) => {
 function ensureL3Setup() {
     const globalDir = path.join(os.homedir(), '.gemini', 'assa');
     const libraryDir = path.join(globalDir, 'LIBRARY');
+    const scriptsDir = path.join(globalDir, 'scripts');
     const templatesDir = path.join(EXTENSION_ROOT, 'templates');
     
-    if (!fs.existsSync(libraryDir)) {
-        fs.mkdirSync(libraryDir, { recursive: true });
-    }
+    if (!fs.existsSync(libraryDir)) fs.mkdirSync(libraryDir, { recursive: true });
+    if (!fs.existsSync(scriptsDir)) fs.mkdirSync(scriptsDir, { recursive: true });
 
     ['SOUL.md', 'USER_HANDBOOK.md', 'index.json', 'graph.json'].forEach(filename => {
         const src = path.join(templatesDir, filename);
         const dst = path.join(globalDir, filename);
         if (fs.existsSync(src) && !fs.existsSync(dst)) {
             log(`Restoring missing template: ${filename}`);
+            fs.copyFileSync(src, dst);
+        }
+    });
+
+    // Copy scripts
+    ['rebuildGraph.js'].forEach(filename => {
+        const src = path.join(templatesDir, filename);
+        const dst = path.join(scriptsDir, filename);
+        // For scripts, we always update to ensure latest version
+        if (fs.existsSync(src)) {
             fs.copyFileSync(src, dst);
         }
     });
