@@ -46,6 +46,7 @@ If a new L3 pattern conflicts with an existing G0/G1 rule:
 5. **Execution (CP Protocol)**:
     - Write the new/updated files to a local temp file.
     - Use `run_shell_command` with `cp` to move to `~/.gemini/assa/`.
+    - **Rebuild (V3.5)**: IMMEDIATELY run `node ~/.gemini/assa/scripts/rebuildGraph.js` to refresh the global graph and index.
 
 ## 🧹 Local Cleanup
 - Mark local L2 patterns as `PROMOTED` once sync is verified.
