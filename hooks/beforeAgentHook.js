@@ -60,8 +60,6 @@ function safeReadFile(filepath) {
     return '';
 }
 
-const PRAISE_KEYWORDS = ['很好', 'Perfect', 'Exactly', '不错', '太棒了', 'Great', 'Awesome', '完美', '干得漂亮', '棒', '赞'];
-
 function cascadeRewound(ledger, transcript, sessionId) {
     if (!sessionId) return { ledger, changed: false };
     
@@ -162,25 +160,6 @@ function recognizeReflex(transcript, currentPrompt) {
     if ((!transcript || transcript.length === 0) && !currentPrompt) return '';
     
     let reflexContext = '';
-    
-    // Scan current prompt for praise
-    const hasPraiseInPrompt = currentPrompt && PRAISE_KEYWORDS.some(k => currentPrompt.includes(k));
-    
-    // Scan last 3 turns from transcript for praise
-    const recentTurns = (transcript || []).slice(-3);
-    const hasPraiseInTranscript = recentTurns.some(turn => {
-        if (turn.type === 'user') {
-            const userText = extractAllText(turn);
-            return PRAISE_KEYWORDS.some(k => userText.includes(k));
-        }
-        return false;
-    });
-
-    if (hasPraiseInPrompt || hasPraiseInTranscript) {
-        log('REFLEX TRIGGER: Praise detected in prompt or transcript.');
-        reflexContext += '### ASSA REFLEX: PRAISE DETECTED ###\n' +
-            '你刚才收到了用户的正面反馈。你必须评估这是否代表了一个成功的模式（Success Pattern）。如果是，请立即调用 `submit_memory_signal` 记录它。\n\n';
-    }
 
     const READ_ONLY_TOOLS = ['read_file', 'list_directory', 'grep_search', 'glob', 'ask_user', 'cli_help', 'get_internal_docs', 'web_fetch'];
     
@@ -389,6 +368,15 @@ function main() {
                 additionalContext += `\n🚨 ASSA IMMEDIATE REFLEXES 🚨\n${reflexContext}\n`;
             }
         }
+        
+        // Semantic Emotion Sensor (Subconscious Directive)
+        // This is always appended at the very end to ensure it is strongly adhered to by the main agent.
+        additionalContext += '\n### 🧠 ASSA SUBCONSCIOUS DIRECTIVE (EMOTION SENSOR) ###\n' +
+            'You are equipped with a highly sensitive Semantic Emotion Sensor. Before replying, carefully analyze the user\'s recent messages.\n' +
+            'If you detect implicit or explicit POSITIVE reinforcement (e.g., "This is a great idea", "I agree", "That worked perfectly"), OR strong NEGATIVE frustration (e.g., "Why is this still failing?", "This is wrong"), you MUST:\n' +
+            '1. Briefly acknowledge the learning in your chat response.\n' +
+            '2. Immediately call `submit_memory_signal` to record the exact raw symptom, failed attempts, and the breakthrough/rule.\n' +
+            'Do NOT wait for a hardcoded keyword. Trust your semantic understanding of the conversation.\n';
 
         process.stdout.write(JSON.stringify({
             decision: 'allow',
