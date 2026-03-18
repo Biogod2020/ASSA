@@ -16,7 +16,7 @@ Instead of matching arrays of strings (`PRAISE_KEYWORDS`), we will inject a pers
 ### 2.2. Robust Tool State Tracking (Sliding Window & Mutator Filtering)
 We will rewrite `isToolFailure` and `isToolSuccess` and the array traversal logic.
 - **Filter Read-Only Tools**: `list_directory`, `read_file`, `grep_search`, `glob` will be entirely filtered out of the Victory/Barrier trajectory analysis. We only track "Mutators" (`run_shell_command`, `write_file`, `replace`).
-- **Barrier (Sliding Window)**: Instead of exactly 3 consecutive failures, we will look at the last 5 Mutator tool calls. If $\ge 3$ are failures, we inject the Barrier trigger.
+- **Barrier (Sliding Window)**: We will look at the last 5 Mutator tool calls. If >= 3 are failures, we inject the Barrier trigger. *Edge Case Handling: If fewer than 3 Mutator tool calls exist in the current session history, no Barrier is triggered.*
 - **Victory (Isomorphic Breakthrough)**: A Victory is only triggered if a Mutator tool sequence transitions from Failure to Success (ignoring read-only tools in between).
 
 ### 2.3. High-Fidelity MCP Schema (The "Four-Part" Signal)
@@ -26,13 +26,15 @@ We will refactor the `mcpServer.js` schema for `submit_memory_signal`.
   2. `failed_attempts` (string): What did we try that didn't work and why?
   3. `breakthrough` (string): The exact code diff, command, or paradigm shift that solved it.
   4. `rule` (string): The distilled, abstract rule for future reference.
+- **Validation & Error Handling**: All four fields will be marked as `required`. If the LLM omits a field or provides an empty payload, the MCP server will return a descriptive error message: `Schema Validation Error: You must provide raw_symptom, failed_attempts, breakthrough, and rule to submit a high-fidelity memory signal.` This forces the LLM to auto-correct and retry.
 - **Ledger Alignment**: The L1 Ledger (`evolution_ledger.json`) `payload` object will be updated to store these new structured fields instead of the legacy `context` string.
 
 ## 3. Data Flow
 1. **Hook Interception**: `beforeAgentHook.js` filters transcript tools -> computes Sliding Window Barrier / Isomorphic Victory -> injects Triggers + Semantic Sentiment Directive.
 2. **AI Action**: AI reads user prompt. If semantic threshold met OR system trigger present, AI formats the structured 4-part payload.
-3. **MCP Server**: `mcpServer.js` receives the 4-part payload and commits it to the atomic L1 ledger.
+3. **MCP Server**: `mcpServer.js` receives the 4-part payload, validates it, and commits it to the atomic L1 ledger.
 
 ## 4. Testing Strategy
-- **Unit/Smoke Test**: Simulate a transcript with failed shell commands interspersed with `read_file` to prove Barrier triggers and False-Victories are suppressed.
-- **Integration**: Verify the new MCP schema parses correctly and writes the expanded payload to `.memory/evolution_ledger.json`.
+- **Positive Path**: Simulate a transcript with failed shell commands interspersed with `read_file` to prove Barrier triggers and False-Victories are handled correctly.
+- **Negative Path (Schema)**: Send an incomplete payload to the `submit_memory_signal` MCP endpoint and verify it returns the correct validation error string.
+- **Negative Path (Windowing)**: Simulate a transcript with exactly 2 failing Mutator commands and verify the Barrier is NOT triggered.
