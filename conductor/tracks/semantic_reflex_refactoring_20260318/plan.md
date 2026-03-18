@@ -1,7 +1,7 @@
 # Implementation Plan: ASSA V3.3 Semantic Reflex Refactoring
 
 ## Phase 1: Structured MCP Payload Upgrade
-- [ ] Task: Update `submit_memory_signal` schema
+- [x] Task: Update `submit_memory_signal` schema [0b66a2a]
     - [ ] Write tests verifying `mcpServer.js` rejects payloads missing `raw_symptom`, `failed_attempts`, `breakthrough`, or `rule`.
     - [ ] Update `mcpServer.js` tool schema to require the 4-part structure.
     - [ ] Update `ledgerUtils.js` or `mcpServer.js` to correctly concatenate these 4 fields into the L1 ledger `context` field.
