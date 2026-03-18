@@ -26,8 +26,8 @@
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: Sliding-Window Barrier Detection' (Protocol in workflow.md)
 
 ## Phase 4: Semantic Emotion Sensor
-- [ ] Task: Replace Keyword Matching with Subconscious Directive
-    - [ ] Write tests (or mock tests) verifying that `PRAISE_KEYWORDS` logic is removed from `beforeAgentHook.js`.
-    - [ ] Remove `PRAISE_KEYWORDS` string matching from `beforeAgentHook.js`.
-    - [ ] Inject the "Subconscious Directive" into the `additionalContext` of the `BeforeAgent` hook. Ensure it explicitly instructs the Main Agent to analyze sentiment and announce its learnings.
+- [x] Task: Replace Keyword Matching with Subconscious Directive [82357b7]
+    - [x] Write tests (or mock tests) verifying that `PRAISE_KEYWORDS` logic is removed from `beforeAgentHook.js`.
+    - [x] Remove `PRAISE_KEYWORDS` string matching from `beforeAgentHook.js`.
+    - [x] Inject the "Subconscious Directive" into the `additionalContext` of the `BeforeAgent` hook. Ensure it explicitly instructs the Main Agent to analyze sentiment and announce its learnings.
 - [ ] Task: Conductor - User Manual Verification 'Phase 4: Semantic Emotion Sensor' (Protocol in workflow.md)
