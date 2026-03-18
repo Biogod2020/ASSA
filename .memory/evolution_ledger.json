@@ -286,5 +286,44 @@
       ]
     },
     "git_anchor": ""
+  },
+  {
+    "session_id": "7d496dfa-7701-4b09-aec8-38c141232194",
+    "message_id": "mcp-1773820681828",
+    "timestamp": "2026-03-18T07:58:01.829Z",
+    "status": "PENDING",
+    "type": "negative",
+    "payload": {
+      "rule": "When documenting hook-based architectures, always use the flow: User -> BeforeHook -> MainProgram -> AfterHook to preserve structural integrity.",
+      "context": "[Symptom/Intent]\nUser frustration: \"还是错的!,你的1后面主程序怎么就出来2/3了?\" indicating logical breakage in the Mermaid sequence.\n\n[Failed Attempts]\nDiagram had Gemini receiving '1' from User and '2' from Hook_Before as if they were independent inputs, breaking the causal chain.\n\n[Breakthrough]\nArchitectural diagrams must reflect the strict linear execution order of hooks (BeforeAgent -> Agent -> AfterTool) to avoid user confusion. The numbering must show the 'Interception' logic (User -> Hook -> Agent).",
+      "tags": []
+    },
+    "git_anchor": ""
+  },
+  {
+    "session_id": "7d496dfa-7701-4b09-aec8-38c141232194",
+    "message_id": "mcp-1773820749980",
+    "timestamp": "2026-03-18T07:59:09.980Z",
+    "status": "PENDING",
+    "type": "negative",
+    "payload": {
+      "rule": "Always use '<br/>' for line breaks in Mermaid node labels within Markdown documentation.",
+      "context": "[Symptom/Intent]\nUser frustration: \"当前有大量的\\n没有被转译,请你务必仔细审核\" indicating broken rendering of line breaks in diagrams.\n\n[Failed Attempts]\nUsing '\\n' in Mermaid labels caused literal '\\n' text to appear in the rendered diagram.\n\n[Breakthrough]\nMermaid diagram nodes in README.md should use '<br/>' instead of '\\n' for line breaks to ensure correct rendering in environments where literal '\\n' is not auto-escaped.",
+      "tags": []
+    },
+    "git_anchor": ""
+  },
+  {
+    "session_id": "7d496dfa-7701-4b09-aec8-38c141232194",
+    "message_id": "mcp-1773820830239",
+    "timestamp": "2026-03-18T08:00:30.240Z",
+    "status": "PENDING",
+    "type": "positive",
+    "payload": {
+      "rule": "Positive reinforcement from the user should be captured to reinforce successful interaction patterns and technical breakthroughs.",
+      "context": "[Symptom/Intent]\nUser reinforcement: '很好' after fixing Mermaid diagram rendering and logic.\n\n[Failed Attempts]\nInitial README updates had numbering gaps and incorrect line break syntax (\\n vs <br/>).\n\n[Breakthrough]\nSuccessfully identified and fixed multiple technical issues (Mermaid numbering, logical flow, and rendering) through proactive user feedback and iterative correction. The user expressed satisfaction with '很好'.",
+      "tags": []
+    },
+    "git_anchor": ""
   }
 ]

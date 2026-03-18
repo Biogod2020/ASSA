@@ -46,27 +46,21 @@ function main() {
         const toolInput = payload.tool_input || {};
         const toolResponse = payload.tool_response || {};
         
-        // Extract plain text from llmContent (could be string, Part, or Part[])
-        let llmText = '';
-        if (typeof toolResponse.llmContent === 'string') {
-            llmText = toolResponse.llmContent;
-        } else if (Array.isArray(toolResponse.llmContent)) {
-            llmText = toolResponse.llmContent.map(p => p.text || '').join('\n');
-        } else if (toolResponse.llmContent && typeof toolResponse.llmContent === 'object') {
-            llmText = toolResponse.llmContent.text || JSON.stringify(toolResponse.llmContent);
-        }
-
-        const exitCodeMatch = llmText.match(/Exit [Cc]ode: (\d+)/i);
+        // CRITICAL FIX: Heuristic string matching is too brittle.
+        // We prioritize explicit status from the CLI.
+        const llmContent = typeof toolResponse.llmContent === 'string' 
+            ? toolResponse.llmContent 
+            : JSON.stringify(toolResponse.llmContent || '');
+        const exitCodeMatch = llmContent.match(/Exit [Cc]ode: (\d+)/i);
         const exitCode = exitCodeMatch ? parseInt(exitCodeMatch[1]) : undefined;
         
-        // A tool truly failed if:
-        // 1. Explicit error object is present
+        // A tool truly failed ONLY if:
+        // 1. Status is explicitly 'error'
         // 2. Exit code is defined and non-zero
-        // 3. Status is explicitly 'error' (if provided)
-        const isError = !!toolResponse.error || (exitCode !== undefined && exitCode !== 0) || toolResponse.status === 'error';
+        const isError = toolResponse.status === 'error' || (exitCode !== undefined && exitCode !== 0);
                         
         const summary = isError ? `[FAILED: ${toolName}]` : `[SUCCESS: ${toolName}]`;
-        log(`Tool: ${toolName}, Status: ${toolResponse.status}, ExitCode: ${exitCode}, HasError: ${!!toolResponse.error} -> ${summary}`);
+        log(`Tool: ${toolName}, Status: ${toolResponse.status}, ExitCode: ${exitCode} -> ${summary}`);
         
         let additionalContext = `<!-- ASSA_METADATA: ${summary} -->\n`;
 
