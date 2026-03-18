@@ -1,154 +1,5 @@
 [
   {
-    "session_id": "unknown",
-    "message_id": "mcp-1773565770047",
-    "timestamp": "2026-03-15T09:09:30.047Z",
-    "status": "REWOUND",
-    "type": "positive",
-    "payload": {
-      "rule": "The 'Native Subagent Dispatch' architecture combined with 'Session-Aware Rewind Isolation' and 'Continuous Ledger Pruning' provides a production-grade self-evolution loop that the user finds 'Very Good'.",
-      "context": "User praised the implementation and the cleanliness of the files after the subagent architecture migration.",
-      "tags": [
-        "success-pattern",
-        "architecture"
-      ]
-    },
-    "git_anchor": ""
-  },
-  {
-    "session_id": "unknown",
-    "message_id": "mcp-1773566031658",
-    "timestamp": "2026-03-15T09:13:51.658Z",
-    "status": "REWOUND",
-    "type": "negative",
-    "payload": {
-      "rule": "Enhance 'Signal Sensitivity': The agent must actively scan every user turn for high-sentiment keywords (e.g., '很好', 'Perfect', 'Exactly', '不错') and immediately trigger 'submit_memory_signal' without waiting for manual correction. Missing a praise is as critical as missing a bug.",
-      "context": "Agent missed a clear 'Success Pattern' trigger ('很好') until prompted by the user. This indicates a gap in the agent's real-time behavioral monitoring.",
-      "tags": [
-        "behavioral-evolution",
-        "signal-sensitivity"
-      ]
-    },
-    "git_anchor": ""
-  },
-  {
-    "session_id": "unknown",
-    "message_id": "mcp-1773580026052",
-    "timestamp": "2026-03-15T13:07:06.052Z",
-    "status": "REWOUND",
-    "type": "positive",
-    "payload": {
-      "rule": "When dispatching evolution subagents, use 'ASSA_EVOLVING=true' to bypass hook recursion and ensure the distiller has '*' tool permissions in its .md profile.",
-      "context": "Verified fixed namespacing and deadlock avoidance in subagent distillation logic. User confirmed the progress is 'Very Good'.",
-      "tags": [
-        "architecture-fix",
-        "subagent-synergy"
-      ]
-    },
-    "git_anchor": ""
-  },
-  {
-    "session_id": "unknown",
-    "message_id": "mcp-1773659112844",
-    "timestamp": "2026-03-16T11:05:12.844Z",
-    "status": "REWOUND",
-    "type": "positive",
-    "payload": {
-      "rule": "Cross-Platform Signal Validation: When syncing memory ledger with framework transcripts (Gemini CLI), never rely on single ID fields. Perform exhaustive text-searches across the entire turn content to bridge disparate ID namespaces (UUID vs MCP-ID).",
-      "context": "Previous turns suffered from hook crashes and brittle ID matching that incorrectly invalidated memories. Breakthrough: Switched to exhaustive text-search for signal IDs across disparate namespaces and fixed the TypeError in tool monitoring.",
-      "tags": [
-        "architecture-fix",
-        "reliability",
-        "id-matching"
-      ]
-    },
-    "git_anchor": ""
-  },
-  {
-    "session_id": "unknown",
-    "message_id": "mcp-1773661627792",
-    "timestamp": "2026-03-16T11:47:07.792Z",
-    "status": "REWOUND",
-    "type": "positive",
-    "payload": {
-      "rule": "Evolutionary Milestone: The ASSA V3.2 core reliability patch (incorporating enhanced praise detection, exhaustive ID search for rollbacks, and recovery logic) has been successfully deployed and verified in a live session. This architectural pattern for hook-based memory synchronization is now considered a 'Golden Standard' for future self-evolving extensions.",
-      "context": "User confirmed that the new 'Smart Reflex' and 'Rewind Resilience' features are working by providing positive feedback ('很好'). The system successfully triggered the reflex context and the user is satisfied with the re-installation and verification process.",
-      "tags": [
-        "success-pattern",
-        "deployment-victory",
-        "self-evolution"
-      ]
-    },
-    "git_anchor": ""
-  },
-  {
-    "session_id": "unknown",
-    "message_id": "mcp-1773662122498",
-    "timestamp": "2026-03-16T11:55:22.498Z",
-    "status": "REWOUND",
-    "type": "positive",
-    "payload": {
-      "rule": "Deep Sourcing Protocol: For any project involving rapidly evolving third-party frameworks or CLIs, DO NOT rely on internal training data or general web searches. You MUST clone the official repository or fetch raw source/docs to verify exact API signatures and payload structures. Empirical source analysis is the only path to 100% reliability in these contexts.",
-      "context": "The user explicitly instructed that for fast-moving tools (like Gemini CLI), the agent must prioritize 'Deep Research' (cloning/fetching official repos) over 'Surface Research' (Google searches). This approach directly led to the fix of hook payload mismatches and sensitive praise detection.",
-      "tags": [
-        "research-protocol",
-        "reliability",
-        "github-first"
-      ]
-    },
-    "git_anchor": ""
-  },
-  {
-    "session_id": "unknown",
-    "message_id": "mcp-1773662651198",
-    "timestamp": "2026-03-16T12:04:11.198Z",
-    "status": "REWOUND",
-    "type": "positive",
-    "payload": {
-      "rule": "Comprehensive Research Discovery: When searching for official framework clones or research artifacts, do not limit audits to primary workspace folders. Systematically scan extension-specific temporary directories (e.g., '~/.gemini/tmp') to identify clones staged during automated analysis sessions.",
-      "context": "During the investigation of local clones, the official repository was not found in 'LocalProjects' but was hidden in the '.gemini/tmp' directory. This insight is crucial for future codebase mapping.",
-      "tags": [
-        "research-protocol",
-        "discovery-victory"
-      ]
-    },
-    "git_anchor": ""
-  },
-  {
-    "session_id": "unknown",
-    "message_id": "mcp-1773663082852",
-    "timestamp": "2026-03-16T12:11:22.852Z",
-    "status": "REWOUND",
-    "type": "positive",
-    "payload": {
-      "rule": "Documentation Consistency & Legal Alignment: Before any release or public push, perform a mandatory cross-check between the physical LICENSE file and the README badges/sections. Legal consistency is a pillar of 'SOTA' technical integrity.",
-      "context": "Identified a mismatch between the LICENSE file (MIT) and the README badge (Apache 2.0). Breakthrough: Corrected the documentation to align with the actual legal file, ensuring release integrity.",
-      "tags": [
-        "documentation-fix",
-        "release-integrity",
-        "victory-pattern"
-      ]
-    },
-    "git_anchor": ""
-  },
-  {
-    "session_id": "unknown",
-    "message_id": "mcp-1773663723569",
-    "timestamp": "2026-03-16T12:22:03.570Z",
-    "status": "REWOUND",
-    "type": "positive",
-    "payload": {
-      "rule": "Periodic Workspace Hygiene & Archiving: As the project reaches a release milestone or version boundary, version-specific tests and artifacts should be moved to an 'archive/' directory. This maintains a lean root, reduces cognitive load, and signals release readiness for the next phase.",
-      "context": "Root Cause Analysis of commit d2212c1 (archiving v3.2 tests). The move to archive/evolution_v3.2/ ensures workspace hygiene and signals release readiness by keeping the root lean.",
-      "tags": [
-        "workspace-hygiene",
-        "maintenance",
-        "release-readiness"
-      ]
-    },
-    "git_anchor": ""
-  },
-  {
     "session_id": "e0bcc8b3-bf67-48c2-a065-0b8612662ee0",
     "message_id": "mcp-1773713827009",
     "timestamp": "2026-03-17T02:17:07.010Z",
@@ -291,7 +142,7 @@
     "session_id": "7d496dfa-7701-4b09-aec8-38c141232194",
     "message_id": "mcp-1773820681828",
     "timestamp": "2026-03-18T07:58:01.829Z",
-    "status": "PENDING",
+    "status": "PROCESSED",
     "type": "negative",
     "payload": {
       "rule": "When documenting hook-based architectures, always use the flow: User -> BeforeHook -> MainProgram -> AfterHook to preserve structural integrity.",
@@ -304,7 +155,7 @@
     "session_id": "7d496dfa-7701-4b09-aec8-38c141232194",
     "message_id": "mcp-1773820749980",
     "timestamp": "2026-03-18T07:59:09.980Z",
-    "status": "PENDING",
+    "status": "PROCESSED",
     "type": "negative",
     "payload": {
       "rule": "Always use '<br/>' for line breaks in Mermaid node labels within Markdown documentation.",
@@ -317,12 +168,106 @@
     "session_id": "7d496dfa-7701-4b09-aec8-38c141232194",
     "message_id": "mcp-1773820830239",
     "timestamp": "2026-03-18T08:00:30.240Z",
-    "status": "PENDING",
+    "status": "PROCESSED",
     "type": "positive",
     "payload": {
       "rule": "Positive reinforcement from the user should be captured to reinforce successful interaction patterns and technical breakthroughs.",
       "context": "[Symptom/Intent]\nUser reinforcement: '很好' after fixing Mermaid diagram rendering and logic.\n\n[Failed Attempts]\nInitial README updates had numbering gaps and incorrect line break syntax (\\n vs <br/>).\n\n[Breakthrough]\nSuccessfully identified and fixed multiple technical issues (Mermaid numbering, logical flow, and rendering) through proactive user feedback and iterative correction. The user expressed satisfaction with '很好'.",
       "tags": []
+    },
+    "git_anchor": ""
+  },
+  {
+    "session_id": "7d496dfa-7701-4b09-aec8-38c141232194",
+    "message_id": "mcp-1773821950671",
+    "timestamp": "2026-03-18T08:19:10.672Z",
+    "status": "PROCESSED",
+    "type": "positive",
+    "payload": {
+      "rule": "Always perform a physical filesystem audit (ls/cat) to verify the results of a Syncer subagent promotion before confirming 'Global Sync Success' to the user. Trust but verify with raw shell commands.",
+      "context": "[Symptom/Intent]\nVerifying if promoted L3 global memory is actually accessible and persistent.\n\n[Failed Attempts]\nInitially relied on subagent's verbal report; performing a direct FS audit using 'ls' and 'cat' provides the 100% reliable confirmation required by SOTA integrity.\n\n[Breakthrough]\nSuccessfully verified the full L2 -> L3 promotion cycle by physically auditing '~/.gemini/assa/LIBRARY/' and 'index.json' after a Syncer subagent dispatch. This confirms that 'Agent-Mediated Wisdom Promotion' is not just a theory but a robust, verifiable deployment path.",
+      "tags": []
+    },
+    "git_anchor": ""
+  },
+  {
+    "session_id": "unknown",
+    "message_id": "mcp-1773824965574",
+    "timestamp": "2026-03-18T09:09:25.575Z",
+    "status": "PROCESSED",
+    "type": "positive",
+    "payload": {
+      "rule": "在构建全局知识图谱时，必须为每个节点分配 Tier 等级。BeforeHook 加载顺序应严格遵循 Tier 1 > Tier 2 > Tier 3，并支持基于层级的递归剪枝。",
+      "context": "[Symptom/Intent]\n用户提议学习 Obsidian 构造并设定节点等级以优化 AI 索引。\n\n[Failed Attempts]\n之前的 index.json 是扁平的路径映射，缺乏权重和层级感，导致在复杂项目中容易触发 Context Explosion 且无法区分核心规则与细节规则。\n\n[Breakthrough]\n引入 Obsidian 风格的双向链接与 Tiered Node Levels (T1: Core, T2: Domain, T3: Atomic) 机制。通过在 graph.json 中标记 tier，BeforeHook 可以实现优先级感知的上下文注入，在 Context 紧张时优先保留高等级规则。",
+      "tags": []
+    },
+    "git_anchor": ""
+  },
+  {
+    "session_id": "5d3c8cea-a42a-4b6d-94dd-1538c2b003f1",
+    "message_id": "mcp-1773825228935",
+    "timestamp": "2026-03-18T09:13:48.937Z",
+    "status": "PROCESSED",
+    "type": "positive",
+    "payload": {
+      "rule": "Architecture: Knowledge management should use hierarchical node levels (L0-L3) and graph-based dependency discovery to balance intelligence density and context safety.",
+      "context": "[Symptom/Intent]\nUser suggested: \"学习obsidian的构造... 设定节点等级, 方便我们的ai快速索引\". This addresses the recurring Context Overhead issues.\n\n[Failed Attempts]\n单纯依赖 index.json 和 graph.json 的平面化解析，在规则库庞大时会导致 BeforeHook 注入的上下文过载（Context Overhead Exceeded）。\n\n[Breakthrough]\n引入 Obsidian 式的知识图谱架构，并设定节点等级（Node Levels）来实现高效的“骨架索引 + 按需加载”。\nL0: Core, L1: Foundation, L2: Domain, L3: Transient.",
+      "tags": [
+        "architecture",
+        "obsidian-graph",
+        "hierarchical-loading"
+      ]
+    },
+    "git_anchor": ""
+  },
+  {
+    "session_id": "5d3c8cea-a42a-4b6d-94dd-1538c2b003f1",
+    "message_id": "mcp-1773825491105",
+    "timestamp": "2026-03-18T09:18:11.105Z",
+    "status": "PROCESSED",
+    "type": "positive",
+    "payload": {
+      "rule": "Promoter Strategy: Knowledge promotion must be preceded by full L3 ingestion and governed by a semantic-frequency hybrid model, emphasizing precision over volume.",
+      "context": "[Symptom/Intent]\nUser requirement: \"给promoter个指引... 综合考虑知识特性和引用次数... 确保完整阅读... 足够准确+到位\".\n\n[Failed Attempts]\n简单的同步逻辑（仅覆盖或追加）会导致知识库臃肿且出现逻辑漂移 (Logical Drift)。\n\n[Breakthrough]\nPromoter (Syncer V3.3+) 必须具备“全局馆长”意识：\n1. 写入前强制执行 Full Ingestion (全量读取)。\n2. 晋升逻辑由“知识语义特性”+“被引用频率”双重驱动。\n3. 写作风格遵循“准确+到位”的极简主义。",
+      "tags": [
+        "promoter-logic",
+        "knowledge-curation",
+        "architecture-v3.4"
+      ]
+    },
+    "git_anchor": ""
+  },
+  {
+    "session_id": "5d3c8cea-a42a-4b6d-94dd-1538c2b003f1",
+    "message_id": "mcp-1773825591030",
+    "timestamp": "2026-03-18T09:19:51.030Z",
+    "status": "PROCESSED",
+    "type": "positive",
+    "payload": {
+      "rule": "Evolution: Knowledge conflict resolution should prioritize versioning/deprecation (superseding), with a hard mandatory user confirmation gate for low-level (L0/L1) architectural rules.",
+      "context": "[Symptom/Intent]\nUser choice: \"C(但是要综合考虑, 如果设计很底层的规则则需要询问用户)\". This resolved the final major design ambiguity for V3.4.\n\n[Failed Attempts]\n在之前的讨论中，我们曾考虑过自动重构全局规则，但这可能会在没有用户参与的情况下破坏系统的核心基石（Core Foundation）。\n\n[Breakthrough]\n确定了 ASSA V3.4 的冲突处理策略：采用版本化/降级（方案 C），并引入“层级熔断”机制——L0/L1 底层规则的任何变更必须经过用户确认（ask_user）。\n同时确认了“骨架图谱 + Rationale 强制化”的精简写作原则。",
+      "tags": [
+        "architecture-v3.4",
+        "conflict-resolution",
+        "human-in-the-loop"
+      ]
+    },
+    "git_anchor": ""
+  },
+  {
+    "session_id": "5d3c8cea-a42a-4b6d-94dd-1538c2b003f1",
+    "message_id": "mcp-1773825698166",
+    "timestamp": "2026-03-18T09:21:38.167Z",
+    "status": "PROCESSED",
+    "type": "positive",
+    "payload": {
+      "rule": "Promotion: The agent should proactively trigger a promotion task if semantic analysis detects explicit cross-project user intent, bypassing the git push latency.",
+      "context": "[Symptom/Intent]\nUser requirement: \"用户是很强烈很明确的意愿且很明显后续别的项目也会用到的信息,需要立刻promote到全局,单纯依赖push感觉调用频率太低了\".\n\n[Failed Attempts]\n仅依赖 git push 钩子会导致多项目并行开发时的“智慧延迟”。\n\n[Breakthrough]\n引入“即时晋升（Instant Promotion）”触发机制：\n如果用户表达了强烈且明确的全局意愿（Strong Cross-Project Intent），Agent 必须立即调用子代理（Promoter）将该模式晋升至全局 L3 库，而不必等待 git push。\n这使得 ASSA 具备了主动扩散智慧的能力。",
+      "tags": [
+        "proactive-promotion",
+        "instant-sync",
+        "architecture-v3.4"
+      ]
     },
     "git_anchor": ""
   }

@@ -41,9 +41,13 @@ hit_count: 1
 **Rule**: When performing deep research or codebase mapping, systematically scan extension temporary directories (e.g., `~/.gemini/tmp`) in addition to primary workspace paths to identify hidden framework clones or research artifacts.
 - **documentation-fix/release-integrity/victory-pattern**: Documentation Consistency & Legal Alignment: Before any release or public push, perform a mandatory cross-check between the physical LICENSE file and the README badges/sections. Legal consistency is a pillar of 'SOTA' technical integrity. (from mcp-1773663082852)
 - **workspace-hygiene/maintenance/release-readiness**: Periodic Workspace Hygiene & Archiving: As the project reaches a release milestone or version boundary, version-specific tests and artifacts should be moved to an 'archive/' directory. This maintains a lean root, reduces cognitive load, and signals release readiness for the next phase. (from mcp-1773663723569)
+- **documentation-fix/mermaid/linear-interception**: When documenting hook-based architectures, always use the flow: User -> BeforeHook -> MainProgram -> AfterHook to preserve structural integrity and numbering logic. (from mcp-1773820681828)
+- **documentation-fix/mermaid/rendering**: Always use '<br/>' for line breaks in Mermaid node labels within Markdown documentation to ensure correct cross-platform rendering. (from mcp-1773820749980)
+- **behavioral-evolution/praise-reinforcement**: Successfully identified and fixed multiple technical issues (Mermaid numbering, logical flow, and rendering) through proactive user feedback, reinforced by '很好'. (from mcp-1773820830239)
+- **architecture-fix/reliability/tool-failure**: Reliable Tool Failure Detection: Prioritize explicit 'status === error' and non-zero exit code matching (e.g., /Exit Code: (\d+)/) over brittle heuristic string matching. (from git diff 7d496dfa)
 
 ---
-id: P-20260316-ROUTR
+id: P-20260316-REFLX
 category: Architecture
 confidence: 10
 status: Active
@@ -163,3 +167,56 @@ hit_count: 1
 **Rationale**: Security restrictions in native file tools (like `write_file`) often prevent operations outside the primary workspace. Using low-level shell commands (`mkdir`, `echo`) provides a necessary bypass for scaffolding external repositories or directories.
 **Rule**: When creating or modifying files in directories outside the current active workspace (e.g., during parallel repository initialization), rely exclusively on `run_shell_command` to bypass path restrictions enforced on native file-system tools.
 - **eslint/monorepo/flat-config/victory-pattern**: In ESLint Flat Config (eslint.config.js) within monorepos or projects with nested sandboxes, always use deep globs (e.g., `**/dist/**`, `**/node_modules/**`) in the `ignores` array. Root-level globs (`dist/**`) will fail to exclude nested build artifacts, causing massive linting failures. (from mcp-1773795558037)
+
+---
+id: P-20260318-LINEA
+category: Documentation
+confidence: 10
+status: Active
+hit_count: 1
+---
+# Mermaid Linear Interception & Rendering
+**Rationale**: Modeling hook-based architectures (like ASSA) requires a strict linear sequence to reflect the interception logic accurately. Showing the User and Hook as parallel inputs to the Agent breaks the causal chain and confuses users. Furthermore, standard Mermaid rendering in Markdown requires '<br/>' for line breaks within node labels; literal '\n' or unescaped newlines often fail to render correctly.
+**Rule**: When documenting interception-based hook architectures in Mermaid diagrams, always use a strictly linear flow: 'User -> BeforeHook -> MainProgram -> AfterHook'. Ensure numbering and directional arrows reflect the interception sequence. Always use '<br/>' for line breaks within node labels to ensure cross-platform rendering consistency.
+
+---
+id: P-20260318-FAILR
+category: Logic
+confidence: 10
+status: Active
+hit_count: 1
+---
+# Reliable Tool Failure Detection (Status Priority)
+**Rationale**: Heuristic or regex-based detection of tool failures in conversational history is brittle due to varying LLM output formats. Relying on explicit 'status' fields from the CLI environment and non-zero 'exitCode' matching from the tool's raw response provides a robust source of truth for error handling and victory detection, avoiding "False Success" reporting.
+**Rule**: Standardize tool failure detection by prioritizing explicit 'status === error' and parsing the 'exitCode' from the tool response (e.g., matching 'Exit Code: (\d+)'). Avoid relying on implicit error objects or descriptive text that can vary across different LLM responses.
+- ****: Always perform a physical filesystem audit (ls/cat) to verify the results of a Syncer subagent promotion before confirming 'Global Sync Success' to the user. Trust but verify with raw shell commands. (from mcp-1773821950671)
+
+---
+id: P-20260318-GRAPH-V3.4
+category: Architecture
+confidence: 10
+status: Active
+hit_count: 1
+---
+# Skeleton Graph Architecture (V3.4)
+**Rationale**: Transitioning from a flat index to a hierarchical, linked knowledge graph (Skeleton Graph) solves the "Context Explosion" and "Intelligence Dilution" problems. By categorizing knowledge into levels (L0-L3) and loading only metadata (Skeleton) for dependencies, the agent maintains high intelligence density without exceeding context limits. Protecting the system's core (L0/L1) with a human-in-the-loop gate ensures stability during rapid autonomous evolution.
+**Rule**: Implement a **Skeleton Graph** architecture for knowledge management with the following mandates:
+1. **Hierarchical Node Levels**: Categorize rules into **L0 (Core Mandates)**, **L1 (Foundational Standards)**, **L2 (Domain Specialists)**, and **L3 (Transient Patterns)**. Loading priority and persistence must scale with these levels.
+2. **Skeleton Loading**: For recursive dependencies identified in the graph, inject only the `id` and `rationale` (the Skeleton) into the context. Only the primary "seed" nodes should have their full content (the Meat) loaded.
+3. **Layered Circuit Breaking**: Any proposed changes, deprecations, or deletions to **L0 or L1** rules MUST trigger an explicit `ask_user` confirmation gate in the Promoter/Syncer agent to prevent accidental corruption of the agent's "Soul."
+4. **Instant Promotion**: Proactively trigger the Syncer sub-agent for "Instant Promotion" of high-value L3 patterns to the Global Library if semantic analysis detects strong, explicit cross-project user intent, bypassing git-push latency.
+
+---
+id: P-20260318-SKELR
+category: Logic
+confidence: 10
+status: Active
+hit_count: 1
+---
+# Skeleton-First Graph Resolution
+**Rationale**: In a large knowledge graph (L3), loading all dependencies of a "Seed" pattern leads to immediate context window saturation (Context Overload). By distinguishing between "Meat" (full content for direct hits) and "Skeleton" (metadata/rationale for dependencies), the system provides the agent with "Awareness" of the broader graph without the "Weight" of its content. This enables "Lazy Context Hydration," where the agent only reads full dependency content via `read_file` if it determines it's necessary during execution.
+**Rule**: Implement a "Skeleton-First" traversal for knowledge graphs. 
+1. **Seed Identification**: Detect "Seed" rules based on domain (CWD) or explicit intent.
+2. **Meat Hydration**: Load the *full content* of Seed rules into the context.
+3. **Skeleton Awareness**: For all transitive dependencies of the Seeds, load only the `id`, `rationale`, and `path`.
+4. **Lazy Fetching**: The agent should treat Skeletons as pointers; if a Skeleton's rationale indicates it is critical for the current task, use `read_file` to fetch the "Meat" on-demand.
