@@ -65,17 +65,19 @@ rl.on('line', (line) => {
                     tools: [
                         {
                             name: 'submit_memory_signal',
-                            description: 'Submits a semantic memory realization to the local ledger.',
+                            description: 'Submits a high-fidelity semantic memory realization to the local ledger.',
                             inputSchema: {
                                 type: 'object',
                                 properties: {
                                     type: { enum: ['positive', 'negative'], description: 'Type of feedback', default: 'positive' },
                                     rule: { type: 'string', description: 'The actionable rule/lesson' },
-                                    context: { type: 'string', description: 'Why this was learned' },
+                                    raw_symptom: { type: 'string', description: 'The original error log, failure message, or symptom that started the issue. Include raw code or logs if possible.' },
+                                    failed_attempts: { type: 'string', description: 'What did we try that did NOT work? Why did it fail?' },
+                                    breakthrough_diff: { type: 'string', description: 'The exact code, command, or logic change that solved the issue.' },
                                     tags: { type: 'array', items: { type: 'string' } },
                                     session_id: { type: 'string', description: 'The current active sessionId' }
                                 },
-                                required: ['rule']
+                                required: ['rule', 'raw_symptom', 'failed_attempts', 'breakthrough_diff']
                             }
                         },
                         {
@@ -131,6 +133,7 @@ rl.on('line', (line) => {
             if (name === 'submit_memory_signal') {
                 const recordId = 'mcp-' + Date.now();
                 ledgerUtils.updateLedger((ledger) => {
+                    const richContext = `[Symptom]: ${args.raw_symptom || 'N/A'}\n[Failed Attempts]: ${args.failed_attempts || 'N/A'}\n[Breakthrough]: ${args.breakthrough_diff || 'N/A'}`;
                     const record = {
                         session_id: args.session_id || 'unknown',
                         message_id: recordId,
@@ -139,7 +142,7 @@ rl.on('line', (line) => {
                         type: args.type || 'positive',
                         payload: {
                             rule: args.rule || '',
-                            context: args.context || '',
+                            context: richContext,
                             tags: args.tags || []
                         },
                         git_anchor: ''
