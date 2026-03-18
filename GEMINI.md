@@ -45,16 +45,16 @@ hit_count: [Count]
 
 ---
 
-# ASSA V3.2 (Autonomous Self-Sovereign Agent) - Project Context
+# ASSA V3.5 (Autonomous Self-Sovereign Agent) - Project Context
 
 ## Project Overview
-ASSA V3.2 is a self-evolving system extension for Gemini CLI. It enables autonomous learning from user interactions without hook-spawned latency.
+ASSA V3.5 is a self-evolving system extension for Gemini CLI. It enables autonomous learning from user interactions with an automated, file-driven knowledge graph indexing engine ("The Weaver").
 
-## Key Architectural Pillar: Subagent-Driven Execution
-To avoid "429 MODEL_CAPACITY_EXHAUSTED" errors and context pollution on restricted models, the system uses **Subagent-Driven Execution**:
-1. **Hooks**: Inject context <1ms (L1/L2/L3 state). Never spawn sub-processes here.
-2. **Main Agent**: Acts as an orchestrator. It detects trigger conditions from the hooks and dispatches tasks to isolated subagents (via `generalist` tool) to perform heavy analysis.
-3. **Immutability**: Never delete memory; use `REWOUND` status for reverted actions.
+## Key Architectural Pillar: The Weaver (V3.5)
+The knowledge graph is now fully automated and decoupled from manual JSON maintenance:
+1. **Single Source of Truth**: All metadata (ID, level, depends_on, triggers) resides in Markdown YAML Frontmatter.
+2. **Automated Rebuild**: The `rebuildGraph.js` script (globalized at `~/.gemini/assa/scripts/`) generates `graph.json` and `index.json` on-demand or after promotion.
+3. **Graph Integrity**: The Weaver implements strict ID-collision detection and broken-link warnings.
 
 ## Trigger Rules (Subagent-Driven)
 | Condition | Action (Dispatched via subagent) |
