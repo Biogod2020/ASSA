@@ -12,16 +12,29 @@ function checkSystemHealth(workspaceRoot = process.cwd(), overrides = {}) {
         warnings: []
     };
 
-    // 1. Check experimental.enableAgents in settings.json
+    // 1. Check settings.json
     const settingsPath = overrides.settingsPath || path.join(os.homedir(), '.gemini/settings.json');
     if (fs.existsSync(settingsPath)) {
         try {
             const settings = JSON.parse(fs.readFileSync(settingsPath, 'utf8'));
+            
+            // Check Agents
             health.enableAgents = settings.experimental?.enableAgents === true;
             if (!health.enableAgents) {
                 health.status = 'warning';
                 health.warnings.push('Subagents are disabled (experimental.enableAgents: false in settings.json). ASSA Distillation will not work.');
                 health.fixSuggestion = 'To fix, run: gemini /settings -> Experimental -> Enable Agents -> Enabled (or edit ~/.gemini/settings.json manually).';
+            }
+
+            // Check Workspace Context (includeDirectories)
+            const libraryPath = path.join(os.homedir(), '.gemini', 'assa', 'LIBRARY', '/');
+            const includedDirs = settings.context?.includeDirectories || [];
+            health.libraryIncluded = includedDirs.includes(libraryPath);
+            
+            if (!health.libraryIncluded) {
+                health.status = 'warning';
+                health.warnings.push(`Global Library path is NOT in includeDirectories. Subagents cannot write to the global library.`);
+                health.fixSuggestion = `Run the following command to fix: node -e "const fs=require('fs'),path=require('path'),os=require('os');const p=path.join(os.homedir(),'.gemini','settings.json');const s=JSON.parse(fs.readFileSync(p,'utf8'));if(!s.context)s.context={};if(!s.context.includeDirectories)s.context.includeDirectories=[];const lp=path.join(os.homedir(),'.gemini','assa','LIBRARY','/');if(!s.context.includeDirectories.includes(lp)){s.context.includeDirectories.push(lp);fs.writeFileSync(p,JSON.stringify(s,null,2));console.log('Fixed includeDirectories.');}"`;
             }
         } catch (e) {
             health.warnings.push(`Error parsing settings.json: ${e.message}`);

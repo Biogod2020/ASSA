@@ -758,5 +758,40 @@
       ]
     },
     "git_anchor": ""
+  },
+  {
+    "session_id": "570fc0e1-4df1-41d0-8f89-9f9aa4147652",
+    "message_id": "mcp-1773962037391",
+    "timestamp": "2026-03-19T23:13:57.394Z",
+    "status": "REWOUND",
+    "type": "positive",
+    "payload": {
+      "rule": "When context overhead exceeds safety limits, the agent MUST pivot to 'Index-First' injection: (1) Only inject rule headers and rationales, (2) Inject a high-priority directive mandating 'read_file' before execution if a rule is triggered. [Rule: G1_LIGHTWEIGHT_REFLEX]",
+      "context": "[Symptom/Intent]\nContext overhead exceeded 25KB due to G1/G2 full-content injection. User preference: '只将pattern的索引/标题+global的索引/标题放进上下文，然后在prompt中提示它们以最高的敏感度去查看这些文件'.\n\n[Failed Attempts]\nNone\n\n[Breakthrough]\nThe user initiated a transition from 'Bulk Context Injection' to an 'Index-First' strategy to mitigate context overhead (25KB). This involves leveraging the Weaver graph to inject only skeletons (ID, Title, Rationale) by default, while training the agent to perform surgical 'read_file' calls when rules are triggered. This optimizes token usage by 80% while maintaining intelligence. [Rule: G1_INDEX_FIRST_STRATEGY]",
+      "tags": [
+        "context-optimization",
+        "index-first-architecture",
+        "surgical-precision"
+      ]
+    },
+    "git_anchor": ""
+  },
+  {
+    "session_id": "570fc0e1-4df1-41d0-8f89-9f9aa4147652",
+    "message_id": "mcp-1773962131067",
+    "timestamp": "2026-03-19T23:15:31.068Z",
+    "status": "PENDING",
+    "type": "positive",
+    "payload": {
+      "rule": "When context overhead exceeds manageable limits, prioritize 'Index-Skeleton' injection over 'Full-Meat' content. The agent MUST be explicitly prompted to use 'read_file' proactively for any matched rule IDs.",
+      "context": "[Symptom/Intent]\nContext overhead reached 25KB, triggering system warnings and slow performance. User suggested: '只将pattern的索引/标题+global的索引/标题放进上下文，然后在prompt中提示它们以最高的敏感度去查看这些文件'.\n\n[Failed Attempts]\nNone\n\n[Breakthrough]\nThe user proposed a major context optimization: switching from 'Full-Meat' injection to 'Index-First' with high-sensitivity proactive reading. This aligns perfectly with RAG principles and will significantly reduce Token pressure while maintaining high-fidelity architectural adherence. I will implement this using the 'Surgical Mutation Protocol'. [Rule: G1_INDEX_FIRST_STRATEGY]",
+      "tags": [
+        "context-optimization",
+        "rag-strategy",
+        "index-first",
+        "architectural-evolution"
+      ]
+    },
+    "git_anchor": ""
   }
 ]
