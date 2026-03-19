@@ -157,29 +157,21 @@ function resolveGraph(seedIds, graph) {
 
     if (!graph || !graph.rules) return resolved;
 
-    // Refactor: V3.5 Foundation/Domain (G1/G2) always Meat
+    // V3.5 Hybrid: Only G0 and G1 are Meat by default
     Object.entries(graph.rules).forEach(([id, rule]) => {
-        if (rule && (rule.level === NODE_LEVELS.G1_FOUNDATION || rule.level === NODE_LEVELS.G2_DOMAIN)) {
+        if (rule && (rule.level === NODE_LEVELS.G0_CORE || rule.level === NODE_LEVELS.G1_FOUNDATION)) {
             resolved.meat.add(id);
+        } else if (rule) {
+            resolved.skeleton.add(id);
         }
     });
 
-    const queue = [...seedIds, ...Array.from(resolved.meat)];
-    seedIds.forEach(id => resolved.meat.add(id));
+    // Seeded rules (matched by domain) should also be Meat
+    seedIds.forEach(id => {
+        resolved.meat.add(id);
+        resolved.skeleton.delete(id);
+    });
 
-    while (queue.length > 0) {
-        const currentId = queue.shift();
-        const rule = graph.rules[currentId];
-        if (rule && rule.depends_on && Array.isArray(rule.depends_on)) {
-            rule.depends_on.forEach(depId => {
-                if (!resolved.meat.has(depId) && !resolved.skeleton.has(depId)) {
-                    // All other dependencies go to skeleton unless they were already added to meat
-                    resolved.skeleton.add(depId);
-                    queue.push(depId);
-                }
-            });
-        }
-    }
     return resolved;
 }
 
@@ -280,6 +272,34 @@ function recognizeReflex(transcript, currentPrompt) {
     }
 
     return reflexContext;
+}
+
+function parseLocalPatterns(filepath) {
+    const content = safeReadFile(filepath);
+    if (!content) return '';
+
+    const blocks = content.split('---').filter(b => b.trim());
+    let skeletonOutput = '';
+
+    blocks.forEach(block => {
+        const idMatch = block.match(/id: (P-\d{8}-\w+)/);
+        const categoryMatch = block.match(/category: (.*)/);
+        const statusMatch = block.match(/status: (.*)/);
+        const titleMatch = block.match(/^# (.*)$/m);
+        const rationaleMatch = block.match(/\*\*Rationale\*\*: (.*)$/m);
+
+        if (idMatch) {
+            const id = idMatch[1];
+            const title = titleMatch ? titleMatch[1].trim() : 'Untitled Pattern';
+            const category = categoryMatch ? categoryMatch[1].trim() : 'General';
+            const status = statusMatch ? statusMatch[1].trim() : 'Unknown';
+            const rationale = rationaleMatch ? rationaleMatch[1].trim() : 'No rationale provided.';
+            
+            skeletonOutput += `- **${id}** (${category}): ${title}\n  **Rationale**: ${rationale}\n  **Status**: ${status}\n\n`;
+        }
+    });
+
+    return skeletonOutput;
 }
 
 log('BeforeAgent Script Execution Started');
@@ -399,7 +419,7 @@ function main() {
         
         // 1. Project Patterns & Decisions (Historical Foundation)
         additionalContext += '### L2 PROJECT PATTERNS & DECISIONS ###\n';
-        additionalContext += safeReadFile(path.join(cwd, '.memory/patterns.md'));
+        additionalContext += parseLocalPatterns(path.join(cwd, '.memory/patterns.md'));
         additionalContext += safeReadFile(path.join(cwd, '.memory/decisions.md'));
         
         // 2. Global Wisdom (Operational Mandates)
@@ -463,10 +483,18 @@ function main() {
             resolved.skeleton.forEach(id => {
                 const rule = graph.rules[id];
                 if (rule) {
-                    additionalContext += `- **${id}**: ${rule.rationale || 'No rationale provided.'} (Path: ${rule.path})\n`;
+                    const title = rule.title || 'Untitled Rule';
+                    const triggers = rule.triggers ? ` Triggers: [${rule.triggers.join(', ')}]` : '';
+                    additionalContext += `- **${id}** (${title}): ${rule.rationale || 'No rationale.'}${triggers} (Path: ${rule.path})\n`;
                 }
             });
         }
+
+        // --- ARCHITECTURAL SENSITIVITY MANDATE ---
+        additionalContext += '\n### 🚨 ARCHITECTURAL SENSITIVITY MANDATE 🚨 ###\n' +
+            'You are operating in **Index-Aware Mode**. The index above lists critical architectural rules (G2/L2).\n' +
+            '**MANDATORY**: If your current task involves any keywords found in the [Triggers] or [Rationale] of a rule, you MUST use `read_file` to fetch its full content BEFORE proposing any code changes. Do NOT guess the implementation details from the summary.\n';
+
 
         // If no domain-specific files were loaded (other than PROMOTED_PATTERNS),
         // we could optionally load a subset of library files as a fallback,
@@ -508,8 +536,8 @@ function main() {
 
         // Mandatory Heartbeat for Continuous Distillation (Rule: G1_CORE_CONTINUOUS_DISTILLATION)
         additionalContext += '\n### MANDATORY NEXT STEP: CONTINUOUS DISTILLATION ###\n' +
-            'You MUST analyze the delta between the previous turns and the user\'s current intent. ' +
-            'Call `submit_memory_signal` (type: positive/neutral) to persist any technical choices, context shifts, or realizations from this turn. ' +
+            '1. **ANALYZE DELTA**: Analyze the delta between previous turns and current intent. Call `submit_memory_signal` to persist realizations.\n' +
+            '2. **REDUNDANCY CHECK**: If you discover a pattern that is REDUNDANT, DUPLICATE, or CONFLICTING with an existing rule in the index, you MUST read the involved entries and ask the user for consolidation advice BEFORE proceeding.\n' +
             'This is a MANDATORY HEARTBEAT; do not skip it.\n';
 
         if (reflexContext) {
