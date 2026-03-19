@@ -37,17 +37,17 @@
 - [x] Task: Audit `mcpServer.js` & Tool Interception [checkpoint: 8fa0626]
     - [x] Verify MCP protocol compliance and tool-call routing.
     - [x] Ensure zero-latency requirements are met during interception.
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Hook Logic Alignment & Reliability Hardening' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Hook Logic Alignment & Reliability Hardening' (Protocol in workflow.md) [checkpoint: c85b28c]
 
 ### Phase 3: V3.5 Feature Integrity & Final Validation
 
-- [ ] Task: Verify Weaver Indexing Integrity
-    - [ ] Run `rebuildGraph.js` and verify against official file-system standards.
-    - [ ] Ensure all 11 core rules are correctly resolved in the injected context.
-- [ ] Task: Validate Semantic Emotion Sensor & Subconscious Directives
-    - [ ] Test proactive signal submission and Rule ID citation in a mocked session.
-    - [ ] Confirm 20KB dynamic warning behavior.
-- [ ] Task: Final System Health Check
-    - [ ] Run `node hooks/healthCheck.js` and resolve any remaining warnings.
-    - [ ] Perform a final audit of the `README.md` for technical accuracy.
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: V3.5 Feature Integrity & Final Validation' (Protocol in workflow.md)
+- [x] Task: Verify Weaver Indexing Integrity [checkpoint: c85b28c]
+    - [x] Run `rebuildGraph.js` and verify against official file-system standards.
+    - [x] Ensure all 11 core rules are correctly resolved in the injected context.
+- [x] Task: Validate Semantic Emotion Sensor & Subconscious Directives [checkpoint: c85b28c]
+    - [x] Test proactive signal submission and Rule ID citation in a mocked session.
+    - [x] Confirm 20KB dynamic warning behavior.
+- [x] Task: Final System Health Check [checkpoint: c85b28c]
+    - [x] Run `node hooks/healthCheck.js` and resolve any remaining warnings.
+    - [x] Perform a final audit of the `README.md` for technical accuracy.
+- [x] Task: Conductor - User Manual Verification 'Phase 3: V3.5 Feature Integrity & Final Validation' (Protocol in workflow.md) [checkpoint: final]
