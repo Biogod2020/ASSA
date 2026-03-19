@@ -64,12 +64,18 @@ Expected: Output showing context size < 10KB.
 Ask a question that triggers a skeletonized G2 rule and verify that I (the Agent) proactively call `read_file` to see the full content.
 - [ ] **Step 2: Commit & Final Push**
 
-### Task 6: Conflict & Redundancy Management (Main Agent)
+### Task 6: Conflict & Redundancy Management (Main Agent Only)
 
 - [ ] **Step 1: Implement Redundancy Detection Instruction**
 Add a directive to the system prompt (or injected context) that instructs the Agent to compare newly read rule content with existing indexed rules.
-- [ ] **Step 2: Define "Ask User" Protocol**
-Specify that if a conflict or redundancy is found, the Agent MUST NOT proceed with modification/promotion silently. It MUST read all involved entries and present a consolidation proposal to the user.
-- [ ] **Step 3: Verification of Inter-Rule Integrity**
+- [ ] **Step 2: Define "Human-in-the-Loop" Protocol**
+Specify that if a conflict or redundancy is found (e.g., during distillation or promotion), the Agent MUST:
+1.  Perform a `read_file` on all involved entries (local and global).
+2.  Present a detailed comparison to the user.
+3.  Ask the user for specific consolidation or modification advice.
+- [ ] **Step 3: Main Process Enforcement**
+Explicitly state in the instructions that this protocol is **limited to the main Agent process**. Automated subagents should flag redundancies for the main Agent rather than attempting silent resolution.
+- [ ] **Step 4: Verification of Inter-Rule Integrity**
 Simulate a scenario where a local pattern overlaps with an L3 rule and verify the Agent asks the user for guidance.
+
 
