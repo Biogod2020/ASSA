@@ -78,4 +78,17 @@ Explicitly state in the instructions that this protocol is **limited to the main
 - [ ] **Step 4: Verification of Inter-Rule Integrity**
 Simulate a scenario where a local pattern overlaps with an L3 rule and verify the Agent asks the user for guidance.
 
+### Task 7: assa-promoter Skill Hardening (Governance Cleanup)
+
+**Files:**
+- Modify: `skills/assa-promoter/SKILL.md`
+
+- [ ] **Step 1: Update SKILL.md with Cleanup Directive**
+Add the requirement to scan and remove redundant local patterns after successful global promotion.
+- [ ] **Step 2: Implement Project-Specific Distillation Rule**
+Specify that local patterns with unique project content should be distilled and written back, rather than just deleted.
+- [ ] **Step 3: Verification of Promoter De-duplication**
+Dispatch a `promoter` subagent to promote a pattern and verify it correctly cleans up the local `.memory/patterns.md`.
+
+
 

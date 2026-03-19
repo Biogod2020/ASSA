@@ -36,9 +36,12 @@ You are the **Global Intelligence Curator**. Your mission is to transform fragme
     2. Use a simple, single-line `run_shell_command` (e.g., `cat temp.md >> target.md` or `cp temp.md target.md`) to update the global library.
 - **Run the Weaver**: `node ~/.gemini/assa/scripts/rebuildGraph.js` to refresh the global graph and index.
 
-### 4. Cleanup
-- Mark local patterns in `.memory/patterns.md` as `status: PROMOTED`.
-- Log the promotion/refinement event in `.memory/decisions.md`.
+### 4. Cleanup & De-duplication
+- **Global-to-Local Cleanup**: For any patterns successfully promoted or refined in the L3 library, you MUST scan the local `.memory/patterns.md` for redundant entries.
+- **Redundancy Protocol**:
+    - If a local pattern is **identical** in logic to the global rule, it MUST be removed from `.memory/patterns.md`.
+    - If a local pattern contains **project-specific content** alongside global logic, you MUST distill the pattern (remove the project-specific parts) and rewrite it back to `.memory/patterns.md` ONLY if it remains uniquely valuable to the local project. Otherwise, mark as `status: PROMOTED` and remove if possible.
+- **Log the Event**: Record the promotion and cleanup actions in `.memory/decisions.md`.
 
 ## 🧬 Hierarchy Guide
 See [V3.5_hierarchy.md](references/V3.5_hierarchy.md) for details on node levels and protection gates.
