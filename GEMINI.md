@@ -54,18 +54,18 @@ The knowledge graph is now fully automated and decoupled from manual JSON mainte
 ## Trigger Rules (Subagent-Driven)
 | Condition | Action (Dispatched via subagent) |
 |-----------|------------------------|
-| 1-4 PENDING | Call `distill_pending` (quick tool) |
-| ≥ 5 PENDING | Dispatch **Distiller** via `generalist` |
-| After `git commit` | **Evaluate Significance**: ONLY dispatch **Distiller** if the commit introduces new architectural patterns, critical bug fixes, or significant logic changes. Skip for chores/docs. |
-| After `git push` | Dispatch **Syncer** via `generalist` |
-| User says `/assa promote` | Dispatch **Syncer** via `generalist` |
+| 1-4 PENDING | Call the `distill_pending` MCP tool immediately. |
+| ≥ 5 PENDING | Dispatch the **Distiller** via the `generalist` tool. |
+| After `git commit` | **Evaluate Significance**: ONLY dispatch the **Distiller** if the commit introduces new architectural patterns, critical bug fixes, or significant logic changes. Skip for chores/docs. |
+| After `git push` | Dispatch the **Syncer** via the `generalist` tool. |
+| User says `/assa promote` | Dispatch the **Syncer** via the `generalist` tool. |
 
 ### ⚡ Smart Reflex (Introspective Evolution)
-- **CORRECTION/PREFERENCE DETECTED**: If the user provides a correction, a stylistic preference, or a recurring instruction (e.g., "Always use X", "Remember to check Y"), YOU MUST immediately call `submit_memory_signal` (type: positive).
-- **PRAISE DETECTED**: Immediately evaluate the preceding turn for a "Success Pattern". Do not wait for the user to ask you to record it.
-- **VICTORY DETECTED**: Analyze the "breakthrough" that turned a failure into a success. Record it as a "Success Pattern".
-- **BARRIER DETECTED**: Perform a Root Cause Analysis (RCA) on the failures. Identify if the barrier is environmental, logical, or stylistic. Record it as a "Technical Barrier" (type: negative).
-- **Silent Capture**: Perform these signalings silently and autonomously.
+- **CORRECTION/PREFERENCE DETECTED**: If the user provides a correction, a stylistic preference, or a recurring instruction (e.g., "Always use X", "Remember to check Y"), YOU MUST IMMEDIATELY call the `submit_memory_signal` (type: positive) MCP tool.
+- **PRAISE DETECTED**: Immediately evaluate the preceding turn for a "Success Pattern". Do not wait for the user to ask you to record it. Call `submit_memory_signal` to persist it.
+- **VICTORY DETECTED**: Analyze the "breakthrough" that turned a failure into a success. You MUST call `submit_memory_signal` to record the exact physical adjustment as a rule.
+- **BARRIER DETECTED**: Perform a Root Cause Analysis (RCA) on the failures. Identify if the barrier is environmental, logical, or stylistic. Record it as a "Technical Barrier" (type: negative) via `submit_memory_signal`.
+- **Silent Capture**: Perform these signalings silently and autonomously using the designated tools.
 
 # User Habits Handbook
 This file records the user's implicit coding preferences and stylistic choices, distilled from multiple projects.

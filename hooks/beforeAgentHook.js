@@ -475,20 +475,6 @@ function main() {
             additionalContext += '\n### L1 PENDING SIGNALS (use distill_pending tool for quick processing) ###\n';
             additionalContext += JSON.stringify(pendingItems, null, 2) + '\n';
         }
-            
-        // 4. Reflexes (Immediate Actions) - HIGHEST PRIORITY / RECENCY
-        let mandatoryAction = '';
-        // Mandatory Heartbeat for Continuous Distillation (Rule: G1_CORE_CONTINUOUS_DISTILLATION)
-        mandatoryAction += '### MANDATORY NEXT STEP: CONTINUOUS DISTILLATION ###\n' +
-            'You MUST analyze the delta between the previous turns and the user\'s current intent. ' +
-            'Call `submit_memory_signal` (type: positive/neutral) to persist any technical choices, context shifts, or realizations from this turn. ' +
-            'This is a MANDATORY HEARTBEAT; do not skip it.\n\n';
-
-        if (reflexContext) {
-            mandatoryAction += `🚨 ASSA REFLEX ALERT 🚨\n${reflexContext}\n`;
-        }
-
-        additionalContext += `\n${mandatoryAction}\n`;
 
         // Context Explosion Guard: If prompt overhead exceeds 20KB (~5k tokens), prepend a warning
         if (additionalContext.length > 20480) {
@@ -498,8 +484,9 @@ function main() {
             additionalContext = warning + additionalContext;
         }
         
+        // 4. Final Directive Layer (Recency Effect - HIGHEST WEIGHT)
+        
         // Semantic Emotion Sensor (Subconscious Directive)
-        // This is always appended at the very end to ensure it is strongly adhered to by the main agent.
         additionalContext += '\n### 🧠 ASSA SUBCONSCIOUS DIRECTIVE (EMOTION SENSOR) ###\n' +
             'You are equipped with a highly sensitive Semantic Emotion Sensor. Before replying, carefully analyze the user\'s recent messages.\n' +
             'If you detect implicit or explicit POSITIVE reinforcement (e.g., "This is a great idea", "I agree", "That worked perfectly"), OR strong NEGATIVE frustration (e.g., "Why is this still failing?", "This is wrong"), you MUST:\n' +
@@ -508,6 +495,16 @@ function main() {
             '3. **Internal Memory Judgment**: Proactively submit signals for your own breakthroughs even if the user doesn\'t explicitly praise them.\n' +
             '4. **Traceability**: When applying an established rule, briefly cite its Rule ID (e.g., [Rule: G1_CORE]) to maintain the evolution chain.\n' +
             'Do NOT wait for a hardcoded keyword. Trust your semantic understanding of the conversation.\n';
+
+        // Mandatory Heartbeat for Continuous Distillation (Rule: G1_CORE_CONTINUOUS_DISTILLATION)
+        additionalContext += '\n### MANDATORY NEXT STEP: CONTINUOUS DISTILLATION ###\n' +
+            'You MUST analyze the delta between the previous turns and the user\'s current intent. ' +
+            'Call `submit_memory_signal` (type: positive/neutral) to persist any technical choices, context shifts, or realizations from this turn. ' +
+            'This is a MANDATORY HEARTBEAT; do not skip it.\n';
+
+        if (reflexContext) {
+            additionalContext += `\n🚨 ASSA REFLEX ALERT 🚨\n${reflexContext}\n`;
+        }
 
         process.stdout.write(JSON.stringify({
             decision: 'allow',
