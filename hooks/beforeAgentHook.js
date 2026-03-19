@@ -218,6 +218,23 @@ function recognizeReflex(transcript, currentPrompt) {
     
     let reflexContext = '';
 
+    // 1. Language-Based Reflex (Correction/Preference/Praise)
+    const indicators = {
+        correction: ['记得', '应该', '必须', '不要', '规范', '习惯', 'remember', 'must', 'should', 'don\'t', 'standard'],
+        praise: ['很好', '棒', 'perfect', 'good job', 'exactly', '不错', '这就对了'],
+    };
+
+    if (currentPrompt && indicators.correction.some(word => currentPrompt.toLowerCase().includes(word))) {
+        reflexContext += '### ASSA REFLEX: CORRECTION/PREFERENCE DETECTED ###\n' +
+            '检测到用户的明确纠偏或工作偏好。你必须立即调用 `submit_memory_signal` (type: positive) 记录这一“工程偏好”。\n' +
+            '注意：Rule 字段应描述该行为的通用指导意义，Context 应引用用户的原始表述。\n\n';
+    }
+
+    if (currentPrompt && indicators.praise.some(word => currentPrompt.toLowerCase().includes(word))) {
+        reflexContext += '### ASSA REFLEX: PRAISE DETECTED ###\n' +
+            '用户表达了肯定。请立即回溯前一个成功的操作，调用 `submit_memory_signal` 记录这个“成功模式”。\n\n';
+    }
+
     const READ_ONLY_TOOLS = ['read_file', 'list_directory', 'grep_search', 'glob', 'ask_user', 'cli_help', 'get_internal_docs', 'web_fetch'];
     
     // Filter to only include turns that have state-mutating tool calls

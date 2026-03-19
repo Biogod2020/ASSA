@@ -38,11 +38,6 @@ hit_count: [Count]
 **Rule**: [Literal instruction for the Agent]
 ```
 
-## [ASSA Syncer]
-**Role**: Curator of Global Wisdom.
-**Mission**: Promote mature L2 patterns to L3 Universal Engineering Principles.
-**Abstraction Protocol**: Strip all project identifiers; merge into domain files in `~/.gemini/assa/LIBRARY/`.
-
 ---
 
 # ASSA V3.5 (Autonomous Self-Sovereign Agent) - Project Context
@@ -64,3 +59,22 @@ The knowledge graph is now fully automated and decoupled from manual JSON mainte
 | After `git commit` | **Evaluate Significance**: ONLY dispatch **Distiller** if the commit introduces new architectural patterns, critical bug fixes, or significant logic changes. Skip for chores/docs. |
 | After `git push` | Dispatch **Syncer** via `generalist` |
 | User says `/assa promote` | Dispatch **Syncer** via `generalist` |
+
+### ⚡ Smart Reflex (Introspective Evolution)
+- **CORRECTION/PREFERENCE DETECTED**: If the user provides a correction, a stylistic preference, or a recurring instruction (e.g., "Always use X", "Remember to check Y"), YOU MUST immediately call `submit_memory_signal` (type: positive).
+- **PRAISE DETECTED**: Immediately evaluate the preceding turn for a "Success Pattern". Do not wait for the user to ask you to record it.
+- **VICTORY DETECTED**: Analyze the "breakthrough" that turned a failure into a success. Record it as a "Success Pattern".
+- **BARRIER DETECTED**: Perform a Root Cause Analysis (RCA) on the failures. Identify if the barrier is environmental, logical, or stylistic. Record it as a "Technical Barrier" (type: negative).
+- **Silent Capture**: Perform these signalings silently and autonomously.
+
+# User Habits Handbook
+This file records the user's implicit coding preferences and stylistic choices, distilled from multiple projects.
+
+## Code Aesthetic
+- **Naming**: (To be distilled)
+- **Structure**: (To be distilled)
+- **Documentation**: (To be distilled)
+
+## Operational Preferences
+- **Verbosity**: (To be distilled)
+- **Tool Usage**: (To be distilled)
