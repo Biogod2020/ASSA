@@ -45,22 +45,22 @@ function main() {
         const toolName = payload.tool_name || 'unknown';
         const toolInput = payload.tool_input || {};
         const toolResponse = payload.tool_response || {};
+        const cwd = payload.cwd || process.cwd();
         
-        // CRITICAL FIX: Heuristic string matching is too brittle.
-        // We prioritize explicit status from the CLI.
+        // Reliability Hardening: Use explicit error property and exitCode
         const llmContent = typeof toolResponse.llmContent === 'string' 
             ? toolResponse.llmContent 
             : JSON.stringify(toolResponse.llmContent || '');
         const exitCodeMatch = llmContent.match(/Exit [Cc]ode: (\d+)/i);
         const exitCode = exitCodeMatch ? parseInt(exitCodeMatch[1]) : undefined;
         
-        // A tool truly failed ONLY if:
-        // 1. Status is explicitly 'error'
-        // 2. Exit code is defined and non-zero
-        const isError = toolResponse.status === 'error' || (exitCode !== undefined && exitCode !== 0);
+        // A tool truly failed if:
+        // 1. toolResponse.error exists (official way)
+        // 2. Exit code is defined and non-zero (shell specific)
+        const isError = !!toolResponse.error || (exitCode !== undefined && exitCode !== 0);
                         
         const summary = isError ? `[FAILED: ${toolName}]` : `[SUCCESS: ${toolName}]`;
-        log(`Tool: ${toolName}, Status: ${toolResponse.status}, ExitCode: ${exitCode} -> ${summary}`);
+        log(`Tool: ${toolName}, Error: ${!!toolResponse.error}, ExitCode: ${exitCode} -> ${summary}`);
         
         let additionalContext = `<!-- ASSA_METADATA: ${summary} -->\n`;
 

@@ -145,7 +145,8 @@ function extractAllText(turn) {
             }
         });
     }
-    return text;
+    // Unescape common HTML entities for metadata matching
+    return text.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
 }
 
 function resolveGraph(seedIds, graph) {
@@ -154,22 +155,22 @@ function resolveGraph(seedIds, graph) {
         skeleton: new Set() // Only metadata/rationale needed
     };
 
+    if (!graph || !graph.rules) return resolved;
+
     // Refactor: V3.5 Foundation/Domain (G1/G2) always Meat
-    if (graph && graph.rules) {
-        Object.entries(graph.rules).forEach(([id, rule]) => {
-            if (rule.level === NODE_LEVELS.G1_FOUNDATION || rule.level === NODE_LEVELS.G2_DOMAIN) {
-                resolved.meat.add(id);
-            }
-        });
-    }
+    Object.entries(graph.rules).forEach(([id, rule]) => {
+        if (rule && (rule.level === NODE_LEVELS.G1_FOUNDATION || rule.level === NODE_LEVELS.G2_DOMAIN)) {
+            resolved.meat.add(id);
+        }
+    });
 
     const queue = [...seedIds, ...Array.from(resolved.meat)];
     seedIds.forEach(id => resolved.meat.add(id));
 
     while (queue.length > 0) {
         const currentId = queue.shift();
-        const rule = graph.rules && graph.rules[currentId];
-        if (rule && rule.depends_on) {
+        const rule = graph.rules[currentId];
+        if (rule && rule.depends_on && Array.isArray(rule.depends_on)) {
             rule.depends_on.forEach(depId => {
                 if (!resolved.meat.has(depId) && !resolved.skeleton.has(depId)) {
                     // All other dependencies go to skeleton unless they were already added to meat
@@ -388,24 +389,37 @@ function main() {
         
         let graph = { rules: {} };
         if (fs.existsSync(graphPath)) {
-            try { graph = JSON.parse(fs.readFileSync(graphPath, 'utf8')); } catch(e) { log(`Graph parse error: ${e.message}`); }
+            try { 
+                const graphContent = fs.readFileSync(graphPath, 'utf8');
+                if (graphContent.trim()) {
+                    graph = JSON.parse(graphContent); 
+                }
+            } catch(e) { 
+                log(`Graph parse error: ${e.message}`); 
+            }
         }
 
         let seedIds = new Set();
         if (fs.existsSync(indexPath)) {
             try {
-                const index = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
-                const cwd = process.cwd().toLowerCase();
-                if (index.mappings && Array.isArray(index.mappings)) {
-                    index.mappings.forEach(m => {
-                        const match = m.domains.some(domain => cwd.includes(domain.toLowerCase()));
-                        if (match) {
-                            log(`Seed match detected: ${m.rule_id || m.pattern}`);
-                            if (m.rule_id) seedIds.add(m.rule_id);
-                        }
-                    });
+                const indexContent = fs.readFileSync(indexPath, 'utf8');
+                if (indexContent.trim()) {
+                    const index = JSON.parse(indexContent);
+                    const currentCwd = cwd.toLowerCase();
+                    if (index.mappings && Array.isArray(index.mappings)) {
+                        index.mappings.forEach(m => {
+                            if (!m.domains) return;
+                            const match = m.domains.some(domain => currentCwd.includes(domain.toLowerCase()));
+                            if (match) {
+                                log(`Seed match detected: ${m.rule_id || m.pattern}`);
+                                if (m.rule_id) seedIds.add(m.rule_id);
+                            }
+                        });
+                    }
                 }
-            } catch (e) { log(`Index parse error: ${e.message}`); }
+            } catch (e) { 
+                log(`Index parse error: ${e.message}`); 
+            }
         }
 
         const resolved = resolveGraph(Array.from(seedIds), graph);

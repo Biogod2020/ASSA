@@ -23,20 +23,20 @@
     - [x] Analyze existing `scripts/tests/beforeAgentHook.test.js` and `scripts/tests/assaV3.5.test.js`.
     - [x] Create a new test suite `scripts/tests/officialAlignment.test.js` to mock official payloads.
     - [x] **TDD: Write failing tests** for any suspected discrepancies or edge cases identified in research.
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Official Specification Analysis & Test Baseline' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Official Specification Analysis & Test Baseline' (Protocol in workflow.md) [checkpoint: 8fa0626]
 
 ### Phase 2: Hook Logic Alignment & Reliability Hardening
 
-- [ ] Task: Audit and Refactor `beforeAgentHook.js`
-    - [ ] Compare local logic with official event lifecycle.
-    - [ ] Ensure `additionalContext` injection is correctly handled per official standards.
-    - [ ] Harden error handling for file reads and JSON parsing.
-- [ ] Task: Audit and Refactor `afterToolHook.js`
-    - [ ] Verify tool-call outcome capture against official `AfterTool` event schema.
-    - [ ] Refine `ASSA_METADATA` injection logic for reliability.
-- [ ] Task: Audit `mcpServer.js` & Tool Interception
-    - [ ] Verify MCP protocol compliance and tool-call routing.
-    - [ ] Ensure zero-latency requirements are met during interception.
+- [x] Task: Audit and Refactor `beforeAgentHook.js` [checkpoint: 8fa0626]
+    - [x] Compare local logic with official event lifecycle.
+    - [x] Ensure `additionalContext` injection is correctly handled per official standards.
+    - [x] Harden error handling for file reads and JSON parsing.
+- [x] Task: Audit and Refactor `afterToolHook.js` [checkpoint: 8fa0626]
+    - [x] Verify tool-call outcome capture against official `AfterTool` event schema.
+    - [x] Refine `ASSA_METADATA` injection logic for reliability.
+- [x] Task: Audit `mcpServer.js` & Tool Interception [checkpoint: 8fa0626]
+    - [x] Verify MCP protocol compliance and tool-call routing.
+    - [x] Ensure zero-latency requirements are met during interception.
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Hook Logic Alignment & Reliability Hardening' (Protocol in workflow.md)
 
 ### Phase 3: V3.5 Feature Integrity & Final Validation
