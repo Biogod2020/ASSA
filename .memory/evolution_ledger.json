@@ -194,7 +194,7 @@
     "session_id": "unknown",
     "message_id": "mcp-1773824965574",
     "timestamp": "2026-03-18T09:09:25.575Z",
-    "status": "REWOUND",
+    "status": "PROCESSED",
     "type": "positive",
     "payload": {
       "rule": "在构建全局知识图谱时，必须为每个节点分配 Tier 等级。BeforeHook 加载顺序应严格遵循 Tier 1 > Tier 2 > Tier 3，并支持基于层级的递归剪枝。",

@@ -62,24 +62,23 @@ function ensureL3Setup() {
     });
 }
 
-function ensureLocalSetup() {
-    const memoryDir = path.resolve(process.cwd(), '.memory');
+function ensureLocalSetup(cwd) {
+    const memoryDir = path.resolve(cwd, '.memory');
     if (!fs.existsSync(memoryDir)) {
-        log('Creating missing .memory directory');
+        log(`Creating missing .memory directory in ${cwd}`);
         fs.mkdirSync(memoryDir, { recursive: true });
     }
     ['patterns.md', 'decisions.md', 'local_habits.md', 'LESSONS_LEARNED.md'].forEach(file => {
         const filePath = path.join(memoryDir, file);
         if (!fs.existsSync(filePath)) {
-            log(`Initializing missing local file: ${file}`);
+            log(`Initializing missing local file: ${file} in ${cwd}`);
             fs.writeFileSync(filePath, `# ${file.split('.')[0].replace(/_/g, ' ').toUpperCase()}\n`, 'utf8');
         }
     });
 }
 
 function safeReadFile(filepath) {
-    const absolutePath = path.resolve(process.cwd(), filepath);
-    if (fs.existsSync(absolutePath)) return fs.readFileSync(absolutePath, 'utf8') + '\n';
+    if (fs.existsSync(filepath)) return fs.readFileSync(filepath, 'utf8') + '\n';
     return '';
 }
 
@@ -295,6 +294,8 @@ function main() {
         }
 
         const userPrompt = payload.prompt || '';
+        const sessionId = payload.session_id || payload.sessionId || 'unknown';
+        const cwd = payload.cwd || process.cwd();
 
         // --- COMMAND INTERCEPTION (V3.4 Slash Commands) ---
         if (userPrompt.trim().startsWith('/assa promote')) {
@@ -317,7 +318,6 @@ function main() {
         }
 
         const agentName = payload.agentName || 'main';
-        const sessionId = payload.sessionId || payload.session_id || 'unknown';
         const currentPrompt = payload.prompt || '';
         const overrides = payload.overrides || {};
         
@@ -332,7 +332,7 @@ function main() {
             }
         }
         
-        log(`Agent: ${agentName}, Session: ${sessionId}, Prompt Length: ${currentPrompt.length}, Active Transcript Turns: ${transcript.length}`);
+        log(`Agent: ${agentName}, Session: ${sessionId}, CWD: ${cwd}, Prompt Length: ${currentPrompt.length}, Active Transcript Turns: ${transcript.length}`);
 
         if (['distiller', 'syncer'].includes(agentName.toLowerCase()) || process.env.ASSA_EVOLVING) {
             process.stdout.write(JSON.stringify({ decision: 'allow' }) + '\n');
@@ -340,9 +340,9 @@ function main() {
         }
 
         ensureL3Setup();
-        ensureLocalSetup();
+        ensureLocalSetup(cwd);
 
-        const health = checkSystemHealth(process.cwd(), overrides);
+        const health = checkSystemHealth(cwd, overrides);
         
         let healthContext = '';
         if (health.status !== 'healthy') {
@@ -360,9 +360,9 @@ function main() {
             ledger = ledgerUtils.updateLedger((l) => {
                 const { ledger: updatedLedger, changed } = cascadeRewound(l, transcript, sessionId);
                 return updatedLedger;
-            });
+            }, cwd);
         } catch (e) {
-            ledger = ledgerUtils.loadLedger();
+            ledger = ledgerUtils.loadLedger(cwd);
         }
 
         const reflexContext = recognizeReflex(transcript, currentPrompt);
@@ -373,8 +373,8 @@ function main() {
         
         // 1. Project Patterns & Decisions (Historical Foundation)
         additionalContext += '### L2 PROJECT PATTERNS & DECISIONS ###\n';
-        additionalContext += safeReadFile('.memory/patterns.md');
-        additionalContext += safeReadFile('.memory/decisions.md');
+        additionalContext += safeReadFile(path.join(cwd, '.memory/patterns.md'));
+        additionalContext += safeReadFile(path.join(cwd, '.memory/decisions.md'));
         
         // 2. Global Wisdom (Operational Mandates)
         additionalContext += '\n### L3 GLOBAL WISDOM ###\n';
@@ -473,7 +473,10 @@ function main() {
 
         process.stdout.write(JSON.stringify({
             decision: 'allow',
-            hookSpecificOutput: { additionalContext }
+            hookSpecificOutput: { 
+                hookEventName: 'BeforeAgent',
+                additionalContext 
+            }
         }) + '\n');
     } catch (globalErr) {
         log(`GLOBAL CRASH in BeforeAgent: ${globalErr.stack}`);

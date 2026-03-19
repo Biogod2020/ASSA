@@ -15,14 +15,14 @@
 
 ### Phase 1: Official Specification Analysis & Test Baseline
 
-- [ ] Task: Deep Audit of `google-gemini/gemini-cli` Hook Infrastructure
-    - [ ] Search official repo for 'hooks' and 'BeforeAgent'/'AfterTool' definitions.
-    - [ ] Analyze `packages/core/src/hooks/` or equivalent paths in the official source.
-    - [ ] Verify payload structures (JSON schemas) for hook events.
-- [ ] Task: Establish Comprehensive Test Baseline
-    - [ ] Analyze existing `scripts/tests/beforeAgentHook.test.js` and `scripts/tests/assaV3.5.test.js`.
-    - [ ] Create a new test suite `scripts/tests/officialAlignment.test.js` to mock official payloads.
-    - [ ] **TDD: Write failing tests** for any suspected discrepancies or edge cases identified in research.
+- [x] Task: Deep Audit of `google-gemini/gemini-cli` Hook Infrastructure [checkpoint: f1872ce]
+    - [x] Search official repo for 'hooks' and 'BeforeAgent'/'AfterTool' definitions.
+    - [x] Analyze `packages/core/src/hooks/` or equivalent paths in the official source.
+    - [x] Verify payload structures (JSON schemas) for hook events.
+- [x] Task: Establish Comprehensive Test Baseline [checkpoint: f1872ce]
+    - [x] Analyze existing `scripts/tests/beforeAgentHook.test.js` and `scripts/tests/assaV3.5.test.js`.
+    - [x] Create a new test suite `scripts/tests/officialAlignment.test.js` to mock official payloads.
+    - [x] **TDD: Write failing tests** for any suspected discrepancies or edge cases identified in research.
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Official Specification Analysis & Test Baseline' (Protocol in workflow.md)
 
 ### Phase 2: Hook Logic Alignment & Reliability Hardening

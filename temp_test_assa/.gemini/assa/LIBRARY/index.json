@@ -1,0 +1,18 @@
+{
+  "version": "3.5",
+  "mappings": [
+    {
+      "domains": [
+        "project_a",
+        "backend"
+      ],
+      "rule_id": "RULE_A"
+    },
+    {
+      "domains": [
+        "shared"
+      ],
+      "rule_id": "RULE_B"
+    }
+  ]
+}

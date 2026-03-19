@@ -1,0 +1,32 @@
+{
+  "version": "3.5",
+  "rules": {
+    "RULE_A": {
+      "id": "RULE_A",
+      "path": "LIBRARY/RULE_A.md",
+      "level": "G1",
+      "rationale": "Core Architecture A",
+      "depends_on": [
+        "RULE_B"
+      ],
+      "evolution_version": "3.5",
+      "triggers": [
+        "project_a",
+        "backend"
+      ]
+    },
+    "RULE_B": {
+      "id": "RULE_B",
+      "path": "LIBRARY/RULE_B.md",
+      "level": "G2",
+      "rationale": "Foundation B",
+      "depends_on": [
+        ""
+      ],
+      "evolution_version": "3.5",
+      "triggers": [
+        "shared"
+      ]
+    }
+  }
+}

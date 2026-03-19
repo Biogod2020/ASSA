@@ -1,11 +1,17 @@
 const fs = require('fs');
 const path = require('path');
 
-const LEDGER_PATH = path.resolve(process.cwd(), '.memory/evolution_ledger.json');
-const LOCK_PATH = path.resolve(process.cwd(), '.memory/evolution_ledger.json.lock');
+function getPaths(cwd = process.cwd()) {
+    const memoryDir = path.resolve(cwd, '.memory');
+    return {
+        memoryDir,
+        ledgerPath: path.join(memoryDir, 'evolution_ledger.json'),
+        lockPath: path.join(memoryDir, 'evolution_ledger.json.lock')
+    };
+}
 
-function ensureMemoryDir() {
-    const memoryDir = path.dirname(LEDGER_PATH);
+function ensureMemoryDir(cwd) {
+    const { memoryDir } = getPaths(cwd);
     if (!fs.existsSync(memoryDir)) {
         fs.mkdirSync(memoryDir, { recursive: true });
     }
@@ -14,20 +20,21 @@ function ensureMemoryDir() {
 /**
  * Simple atomic file lock using mkdirSync (zero-dependency) with retries
  * @param {Function} callback 
+ * @param {string} cwd
  */
-function withLock(callback) {
-    ensureMemoryDir();
-    const maxRetries = 50; // Increased retries
+function withLock(callback, cwd) {
+    ensureMemoryDir(cwd);
+    const { lockPath } = getPaths(cwd);
+    const maxRetries = 50; 
     let lockAcquired = false;
 
     for (let i = 0; i < maxRetries; i++) {
         try {
-            fs.mkdirSync(LOCK_PATH);
+            fs.mkdirSync(lockPath);
             lockAcquired = true;
             break;
         } catch (err) {
             if (err.code === 'EEXIST') {
-                // Wait and retry with a small random delay to reduce collision
                 const retryDelay = Math.floor(Math.random() * 50) + 10;
                 const start = Date.now();
                 while (Date.now() - start < retryDelay) { /* block */ }
@@ -45,21 +52,19 @@ function withLock(callback) {
         return callback();
     } finally {
         try {
-            fs.rmdirSync(LOCK_PATH);
+            fs.rmdirSync(lockPath);
         } catch (err) {
             // Ignore cleanup errors
         }
     }
 }
 
-function loadLedger() {
-    if (!fs.existsSync(LEDGER_PATH)) {
-        // We don't call saveLedger here to avoid recursive locking issues
-        // if saveLedger also uses withLock. 
-        // Instead, just return empty and let the caller decide.
+function loadLedger(cwd) {
+    const { ledgerPath } = getPaths(cwd);
+    if (!fs.existsSync(ledgerPath)) {
         return [];
     }
-    const data = fs.readFileSync(LEDGER_PATH, 'utf8');
+    const data = fs.readFileSync(ledgerPath, 'utf8');
     try {
         return JSON.parse(data || '[]');
     } catch (e) {
@@ -67,24 +72,26 @@ function loadLedger() {
     }
 }
 
-function saveLedger(ledger) {
-    fs.writeFileSync(LEDGER_PATH, JSON.stringify(ledger, null, 2), 'utf8');
+function saveLedger(ledger, cwd) {
+    const { ledgerPath } = getPaths(cwd);
+    fs.writeFileSync(ledgerPath, JSON.stringify(ledger, null, 2), 'utf8');
 }
 
 /**
  * Perform a thread-safe update to the ledger
  * @param {Function} updateFn (ledger) => updatedLedger
+ * @param {string} cwd
  */
-function updateLedger(updateFn) {
+function updateLedger(updateFn, cwd) {
     return withLock(() => {
-        const ledger = loadLedger();
+        const ledger = loadLedger(cwd);
         const updated = updateFn(ledger);
-        saveLedger(updated);
+        saveLedger(updated, cwd);
         return updated;
-    });
+    }, cwd);
 }
 
-function markProcessed(messageIds) {
+function markProcessed(messageIds, cwd) {
     updateLedger((ledger) => {
         ledger.forEach(entry => {
             if (messageIds.includes(entry.message_id)) {
@@ -92,15 +99,14 @@ function markProcessed(messageIds) {
             }
         });
         return ledger;
-    });
+    }, cwd);
 }
 
 module.exports = {
     loadLedger,
     saveLedger,
-    updateLedger, // New atomic update method
+    updateLedger,
     markProcessed,
     withLock,
-    LEDGER_PATH,
-    LOCK_PATH
+    getPaths // Replaces static LEDGER_PATH/LOCK_PATH exports
 };

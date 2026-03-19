@@ -78,7 +78,10 @@ function main() {
 
         process.stdout.write(JSON.stringify({
             decision: 'allow',
-            hookSpecificOutput: { additionalContext }
+            hookSpecificOutput: { 
+                hookEventName: 'AfterTool',
+                additionalContext 
+            }
         }) + '\n');
     } catch (globalErr) {
         log(`GLOBAL CRASH in AfterTool: ${globalErr.stack}`);
