@@ -759,5 +759,23 @@
       ]
     },
     "git_anchor": ""
+  },
+  {
+    "session_id": "570fc0e1-4df1-41d0-8f89-9f9aa4147652",
+    "message_id": "mcp-1773963129692",
+    "timestamp": "2026-03-19T23:32:09.693Z",
+    "status": "PENDING",
+    "type": "positive",
+    "payload": {
+      "rule": "Conflict/Redundancy resolution MUST involve a user consultation after a mandatory deep read of all involved patterns. This specific protocol is restricted to the main process to ensure architectural integrity via human-in-the-loop verification.",
+      "context": "[Symptom/Intent]\nUser hint: '如果ai发现了冗余/重复/冲突的pattern，就需要仔细阅读这些条目然后问用户修改的意见（限于主进程）'\n\n[Failed Attempts]\nNone\n\n[Breakthrough]\nThe user clarified the redundancy management protocol: (1) Mandatory deep reading of conflicting patterns, (2) Mandatory human-in-the-loop for consolidation advice, and (3) Restriction of this high-stakes decision-making to the main process. This prevents automated subagents from unilaterally modifying or deleting overlapping knowledge without user oversight. [Rule: G1_REDUNDANCY_GOVERNANCE_PROTOCOL]",
+      "tags": [
+        "governance-hardening",
+        "human-in-the-loop",
+        "conflict-resolution",
+        "main-process-constraint"
+      ]
+    },
+    "git_anchor": ""
   }
 ]

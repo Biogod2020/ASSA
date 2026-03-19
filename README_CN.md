@@ -54,6 +54,41 @@ flowchart TD
     SubAgent -- "8. 提炼 & 升华经验" --> Mem_Global
 ```
 
+### 🌐 活跃全局知识图谱
+
+以下是 L3 全局智慧库的实时结构，由 **Weaver (V3.5)** 引擎自动维护。它可视化了工程标准 (G1)、领域知识 (G2) 和工具碎片 (G3) 之间的层级依赖关系。
+
+```mermaid
+graph TD
+  subgraph G1[G1: 基础层]
+    P_20260319_ARCH_GOVERNANCE["P-20260319-ARCH-GOVERNANCE<br/>架构治理与深度审计"]
+    P_20260319_DUAL_AXIS["P-20260319-DUAL-AXIS<br/>双轴架构视角"]
+    P_20260319_HARDENING["P-20260319-HARDENING<br/>指令硬化与语言标准化"]
+    P_20260319_RECENCY_WEIGHTING["P-20260319-RECENCY-WEIGHTING<br/>基于近因效应的上下文注入"]
+  end
+  subgraph G2[G2: 领域层]
+    P_20260319_CONT_DISTILL["P-20260319-CONT-DISTILL<br/>持续提炼协议"]
+    P_20260319_INDEX_FIRST["P-20260319-INDEX-FIRST<br/>索引优先上下文优化策略"]
+    P_20260319_PHYSICAL_METADATA["P-20260319-PHYSICAL-METADATA<br/>物理坐标注入 (ASSA_METADATA)"]
+    P_20260319_SURGICAL_EDIT["P-20260319-SURGICAL-EDIT<br/>手术刀式变动与深度阅读协议"]
+    P_20260319_VISUAL_QA["P-20260319-VISUAL-QA<br/>诚实的视觉校验 (高保真审计)"]
+  end
+  subgraph G3[G3: 碎片层]
+    P_SKILL_CANDIDATE_REAL["P-SKILL-CANDIDATE-REAL<br/>技能候选验证"]
+    P_UNIVERSAL_NODEJS_MIDDLEWARE["P-UNIVERSAL-NODEJS-MIDDLEWARE<br/>通用Node.js中间件规范"]
+    P_20260315_NODE_JS_MID["P-20260315-NODE-JS-MID<br/>Node.js 中间件增强"]
+    U_20260315_IMMUTABILITY["U-20260315-IMMUTABILITY<br/>不可变性原则"]
+    P_20260317_TS_INTF["P-20260317-TS-INTF<br/>TypeScript Interface 优先"]
+  end
+
+  %% Styling
+  classDef g1 fill:#f9f,stroke:#333,stroke-width:2px;
+  classDef g2 fill:#bbf,stroke:#333,stroke-width:2px;
+  classDef g3 fill:#dfd,stroke:#333,stroke-width:1px;
+  class P_20260319_ARCH_GOVERNANCE,P_20260319_DUAL_AXIS,P_20260319_HARDENING,P_20260319_RECENCY_WEIGHTING g1;
+  class P_20260319_CONT_DISTILL,P_20260319_INDEX_FIRST,P_20260319_PHYSICAL_METADATA,P_20260319_SURGICAL_EDIT,P_20260319_VISUAL_QA g2;
+```
+
 ### 关键架构：
 - **Weaver 织网者 (V3.5 自动化索引)**：从手动维护 JSON 转向全自动的文件驱动系统。Markdown 成为 **Single Source of Truth**；脚本自动生成高性能索引并具备严格的 ID 冲突和死链检测。
 - **Skeleton-First 骨架优先解析**：针对长对话场景，V3.5 引入“骨架加载”机制。仅为当前活跃节点加载全文，其余依赖节点仅注入 ID 和核心摘要（骨架），节省高达 90% 的上下文 Token。

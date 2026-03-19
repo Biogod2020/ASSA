@@ -54,6 +54,41 @@ flowchart TD
     SubAgent -- "8. Distill & Promote" --> Mem_Global
 ```
 
+### 🌐 Active Global Knowledge Graph
+
+Below is the live structure of the L3 Global Wisdom library, automatically maintained by the **Weaver (V3.5)** engine. It visualizes the hierarchical dependencies between engineering standards (G1), domain knowledge (G2), and utility fragments (G3).
+
+```mermaid
+graph TD
+  subgraph G1[G1: Foundation]
+    P_20260319_ARCH_GOVERNANCE["P-20260319-ARCH-GOVERNANCE<br/>Architectural Governance & Deep Auditing"]
+    P_20260319_DUAL_AXIS["P-20260319-DUAL-AXIS<br/>Dual-Axis Architectural Perspective"]
+    P_20260319_HARDENING["P-20260319-HARDENING<br/>Instruction Hardening & Linguistic Standardization"]
+    P_20260319_RECENCY_WEIGHTING["P-20260319-RECENCY-WEIGHTING<br/>Recency-Based Context Injection"]
+  end
+  subgraph G2[G2: Domain]
+    P_20260319_CONT_DISTILL["P-20260319-CONT-DISTILL<br/>Continuous Distillation Protocol"]
+    P_20260319_INDEX_FIRST["P-20260319-INDEX-FIRST<br/>Index-First Context Optimization Strategy"]
+    P_20260319_PHYSICAL_METADATA["P-20260319-PHYSICAL-METADATA<br/>Physical Coordinate Injection (ASSA_METADATA)"]
+    P_20260319_SURGICAL_EDIT["P-20260319-SURGICAL-EDIT<br/>Surgical Mutation & Deep Reading Protocol"]
+    P_20260319_VISUAL_QA["P-20260319-VISUAL-QA<br/>Honest Visual Verification (Fidelity Audit)"]
+  end
+  subgraph G3[G3: Fragment]
+    P_SKILL_CANDIDATE_REAL["P-SKILL-CANDIDATE-REAL<br/>P-SKILL-CANDIDATE-REAL"]
+    P_UNIVERSAL_NODEJS_MIDDLEWARE["P-UNIVERSAL-NODEJS-MIDDLEWARE<br/>P-UNIVERSAL-NODEJS-MIDDLEWARE"]
+    P_20260315_NODE_JS_MID["P-20260315-NODE-JS-MID<br/>P-20260315-NODE-JS-MID"]
+    U_20260315_IMMUTABILITY["U-20260315-IMMUTABILITY<br/>U-20260315-IMMUTABILITY"]
+    P_20260317_TS_INTF["P-20260317-TS-INTF<br/>P-20260317-TS-INTF"]
+  end
+
+  %% Styling
+  classDef g1 fill:#f9f,stroke:#333,stroke-width:2px;
+  classDef g2 fill:#bbf,stroke:#333,stroke-width:2px;
+  classDef g3 fill:#dfd,stroke:#333,stroke-width:1px;
+  class P_20260319_ARCH_GOVERNANCE,P_20260319_DUAL_AXIS,P_20260319_HARDENING,P_20260319_RECENCY_WEIGHTING g1;
+  class P_20260319_CONT_DISTILL,P_20260319_INDEX_FIRST,P_20260319_PHYSICAL_METADATA,P_20260319_SURGICAL_EDIT,P_20260319_VISUAL_QA g2;
+```
+
 ### Key Architectural Pillars:
 - **The Weaver (V3.5 Automated Indexing)**: Transitioned from manual JSON maintenance to a fully automated, file-driven system. Markdown is now the **Single Source of Truth**; the `rebuildGraph.js` engine automatically generates high-performance JSON indexes (`graph.json`, `index.json`) with strict ID-collision and broken-link detection.
 - **Skeleton-First Resolution**: To prevent context window saturation in long sessions, V3.5 implements "Skeleton Loading." It loads full content only for active "Seed" nodes, while injecting only the ID, rationale, and file path (the Skeleton) for dependencies, reducing token overhead by up to 90%.
