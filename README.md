@@ -60,33 +60,39 @@ Below is the live structure of the L3 Global Wisdom library, automatically maint
 
 ```mermaid
 graph TD
-  subgraph G1[G1: Foundation]
-    P_20260319_ARCH_GOVERNANCE["P-20260319-ARCH-GOVERNANCE<br/>Architectural Governance & Deep Auditing"]
-    P_20260319_DUAL_AXIS["P-20260319-DUAL-AXIS<br/>Dual-Axis Architectural Perspective"]
-    P_20260319_HARDENING["P-20260319-HARDENING<br/>Instruction Hardening & Linguistic Standardization"]
-    P_20260319_RECENCY_WEIGHTING["P-20260319-RECENCY-WEIGHTING<br/>Recency-Based Context Injection"]
+  subgraph G1 ["G1: Foundation (Core Standards)"]
+    P_20260319_ARCH_GOVERNANCE{{"<b>P-20260319-ARCH-GOVERNANCE</b><br/>Architectural Governance & Deep Auditing"}}
+    P_20260319_DUAL_AXIS{{"<b>P-20260319-DUAL-AXIS</b><br/>Dual-Axis Architectural Perspective"}}
+    P_20260319_HARDENING{{"<b>P-20260319-HARDENING</b><br/>Instruction Hardening & Linguistic Standardization"}}
+    P_20260319_RECENCY_WEIGHTING{{"<b>P-20260319-RECENCY-WEIGHTING</b><br/>Recency-Based Context Injection"}}
   end
-  subgraph G2[G2: Domain]
-    P_20260319_CONT_DISTILL["P-20260319-CONT-DISTILL<br/>Continuous Distillation Protocol"]
-    P_20260319_INDEX_FIRST["P-20260319-INDEX-FIRST<br/>Index-First Context Optimization Strategy"]
-    P_20260319_PHYSICAL_METADATA["P-20260319-PHYSICAL-METADATA<br/>Physical Coordinate Injection (ASSA_METADATA)"]
-    P_20260319_SURGICAL_EDIT["P-20260319-SURGICAL-EDIT<br/>Surgical Mutation & Deep Reading Protocol"]
-    P_20260319_VISUAL_QA["P-20260319-VISUAL-QA<br/>Honest Visual Verification (Fidelity Audit)"]
+  subgraph G2 ["G2: Domain (Specialized Knowledge)"]
+    P_20260319_CONT_DISTILL("<b>P-20260319-CONT-DISTILL</b><br/>Continuous Distillation Protocol")
+    P_20260319_INDEX_FIRST("<b>P-20260319-INDEX-FIRST</b><br/>Index-First Context Optimization Strategy")
+    P_20260319_PHYSICAL_METADATA("<b>P-20260319-PHYSICAL-METADATA</b><br/>Physical Coordinate Injection (ASSA_METADATA)")
+    P_20260319_SURGICAL_EDIT("<b>P-20260319-SURGICAL-EDIT</b><br/>Surgical Mutation & Deep Reading Protocol")
+    P_20260319_VISUAL_QA("<b>P-20260319-VISUAL-QA</b><br/>Honest Visual Verification (Fidelity Audit)")
   end
-  subgraph G3[G3: Fragment]
-    P_SKILL_CANDIDATE_REAL["P-SKILL-CANDIDATE-REAL<br/>P-SKILL-CANDIDATE-REAL"]
-    P_UNIVERSAL_NODEJS_MIDDLEWARE["P-UNIVERSAL-NODEJS-MIDDLEWARE<br/>P-UNIVERSAL-NODEJS-MIDDLEWARE"]
-    P_20260315_NODE_JS_MID["P-20260315-NODE-JS-MID<br/>P-20260315-NODE-JS-MID"]
-    U_20260315_IMMUTABILITY["U-20260315-IMMUTABILITY<br/>U-20260315-IMMUTABILITY"]
-    P_20260317_TS_INTF["P-20260317-TS-INTF<br/>P-20260317-TS-INTF"]
+  subgraph G3 ["G3: Fragment (Snippets & Tools)"]
+    P_SKILL_CANDIDATE_REAL["<b>P-SKILL-CANDIDATE-REAL</b><br/>P-SKILL-CANDIDATE-REAL"]
+    P_UNIVERSAL_NODEJS_MIDDLEWARE["<b>P-UNIVERSAL-NODEJS-MIDDLEWARE</b><br/>P-UNIVERSAL-NODEJS-MIDDLEWARE"]
+    P_20260315_NODE_JS_MID["<b>P-20260315-NODE-JS-MID</b><br/>P-20260315-NODE-JS-MID"]
+    U_20260315_IMMUTABILITY["<b>U-20260315-IMMUTABILITY</b><br/>U-20260315-IMMUTABILITY"]
+    P_20260317_TS_INTF["<b>P-20260317-TS-INTF</b><br/>P-20260317-TS-INTF"]
   end
+  P_20260319_DUAL_AXIS --> P_20260319_ARCH_GOVERNANCE
+  P_20260319_PHYSICAL_METADATA --> P_20260319_CONT_DISTILL
+  P_20260318_WEAVR_V3.5 --> P_20260319_INDEX_FIRST
+  P_20260318_REFLX --> P_20260319_RECENCY_WEIGHTING
+  P_20260319_SURGICAL_EDIT --> P_20260319_VISUAL_QA
 
   %% Styling
-  classDef g1 fill:#f9f,stroke:#333,stroke-width:2px;
-  classDef g2 fill:#bbf,stroke:#333,stroke-width:2px;
-  classDef g3 fill:#dfd,stroke:#333,stroke-width:1px;
-  class P_20260319_ARCH_GOVERNANCE,P_20260319_DUAL_AXIS,P_20260319_HARDENING,P_20260319_RECENCY_WEIGHTING g1;
-  class P_20260319_CONT_DISTILL,P_20260319_INDEX_FIRST,P_20260319_PHYSICAL_METADATA,P_20260319_SURGICAL_EDIT,P_20260319_VISUAL_QA g2;
+  classDef style_G1 fill:#1a5fb4,stroke:#333,stroke-width:2px,color:#fff,font-family:Arial;
+  class P_20260319_ARCH_GOVERNANCE,P_20260319_DUAL_AXIS,P_20260319_HARDENING,P_20260319_RECENCY_WEIGHTING style_G1;
+  classDef style_G2 fill:#26a269,stroke:#333,stroke-width:2px,color:#fff,font-family:Arial;
+  class P_20260319_CONT_DISTILL,P_20260319_INDEX_FIRST,P_20260319_PHYSICAL_METADATA,P_20260319_SURGICAL_EDIT,P_20260319_VISUAL_QA style_G2;
+  classDef style_G3 fill:#9a9996,stroke:#333,stroke-width:2px,color:#fff,font-family:Arial;
+  class P_SKILL_CANDIDATE_REAL,P_UNIVERSAL_NODEJS_MIDDLEWARE,P_20260315_NODE_JS_MID,U_20260315_IMMUTABILITY,P_20260317_TS_INTF style_G3;
 ```
 
 ### Key Architectural Pillars:
