@@ -63,3 +63,13 @@ Expected: Output showing context size < 10KB.
 - [ ] **Step 1: End-to-End Test**
 Ask a question that triggers a skeletonized G2 rule and verify that I (the Agent) proactively call `read_file` to see the full content.
 - [ ] **Step 2: Commit & Final Push**
+
+### Task 6: Conflict & Redundancy Management (Main Agent)
+
+- [ ] **Step 1: Implement Redundancy Detection Instruction**
+Add a directive to the system prompt (or injected context) that instructs the Agent to compare newly read rule content with existing indexed rules.
+- [ ] **Step 2: Define "Ask User" Protocol**
+Specify that if a conflict or redundancy is found, the Agent MUST NOT proceed with modification/promotion silently. It MUST read all involved entries and present a consolidation proposal to the user.
+- [ ] **Step 3: Verification of Inter-Rule Integrity**
+Simulate a scenario where a local pattern overlaps with an L3 rule and verify the Agent asks the user for guidance.
+
