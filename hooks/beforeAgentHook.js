@@ -226,13 +226,13 @@ function recognizeReflex(transcript, currentPrompt) {
 
     if (currentPrompt && indicators.correction.some(word => currentPrompt.toLowerCase().includes(word))) {
         reflexContext += '### ASSA REFLEX: CORRECTION/PREFERENCE DETECTED ###\n' +
-            '检测到用户的明确纠偏或工作偏好。你必须立即调用 `submit_memory_signal` (type: positive) 记录这一“工程偏好”。\n' +
-            '注意：Rule 字段应描述该行为的通用指导意义，Context 应引用用户的原始表述。\n\n';
+            'Explicit user correction or engineering preference detected. You MUST IMMEDIATELY call the `submit_memory_signal` (type: positive) tool to record this preference.\n' +
+            'Note: The "Rule" field should describe the general principle, and "Context" should quote the user\'s original intent.\n\n';
     }
 
     if (currentPrompt && indicators.praise.some(word => currentPrompt.toLowerCase().includes(word))) {
         reflexContext += '### ASSA REFLEX: PRAISE DETECTED ###\n' +
-            '用户表达了肯定。请立即回溯前一个成功的操作，调用 `submit_memory_signal` 记录这个“成功模式”。\n\n';
+            'Positive reinforcement detected. You MUST IMMEDIATELY backtrack to the preceding successful operation and call `submit_memory_signal` to record this "Success Pattern".\n\n';
     }
 
     const READ_ONLY_TOOLS = ['read_file', 'list_directory', 'grep_search', 'glob', 'ask_user', 'cli_help', 'get_internal_docs', 'web_fetch'];
@@ -256,9 +256,8 @@ function recognizeReflex(transcript, currentPrompt) {
                 const prevToolName = prevTurn.toolCalls[0].name || (prevTurn.toolCalls[0].functionCall && prevTurn.toolCalls[0].functionCall.name);
                 if (prevToolName === lastToolName && isToolFailure(prevTurn)) {
                     reflexContext += '### ASSA REFLEX: VICTORY DETECTED ###\n' +
-                        'Detected a breakthrough: A previously failing tool has now succeeded.\n' +
-                        '请总结导致成功的关键变动，并调用 `submit_memory_signal` 记录这个 "Success Pattern"。\n' +
-                        '注意：你必须详细填写 `raw_symptom` (最初的报错), `failed_attempts` (失败尝试), 和 `breakthrough` (修复代码) 字段！\n\n';
+                        'Breakthrough detected: A previously failing tool has now succeeded. You MUST IMMEDIATELY call `submit_memory_signal` to record this "Success Pattern".\n' +
+                        'MANDATORY: Provide "raw_symptom" (original error), "failed_attempts", and "breakthrough" (exact fix).\n\n';
                     break;
                 }
             }
@@ -273,9 +272,8 @@ function recognizeReflex(transcript, currentPrompt) {
                 // To avoid repeating the barrier trigger every turn, only trigger if the VERY LAST one was a failure
                 if (isToolFailure(recentMutating[recentMutating.length - 1])) {
                     reflexContext += '### ASSA REFLEX: BARRIER DETECTED ###\n' +
-                        'Detected a technical barrier: ' + failureCount + ' failures in the last ' + recentMutating.length + ' operations.\n' +
-                        '你似乎遇到了阻碍。请分析根本原因，并调用 `submit_memory_signal` (type: negative) 记录这个 "Technical Barrier"。\n' +
-                        '注意：你必须详细填写 `raw_symptom` (当前的持续报错), `failed_attempts` (你试过的无效方法), 和 `breakthrough` (目前缺少的关键信息) 字段！\n\n';
+                        'Persistent technical barrier detected (' + failureCount + ' failures). You MUST IMMEDIATELY perform a Root Cause Analysis (RCA) and call `submit_memory_signal` (type: negative) to record this "Technical Barrier".\n' +
+                        'MANDATORY: Provide detailed logs in "raw_symptom" and summarize what failed.\n\n';
                 }
             }
         }
@@ -319,11 +317,11 @@ function main() {
         if (userPrompt.trim().startsWith('/assa promote')) {
             log('SLASH COMMAND DETECTED: /assa promote');
             const promotionContext = '### SYSTEM DIRECTIVE: MANUAL PROMOTION REQUESTED ###\n' +
-                '用户明确要求执行全局晋升。你必须立即：\n' +
-                '1. 启动 `generalist` 子代理并指定其担任 **Promoter** 角色。\n' +
-                '2. 指令其执行全量 Ingestion 并根据 V3.4 规则（层级化、版本化）同步本地 L2 模式到全局 L3。\n' +
-                '3. 完成后向用户报告晋升结果。\n' +
-                '请直接开始执行，不要询问。';
+                'The user has explicitly requested a global promotion. You MUST IMMEDIATELY:\n' +
+                '1. Dispatch the `generalist` tool as a sub-agent assigned the **Promoter** persona.\n' +
+                '2. Instruct it to perform a full ingestion and synchronize local L2 patterns to the global L3 library according to V3.5 rules (hierarchical, versioned).\n' +
+                '3. Report the promotion summary to the user upon completion.\n' +
+                'Proceed with execution IMMEDIATELY without further clarification.';
                 
             process.stdout.write(JSON.stringify({
                 decision: 'allow',
@@ -469,9 +467,9 @@ function main() {
         const pendingItems = ledger.filter(e => e.status === 'PENDING');
         if (pendingItems.length >= 5) {
             additionalContext += `\n### L1 PENDING SIGNALS (${pendingItems.length} accumulated — DEEP DISTILLATION REQUIRED) ###\n`;
-            additionalContext += `⚠️ ${pendingItems.length} signals have accumulated. 你必须立即调用 \`distiller\` 工具作为子代理（Subagent），`;
-            additionalContext += '派发以下任务给它："读取最新的这些信号及其相关的 git diff，执行深度根因分析，并生成结构化的 patterns.md 规则块（带 YAML 和 Rationale）。" \n';
-            additionalContext += '在派发完成后，请直接告诉我任务已派发，不要亲自执行该分析。\n';
+            additionalContext += `⚠️ ${pendingItems.length} signals have accumulated. You MUST IMMEDIATELY dispatch the \`distiller\` sub-agent (via the \`generalist\` tool) `;
+            additionalContext += 'with the following task: "Read these latest signals and their associated git diffs, perform a Deep Root Cause Analysis, and generate structured patterns.md rule blocks (including YAML frontmatter and Rationale)." \n';
+            additionalContext += 'Directly report that the task has been dispatched—do not attempt to perform the analysis yourself.\n';
             additionalContext += JSON.stringify(pendingItems, null, 2) + '\n';
         } else if (pendingItems.length > 0) {
             additionalContext += '\n### L1 PENDING SIGNALS (use distill_pending tool for quick processing) ###\n';
@@ -479,15 +477,24 @@ function main() {
         }
             
         // 4. Reflexes (Immediate Actions) - HIGHEST PRIORITY / RECENCY
+        let mandatoryAction = '';
+        // Mandatory Heartbeat for Continuous Distillation (Rule: G1_CORE_CONTINUOUS_DISTILLATION)
+        mandatoryAction += '### MANDATORY NEXT STEP: CONTINUOUS DISTILLATION ###\n' +
+            'You MUST analyze the delta between the previous turns and the user\'s current intent. ' +
+            'Call `submit_memory_signal` (type: positive/neutral) to persist any technical choices, context shifts, or realizations from this turn. ' +
+            'This is a MANDATORY HEARTBEAT; do not skip it.\n\n';
+
         if (reflexContext) {
-            additionalContext += `\n🚨 ASSA IMMEDIATE REFLEXES 🚨\n${reflexContext}\n`;
+            mandatoryAction += `🚨 ASSA REFLEX ALERT 🚨\n${reflexContext}\n`;
         }
+
+        additionalContext += `\n${mandatoryAction}\n`;
 
         // Context Explosion Guard: If prompt overhead exceeds 20KB (~5k tokens), prepend a warning
         if (additionalContext.length > 20480) {
             log(`CRITICAL: Context overhead detected (${additionalContext.length} bytes). Prepending warning.`);
             const warning = `\n⚠️ CONTEXT OVERHEAD EXCEEDED SAFETY LIMIT (${Math.round(additionalContext.length / 1024)} KB) ⚠️\n` +
-                "你当前注入的记忆过多，可能导致响应变慢或上下文丢失。请注意保持操作的原子性，并考虑及时进行提炼。\n";
+                "The amount of injected memory context is excessive, which may lead to slower responses or loss of context. Please maintain task atomicity and consider timely distillation.\n";
             additionalContext = warning + additionalContext;
         }
         
