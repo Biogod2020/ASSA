@@ -31,27 +31,30 @@ flowchart TD
     Hook_Before{"⚙️ BeforeAgent Hook<br/>(Context Injection)"}:::assaNode
     Hook_After{"⚙️ AfterTool Hook<br/>(Outcome Distillation)"}:::assaNode
     
-    Mem_Local[("📂 L2 Local Memory<br/>(Project-specific)")]:::memoryNode
-    Mem_Global[("🌐 L3 Global Wisdom<br/>(Cross-project)")]:::memoryNode
+    Mem_G3[("📝 G3 Transient Patterns<br/>(Raw Signals/Ledger)")]:::memoryNode
+    Mem_G2[("📂 G2 Project Specialists<br/>(Local Conventions)")]:::memoryNode
+    Mem_G1[("🌐 G1 Global Standards<br/>(Universal Wisdom)")]:::memoryNode
     
     SubAgent["🕵️ Distiller/Syncer<br/>(Background Sub-agents)"]:::subAgentNode
 
     %% Flow: Normal Conversation
     User -- "1. Question / Directive" --> Hook_Before
-    Hook_Before -- "2. Inject Patterns" --> Gemini
-    Mem_Local -.-> Hook_Before
-    Mem_Global -.-> Hook_Before
+    Hook_Before -- "2. Inject Rules" --> Gemini
+    Mem_G2 -.-> Hook_Before
+    Mem_G1 -.-> Hook_Before
 
     Gemini -- "3. Tool Call / Response" --> User
     Gemini -- "4. Intercept Output" --> Hook_After
     
     %% Flow: Reflex Evolution
-    Hook_After -- "5. Detect Success (Victory)" --> Mem_Local
+    Hook_After -- "5. Capture Signals" --> Mem_G3
     
     %% Flow: Deep Evolution
     User -- "6. git commit / push" --> Hook_After
     Hook_After -- "7. Evaluate Significance" --> SubAgent
-    SubAgent -- "8. Distill & Promote" --> Mem_Global
+    SubAgent -- "8. Distill" --> Mem_G2
+    SubAgent -- "9. Promote" --> Mem_G1
+    Mem_G3 -- "Read Signals" --> SubAgent
 ```
 
 ### 🌐 Active Global Knowledge Graph

@@ -31,27 +31,30 @@ flowchart TD
     Hook_Before{"⚙️ BeforeAgent Hook<br/>(环境感知注入)"}:::assaNode
     Hook_After{"⚙️ AfterTool Hook<br/>(成果捕获提炼)"}:::assaNode
     
-    Mem_Local[("📂 L2 本地记忆库<br/>(精准项目经验)")]:::memoryNode
-    Mem_Global[("🌐 L3 全局智慧库<br/>(跨项目共享)")]:::memoryNode
+    Mem_G3[("📝 G3 瞬态模式<br/>(原始信号/账本)")]:::memoryNode
+    Mem_G2[("📂 G2 项目专家<br/>(本地代码规范)")]:::memoryNode
+    Mem_G1[("🌐 G1 全球标准<br/>(通用工程智慧)")]:::memoryNode
     
     SubAgent["🕵️ 提炼助手<br/>(后台子代理)"]:::subAgentNode
 
     %% Flow: Normal Conversation
     User -- "1. 提问 / 指令" --> Hook_Before
-    Hook_Before -- "2. 感知环境并注入" --> Gemini
-    Mem_Local -.-> Hook_Before
-    Mem_Global -.-> Hook_Before
+    Hook_Before -- "2. 注入规则" --> Gemini
+    Mem_G2 -.-> Hook_Before
+    Mem_G1 -.-> Hook_Before
 
     Gemini -- "3. 工具调用 / 回答" --> User
     Gemini -- "4. 拦截并复盘成果" --> Hook_After
     
     %% Flow: Reflex Evolution
-    Hook_After -- "5. 发现成功模式" --> Mem_Local
+    Hook_After -- "5. 捕获原始信号" --> Mem_G3
     
     %% Flow: Deep Evolution
     User -- "6. git commit / push" --> Hook_After
     Hook_After -- "7. 派发显著性任务" --> SubAgent
-    SubAgent -- "8. 提炼 & 升华经验" --> Mem_Global
+    SubAgent -- "8. 提炼项目模式" --> Mem_G2
+    SubAgent -- "9. 晋升全球标准" --> Mem_G1
+    Mem_G3 -- "读取信号" --> SubAgent
 ```
 
 ### 🌐 活跃全局知识图谱
