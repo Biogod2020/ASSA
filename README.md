@@ -61,17 +61,14 @@ Below is the live structure of the L3 Global Wisdom library, automatically maint
 ```mermaid
 graph TD
   subgraph G1 ["G1: Foundation (Core Standards)"]
-    P_20260318_PROMT{{"<b>P-20260318-PROMT</b><br/>Global Knowledge Curation (ASSA Promoter)"}}
-    P_20260318_REFLX{{"<b>P-20260318-REFLX</b><br/>Autonomous Evolution Reflexes"}}
-    P_20260318_RELIAB{{"<b>P-20260318-RELIAB</b><br/>Reliable Execution & Failure Detection"}}
-    P_20260318_SRCH{{"<b>P-20260318-SRCH</b><br/>Deep Empirical Research Protocol"}}
-    P_20260318_WEAVR_V3.5{{"<b>P-20260318-WEAVR-V3.5</b><br/>The Weaver Architecture (V3.5)"}}
+    G1_EMPIRICAL_TRUTH{{"<b>G1-EMPIRICAL-TRUTH</b><br/>Empirical Truth & Reliable Execution"}}
+    G1_INSTRUCTION_INTEGRITY{{"<b>G1-INSTRUCTION-INTEGRITY</b><br/>Instruction Integrity & Reflex Sovereignty"}}
     P_20260319_ARCH_GOVERNANCE{{"<b>P-20260319-ARCH-GOVERNANCE</b><br/>Architectural Governance & Deep Auditing"}}
     P_20260319_DUAL_AXIS{{"<b>P-20260319-DUAL-AXIS</b><br/>Dual-Axis Architectural Perspective"}}
-    P_20260319_HARDENING{{"<b>P-20260319-HARDENING</b><br/>Instruction Hardening & Linguistic Standardization"}}
-    P_20260319_RECENCY_WEIGHTING{{"<b>P-20260319-RECENCY-WEIGHTING</b><br/>Recency-Based Context Injection"}}
   end
   subgraph G2 ["G2: Domain (Specialized Knowledge)"]
+    P_20260318_PROMT("<b>P-20260318-PROMT</b><br/>Global Knowledge Curation (ASSA Promoter)")
+    P_20260318_WEAVR_V3.5("<b>P-20260318-WEAVR-V3.5</b><br/>The Weaver Architecture (V3.5)")
     P_20260319_CONT_DISTILL("<b>P-20260319-CONT-DISTILL</b><br/>Continuous Distillation Protocol")
     P_20260319_INDEX_FIRST("<b>P-20260319-INDEX-FIRST</b><br/>Index-First Context Optimization Strategy")
     P_20260319_PHYSICAL_METADATA("<b>P-20260319-PHYSICAL-METADATA</b><br/>Physical Coordinate Injection (ASSA_METADATA)")
@@ -88,14 +85,13 @@ graph TD
   P_20260319_DUAL_AXIS --> P_20260319_ARCH_GOVERNANCE
   P_20260319_PHYSICAL_METADATA --> P_20260319_CONT_DISTILL
   P_20260318_WEAVR_V3.5 --> P_20260319_INDEX_FIRST
-  P_20260318_REFLX --> P_20260319_RECENCY_WEIGHTING
   P_20260319_SURGICAL_EDIT --> P_20260319_VISUAL_QA
 
   %% Styling
   classDef style_G1 fill:#1a5fb4,stroke:#333,stroke-width:2px,color:#fff,font-family:Arial;
-  class P_20260318_PROMT,P_20260318_REFLX,P_20260318_RELIAB,P_20260318_SRCH,P_20260318_WEAVR_V3.5,P_20260319_ARCH_GOVERNANCE,P_20260319_DUAL_AXIS,P_20260319_HARDENING,P_20260319_RECENCY_WEIGHTING style_G1;
+  class G1_EMPIRICAL_TRUTH,G1_INSTRUCTION_INTEGRITY,P_20260319_ARCH_GOVERNANCE,P_20260319_DUAL_AXIS style_G1;
   classDef style_G2 fill:#26a269,stroke:#333,stroke-width:2px,color:#fff,font-family:Arial;
-  class P_20260319_CONT_DISTILL,P_20260319_INDEX_FIRST,P_20260319_PHYSICAL_METADATA,P_20260319_SURGICAL_EDIT,P_20260319_VISUAL_QA style_G2;
+  class P_20260318_PROMT,P_20260318_WEAVR_V3.5,P_20260319_CONT_DISTILL,P_20260319_INDEX_FIRST,P_20260319_PHYSICAL_METADATA,P_20260319_SURGICAL_EDIT,P_20260319_VISUAL_QA style_G2;
   classDef style_G3 fill:#9a9996,stroke:#333,stroke-width:2px,color:#fff,font-family:Arial;
   class P_SKILL_CANDIDATE_REAL,P_UNIVERSAL_NODEJS_MIDDLEWARE,P_20260315_NODE_JS_MID,U_20260315_IMMUTABILITY,P_20260317_TS_INTF style_G3;
 ```

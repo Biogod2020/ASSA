@@ -777,5 +777,39 @@
       ]
     },
     "git_anchor": ""
+  },
+  {
+    "session_id": "570fc0e1-4df1-41d0-8f89-9f9aa4147652",
+    "message_id": "mcp-1773965840196",
+    "timestamp": "2026-03-20T00:17:20.199Z",
+    "status": "PENDING",
+    "type": "positive",
+    "payload": {
+      "rule": "Subagents MUST NOT attempt interactive user consultation. Redundancy or conflict detection by subagents MUST be signaled back to the local ledger (or a specific context flag). The Main Agent is the SOLE authority for user consultation and final consolidation decisions.",
+      "context": "[Symptom/Intent]\nUser inquiry: 'promoter如果要执行询问意见的操作的话，在子代理阶段可能无法进行吧？还是说我们应该让它检测到冗余之后先把promote的工作做完，然后把冗余的信号发回主进程告知用户？'\n\n[Failed Attempts]\nNone\n\n[Breakthrough]\nThe user refined the cross-process governance protocol: (1) Subagents (Promoter) are restricted to *detecting and flagging* redundancies without direct interaction. (2) The Main Agent is responsible for reacting to these flags, performing deep reads, and engaging the user for consolidation. This preserves the 'Main Process Sovereignty' while leveraging subagent processing power. [Rule: G1_CROSS_PROCESS_GOVERNANCE_FLOW]",
+      "tags": [
+        "process-sovereignty",
+        "governance-refinement",
+        "subagent-limitations"
+      ]
+    },
+    "git_anchor": ""
+  },
+  {
+    "session_id": "570fc0e1-4df1-41d0-8f89-9f9aa4147652",
+    "message_id": "mcp-1773965916464",
+    "timestamp": "2026-03-20T00:18:36.466Z",
+    "status": "PENDING",
+    "type": "positive",
+    "payload": {
+      "rule": "When standard extension installation fails (e.g., 403 on releases), ALWAYS fallback to 'git clone' mode. The agent MUST verify the physical synchronization of the Weaver graph immediately after reinstallation to ensure state consistency.",
+      "context": "[Symptom/Intent]\nError downloading github release for https://github.com/Biogod2020/ASSA.git: Failed to fetch release data... Request failed with status code 403.\n\n[Failed Attempts]\nNone\n\n[Breakthrough]\nSuccessfully reinstalled the ASSA extension via 'git clone' mode after the initial 'github release' download failed due to 403 Forbidden. This confirms the robustness of the fallback installation path. [Victory: G1_INSTALLATION_RESILIENCE]",
+      "tags": [
+        "installation-victory",
+        "resilience-pattern",
+        "state-consistency"
+      ]
+    },
+    "git_anchor": ""
   }
 ]
