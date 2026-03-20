@@ -1,15 +1,17 @@
 {
   "id": "assa-evolution",
   "name": "assa-evolution",
-  "version": "3.2.0",
+  "version": "3.5.0",
   "author": "Biogod2020",
-  "description": "ASSA (Autonomous Self-Sovereign Agent): A self-evolving system with L1/L2/L3 memory hierarchy, Smart Reflex, and domain-aware context routing.",
+  "description": "ASSA v3.5 (WEAVER): A self-evolving autonomous system for Gemini CLI. Features include Automated Hierarchical Knowledge Graph (G0-G3), Skeleton-First Context Resolution, and Continuous Distillation.",
   "repository": "https://github.com/Biogod2020/ASSA",
   "contextFileName": "GEMINI.md",
   "mcpServers": {
     "assa-mcp": {
       "command": "node",
-      "args": ["${extensionPath}/hooks/mcpServer.js"]
+      "args": [
+        "${extensionPath}/hooks/mcpServer.js"
+      ]
     }
   },
   "agents": [

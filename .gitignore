@@ -33,3 +33,10 @@ coverage/
 .superpowers/
 .gemini-clipboard
 .worktrees/
+temp_test_assa/
+
+# Archiving
+archive/
+# Huge research clones (untracked)
+external/
+research_stable/

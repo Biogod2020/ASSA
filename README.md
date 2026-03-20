@@ -178,9 +178,9 @@ The real magic of ASSA is turning your **"feedback"** and **"corrections"** into
 > **Great, please commit this.**
 
 ╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
-│ ✓  Shell git commit -m "docs: update README with V3.2+ features, fix Mermaid diagrams, and add real-world evolution case" && git status          │
+│ ✓  Shell git commit -m "docs: update README with V3.5+ features, fix Mermaid diagrams, and add real-world evolution case" && git status          │
 │                                                                                                                                                  │
-│ [master 3d3e286] docs: update README with V3.2+ features, fix Mermaid diagrams, and add real-world evolution case                        │
+│ [master 3d3e286] docs: update README with V3.5+ features, fix Mermaid diagrams, and add real-world evolution case                        │
 │ 3 files changed, 117 insertions(+), 62 deletions(-)                                                                                             │
 ╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
 

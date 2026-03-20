@@ -811,5 +811,56 @@
       ]
     },
     "git_anchor": ""
+  },
+  {
+    "session_id": "c3036f2b-ada9-4006-b93c-457cd2b5a76b",
+    "message_id": "mcp-1773978031569",
+    "timestamp": "2026-03-20T03:40:31.571Z",
+    "status": "PENDING",
+    "type": "positive",
+    "payload": {
+      "rule": "Systematic manifest updates MUST align versioning and descriptions across extension metadata, README, and internal 'Soul' directives to maintain project integrity.",
+      "context": "[Symptom/Intent]\nManifest (v3.2.0) was stale compared to documentation (v3.5-WEAVER). git version was in sync but metadata was mismatched.\n\n[Failed Attempts]\nNone. Detected during version check.\n\n[Breakthrough]\nAligned extension manifest version (3.2.0 -> 3.5.0) and description with the V3.5-WEAVER architecture across README.md and internal directives.",
+      "tags": [
+        "manifest",
+        "alignment",
+        "versioning"
+      ]
+    },
+    "git_anchor": ""
+  },
+  {
+    "session_id": "c3036f2b-ada9-4006-b93c-457cd2b5a76b",
+    "message_id": "mcp-1773978157874",
+    "timestamp": "2026-03-20T03:42:37.876Z",
+    "status": "PENDING",
+    "type": "positive",
+    "payload": {
+      "rule": "Release Readiness Hygiene: Every version bump (e.g., V3.2 -> V3.5) MUST be accompanied by an audit to archive superseded snapshots and harden '.gitignore' against session-specific temporary files.",
+      "context": "[Symptom/Intent]\nRepo contained stale V3.4 memory files, redundant blog PNG versions, and untracked temporary test directories causing cognitive overhead.\n\n[Failed Attempts]\nNone. Systematic audit of untracked and versioned files.\n\n[Breakthrough]\nImplemented a systematic 'Archive & Ignore' protocol for V3.5-WEAVER transition. \n1. Established 'archive/memory_snapshots/' and 'archive/blog_drafts/' for versioned history.\n2. Hardened '.gitignore' to exclude 'archive/', 'temp_test_assa/', and internal log artifacts.\n3. Identified 'external/' and 'research_stable/' as huge tracked Gitlink objects (160000) that may cause repo bloat.",
+      "tags": [
+        "hygiene",
+        "archiving",
+        "governance"
+      ]
+    },
+    "git_anchor": ""
+  },
+  {
+    "session_id": "c3036f2b-ada9-4006-b93c-457cd2b5a76b",
+    "message_id": "mcp-1773978236254",
+    "timestamp": "2026-03-20T03:43:56.255Z",
+    "status": "PENDING",
+    "type": "positive",
+    "payload": {
+      "rule": "Repository Integrity: Large research clones or mirror repositories MUST be excluded from the main repo's git index using 'git rm --cached' and '.gitignore' to prevent metadata bloat. Only configuration and core source should be tracked.",
+      "context": "[Symptom/Intent]\nGit status showed 'deleted' for files that were actually large nested repositories tracked as Gitlinks, causing potential sync issues and bloat.\n\n[Failed Attempts]\nNone. Executed 'git rm --cached' as planned.\n\n[Breakthrough]\nSuccessfully removed 'external/' and 'research_stable/' Gitlink objects (160000) from git index. These directories are now local-only research clones, preventing huge repo bloat while maintaining developer visibility. Implemented un-commented .gitignore rules for these directories.",
+      "tags": [
+        "governance",
+        "optimization",
+        "git-hygiene"
+      ]
+    },
+    "git_anchor": ""
   }
 ]
