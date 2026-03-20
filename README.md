@@ -112,8 +112,8 @@ graph TD
 
 ### 1. Hierarchical Memory & Context Router
 ASSA doesn't bloat the AI's context with everything. It organizes memory like a human brain:
-- **Local Memory (L2)**: Project-specific coding standards and conventions.
-- **Global Wisdom (L3)**: High-confidence architectural principles.
+- **Domain-Specific Patterns (G2)**: Project-specific coding standards and conventions derived from the L2 evolution cycle.
+- **Global Engineering Standards (G1)**: High-confidence architectural principles and foundation standards stored in the L3 global library.
 - **Context Router**: Automatically matches and loads relevant "wisdom blocks" based on your Current Working Directory (CWD), ensuring the AI is always in the optimal state for the task.
 
 ### 2. Smart Reflex & Semantic Emotion Sensing
