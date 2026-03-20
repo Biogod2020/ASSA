@@ -99,11 +99,11 @@ graph TD
 ### Key Architectural Pillars:
 - **The Weaver (V3.5 Automated Indexing)**: Transitioned from manual JSON maintenance to a fully automated, file-driven system. Markdown is now the **Single Source of Truth**; the `rebuildGraph.js` engine automatically generates high-performance JSON indexes (`graph.json`, `index.json`) with strict ID-collision and broken-link detection.
 - **Skeleton-First Resolution**: To prevent context window saturation in long sessions, V3.5 implements "Skeleton Loading." It loads full content only for active "Seed" nodes, while injecting only the ID, rationale, and file path (the Skeleton) for dependencies, reducing token overhead by up to 90%.
-- **Hierarchical Knowledge Graph (L0-L3)**:
-    - **L0 (Core Mandates)**: Hardcoded safety and system integrity rules.
-    - **L1 (Foundational Standards)**: Universal engineering principles (e.g., TDD, logic patterns).
-    - **L2 (Domain Specialists)**: Project-specific conventions and local habits.
-    - **L3 (Transient Patterns)**: Raw signals from recent interactions waiting for distillation.
+- **Hierarchical Knowledge Graph (G0-G3)**:
+    - **G0 (Core Mandates)**: Hardcoded safety and system integrity rules.
+    - **G1 (Foundational Standards)**: Universal engineering principles (e.g., TDD, logic patterns).
+    - **G2 (Domain Specialists)**: Project-specific conventions and local habits.
+    - **G3 (Transient Patterns)**: Raw signals from recent interactions waiting for distillation.
 - **Deep Empirical Research Protocol**: When internal training data is insufficient, ASSA is mandated to clone official repositories or fetch raw source code to verify API signatures, ensuring 100% reliability for modern frameworks.
 
 ---
