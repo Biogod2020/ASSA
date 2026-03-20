@@ -23,41 +23,44 @@ flowchart TD
     classDef geminiNode fill:#AEC6CF,stroke:#333,stroke-width:2px,color:#000,font-weight:bold
     classDef assaNode fill:#B4E197,stroke:#333,stroke-width:2px,color:#000,font-weight:bold
     classDef memoryNode fill:#FDFD96,stroke:#333,stroke-width:2px,color:#000,stroke-dasharray: 5 5
-    classDef subAgentNode fill:#CBAACB,stroke:#333,stroke-width:2px,color:#000
+    classDef globalNode fill:#85C1E9,stroke:#333,stroke-width:2px,color:#000
 
     %% Nodes
     User(("🧑‍💻 Developer<br/>(You)")):::userNode
     Gemini["🤖 Gemini CLI<br/>(Main Agent)"]:::geminiNode
     Hook_Before{"⚙️ BeforeAgent Hook<br/>(Context Injection)"}:::assaNode
-    Hook_After{"⚙️ AfterTool Hook<br/>(Outcome Distillation)"}:::assaNode
+    Hook_After{"⚙️ AfterTool Hook<br/>(Signal Capture)"}:::assaNode
     
-    Mem_G3[("📝 G3 Transient Patterns<br/>(Raw Signals/Ledger)")]:::memoryNode
-    Mem_G2[("📂 G2 Project Specialists<br/>(Local Conventions)")]:::memoryNode
-    Mem_G1[("🌐 G1 Global Standards<br/>(Universal Wisdom)")]:::memoryNode
+    Mem_L1[("📝 L1 Transient Memory<br/>(Raw Signals/Ledger)")]:::memoryNode
+    Mem_L2[("📂 L2 Local Patterns<br/>(Project-specific)")]:::memoryNode
     
-    SubAgent["🕵️ Distiller/Promoter<br/>(Background Sub-agents)"]:::subAgentNode
+    subgraph L3 ["🌐 L3 Global Wisdom (The Weaver Library)"]
+        direction TB
+        G0["G0 Core Mandates"]
+        G1["G1 Foundation Standards"]
+        G2["G2 Domain Knowledge"]
+        G3["G3 Tech Fragments"]
+    end
+    class L3 globalNode
+
+    Sub_Distill["🕵️ Distiller Subagent"]
+    Sub_Promote["🕵️ Promoter Subagent"]
 
     %% Flow: Normal Conversation
     User -- "1. Question / Directive" --> Hook_Before
     Hook_Before -- "2. Inject Rules" --> Gemini
-    Mem_G2 -.-> Hook_Before
-    Mem_G1 -.-> Hook_Before
+    Mem_L2 -.-> Hook_Before
+    L3 -.-> Hook_Before
 
     Gemini -- "3. Tool Call / Response" --> User
     Gemini -- "4. Intercept Output" --> Hook_After
     
-    %% Flow: Reflex Evolution
-    Hook_After -- "5. Capture Signals" --> Mem_G3
-    
-    %% Flow: Deep Evolution
-    User -- "6. git commit / push" --> Hook_After
-    Hook_After -- "7. Evaluate Significance" --> SubAgent
-    
-    %% The Sequential Chain
-    Mem_G3 -- "8. Distill into Patterns" --> SubAgent
-    SubAgent --> Mem_G2
-    Mem_G2 -- "9. Promote to Global" --> SubAgent
-    SubAgent --> Mem_G1
+    %% Flow: Evolution Chain
+    Hook_After -- "5. Record" --> Mem_L1
+    Mem_L1 -- "6. Distill" --> Sub_Distill
+    Sub_Distill -- "7. Local Pattern" --> Mem_L2
+    Mem_L2 -- "8. Promote" --> Sub_Promote
+    Sub_Promote -- "9. Global Rule" --> L3
 ```
 
 ### 🌐 Active Global Knowledge Graph
@@ -105,11 +108,14 @@ graph TD
 ### Key Architectural Pillars:
 - **The Weaver (V3.5 Automated Indexing)**: Transitioned from manual JSON maintenance to a fully automated, file-driven system. Markdown is now the **Single Source of Truth**; the `rebuildGraph.js` engine automatically generates high-performance JSON indexes (`graph.json`, `index.json`) with strict ID-collision and broken-link detection.
 - **Skeleton-First Resolution**: To prevent context window saturation in long sessions, V3.5 implements "Skeleton Loading." It loads full content only for active "Seed" nodes, while injecting only the ID, rationale, and file path (the Skeleton) for dependencies, reducing token overhead by up to 90%.
-- **Hierarchical Knowledge Graph (G0-G3)**:
-    - **G0 (Core Mandates)**: Hardcoded safety and system integrity rules.
-    - **G1 (Foundational Standards)**: Universal engineering principles (e.g., TDD, logic patterns).
-    - **G2 (Domain Specialists)**: Project-specific conventions and local habits.
-    - **G3 (Transient Patterns)**: Raw signals from recent interactions waiting for distillation.
+- **Evolutionary Tiers (L1-L3)**:
+    - **L1 (Transient Memory)**: Raw tool outputs and semantic signals captured by the `AfterTool` hook.
+    - **L2 (Local Patterns)**: Distilled project-specific conventions stored in `.memory/patterns.md`.
+    - **L3 (Global Wisdom)**: Promoted cross-project knowledge organized into the **G-Series Hierarchy**:
+        - **G0 (Core Mandates)**: Hardcoded safety and system integrity rules.
+        - **G1 (Foundational Standards)**: Universal engineering principles (e.g., Instruction Integrity).
+        - **G2 (Domain Knowledge)**: Specialized rules (e.g., Weaver Architecture, Promotion Protocol).
+        - **G3 (Tech Fragments)**: Fine-grained snippets and specific tool knowledge.
 - **Deep Empirical Research Protocol**: When internal training data is insufficient, ASSA is mandated to clone official repositories or fetch raw source code to verify API signatures, ensuring 100% reliability for modern frameworks.
 
 ---

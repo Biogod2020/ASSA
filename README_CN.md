@@ -23,41 +23,44 @@ flowchart TD
     classDef geminiNode fill:#AEC6CF,stroke:#333,stroke-width:2px,color:#000,font-weight:bold
     classDef assaNode fill:#B4E197,stroke:#333,stroke-width:2px,color:#000,font-weight:bold
     classDef memoryNode fill:#FDFD96,stroke:#333,stroke-width:2px,color:#000,stroke-dasharray: 5 5
-    classDef subAgentNode fill:#CBAACB,stroke:#333,stroke-width:2px,color:#000
+    classDef globalNode fill:#85C1E9,stroke:#333,stroke-width:2px,color:#000
 
     %% Nodes
     User(("🧑‍💻 开发者<br/>(你)")):::userNode
     Gemini["🤖 Gemini CLI<br/>(主程序)"]:::geminiNode
     Hook_Before{"⚙️ BeforeAgent Hook<br/>(环境感知注入)"}:::assaNode
-    Hook_After{"⚙️ AfterTool Hook<br/>(成果捕获提炼)"}:::assaNode
+    Hook_After{"⚙️ AfterTool Hook<br/>(信号捕获)"}:::assaNode
     
-    Mem_G3[("📝 G3 瞬态模式<br/>(原始信号/账本)")]:::memoryNode
-    Mem_G2[("📂 G2 项目专家<br/>(本地代码规范)")]:::memoryNode
-    Mem_G1[("🌐 G1 全球标准<br/>(通用工程智慧)")]:::memoryNode
+    Mem_L1[("📝 L1 瞬态记忆<br/>(原始信号/账本)")]:::memoryNode
+    Mem_L2[("📂 L2 本地模式<br/>(项目专项经验)")]:::memoryNode
     
-    SubAgent["🕵️ 提炼助手/晋升助手<br/>(后台子代理)"]:::subAgentNode
+    subgraph L3 ["🌐 L3 全局智慧 (Weaver 知识库)"]
+        direction TB
+        G0["G0 核心生存指令"]
+        G1["G1 通用工程标准"]
+        G2["G2 领域专家规则"]
+        G3["G3 技术知识碎片"]
+    end
+    class L3 globalNode
+
+    Sub_Distill["🕵️ 提炼助手 (Distiller)"]
+    Sub_Promote["🕵️ 晋升助手 (Promoter)"]
 
     %% Flow: Normal Conversation
     User -- "1. 提问 / 指令" --> Hook_Before
     Hook_Before -- "2. 注入规则" --> Gemini
-    Mem_G2 -.-> Hook_Before
-    Mem_G1 -.-> Hook_Before
+    Mem_L2 -.-> Hook_Before
+    L3 -.-> Hook_Before
 
     Gemini -- "3. 工具调用 / 回答" --> User
-    Gemini -- "4. 拦截并复盘成果" --> Hook_After
+    Gemini -- "4. 拦截输出" --> Hook_After
     
-    %% Flow: Reflex Evolution
-    Hook_After -- "5. 捕获原始信号" --> Mem_G3
-    
-    %% Flow: Deep Evolution
-    User -- "6. git commit / push" --> Hook_After
-    Hook_After -- "7. 派发显著性任务" --> SubAgent
-    
-    %% The Sequential Chain
-    Mem_G3 -- "8. 提炼为项目模式" --> SubAgent
-    SubAgent --> Mem_G2
-    Mem_G2 -- "9. 晋升为全球标准" --> SubAgent
-    SubAgent --> Mem_G1
+    %% Flow: Evolution Chain
+    Hook_After -- "5. 记录" --> Mem_L1
+    Mem_L1 -- "6. 提炼" --> Sub_Distill
+    Sub_Distill -- "7. 生成项目模式" --> Mem_L2
+    Mem_L2 -- "8. 晋升" --> Sub_Promote
+    Sub_Promote -- "9. 生成全球规则" --> L3
 ```
 
 ### 🌐 活跃全局知识图谱
@@ -105,11 +108,14 @@ graph TD
 ### 关键架构：
 - **Weaver 织网者 (V3.5 自动化索引)**：从手动维护 JSON 转向全自动的文件驱动系统。Markdown 成为 **Single Source of Truth**；脚本自动生成高性能索引并具备严格的 ID 冲突和死链检测。
 - **Skeleton-First 骨架优先解析**：针对长对话场景，V3.5 引入“骨架加载”机制。仅为当前活跃节点加载全文，其余依赖节点仅注入 ID 和核心摘要（骨架），节省高达 90% 的上下文 Token。
-- **G0-G3 层级化知识图谱**：
-    - **G0 (核心指令)**：硬编码的安全与系统完整性规则。
-    - **G1 (基础标准)**：通用工程原则 (如 TDD, 逻辑模式)。
-    - **G2 (领域专家)**：针对具体项目的代码规范与本地习惯。
-    - **G3 (瞬态模式)**：待提炼的近期交互原始信号。
+- **进化层级 (L1-L3)**：
+    - **L1 (瞬态记忆)**：由 `AfterTool` 钩子捕获的原始工具输出与语义信号。
+    - **L2 (本地模式)**：存储在 `.memory/patterns.md` 中的、针对具体项目的提炼经验。
+    - **L3 (全局智慧)**：晋升至全局库的跨项目知识，采用 **G 系列分层体系**：
+        - **G0 (核心指令)**：硬编码的安全与系统完整性规则。
+        - **G1 (基础标准)**：通用的工程原则（如：指令完整性守则）。
+        - **G2 (领域知识)**：专项系统逻辑（如：Weaver 架构、晋升协议）。
+        - **G3 (技术碎片)**：细粒度的代码片段与工具知识。
 - **Deep Empirical Research (深度实证研究)**：当内部训练数据不足时，ASSA 会自动克隆官方源码或获取原始文档以验证 API 签名，确保 100% 的可靠性。
 
 ---
