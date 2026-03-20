@@ -35,7 +35,7 @@ flowchart TD
     Mem_G2[("📂 G2 项目专家<br/>(本地代码规范)")]:::memoryNode
     Mem_G1[("🌐 G1 全球标准<br/>(通用工程智慧)")]:::memoryNode
     
-    SubAgent["🕵️ 提炼助手<br/>(后台子代理)"]:::subAgentNode
+    SubAgent["🕵️ 提炼助手/晋升助手<br/>(后台子代理)"]:::subAgentNode
 
     %% Flow: Normal Conversation
     User -- "1. 提问 / 指令" --> Hook_Before
@@ -52,9 +52,12 @@ flowchart TD
     %% Flow: Deep Evolution
     User -- "6. git commit / push" --> Hook_After
     Hook_After -- "7. 派发显著性任务" --> SubAgent
-    SubAgent -- "8. 提炼项目模式" --> Mem_G2
-    SubAgent -- "9. 晋升全球标准" --> Mem_G1
-    Mem_G3 -- "读取信号" --> SubAgent
+    
+    %% The Sequential Chain
+    Mem_G3 -- "8. 提炼为项目模式" --> SubAgent
+    SubAgent --> Mem_G2
+    Mem_G2 -- "9. 晋升为全球标准" --> SubAgent
+    SubAgent --> Mem_G1
 ```
 
 ### 🌐 活跃全局知识图谱

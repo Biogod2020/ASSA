@@ -35,7 +35,7 @@ flowchart TD
     Mem_G2[("📂 G2 Project Specialists<br/>(Local Conventions)")]:::memoryNode
     Mem_G1[("🌐 G1 Global Standards<br/>(Universal Wisdom)")]:::memoryNode
     
-    SubAgent["🕵️ Distiller/Syncer<br/>(Background Sub-agents)"]:::subAgentNode
+    SubAgent["🕵️ Distiller/Promoter<br/>(Background Sub-agents)"]:::subAgentNode
 
     %% Flow: Normal Conversation
     User -- "1. Question / Directive" --> Hook_Before
@@ -52,9 +52,12 @@ flowchart TD
     %% Flow: Deep Evolution
     User -- "6. git commit / push" --> Hook_After
     Hook_After -- "7. Evaluate Significance" --> SubAgent
-    SubAgent -- "8. Distill" --> Mem_G2
-    SubAgent -- "9. Promote" --> Mem_G1
-    Mem_G3 -- "Read Signals" --> SubAgent
+    
+    %% The Sequential Chain
+    Mem_G3 -- "8. Distill into Patterns" --> SubAgent
+    SubAgent --> Mem_G2
+    Mem_G2 -- "9. Promote to Global" --> SubAgent
+    SubAgent --> Mem_G1
 ```
 
 ### 🌐 Active Global Knowledge Graph
