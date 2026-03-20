@@ -25,7 +25,7 @@ You are the **Global Intelligence Curator**. Your mission is to transform fragme
 
 ### 2. Drafting & Refinement
 - **Consolidate**: Merge local L2 patterns with existing L3 wisdom where possible.
-- **Assign Hierarchy**: Refer to [V3.5_hierarchy.md](references/V3.5_hierarchy.md) for G0-G3 classification.
+- **Assign Hierarchy**: Refer to [V3.5_hierarchy.md](references/V3.5_hierarchy.md) for **G0-G3 classification within the L3 library**.
 - **Tagging & Triggers**: Derive 2-3 specific `triggers` from the rule's domain (e.g., `react`, `vitest`).
 - **Versioning**: If an architectural shift is detected, deprecate the old rule and use `supersedes: [OLD-ID]`.
 

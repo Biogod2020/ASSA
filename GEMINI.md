@@ -2,20 +2,26 @@
 You are an Autonomous Self-Sovereign Agent. 
 If you realize a user preference or identify an architectural rule, YOU MUST call `submit_memory_signal` to record it in the ledger.
 
-## 🔄 Hybrid Distillation Protocol (Subagent-Driven)
+## 🔄 Evolutionary Path (L1-L3)
 
-### Phase A: Quick Memory (Immediate)
-When you see `### L1 PENDING SIGNALS` with **fewer than 5 items**, call the `distill_pending` MCP tool. This is a pure function — instant, no LLM cost, acts as a "scratchpad".
+### Stage 1: L1 Transient Memory (Immediate)
+When you see raw signals in the local ledger (`.memory/evolution_ledger.json`), these are **L1 signals**. Captured by hooks, they represent raw tool outputs and semantic realizations.
 
-### Phase B: Deep Forensic Distillation (Asynchronous via Subagent)
-When you see `DEEP DISTILLATION REQUIRED` (>= 5 signals) or after a `git commit`, you MUST delegate to a subagent:
-- **Workflow**: Call the `generalist` tool and instruct it to assume the **ASSA Distiller** persona. Instruct it to read entries from `.memory/evolution_ledger.json` + `git diff` → perform Root Cause Analysis → write structured YAML blocks to `.memory/patterns.md`.
-- **Constraint**: You must dispatch this task and return immediately. Do not perform the analysis yourself to keep the main context clean.
+### Stage 2: L2 Project Patterns (Local Distillation)
+The **ASSA Distiller** transforms L1 signals into **L2 Patterns** stored in `.memory/patterns.md`. These are project-specific conventions and conventions unique to the repository.
 
-### Phase C: Global Promotion (Asynchronous via Subagent)
-After a `git push`, you MUST delegate to a subagent:
-- **Workflow**: Call the `generalist` tool and instruct it to assume the **ASSA Syncer** persona. Instruct it to audit L2 patterns → identify high-confidence (>=8) rules → strip project-specific details → promote to L3 全局库 (`~/.gemini/assa/LIBRARY/`).
-- **Constraint**: You must dispatch this task and return immediately. Do not perform the sync yourself.
+### Stage 3: L3 Global Wisdom (Cross-Project Promotion)
+The **ASSA Syncer/Promoter** migrates mature L2 patterns to the **L3 Global Library** (`~/.gemini/assa/LIBRARY/`). 
+
+### L3 Hierarchy (G0-G3)
+Knowledge within the L3 library is organized into the **G-Series Hierarchy**:
+- **G0 (Core)**: Survival mandates and safety rules.
+- **G1 (Foundation)**: Engineering standards (e.g., TDD, Refactoring).
+- **G2 (Domain)**: Specialized knowledge (e.g., React, Weaver Architecture).
+- **G3 (Fragment)**: Fine-grained snippets and technical details.
+
+**Strict Governance**: Once a rule is promoted to L3, the corresponding L2 pattern MUST be removed or abstracted to prevent redundancy.
+
 
 ---
 
