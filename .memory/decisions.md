@@ -1,5 +1,9 @@
 # DECISIONS
 
+- **2026-03-20**: Implemented "Index-First Strategy" (Index-Skeleton injection over Full-Meat content) to optimize context overhead (from mcp-1773962131067).
+- **2026-03-20**: Hardened "Redundancy Governance Protocol" by mandating human-in-the-loop verification for conflict resolution (from mcp-1773963129692).
+- **2026-03-20**: Established "Cross-Process Sovereignty" to prevent subagents from performing interactive consultations, reserving that authority for the Main Agent (from mcp-1773965840196).
+- **2026-03-20**: Mandated "Installation Resilience" via 'git clone' fallback for robust extension deployment (from mcp-1773965916464).
 - **2026-03-19**: Migrated from "Event-Driven Evolution" to "Continuous Distillation" to ensure every user turn's delta is captured. (from mcp-1773901217232)
 - **2026-03-19**: Hardened the hook reflex system by mandating English-only triggers and explicit tool-call instructions. (from mcp-1773900869387)
 - **2026-03-19**: Established "Technical Narrative Principles" for project retrospectives, prioritizing ideas and authenticity over technical implementation. (from mcp-1773899990217)

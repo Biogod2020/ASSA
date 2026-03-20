@@ -764,7 +764,7 @@
     "session_id": "570fc0e1-4df1-41d0-8f89-9f9aa4147652",
     "message_id": "mcp-1773963129692",
     "timestamp": "2026-03-19T23:32:09.693Z",
-    "status": "PENDING",
+    "status": "PROCESSED",
     "type": "positive",
     "payload": {
       "rule": "Conflict/Redundancy resolution MUST involve a user consultation after a mandatory deep read of all involved patterns. This specific protocol is restricted to the main process to ensure architectural integrity via human-in-the-loop verification.",
@@ -782,7 +782,7 @@
     "session_id": "570fc0e1-4df1-41d0-8f89-9f9aa4147652",
     "message_id": "mcp-1773965840196",
     "timestamp": "2026-03-20T00:17:20.199Z",
-    "status": "PENDING",
+    "status": "PROCESSED",
     "type": "positive",
     "payload": {
       "rule": "Subagents MUST NOT attempt interactive user consultation. Redundancy or conflict detection by subagents MUST be signaled back to the local ledger (or a specific context flag). The Main Agent is the SOLE authority for user consultation and final consolidation decisions.",
@@ -799,7 +799,7 @@
     "session_id": "570fc0e1-4df1-41d0-8f89-9f9aa4147652",
     "message_id": "mcp-1773965916464",
     "timestamp": "2026-03-20T00:18:36.466Z",
-    "status": "PENDING",
+    "status": "PROCESSED",
     "type": "positive",
     "payload": {
       "rule": "When standard extension installation fails (e.g., 403 on releases), ALWAYS fallback to 'git clone' mode. The agent MUST verify the physical synchronization of the Weaver graph immediately after reinstallation to ensure state consistency.",

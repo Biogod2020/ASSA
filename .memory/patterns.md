@@ -42,3 +42,42 @@ hit_count: 5
 **Rationale**: Overwriting entire files destroys nuance. 
 **Rule**: See Global L3 Library.
 **Local Note**: For this repository, specifically prioritize deep reading of 'external/gemini-cli-source' when modifying hook logic to avoid breaking upstream compatibility.
+
+---
+id: P-20260320-REDUNDANCY-GOV
+category: Governance
+confidence: 10
+status: STAGED
+hit_count: 1
+---
+# Redundancy Governance Protocol
+**Rationale**: Automated subagents might unilaterally modify or delete overlapping knowledge, potentially destroying nuances or contradictory but valid perspectives. 
+**Rule**: When the agent detects redundancy, overlap, or conflict between patterns (L2 or L3):
+1. **Deep Read**: Perform a mandatory deep read of all involved patterns to understand their specific context and delta.
+2. **Main Process Constraint**: This protocol is restricted to the main process. Subagents MUST NOT resolve these conflicts.
+3. **User Consultation**: You MUST ask the user for modification or consolidation advice before making any changes to conflicting knowledge.
+
+---
+id: P-20260320-PROCESS-SOVEREIGNTY
+category: Architecture
+confidence: 10
+status: STAGED
+hit_count: 1
+---
+# Cross-Process Sovereignty
+**Rationale**: Subagents operate in isolated contexts and cannot engage in interactive dialogue. Directing them to perform consultations leads to task abortion or "silent failure".
+**Rule**: 
+1. **Interactive Constraint**: Subagents (e.g., Promoter, Distiller) MUST NOT attempt interactive user consultation.
+2. **Flagging Mechanism**: If a subagent detects a condition requiring user input (e.g., redundancy, architectural ambiguity), it MUST signal this back to the local ledger (or via a specific context flag).
+3. **Main Agent Authority**: The Main Agent is the SOLE authority for user consultation and final consolidation decisions.
+
+---
+id: P-20260320-INSTALL-RESILIENCE
+category: Infrastructure
+confidence: 9
+status: STAGED
+hit_count: 1
+---
+# Installation Resilience (Fallback)
+**Rationale**: GitHub Release downloads (403 Forbidden) or network-restricted environments can break standard installation paths.
+**Rule**: When standard extension installation fails (e.g., via `npm install` or release download), the agent MUST fallback to a 'git clone' mode. Immediately after reinstallation, verify the physical synchronization of the Weaver graph and configuration files to ensure state consistency.
