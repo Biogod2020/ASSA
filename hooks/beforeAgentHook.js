@@ -8,16 +8,11 @@ const ledgerUtils = require(path.join(EXTENSION_ROOT, 'skills', 'assa-core', 'sc
 const { checkSystemHealth } = require('./healthCheck');
 
 const NODE_LEVELS = {
-    // Global Levels (G) - Library Wisdom
+    // L3 Global Levels (G) - Library Wisdom
     G0_CORE: 'G0',       // SOUL, HANDBOOK
     G1_FOUNDATION: 'G1', // Universal Standards
-    G2_DOMAIN: 'G2',     // Tech Stacks
-    G3_FRAGMENT: 'G3',   // Specific utilities, cross-project snippets
-    
-    // Local Levels (L) - Project Flesh
-    L1_OVERRIDE: 'L1',   // Local standard overrides
-    L2_SPECIALIST: 'L2', // Project-specific deep knowledge
-    L3_TRANSIENT: 'L3'   // Temporary patterns
+    G2_DOMAIN: 'G2',     // Tech Stacks, Project Domain Knowledge
+    G3_FRAGMENT: 'G3'    // Specific utilities, snippets
 };
 
 function log(msg) {
@@ -339,7 +334,7 @@ function main() {
             const promotionContext = '### SYSTEM DIRECTIVE: MANUAL PROMOTION REQUESTED ###\n' +
                 'The user has explicitly requested a global promotion. You MUST IMMEDIATELY:\n' +
                 '1. Dispatch the `generalist` tool as a sub-agent assigned the **Promoter** persona.\n' +
-                '2. Instruct it to perform a full ingestion and synchronize local L2 patterns to the global L3 library according to V3.5 rules (hierarchical, versioned).\n' +
+                '2. Instruct it to perform a full ingestion and synchronize local L2 patterns to the global L3 library according to V3.5 rules (G0-G3 hierarchy).\n' +
                 '3. Report the promotion summary to the user upon completion.\n' +
                 'Proceed with execution IMMEDIATELY without further clarification.';
                 
