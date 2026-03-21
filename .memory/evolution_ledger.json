@@ -816,7 +816,7 @@
     "session_id": "c3036f2b-ada9-4006-b93c-457cd2b5a76b",
     "message_id": "mcp-1773978031569",
     "timestamp": "2026-03-20T03:40:31.571Z",
-    "status": "PENDING",
+    "status": "PROCESSED",
     "type": "positive",
     "payload": {
       "rule": "Systematic manifest updates MUST align versioning and descriptions across extension metadata, README, and internal 'Soul' directives to maintain project integrity.",
@@ -833,7 +833,7 @@
     "session_id": "c3036f2b-ada9-4006-b93c-457cd2b5a76b",
     "message_id": "mcp-1773978157874",
     "timestamp": "2026-03-20T03:42:37.876Z",
-    "status": "PENDING",
+    "status": "PROCESSED",
     "type": "positive",
     "payload": {
       "rule": "Release Readiness Hygiene: Every version bump (e.g., V3.2 -> V3.5) MUST be accompanied by an audit to archive superseded snapshots and harden '.gitignore' against session-specific temporary files.",
@@ -850,7 +850,7 @@
     "session_id": "c3036f2b-ada9-4006-b93c-457cd2b5a76b",
     "message_id": "mcp-1773978236254",
     "timestamp": "2026-03-20T03:43:56.255Z",
-    "status": "PENDING",
+    "status": "PROCESSED",
     "type": "positive",
     "payload": {
       "rule": "Repository Integrity: Large research clones or mirror repositories MUST be excluded from the main repo's git index using 'git rm --cached' and '.gitignore' to prevent metadata bloat. Only configuration and core source should be tracked.",
@@ -860,6 +860,19 @@
         "optimization",
         "git-hygiene"
       ]
+    },
+    "git_anchor": ""
+  },
+  {
+    "session_id": "unknown",
+    "message_id": "mcp-1774069833257",
+    "timestamp": "2026-03-21T05:10:33.259Z",
+    "status": "PENDING",
+    "type": "positive",
+    "payload": {
+      "rule": "When investigating external source repositories in a monorepo structure, ALWAYS perform a top-level directory listing first to identify the 'packages/' or 'services/' layout before assuming a flat 'src/' directory.",
+      "context": "[Symptom/Intent]\nSearching for MCP and hook implementations in standard paths failed during the research phase. \nError: ls: external/gemini-cli-source/src/: No such file or directory\n\n[Failed Attempts]\nInitially attempted to locate source in src/mcp and src/hooks based on common project structures, which resulted in 'No such file or directory' errors.\n\n[Breakthrough]\nIdentified gemini-cli source code in packages/core/src/ instead of a flat src/ structure. This allowed for precise alignment with the core MCP and Hook implementation logic.",
+      "tags": []
     },
     "git_anchor": ""
   }

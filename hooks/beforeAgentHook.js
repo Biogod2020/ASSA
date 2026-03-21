@@ -498,14 +498,11 @@ function main() {
         
         // 3. Pending Signals (Current Tasks)
         const pendingItems = ledger.filter(e => e.status === 'PENDING');
-        if (pendingItems.length >= 5) {
-            additionalContext += `\n### L1 PENDING SIGNALS (${pendingItems.length} accumulated — DEEP DISTILLATION REQUIRED) ###\n`;
+        if (pendingItems.length > 0) {
+            additionalContext += `\n### L1 PENDING SIGNALS (${pendingItems.length} accumulated — DISTILLATION REQUIRED) ###\n`;
             additionalContext += `⚠️ ${pendingItems.length} signals have accumulated. You MUST IMMEDIATELY dispatch the \`distiller\` sub-agent (via the \`generalist\` tool) `;
             additionalContext += 'with the following task: "Read these latest signals and their associated git diffs, perform a Deep Root Cause Analysis, and generate structured patterns.md rule blocks (including YAML frontmatter and Rationale)." \n';
             additionalContext += 'Directly report that the task has been dispatched—do not attempt to perform the analysis yourself.\n';
-            additionalContext += JSON.stringify(pendingItems, null, 2) + '\n';
-        } else if (pendingItems.length > 0) {
-            additionalContext += '\n### L1 PENDING SIGNALS (use distill_pending tool for quick processing) ###\n';
             additionalContext += JSON.stringify(pendingItems, null, 2) + '\n';
         }
 

@@ -81,15 +81,6 @@ rl.on('line', (line) => {
                             }
                         },
                         {
-                            name: 'distill_pending',
-                            description: 'Distills all PENDING ledger signals into patterns.md. This is a pure function—no LLM needed. Call this when you see PENDING items in L1 context.',
-                            inputSchema: {
-                                type: 'object',
-                                properties: {},
-                                required: []
-                            }
-                        },
-                        {
                             name: 'request_global_promotion',
                             description: 'Requests the promotion of mature L2 patterns to the Global L3 Library. This tool triggers an AI-led synchronization process using the Syncer agent.',
                             inputSchema: {
@@ -158,33 +149,6 @@ rl.on('line', (line) => {
                     return ledger;
                 });
                 resultText = `Signal appended to ledger as PENDING (id: ${recordId})`;
-
-            } else if (name === 'distill_pending') {
-                let pendingItems = [];
-                ledgerUtils.updateLedger((ledger) => {
-                    pendingItems = ledger.filter(e => e.status === 'PENDING');
-                    if (pendingItems.length > 0) {
-                        pendingItems.forEach(e => e.status = 'PROCESSED');
-                    }
-                    return ledger.filter(e => e.status !== 'REWOUND');
-                });
-                
-                if (pendingItems.length === 0) {
-                    resultText = 'No pending signals to distill.';
-                } else {
-                    const patternsPath = path.resolve(process.cwd(), '.memory/patterns.md');
-                    let patterns = '# PATTERNS\n';
-                    if (fs.existsSync(patternsPath)) {
-                        patterns = fs.readFileSync(patternsPath, 'utf8');
-                    }
-                    const newPatterns = pendingItems.map(item => {
-                        const tags = item.payload.tags ? item.payload.tags.join('/') : 'general';
-                        return `- **${tags}**: ${item.payload.rule} (from ${item.message_id})`;
-                    });
-                    patterns = patterns.trimEnd() + '\n' + newPatterns.join('\n') + '\n';
-                    fs.writeFileSync(patternsPath, patterns, 'utf8');
-                    resultText = `Distilled ${pendingItems.length} signals into patterns.md and marked as PROCESSED.\nNew patterns:\n${newPatterns.join('\n')}`;
-                }
 
             } else if (name === 'request_global_promotion') {
                 const topic = args.topic || 'all';

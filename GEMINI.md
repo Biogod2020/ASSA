@@ -60,9 +60,8 @@ The knowledge graph is now fully automated and decoupled from manual JSON mainte
 ## Trigger Rules (Subagent-Driven)
 | Condition | Action (Dispatched via subagent) |
 |-----------|------------------------|
-| 1-4 PENDING | Call the `distill_pending` MCP tool immediately. |
-| ≥ 5 PENDING | Dispatch the **Distiller** via the `generalist` tool. |
-| After `git commit` | **Evaluate Significance**: ONLY dispatch the **Distiller** if the commit introduces new architectural patterns, critical bug fixes, or significant logic changes. Skip for chores/docs. |
+| Any PENDING | Dispatch the **Distiller** via the \`generalist\` tool. |
+| After \`git commit\` | **Evaluate Significance**: ONLY dispatch the **Distiller** if the commit introduces new architectural patterns, critical bug fixes, or significant logic changes. Skip for chores/docs. |
 | After `git push` | Dispatch the **Syncer** via the `generalist` tool. |
 | User says `/assa promote` | Dispatch the **Syncer** via the `generalist` tool. |
 

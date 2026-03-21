@@ -11,3 +11,4 @@
 - **2026-03-19**: Introduced "Physical Coordinate Injection (ASSA_METADATA)" to resolve History Reading Failure and eliminate semantic ambiguity in tool outputs. (from mcp-1773902620892)
 - **2026-03-19**: Mandated a "Visual QA Protocol" (VLM-based audit) for all tasks involving visual assets (SVG, Mermaid, PDF) within the `pdf_process` environment. (from mcp-1773903324305)
 - **2026-03-19**: Pivoted to "High-Fidelity Visual QA" (Headless Chrome) to resolve blurry and broken renderings caused by lightweight PDF libraries (fitz). (from mcp-1773908886938)
+\n- [2026-03-20] PROMOTION: Promoted 3 L2 patterns to L3 Global Library (G1-MANIFEST-INTEGRITY, P-20260319-ARCH-GOVERNANCE updated). Local patterns.md cleaned.
