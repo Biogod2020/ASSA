@@ -875,5 +875,22 @@
       "tags": []
     },
     "git_anchor": ""
+  },
+  {
+    "session_id": "1d06d737-06dd-4ab0-8799-68fc240f6923",
+    "message_id": "mcp-1774070651374",
+    "timestamp": "2026-03-21T05:24:11.376Z",
+    "status": "PENDING",
+    "type": "positive",
+    "payload": {
+      "rule": "When a cognitive task (like architectural distillation) can be performed by either a procedural tool or a sub-agent, ALWAYS prefer the sub-agent if memory quality and schema compliance are critical. Higher intelligence density justifies the marginal increase in latency.",
+      "context": "[Symptom/Intent]\nCo-existence of low-fidelity MCP distillation and high-fidelity Sub-agent distillation created technical debt and schema inconsistency.\n\n[Failed Attempts]\nPreviously maintained a tiered system where small batches (1-4 signals) were processed by a low-fidelity MCP tool to save latency, but this resulted in non-standard patterns that required manual cleanup.\n\n[Breakthrough]\nSuccessfully consolidated the procedural MCP distillation tool into a cognitive Distiller sub-agent. This ensures all patterns are born with V3.5 Frontmatter and Root Cause Analysis, eliminating 'architectural junk' in memory. The user's explicit praise ('很好') confirms the value of prioritizing quality over speed.",
+      "tags": [
+        "architecture-consolidation",
+        "v3.5-weaver",
+        "quality-first"
+      ]
+    },
+    "git_anchor": ""
   }
 ]
